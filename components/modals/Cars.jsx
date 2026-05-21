@@ -1,8 +1,8 @@
 import AutoModal from "./Automodal";
 import Image from "next/image";
-import carCash from "../../public/assets/images/cars-emojis/carcash.png";
-import carMap from "../../public/assets/images/cars-emojis/carMap.png";
-import carCheck from "../../public/assets/images/cars-emojis/carCheck.png";
+import carCash from "../../public/assets/images/cars-emojis/carcash.PNG";
+import carMap from "../../public/assets/images/cars-emojis/carmap.PNG";
+import carCheck from "../../public/assets/images/cars-emojis/carcheck.PNG";
 import { useCarModal } from "@/context/providers/carFilterProvider";
 
 export default function Page() {

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useReducer, useState } from "react";
-import { initialState, reducer } from "@/reducer/carFilterReducer";
+import { initialState, reducer } from "@/context/reducer/carFilterReducer";
 import { allCars } from "@/data/cars";
 import DropdownSelect from "../common/DropDownSelect";
 import FilterSidebar from "./FilterSidebar";

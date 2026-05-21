@@ -3,7 +3,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 const categories = ["All car", "New car", "Used car"];
-import { initialState, reducer } from "@/reducer/carFilterReducer";
+import { initialState, reducer } from "@/context/reducer/carFilterReducer";
 import { allCars } from "@/data/cars";
 import DropdownSelect from "../common/DropDownSelect";
 import Pagination from "../common/Pagination";

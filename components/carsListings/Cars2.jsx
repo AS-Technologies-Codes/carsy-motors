@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { allCars, cars } from "@/data/cars";
 import FlatFilter3 from "../common/FlatFilter3";
-import { initialState, reducer } from "@/reducer/carFilterReducer";
+import { initialState, reducer } from "@/context/reducer/carFilterReducer";
 import Pagination from "../common/Pagination";
 export default function Cars2() {
   const [state, dispatch] = useReducer(reducer, initialState);

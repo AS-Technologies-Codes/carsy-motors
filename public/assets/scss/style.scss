@@ -2380,3 +2380,12 @@ body {
 .map-listing-car {
   min-height: calc(100vh - 300px);
 }
+
+.hover-zoom {
+  transition: transform .1s ease-in-out; /* Smooth transition */
+  cursor: pointer;
+}
+
+.hover-zoom:hover {
+  transform: scale(1.1); /* Scale up to 110% */
+}

@@ -9,7 +9,7 @@ import Cars from "@/components/homes/home-7/Cars";
 import Cars2 from "@/components/homes/home-7/Cars2";
 import Filter from "@/components/homes/home-7/Filter";
 import Hero from "@/components/homes/home-7/Hero";
-import LoanCalculator from "@/components/homes/home-7/LoanCalculator";
+import LoanCalculator from "@/components/homes/home-1/LoanCalculator";
 import React from "react";
 import Testimonials from "@/components/homes/home-7/Testimonials";
 import Blogs from "@/components/common/Blogs";

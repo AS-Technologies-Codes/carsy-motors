@@ -6,7 +6,7 @@ import Link from "next/link";
 import { allCars } from "@/data/cars";
 import DropdownSelect from "../common/DropDownSelect";
 import { featureOptions } from "@/data/filterOptions";
-import { initialState, reducer } from "@/reducer/carFilterReducer";
+import { initialState, reducer } from "@/context/reducer/carFilterReducer";
 import Pagination from "../common/Pagination";
 import ListGridToggler from "./ListGridToggler";
 import FilterSidebar from "./FilterSidebar";

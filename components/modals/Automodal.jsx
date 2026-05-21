@@ -1,38 +1,37 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCarModal } from "@/context/providers/carFilterProvider";
+import { useEffect, useRef } from "react";
 
 export default function AutoModal({ children }) {
-  const [visible, setVisible] = useState(false);
-  const [animating, setAnimating] = useState(false);
   const backdropRef = useRef(null);
+  const { state, dispatch } = useCarModal();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setVisible(true);
+      dispatch({ type: "SET_VISIBLE", payload: true });
       requestAnimationFrame(() => {
-        requestAnimationFrame(() => setAnimating(true));
+        requestAnimationFrame(() =>
+          dispatch({ type: "SET_ANIMATING", payload: true }),
+        );
       });
     }, 4000);
     return () => clearTimeout(timer);
   }, []);
 
   const closeModal = () => {
-    setAnimating(false);
-    setTimeout(() => setVisible(false), 350);
+    dispatch({ type: "SET_ANIMATING", payload: false });
+    setTimeout(() => dispatch({ type: "SET_VISIBLE", payload: false }), 350);
   };
-
   const handleBackdropClick = (e) => {
     if (e.target === backdropRef.current) closeModal();
   };
 
-  if (!visible) return null;
+  if (!state.visible) return null;
 
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap');
-
         .auto-modal-backdrop {
           position: fixed;
           inset: 0;
@@ -48,11 +47,12 @@ export default function AutoModal({ children }) {
         }
         .auto-modal-backdrop.show {
           opacity: 1;
+          overflow: auto;
         }
 
         .auto-modal-dialog {
           width: 100%;
-          max-width: 80vw;
+          max-width: 90vw;
           max-height: 95vh;
           margin: 1rem;
           transform: scale(0.72) translateY(24px);
@@ -83,7 +83,6 @@ export default function AutoModal({ children }) {
           overflow: hidden;
         }
         .modal-header-bg {
-          background: "white";
           padding: 2.5rem 2rem 2rem;
           position: relative;
         }
@@ -92,7 +91,6 @@ export default function AutoModal({ children }) {
           position: absolute;
           top: -60px; right: -60px;
           width: 220px; height: 220px;
-          background: radial-gradient(circle, rgba(180,80,255,0.22) 0%, transparent 70%);
           border-radius: 50%;
         }
         .modal-header-bg::after {
@@ -100,7 +98,6 @@ export default function AutoModal({ children }) {
           position: absolute;
           bottom: -40px; left: 20px;
           width: 160px; height: 160px;
-          background: radial-gradient(circle, rgba(80,160,255,0.18) 0%, transparent 70%);
           border-radius: 50%;
         }
 
@@ -238,7 +235,7 @@ export default function AutoModal({ children }) {
 
       <div
         ref={backdropRef}
-        className={`auto-modal-backdrop${animating ? " show" : ""}`}
+        className={`auto-modal-backdrop${state.animating ? " show" : ""}`}
         onClick={handleBackdropClick}
         role="dialog"
         aria-modal="true"
@@ -248,16 +245,15 @@ export default function AutoModal({ children }) {
           <div className="auto-modal-content">
             {/* Header */}
             <div className="auto-modal-header">
-              <div className="modal-header-bg">
+              <div className="modal-header-bg modal-content">
                 <button
-                  className="btn-close-custom"
+                  type="button"
+                  className="close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
                   onClick={closeModal}
-                  aria-label="Close modal"
                 >
-                  <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <line x1="2" y1="2" x2="14" y2="14" />
-                    <line x1="14" y1="2" x2="2" y2="14" />
-                  </svg>
+                  <span aria-hidden="true">×</span>
                 </button>
               </div>
             </div>

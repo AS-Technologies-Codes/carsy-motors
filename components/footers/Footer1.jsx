@@ -387,11 +387,11 @@ export default function Footer1() {
                 <Link href={`/`}>
                   <Image
                     className="lazyload"
-                    data-src="/assets/images/logo/logo-footer@2x.png"
+                    data-src="/assets/images/logo/logo.png"
                     alt="img"
                     width={225}
                     height={40}
-                    src="/assets/images/logo/logo-footer@2x.png"
+                    src="/assets/images/logo/logo.png"
                   />
                 </Link>
               </div>
@@ -399,7 +399,7 @@ export default function Footer1() {
             <div className="col-lg-8 col-md-12">
               <div className="footer-bottom-right flex-six flex-wrap">
                 <div className="title-bottom center">
-                  © 2024 Auto Decar. All rights reserved
+                  © 2026 Carsy Moters. All rights reserved
                 </div>
                 <div className="icon-social box-3 text-color-1">
                   <a href="#">

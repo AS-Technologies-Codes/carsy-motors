@@ -9,8 +9,8 @@ import BackToTop from "@/components/common/BacktoTop";
 import { usePathname } from "next/navigation";
 import Login from "@/components/modals/Login";
 import SignUp from "@/components/modals/SignUp";
-import Cars from "@/components/modals/Cars";
-import { CarModalProvider } from "@/context/providers/carFilterProvider";
+// import Cars from "@/components/modals/Cars";
+// import { CarModalProvider } from "@/context/providers/carFilterProvider";
 export default function RootLayout({ children }) {
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -87,9 +87,9 @@ export default function RootLayout({ children }) {
             {children}
           </div>
         </div>
-        <CarModalProvider>
+        {/* <CarModalProvider>
           <Cars />
-        </CarModalProvider>
+        </CarModalProvider> */}
         <Login />
         <SignUp />
         <BackToTop />

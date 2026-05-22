@@ -8,6 +8,7 @@ import CarBrands from "@/components/homes/home-7/CarBrands";
 import Cars from "@/components/homes/home-7/Cars";
 import Cars2 from "@/components/homes/home-7/Cars2";
 import Filter from "@/components/homes/home-7/Filter";
+import Slider from "@/components/homes/home-3/Hero";
 import Hero from "@/components/homes/home-7/Hero";
 import LoanCalculator from "@/components/homes/home-1/LoanCalculator";
 import React from "react";
@@ -17,6 +18,10 @@ import DownloadApp from "@/components/common/DownloadApp";
 import Brands from "@/components/common/Brands";
 import Footer1 from "@/components/footers/Footer1";
 import Banner2 from "@/components/homes/home-6/Banner2";
+import Image from "next/image";
+import Banner from "@/public/assets/images/dashboard/banner-exp.jpg";
+import Achievements from "@/components/homes/home-1/Achievements";
+import YardsMap from "@/components/carsListings/YardsMap";
 
 export const metadata = {
   title:
@@ -30,22 +35,29 @@ export default function page() {
         <Header1 />
       </div>
       <Hero />
+      {/* 
       <Filter />
       <CarBrands />
       <Cars />
       <Cars2 />
-      <LoanCalculator />
-      <Trending />
+      <Trending /> */}
       <Cta />
-      <Banner2 />
+      <div>
+        <Image src={Banner} alt="image" className="img-fluid" />
+      </div>
+      <Achievements />
+      <YardsMap height={"600px"} />
+      <Slider />
+      {/* <Banner2 />
       <CarBrands2 />
       <CarReview />
       <div className="mt-5 pt-5"></div>
-      <Testimonials />
-      <Blogs />
       <DownloadApp />
       <div className="mt-5 pt-5"></div>
-      <Brands />
+      <Brands /> */}
+      <LoanCalculator />
+      <Testimonials />
+      <Blogs />
       <Footer1 />
     </>
   );

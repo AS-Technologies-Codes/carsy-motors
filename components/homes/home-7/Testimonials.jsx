@@ -40,11 +40,11 @@ export default function Testimonials() {
   };
   return (
     <section className="tf-section bg-1">
-      <div className="container-fluid">
+      <div className="container">
         <div className="row">
           <div className="col-lg-12">
             <div
-              className="heading-section center wow fadeInUpSmall"
+              className="heading-section wow fadeInUpSmall"
               data-wow-delay="0.2s"
               data-wow-duration="1000ms"
             >

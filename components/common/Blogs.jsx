@@ -9,15 +9,15 @@ export default function Blogs({ parentClass = "section-blog tf-section" }) {
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
-            <div className="heading-section flex align-center justify-space flex-wrap gap-20">
+            <div className=" flex align-center justify-space flex-wrap gap-20">
               <h2
                 className="wow fadeInUpSmall"
                 data-wow-delay="0.2s"
                 data-wow-duration="1000ms"
               >
-                News to help choose your car
+                What's New?
               </h2>
-              <Link
+              {/* <Link
                 href={`/blog-grid`}
                 className="tf-btn-arrow wow fadeInUpSmall"
                 data-wow-delay="0.2s"
@@ -25,8 +25,11 @@ export default function Blogs({ parentClass = "section-blog tf-section" }) {
               >
                 View all
                 <i className="icon-autodeal-btn-right" />
-              </Link>
+              </Link> */}
             </div>
+            <p className="mt-18 heading-section">
+              Find all the latest and intresting news about our cars here!
+            </p>
             <Swiper
               className="swiper tf-sw-mobile"
               slidesPerView={3}

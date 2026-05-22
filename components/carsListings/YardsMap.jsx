@@ -1,0 +1,327 @@
+"use client";
+import {
+  GoogleMap,
+  OverlayView,
+  useLoadScript,
+  InfoWindow,
+} from "@react-google-maps/api";
+import { useMemo, useState } from "react";
+import Link from "next/link";
+
+import { cars } from "@/data/cars";
+cars;
+const option = {
+  zoomControl: true,
+  disableDefaultUI: true,
+  scrollwheel: false,
+  styles: [
+    {
+      featureType: "all",
+      elementType: "geometry.fill",
+      stylers: [
+        {
+          weight: "2.00",
+        },
+      ],
+    },
+    {
+      featureType: "all",
+      elementType: "geometry.stroke",
+      stylers: [
+        {
+          color: "#9c9c9c",
+        },
+      ],
+    },
+    {
+      featureType: "all",
+      elementType: "labels.text",
+      stylers: [
+        {
+          visibility: "on",
+        },
+      ],
+    },
+    {
+      featureType: "landscape",
+      elementType: "all",
+      stylers: [
+        {
+          color: "#f2f2f2",
+        },
+      ],
+    },
+    {
+      featureType: "landscape",
+      elementType: "geometry.fill",
+      stylers: [
+        {
+          color: "#ffffff",
+        },
+      ],
+    },
+    {
+      featureType: "landscape.man_made",
+      elementType: "geometry.fill",
+      stylers: [
+        {
+          color: "#ffffff",
+        },
+      ],
+    },
+    {
+      featureType: "poi",
+      elementType: "all",
+      stylers: [
+        {
+          visibility: "off",
+        },
+      ],
+    },
+    {
+      featureType: "road",
+      elementType: "all",
+      stylers: [
+        {
+          saturation: -100,
+        },
+        {
+          lightness: 45,
+        },
+      ],
+    },
+    {
+      featureType: "road",
+      elementType: "geometry.fill",
+      stylers: [
+        {
+          color: "#eeeeee",
+        },
+      ],
+    },
+    {
+      featureType: "road",
+      elementType: "labels.text.fill",
+      stylers: [
+        {
+          color: "#7b7b7b",
+        },
+      ],
+    },
+    {
+      featureType: "road",
+      elementType: "labels.text.stroke",
+      stylers: [
+        {
+          color: "#ffffff",
+        },
+      ],
+    },
+    {
+      featureType: "road.highway",
+      elementType: "all",
+      stylers: [
+        {
+          visibility: "simplified",
+        },
+      ],
+    },
+    {
+      featureType: "road.arterial",
+      elementType: "labels.icon",
+      stylers: [
+        {
+          visibility: "off",
+        },
+      ],
+    },
+    {
+      featureType: "transit",
+      elementType: "all",
+      stylers: [
+        {
+          visibility: "off",
+        },
+      ],
+    },
+    {
+      featureType: "water",
+      elementType: "all",
+      stylers: [
+        {
+          color: "#46bcec",
+        },
+        {
+          visibility: "on",
+        },
+      ],
+    },
+    {
+      featureType: "water",
+      elementType: "geometry.fill",
+      stylers: [
+        {
+          color: "#c8d7d4",
+        },
+      ],
+    },
+    {
+      featureType: "water",
+      elementType: "labels.text.fill",
+      stylers: [
+        {
+          color: "#070707",
+        },
+      ],
+    },
+    {
+      featureType: "water",
+      elementType: "labels.text.stroke",
+      stylers: [
+        {
+          color: "#ffffff",
+        },
+      ],
+    },
+  ],
+};
+
+export default function ListingMap({ height }) {
+  const [getLocation, setLocation] = useState(null);
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: "AIzaSyAAz77U5XQuEME6TpftaMdX0bBelQxXRlM",
+  });
+  const center = useMemo(
+    () => ({ lat: 32.411201277163975, lng: -96.12394824867293 }),
+    [],
+  );
+  const containerStyle = {
+    width: "100%",
+    height: height || "100%",
+  };
+  const CustomMarker = ({ elm }) => {
+    return (
+      <div className="marker-container" onClick={() => setLocation(elm)}>
+        <div className="marker-card">
+          <div className="front face">
+            <div />
+          </div>
+          <div className="back face">
+            <div />
+          </div>
+          <div className="marker-arrow" />
+        </div>
+      </div>
+    );
+  };
+
+  // close handler
+  const closeCardHandler = () => {
+    setLocation(null);
+  };
+
+  return (
+    <div className="container">
+      <div className="col-lg-12">
+        <div
+          className="heading-section wow fadeInUpSmall"
+          data-wow-delay="0.2s"
+          data-wow-duration="1000ms"
+        >
+          <h2>Nearby Locations</h2>
+        </div>
+      </div>
+      {!isLoaded ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="position-relative d-flex justify-content-center mb-5  rounded-4">
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={4}
+            options={option}
+          >
+            {cars.slice(0, 6).map((marker, i) => (
+              <OverlayView
+                key={i}
+                position={{
+                  lat: marker.lat,
+                  lng: marker.long,
+                }}
+                mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+              >
+                <CustomMarker elm={marker} />
+              </OverlayView>
+            ))}
+            {getLocation !== null && (
+              <InfoWindow
+                position={{
+                  lat: getLocation.lat,
+                  lng: getLocation.long,
+                }}
+                onCloseClick={closeCardHandler}
+              >
+                <div className="map-listing-item">
+                  <div className="inner-box">
+                    <div className="image-box">
+                      <figure className="image">
+                        <img src={getLocation.imgSrc} alt="" />
+                      </figure>
+                    </div>
+                    <div className="content">
+                      <p className="text-color-3 font">{getLocation.type}</p>
+                      <h5>
+                        {/* <Link href={`/property-detail-v1/${getLocation.id}`}> */}
+                        <Link href={`javascript:void(0)`}>
+                          {getLocation.title}
+                        </Link>
+                      </h5>
+                      <div className="flex flex-wrap gap-8">
+                        <p className="location">
+                          <i className="icon-autodeal-km1" />
+                          {getLocation.km.toLocaleString()} kms
+                        </p>
+                        <p className="location">
+                          <i className="icon-autodeal-diesel" />
+                          {getLocation.fuelType}
+                        </p>
+                        <p className="location">
+                          <i className="icon-autodeal-automatic" />
+                          {getLocation.transmission}
+                        </p>
+                      </div>
+                      <h3>
+                        <a>${getLocation.price.toLocaleString()}</a>
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </InfoWindow>
+            )}
+          </GoogleMap>
+
+          <div
+            className="tf-icon-box style-1 w-75 my-10 position-absolute"
+            style={{ top: "70%" }}
+          >
+            <div className="content d-flex align-items-center flex-column">
+              <h3>
+                <a href="javascript:void(0)">The right ride, right nearby</a>
+              </h3>
+              <p>
+                With neighbourhood locations nationwide, a Hertz car rental
+                location is right around the corner.{" "}
+              </p>
+              <div className="meta style">
+                <a href="javascript:void(0)" className="btn-button">
+                  <span>Find Nearby Locations</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

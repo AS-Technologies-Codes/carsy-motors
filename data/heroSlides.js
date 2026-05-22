@@ -10,7 +10,12 @@ export const slides2 = [
     subHeading: "Find what are you looking for",
   },
   {
-    imgSrc: "/assets/images/slider/slide4.jpg",
+    imgSrc: "/assets/images/slider/slide2.jpg",
+    heading: "Over 95,000 classified ads listing",
+    subHeading: "Find what are you looking for",
+  },
+   {
+    imgSrc: "/assets/images/slider/slide7.jpg",
     heading: "Over 95,000 classified ads listing",
     subHeading: "Find what are you looking for",
   },

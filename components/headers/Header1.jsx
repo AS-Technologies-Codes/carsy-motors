@@ -19,19 +19,19 @@ export default function Header1() {
                     <Link href={`/`}>
                       <Image
                         className="lazyload img-none"
-                        data-src="/assets/images/logo/logo2.png"
+                        data-src="/assets/images/logo/logo.png"
                         alt=""
                         width={225}
                         height={40}
-                        src="/assets/images/logo/logo2.png"
+                        src="/assets/images/logo/logo.png"
                       />
                       <Image
                         className="lazyload img-is-fixed"
-                        data-src="/assets/images/logo/logo@2x.png"
+                        data-src="/assets/images/logo/logo.png"
                         alt=""
                         width={225}
                         height={40}
-                        src="/assets/images/logo/logo@2x.png"
+                        src="/assets/images/logo/logo.png"
                       />
                     </Link>
                   </div>

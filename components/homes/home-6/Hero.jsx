@@ -111,7 +111,7 @@ export default function Hero() {
                         </li>
                       </ul>
                       <div className="chat-wrap flex-three fade-item fade-item-3">
-                        <a href="#" className="chat">
+                        <a href="javascript:void(0)" className="chat">
                           Chat
                         </a>
                         <div className="flex-three">

@@ -58,7 +58,7 @@ export default function Brands() {
               {partnerLogos.map((logo, index) => (
                 <SwiperSlide className="swiper-slide" key={index}>
                   <div className="slogan-logo">
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <Image
                         className="lazyload"
                         data-src={logo.imgSrc}

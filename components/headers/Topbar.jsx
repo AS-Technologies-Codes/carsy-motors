@@ -78,27 +78,27 @@ export default function Topbar() {
               <p className="text-color-1">Follow us:</p>
               <ul className="flex-three">
                 <li>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-facebook" />
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-linkedin" />
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-twitter" />
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-instagram" />
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-youtube" />
                   </a>
                 </li>

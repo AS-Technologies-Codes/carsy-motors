@@ -39,14 +39,14 @@ export default function DealerDetails({ dealerItem }) {
             <div className="tf-sale-agent-list">
               <h2 className="mb-3">Sale agent list</h2>
               <AgentList />
-              <a href="#" className="fs-16 fw-5 font text-color-3 lh-22">
+              <a href="javascript:void(0)" className="fs-16 fw-5 font text-color-3 lh-22">
                 View all sale agents <i className="icon-autodeal-view-more" />
               </a>
             </div>
             <div className="tf-list-car-agent">
               <h2 className="mb-3">Dealership inventory (8)</h2>
               <Cars />
-              <a href="#" className="fs-16 fw-5 font text-color-3 lh-22">
+              <a href="javascript:void(0)" className="fs-16 fw-5 font text-color-3 lh-22">
                 View all car <i className="icon-autodeal-view-more" />
               </a>
             </div>
@@ -61,7 +61,7 @@ export default function DealerDetails({ dealerItem }) {
                 appointment with them? <br />
                 Just leave your contact and preferred date and time
               </p>
-              <a href="#">Book an appointment with Dealership</a>
+              <a href="javascript:void(0)">Book an appointment with Dealership</a>
             </div>
             <div
               className="listing-reviews dealer-review flat-property-detail"
@@ -135,26 +135,26 @@ export default function DealerDetails({ dealerItem }) {
                     </div>
                   </div>
                 </div>
-                <a href="#" className="button-form-1">
+                <a href="javascript:void(0)" className="button-form-1">
                   Get quote
                 </a>
-                <a href="#" className="button-form-2">
+                <a href="javascript:void(0)" className="button-form-2">
                   Request test drive
                 </a>
               </div>
               <div className="social-listing flex-wrap mb-4">
                 <p>Share for Honda cars Pasig:</p>
                 <div className="icon-social style1">
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-facebook" />
                   </a>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-linkedin" />
                   </a>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-twitter" />
                   </a>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-instagram" />
                   </a>
                 </div>
@@ -223,7 +223,7 @@ export default function DealerDetails({ dealerItem }) {
                     </div>
                   ))}
                 </div>
-                <a href="#" className="fs-16 fw-5 font text-color-3 lh-22">
+                <a href="javascript:void(0)" className="fs-16 fw-5 font text-color-3 lh-22">
                   View more reviews <i className="icon-autodeal-view-more" />
                 </a>
               </div>

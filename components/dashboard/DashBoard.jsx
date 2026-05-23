@@ -17,7 +17,7 @@ export default function DashBoard() {
                 <div className="tfcl-dashboard-overview">
                   <div className="row">
                     <div className="col-sm-6 col-xl-3">
-                      <a className="tfcl-card" href="#">
+                      <a className="tfcl-card" href="javascript:void(0)">
                         <div className="card-body">
                           <div className="tfcl-icon-overview">
                             <Image
@@ -40,7 +40,7 @@ export default function DashBoard() {
                       </a>
                     </div>
                     <div className="col-sm-6 col-xl-3">
-                      <a className="tfcl-card" href="#">
+                      <a className="tfcl-card" href="javascript:void(0)">
                         <div className="card-body">
                           <div className="tfcl-icon-overview">
                             <Image
@@ -62,7 +62,7 @@ export default function DashBoard() {
                       </a>
                     </div>
                     <div className="col-sm-6 col-xl-3">
-                      <a className="tfcl-card" href="#">
+                      <a className="tfcl-card" href="javascript:void(0)">
                         <div className="card-body">
                           <div className="tfcl-icon-overview">
                             <Image
@@ -84,7 +84,7 @@ export default function DashBoard() {
                       </a>
                     </div>
                     <div className="col-sm-6 col-xl-3">
-                      <a className="tfcl-card" href="#">
+                      <a className="tfcl-card" href="javascript:void(0)">
                         <div className="card-body">
                           <div className="tfcl-icon-overview">
                             <Image
@@ -283,7 +283,7 @@ export default function DashBoard() {
                                           />
                                         </span>{" "}
                                         <a
-                                          href="#"
+                                          href="javascript:void(0)"
                                           className="btn-action tfcl-dashboard-action-edit"
                                         >
                                           Edit
@@ -299,7 +299,7 @@ export default function DashBoard() {
                                           />
                                         </span>{" "}
                                         <a
-                                          href="#"
+                                          href="javascript:void(0)"
                                           className="btn-action tfcl-dashboard-action-edit"
                                         >
                                           Sold
@@ -315,7 +315,7 @@ export default function DashBoard() {
                                           />
                                         </span>{" "}
                                         <a
-                                          href="#"
+                                          href="javascript:void(0)"
                                           className="btn-action tfcl-dashboard-action-edit"
                                         >
                                           Delete

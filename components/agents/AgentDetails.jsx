@@ -16,16 +16,16 @@ export default function AgentDetails({ agentItem = teamMembers[0] }) {
               <div className="social-listing flex-six flex-wrap">
                 <p>Share this page:</p>
                 <div className="icon-social style1">
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-facebook" />
                   </a>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-linkedin" />
                   </a>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-twitter" />
                   </a>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-instagram" />
                   </a>
                 </div>
@@ -77,20 +77,20 @@ export default function AgentDetails({ agentItem = teamMembers[0] }) {
                   </li>
                 </div>
                 <div className="icon-social style1">
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-facebook" />
                   </a>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-linkedin" />
                   </a>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-twitter" />
                   </a>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-instagram" />
                   </a>
                 </div>
-                <a href="#" className="sc-button">
+                <a href="javascript:void(0)" className="sc-button">
                   <span>Get quote</span>
                 </a>
               </div>

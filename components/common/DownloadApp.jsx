@@ -19,14 +19,14 @@ export default function DownloadApp({ parentClass = "tf-section-banner" }) {
               </div>
               <div className="content">
                 <h2 className="text-color-1">
-                  <a href="#">Down load our app</a>
+                  <a href="javascript:void(0)">Down load our app</a>
                 </h2>
                 <p className="text-color-1">
                   Whether you're buying, selling, or simply researching cars,
                   AutoDecar is the app for you.
                 </p>
                 <div className="flex gap-8">
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <Image
                       className="lazyload"
                       data-src="/assets/images/section/app-store.png"
@@ -36,7 +36,7 @@ export default function DownloadApp({ parentClass = "tf-section-banner" }) {
                       height={48}
                     />
                   </a>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <Image
                       className="lazyload"
                       data-src="/assets/images/section/google-play.png"
@@ -64,13 +64,13 @@ export default function DownloadApp({ parentClass = "tf-section-banner" }) {
               </div>
               <div className="content">
                 <h2 className="text-color-1">
-                  <a href="#">Are you looking for a car?</a>
+                  <a href="javascript:void(0)">Are you looking for a car?</a>
                 </h2>
                 <p className="text-color-1">
                   Save time and effort as you no longer need to visit multiple
                   stores to find the right car.
                 </p>
-                <a href="#" className="find-cars">
+                <a href="javascript:void(0)" className="find-cars">
                   <span>Find cars</span>
                   <i className="icon-autodeal-search" />
                 </a>

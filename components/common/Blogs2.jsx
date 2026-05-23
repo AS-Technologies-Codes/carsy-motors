@@ -43,10 +43,10 @@ export default function Blogs2() {
                   </div>
                   <div className="content">
                     <div className="sub-box flex align-center fs-13 fw-6">
-                      <a href="#" className="admin fw-7 text-color-2">
+                      <a href="javascript:void(0)" className="admin fw-7 text-color-2">
                         Jerome Bell
                       </a>
-                      <a href="#" className="category text-color-3">
+                      <a href="javascript:void(0)" className="category text-color-3">
                         First Drives
                       </a>
                     </div>
@@ -79,13 +79,13 @@ export default function Blogs2() {
                   </div>
                   <div className="content">
                     <div className="sub-box flex align-center flex-wrap fs-13 fw-6">
-                      <a href="#" className="admin fw-7 text-color-2">
+                      <a href="javascript:void(0)" className="admin fw-7 text-color-2">
                         Jerome Bell
                       </a>
-                      <a href="#" className="category text-color-3 fw-4">
+                      <a href="javascript:void(0)" className="category text-color-3 fw-4">
                         First Drives
                       </a>
-                      <a href="#" className="date fw-4 fs-12 font-2">
+                      <a href="javascript:void(0)" className="date fw-4 fs-12 font-2">
                         {post.date}
                       </a>
                     </div>
@@ -102,7 +102,7 @@ export default function Blogs2() {
                 data-wow-delay="0.2s"
                 data-wow-duration="1000ms"
               >
-                <a className="sc-button btn-1" href="#">
+                <a className="sc-button btn-1" href="javascript:void(0)">
                   <span>View all news</span>
                   <i className="icon-autodeal-next" />
                 </a>

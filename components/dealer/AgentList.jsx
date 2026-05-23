@@ -39,7 +39,7 @@ export default function AgentList() {
             <p>Honda cars Pasig</p>
           </div>
         </div>
-        <a href="#" className="btn-agent">
+        <a href="javascript:void(0)" className="btn-agent">
           Request a call back
         </a>
       </li>
@@ -78,7 +78,7 @@ export default function AgentList() {
             <p>Honda cars Pasig</p>
           </div>
         </div>
-        <a href="#" className="btn-agent">
+        <a href="javascript:void(0)" className="btn-agent">
           Request a call back
         </a>
       </li>
@@ -117,7 +117,7 @@ export default function AgentList() {
             <p>Honda cars Pasig</p>
           </div>
         </div>
-        <a href="#" className="btn-agent">
+        <a href="javascript:void(0)" className="btn-agent">
           Request a call back
         </a>
       </li>
@@ -156,7 +156,7 @@ export default function AgentList() {
             <p>Honda cars Pasig</p>
           </div>
         </div>
-        <a href="#" className="btn-agent">
+        <a href="javascript:void(0)" className="btn-agent">
           Request a call back
         </a>
       </li>

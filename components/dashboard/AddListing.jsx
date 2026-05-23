@@ -98,7 +98,7 @@ export default function AddListing() {
                     onDragLeave={handleDragLeave}
                   >
                     <div className="inner">
-                      <a href="#" className="relative">
+                      <a href="javascript:void(0)" className="relative">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width={18}

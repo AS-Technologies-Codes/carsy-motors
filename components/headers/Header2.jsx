@@ -77,7 +77,7 @@ export default function Header2() {
                     </div>
                   </div>
                   <a
-                    href="#"
+                    href="javascript:void(0)"
                     className="header-favorite flex items-center justify-center"
                   >
                     <i className="icon-autodeal-favorite fs-18" />
@@ -89,7 +89,7 @@ export default function Header2() {
                       </li>
                       <li className="">
                         <a
-                          href="#"
+                          href="javascript:void(0)"
                           data-bs-toggle="modal"
                           data-bs-target="#popup_bid"
                         >
@@ -101,7 +101,7 @@ export default function Header2() {
                       </li>
                       <li className="">
                         <a
-                          href="#"
+                          href="javascript:void(0)"
                           data-bs-toggle="modal"
                           data-bs-target="#popup_bid2"
                         >
@@ -191,7 +191,7 @@ export default function Header2() {
             <div className="login-box flex align-center">
               <i className="icon-autodeal-user fs-20" />
               <a
-                href="#"
+                href="javascript:void(0)"
                 data-bs-toggle="modal"
                 data-bs-target="#popup_bid"
                 className="fw-7 font-2"

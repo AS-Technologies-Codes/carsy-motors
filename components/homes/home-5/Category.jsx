@@ -49,7 +49,7 @@ export default function Category() {
               </h2>
               <div className="flex-six gap-20 flex-wrap">
                 <a
-                  href="#"
+                  href="javascript:void(0)"
                   className="tf-btn-arrow wow fadeInUpSmall"
                   data-wow-delay="0.2s"
                   data-wow-duration="1000ms"
@@ -58,7 +58,7 @@ export default function Category() {
                   <i className="icon-autodeal-btn-right" />
                 </a>
                 <a
-                  href="#"
+                  href="javascript:void(0)"
                   className="tf-btn-arrow wow fadeInUpSmall"
                   data-wow-delay="0.3s"
                   data-wow-duration="1000ms"
@@ -67,7 +67,7 @@ export default function Category() {
                   <i className="icon-autodeal-btn-right" />
                 </a>
                 <a
-                  href="#"
+                  href="javascript:void(0)"
                   className="tf-btn-arrow wow fadeInUpSmall"
                   data-wow-delay="0.4s"
                   data-wow-duration="1000ms"
@@ -86,7 +86,7 @@ export default function Category() {
             >
               {partners.map((elm, i) => (
                 <SwiperSlide key={i} className="swiper-slide">
-                  <a href="#" className="partner-item style-4">
+                  <a href="javascript:void(0)" className="partner-item style-4">
                     <div className="image">
                       <Image
                         className="lazyload"

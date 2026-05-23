@@ -365,7 +365,7 @@ export default function Sidebar() {
                 </Link>
               </li>
               <li>
-                <a href="#" className="menu-index-7">
+                <a href="javascript:void(0)" className="menu-index-7">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width={22}

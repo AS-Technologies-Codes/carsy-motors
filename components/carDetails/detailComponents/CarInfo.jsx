@@ -34,7 +34,7 @@ export default function CarInfo({ carItem = allCars[0] }) {
       </div>
       <ul className="action-icon flex flex-wrap">
         <li>
-          <a href="#" className="icon">
+          <a href="javascript:void(0)" className="icon">
             <svg
               width={16}
               height={14}
@@ -53,7 +53,7 @@ export default function CarInfo({ carItem = allCars[0] }) {
           </a>
         </li>
         <li>
-          <a href="#" className="icon">
+          <a href="javascript:void(0)" className="icon">
             <svg
               width={16}
               height={16}
@@ -72,7 +72,7 @@ export default function CarInfo({ carItem = allCars[0] }) {
           </a>
         </li>
         <li>
-          <a href="#" className="icon">
+          <a href="javascript:void(0)" className="icon">
             <svg
               width={16}
               height={18}
@@ -91,7 +91,7 @@ export default function CarInfo({ carItem = allCars[0] }) {
           </a>
         </li>
         <li>
-          <a href="#" className="icon">
+          <a href="javascript:void(0)" className="icon">
             <svg
               width={16}
               height={18}

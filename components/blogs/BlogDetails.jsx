@@ -186,24 +186,24 @@ export default function BlogDetails({ blogItem }) {
                   <div className="tags flex-three">
                     <p className="text-color-2 fw-5 font">Tags :</p>
                     <div className="flex fs-13 fw-6 link-style-1">
-                      <a href="#">AutoDecar</a>
-                      <a href="#">BMW</a>
+                      <a href="javascript:void(0)">AutoDecar</a>
+                      <a href="javascript:void(0)">BMW</a>
                     </div>
                   </div>
                 </div>
                 <div className="share-box flex-three">
                   <p className="text-color-2 fw-5 font">Share this post:</p>
                   <div className="icon-social">
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <i className="icon-autodeal-facebook" />
                     </a>
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <i className="icon-autodeal-linkedin" />
                     </a>
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <i className="icon-autodeal-twitter" />
                     </a>
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <i className="icon-autodeal-instagram" />
                     </a>
                   </div>
@@ -238,10 +238,10 @@ export default function BlogDetails({ blogItem }) {
                       <div className="flex-three">
                         <p className="fs-12">Is this review helpful?</p>
                         <div className="helpful">
-                          <a href="#" className="fs-12 fw-4 font-2">
+                          <a href="javascript:void(0)" className="fs-12 fw-4 font-2">
                             Yes
                           </a>{" "}
-                          <a href="#" className="fs-12 fw-4 font-2">
+                          <a href="javascript:void(0)" className="fs-12 fw-4 font-2">
                             No
                           </a>
                         </div>
@@ -271,10 +271,10 @@ export default function BlogDetails({ blogItem }) {
                       <div className="flex-three">
                         <p className="fs-12">Is this review helpful?</p>
                         <div className="helpful">
-                          <a href="#" className="fs-12 fw-4 font-2">
+                          <a href="javascript:void(0)" className="fs-12 fw-4 font-2">
                             Yes
                           </a>{" "}
-                          <a href="#" className="fs-12 fw-4 font-2">
+                          <a href="javascript:void(0)" className="fs-12 fw-4 font-2">
                             No
                           </a>
                         </div>
@@ -303,10 +303,10 @@ export default function BlogDetails({ blogItem }) {
                       <div className="flex-three">
                         <p className="fs-12">Is this review helpful?</p>
                         <div className="helpful">
-                          <a href="#" className="fs-12 fw-4 font-2">
+                          <a href="javascript:void(0)" className="fs-12 fw-4 font-2">
                             Yes
                           </a>{" "}
-                          <a href="#" className="fs-12 fw-4 font-2">
+                          <a href="javascript:void(0)" className="fs-12 fw-4 font-2">
                             No
                           </a>
                         </div>

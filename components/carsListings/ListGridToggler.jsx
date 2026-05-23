@@ -3,7 +3,7 @@ export default function ListGridToggler({ isGrid, setIsGrid }) {
   return (
     <>
       <a
-        href="#"
+        href="javascript:void(0)"
         className={`btn-view grid ${isGrid ? "active" : ""}`}
         onClick={() => setIsGrid(true)}
       >

@@ -117,7 +117,7 @@ export default function Achievements() {
                     </div>
                     <div className="content">
                       <h3>
-                        <a href="#">{achievement.heading}</a>
+                        <a href="javascript:void(0)">{achievement.heading}</a>
                       </h3>
                       <p>{achievement.text}</p>
                     </div>
@@ -139,7 +139,7 @@ export default function Achievements() {
                       <div className="icon">{achievement.icon}</div>
                       <div className="content">
                         <h3>
-                          <a href="#">{achievement.heading}</a>
+                          <a href="javascript:void(0)">{achievement.heading}</a>
                         </h3>
                         <p>{achievement.text}</p>
                       </div>

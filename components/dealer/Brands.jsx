@@ -55,7 +55,7 @@ export default function Categories2() {
             >
               {partners.map((partner, i) => (
                 <SwiperSlide key={i} className="swiper-slide">
-                  <a href="#" className="partner-item style-1">
+                  <a href="javascript:void(0)" className="partner-item style-1">
                     <div className="image">
                       <Image
                         className="lazyload"

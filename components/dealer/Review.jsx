@@ -85,10 +85,10 @@ export default function Review() {
                     <div className="flex-three">
                       <p className="fs-12">Is this review helpful?</p>
                       <div className="helpful">
-                        <a href="#" className="fs-12 fw-4 font-2">
+                        <a href="javascript:void(0)" className="fs-12 fw-4 font-2">
                           Yes
                         </a>{" "}
-                        <a href="#" className="fs-12 fw-4 font-2">
+                        <a href="javascript:void(0)" className="fs-12 fw-4 font-2">
                           No
                         </a>
                       </div>
@@ -127,10 +127,10 @@ export default function Review() {
                     <div className="flex-three">
                       <p className="fs-12">Is this review helpful?</p>
                       <div className="helpful">
-                        <a href="#" className="fs-12 fw-4 font-2">
+                        <a href="javascript:void(0)" className="fs-12 fw-4 font-2">
                           Yes
                         </a>{" "}
-                        <a href="#" className="fs-12 fw-4 font-2">
+                        <a href="javascript:void(0)" className="fs-12 fw-4 font-2">
                           No
                         </a>
                       </div>
@@ -169,17 +169,17 @@ export default function Review() {
                     <div className="flex-three">
                       <p className="fs-12">Is this review helpful?</p>
                       <div className="helpful">
-                        <a href="#" className="fs-12 fw-4 font-2">
+                        <a href="javascript:void(0)" className="fs-12 fw-4 font-2">
                           Yes
                         </a>{" "}
-                        <a href="#" className="fs-12 fw-4 font-2">
+                        <a href="javascript:void(0)" className="fs-12 fw-4 font-2">
                           No
                         </a>
                       </div>
                     </div>
                   </li>
                 </ol>
-                <a href="#" className="fs-16 fw-5 font text-color-3 lh-22">
+                <a href="javascript:void(0)" className="fs-16 fw-5 font text-color-3 lh-22">
                   View more reviews
                   <i className="icon-autodeal-view-more" />
                 </a>

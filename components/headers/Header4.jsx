@@ -41,7 +41,7 @@ export default function Header4() {
                 </div>
                 <div className="header-account flex align-center">
                   <a
-                    href="#"
+                    href="javascript:void(0)"
                     className="box-avatar dropdown-toggle"
                     data-bs-toggle="dropdown"
                   >
@@ -301,7 +301,7 @@ export default function Header4() {
                       </svg>
                       Change passwords
                     </Link>
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="javascript:void(0)">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width={22}
@@ -415,7 +415,7 @@ export default function Header4() {
             <div className="login-box flex align-center">
               <i className="icon-autodeal-user fs-20" />
               <a
-                href="#"
+                href="javascript:void(0)"
                 data-bs-toggle="modal"
                 data-bs-target="#popup_bid"
                 className="fw-7 font-2"

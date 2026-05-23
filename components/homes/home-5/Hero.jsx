@@ -163,7 +163,7 @@ export default function Hero() {
                       data-wow-duration="1000ms"
                     >
                       <a
-                        href="#"
+                        href="javascript:void(0)"
                         className="chat fs-16 fw-5 text-color-1 flex align-center"
                       >
                         See full specs <i className="icon-autodeal-top" />
@@ -180,7 +180,7 @@ export default function Hero() {
                       fringilla lectus.
                     </p>
                     <div className="chat-wrap fade-item fade-item-3">
-                      <a href="#" className="chat">
+                      <a href="javascript:void(0)" className="chat">
                         View Detail
                       </a>
                     </div>
@@ -328,7 +328,7 @@ export default function Hero() {
                       data-wow-duration="1000ms"
                     >
                       <a
-                        href="#"
+                        href="javascript:void(0)"
                         className="chat fs-16 fw-5 text-color-1 flex align-center"
                       >
                         See full specs <i className="icon-autodeal-top" />
@@ -345,7 +345,7 @@ export default function Hero() {
                       fringilla lectus.
                     </p>
                     <div className="chat-wrap fade-item fade-item-3">
-                      <a href="#" className="chat">
+                      <a href="javascript:void(0)" className="chat">
                         View Detail
                       </a>
                     </div>

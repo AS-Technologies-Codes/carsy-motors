@@ -62,10 +62,10 @@ export default function Blogs({ parentClass = "section-blog tf-section" }) {
                     </div>
                     <div className="content">
                       <div className="sub-box flex align-center fs-13 fw-6">
-                        <a href="#" className="admin fw-7 text-color-2">
+                        <a href="javascript:void(0)" className="admin fw-7 text-color-2">
                           {slide.admin}
                         </a>
-                        <a href="#" className="category text-color-3">
+                        <a href="javascript:void(0)" className="category text-color-3">
                           {slide.category}
                         </a>
                       </div>

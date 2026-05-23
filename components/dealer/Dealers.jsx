@@ -41,7 +41,7 @@ export default function Dealers() {
                       </div>
                       <div className="content">
                         <h4>
-                          <a href="#">{dealer.title}</a>
+                          <a href="javascript:void(0)">{dealer.title}</a>
                         </h4>
                         <div className="rating">
                           {dealer.reviews} Reviews
@@ -63,7 +63,7 @@ export default function Dealers() {
                     </div>
                     <div className="dealer-phone">
                       <h4>{dealer.phone}</h4>
-                      <a href="#">
+                      <a href="javascript:void(0)">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width={16}

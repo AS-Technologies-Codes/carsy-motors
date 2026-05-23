@@ -15,7 +15,7 @@ export default function BlogCategories() {
       <ul>
         {categories.map((category, index) => (
           <li key={index} className="flex-two">
-            <a href="#" className="font-2 fw-7">
+            <a href="javascript:void(0)" className="font-2 fw-7">
               {category.title}
             </a>
             <div className="number">({category.count})</div>

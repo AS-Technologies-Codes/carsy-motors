@@ -13,7 +13,7 @@ export default function SearchSection() {
               className="search-dealer-list"
             >
               <div className="filter-search">
-                <a href="#" className="active">
+                <a href="javascript:void(0)" className="active">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width={20}
@@ -31,7 +31,7 @@ export default function SearchSection() {
                   </svg>
                   New
                 </a>
-                <a href="#">Used</a>
+                <a href="javascript:void(0)">Used</a>
               </div>
               <div className="group-input">
                 <div className="inner">
@@ -52,7 +52,7 @@ export default function SearchSection() {
                   <input type="text" placeholder="Search car dealerships" />
                 </div>
               </div>
-              <a href="#" className="search-submit">
+              <a href="javascript:void(0)" className="search-submit">
                 Search <i className="far fa-search text-color-1" />
               </a>
             </form>

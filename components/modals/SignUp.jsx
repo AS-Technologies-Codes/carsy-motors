@@ -169,7 +169,7 @@ export default function SignUp() {
                 </div>
                 <p className="texts line fs-12 text-center">or Register with</p>
                 <div className="button-box flex">
-                  <a href="#" className="flex align-center hover-login-social">
+                  <a href="javascript:void(0)" className="flex align-center hover-login-social">
                     <svg
                       width={20}
                       height={21}
@@ -196,7 +196,7 @@ export default function SignUp() {
                     </svg>
                     <span className="fw-6">Google</span>
                   </a>
-                  <a href="#" className="flex align-center hover-login-social">
+                  <a href="javascript:void(0)" className="flex align-center hover-login-social">
                     <svg
                       width={21}
                       height={21}

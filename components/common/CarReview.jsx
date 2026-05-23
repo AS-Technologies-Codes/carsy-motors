@@ -69,7 +69,7 @@ export default function CarReview() {
                           {slide.description}
                         </p>
                         <div className="btn-wrap">
-                          <a href="#" className="sc-button">
+                          <a href="javascript:void(0)" className="sc-button">
                             <span>{slide.btnText}</span>
                           </a>
                         </div>

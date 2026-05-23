@@ -51,7 +51,7 @@ export default function CarDetails4({ carItem = allCars[0] }) {
                 </div>
                 <ul className="action-icon style-1 flex flex-wrap">
                   <li>
-                    <a href="#" className="icon">
+                    <a href="javascript:void(0)" className="icon">
                       <svg
                         width={16}
                         height={18}
@@ -70,7 +70,7 @@ export default function CarDetails4({ carItem = allCars[0] }) {
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="icon">
+                    <a href="javascript:void(0)" className="icon">
                       <svg
                         width={16}
                         height={14}
@@ -89,7 +89,7 @@ export default function CarDetails4({ carItem = allCars[0] }) {
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="icon">
+                    <a href="javascript:void(0)" className="icon">
                       <svg
                         width={16}
                         height={16}
@@ -252,7 +252,7 @@ export default function CarDetails4({ carItem = allCars[0] }) {
                     <p>Showing 26 more cars you might like</p>
                   </div>
                   <Recommended />
-                  <a href="#" className="fs-16 fw-5 font text-color-3 lh-22">
+                  <a href="javascript:void(0)" className="fs-16 fw-5 font text-color-3 lh-22">
                     View more reviews <i className="icon-autodeal-view-more" />
                   </a>
                 </div>

@@ -111,7 +111,7 @@ export default function FlatFilter3({
                 </a>
               </div>
               <div className="button-search sc-btn-top">
-                <a className="sc-button" href="#">
+                <a className="sc-button" href="javascript:void(0)">
                   <span>Find cars</span>
                   <i className="far fa-search text-color-1" />
                 </a>

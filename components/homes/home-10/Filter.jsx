@@ -12,23 +12,23 @@ export default function Filter() {
               <div className="wrap-icon flex align-center link-style-3 link-style-4 justify-center flex-wrap">
                 <div className="icon-box text-color-1 font">
                   <span className="icon-autodeal-suv" />
-                  <a href="#">Hatchback</a>
+                  <a href="javascript:void(0)">Hatchback</a>
                 </div>
                 <div className="icon-box text-color-1 font">
                   <span className="icon-autodeal-coupe" />
-                  <a href="#">SUV</a>
+                  <a href="javascript:void(0)">SUV</a>
                 </div>
                 <div className="icon-box text-color-1 font">
                   <span className="icon-autodeal-coupe" />
-                  <a href="#">Coupe</a>
+                  <a href="javascript:void(0)">Coupe</a>
                 </div>
                 <div className="icon-box text-color-1 font">
                   <span className="icon-autodeal-hatchback" />
-                  <a href="#">Hatchback</a>
+                  <a href="javascript:void(0)">Hatchback</a>
                 </div>
                 <div className="icon-box text-color-1 font">
                   <span className="icon-autodeal-hybrid" />
-                  <a href="#">Hybrid</a>
+                  <a href="javascript:void(0)">Hybrid</a>
                 </div>
               </div>
             </div>

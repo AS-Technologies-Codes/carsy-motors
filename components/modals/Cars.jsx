@@ -61,7 +61,7 @@ export default function Page() {
                   </svg>*/}
                     </div>
                     <h3>
-                      <a href="#">Cash for Car</a>
+                      <a href="javascript:void(0)">Cash for Car</a>
                     </h3>
                   </div>
                   <div className="content">
@@ -110,7 +110,7 @@ export default function Page() {
                   </svg> */}
                     </div>
                     <h3>
-                      <a href="#">Buy Pre-owned Cars</a>
+                      <a href="javascript:void(0)">Buy Pre-owned Cars</a>
                     </h3>
                   </div>
                   <div className="content">
@@ -160,7 +160,7 @@ export default function Page() {
                   </svg> */}
                     </div>
                     <h3>
-                      <a href="#">Car Hire Service</a>
+                      <a href="javascript:void(0)">Car Hire Service</a>
                     </h3>
                   </div>
                   <div className="content">

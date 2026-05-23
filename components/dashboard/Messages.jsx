@@ -292,10 +292,10 @@ export default function Messages() {
                             placeholder="Aa"
                             defaultValue=""
                           />
-                          <a href="#">Send</a>
+                          <a href="javascript:void(0)">Send</a>
                         </div>
                         <div className="controll">
-                          <a href="#" className="file">
+                          <a href="javascript:void(0)" className="file">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width={20}
@@ -312,7 +312,7 @@ export default function Messages() {
                               />
                             </svg>
                           </a>
-                          <a href="#" className="image">
+                          <a href="javascript:void(0)" className="image">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width={22}

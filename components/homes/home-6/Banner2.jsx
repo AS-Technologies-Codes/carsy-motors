@@ -27,7 +27,7 @@ export default function Banner2() {
                 data-wow-delay="0.2s"
                 data-wow-duration="1000ms"
               >
-                <a href="#" className="sc-button btn-svg">
+                <a href="javascript:void(0)" className="sc-button btn-svg">
                   <span>View all listing</span>
                   <i className="icon-autodeal-right2" />
                 </a>

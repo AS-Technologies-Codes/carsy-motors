@@ -64,14 +64,14 @@ export default function Process() {
                   </div>
                   <div className="content">
                     <h3>
-                      <a href="#">Browse inventory</a>
+                      <a href="javascript:void(0)">Browse inventory</a>
                     </h3>
                     <p>
                       Find the ideal car for you and browse our affordable
                       inventory.
                     </p>
                     <div className="meta style">
-                      <a href="#" className="btn-button">
+                      <a href="javascript:void(0)" className="btn-button">
                         <span>Search inventory</span>
                         <i className="icon-autodeal-next" />
                       </a>
@@ -105,14 +105,14 @@ export default function Process() {
                   </div>
                   <div className="content">
                     <h3>
-                      <a href="#">Get An Offer</a>
+                      <a href="javascript:void(0)">Get An Offer</a>
                     </h3>
                     <p>
                       What's your car worth? Get the best value for your
                       vehicle.
                     </p>
                     <div className="meta style">
-                      <a href="#" className="btn-button">
+                      <a href="javascript:void(0)" className="btn-button">
                         <span>Get trade-in Value</span>
                         <i className="icon-autodeal-next" />
                       </a>
@@ -142,14 +142,14 @@ export default function Process() {
                   </div>
                   <div className="content">
                     <h3>
-                      <a href="#">Apply For Financing</a>
+                      <a href="javascript:void(0)">Apply For Financing</a>
                     </h3>
                     <p>
                       Fill out our credit approval form for your next used
                       vehicle loan.
                     </p>
                     <div className="meta style">
-                      <a href="#" className="btn-button">
+                      <a href="javascript:void(0)" className="btn-button">
                         <span>Apply Now</span>
                         <i className="icon-autodeal-next" />
                       </a>
@@ -183,14 +183,14 @@ export default function Process() {
                   </div>
                   <div className="content">
                     <h3>
-                      <a href="#">Expert Service</a>
+                      <a href="javascript:void(0)">Expert Service</a>
                     </h3>
                     <p>
                       Expert technicians will keep your vehicle in top running
                       condition.
                     </p>
                     <div className="meta style">
-                      <a href="#" className="btn-button">
+                      <a href="javascript:void(0)" className="btn-button">
                         <span>Schedule Service</span>
                         <i className="icon-autodeal-next" />
                       </a>
@@ -229,14 +229,14 @@ export default function Process() {
                     </div>
                     <div className="content">
                       <h3>
-                        <a href="#">Browse inventory</a>
+                        <a href="javascript:void(0)">Browse inventory</a>
                       </h3>
                       <p>
                         Find the ideal car for you and browse our affordable
                         inventory.
                       </p>
                       <div className="meta style">
-                        <a href="#" className="btn-button">
+                        <a href="javascript:void(0)" className="btn-button">
                           <span>Search inventory</span>
                           <i className="icon-autodeal-next" />
                         </a>
@@ -270,14 +270,14 @@ export default function Process() {
                     </div>
                     <div className="content">
                       <h3>
-                        <a href="#">Get An Offer</a>
+                        <a href="javascript:void(0)">Get An Offer</a>
                       </h3>
                       <p>
                         What's your car worth? Get the best value for your
                         vehicle.
                       </p>
                       <div className="meta style">
-                        <a href="#" className="btn-button">
+                        <a href="javascript:void(0)" className="btn-button">
                           <span>Get trade-in Value</span>
                           <i className="icon-autodeal-next" />
                         </a>
@@ -307,14 +307,14 @@ export default function Process() {
                     </div>
                     <div className="content">
                       <h3>
-                        <a href="#">Apply For Financing</a>
+                        <a href="javascript:void(0)">Apply For Financing</a>
                       </h3>
                       <p>
                         Fill out our credit approval form for your next used
                         vehicle loan.
                       </p>
                       <div className="meta style">
-                        <a href="#" className="btn-button">
+                        <a href="javascript:void(0)" className="btn-button">
                           <span>Apply Now</span>
                           <i className="icon-autodeal-next" />
                         </a>
@@ -348,14 +348,14 @@ export default function Process() {
                     </div>
                     <div className="content">
                       <h3>
-                        <a href="#">Expert Service</a>
+                        <a href="javascript:void(0)">Expert Service</a>
                       </h3>
                       <p>
                         Expert technicians will keep your vehicle in top running
                         condition.
                       </p>
                       <div className="meta style">
-                        <a href="#" className="btn-button">
+                        <a href="javascript:void(0)" className="btn-button">
                           <span>Schedule Service</span>
                           <i className="icon-autodeal-next" />
                         </a>

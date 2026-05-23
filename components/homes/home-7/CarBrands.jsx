@@ -42,7 +42,7 @@ export default function CarBrands() {
                 Search car by body
               </h2>
               <a
-                href="#"
+                href="javascript:void(0)"
                 className="tf-btn-arrow wow fadeInUpSmall"
                 data-wow-delay="0.2s"
                 data-wow-duration="1000ms"

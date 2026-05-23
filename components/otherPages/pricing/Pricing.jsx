@@ -16,16 +16,16 @@ export default function Pricing() {
               <div className="social-listing flex-six flex-wrap">
                 <p>Share this page:</p>
                 <div className="icon-social style1">
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-facebook" />
                   </a>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-linkedin" />
                   </a>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-twitter" />
                   </a>
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <i className="icon-autodeal-instagram" />
                   </a>
                 </div>
@@ -90,7 +90,7 @@ export default function Pricing() {
                             ))}
                           </ul>
                           <div className="button-pricing">
-                            <a className="sc-button btn-1 w-100" href="#">
+                            <a className="sc-button btn-1 w-100" href="javascript:void(0)">
                               <span>Get started</span>
                             </a>
                           </div>

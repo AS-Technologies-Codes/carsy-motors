@@ -31,7 +31,7 @@ export default function Nav() {
           isActive(homepages) ? "current" : ""
         } `}
       >
-        <a href="#">Home</a>
+        <a href="javascript:void(0)">Home</a>
         <ul>
           {homepages.map((page, index) => (
             <li
@@ -52,11 +52,11 @@ export default function Nav() {
           isActive(listingPages) ? "current" : ""
         } `}
       >
-        <a href="#">Listing Car</a>
+        <a href="javascript:void(0)">Listing Car</a>
         <ul>
           {listingPages.map((item, index) => (
             <li key={index} className={item.className}>
-              <a href="#">{item.title}</a>
+              <a href="javascript:void(0)">{item.title}</a>
               <ul>
                 {item.links.map((link, linkIndex) => (
                   <li
@@ -77,7 +77,7 @@ export default function Nav() {
         </ul>
       </li>
       <li className={`dropdown2  ${isActive(otherPages) ? "current" : ""} `}>
-        <a href="#">Page</a>
+        <a href="javascript:void(0)">Page</a>
         <ul>
           {otherPages.map((item, index) => (
             <li
@@ -92,7 +92,7 @@ export default function Nav() {
             >
               {item.title ? (
                 <>
-                  <a href="#">{item.title}</a>
+                  <a href="javascript:void(0)">{item.title}</a>
                   <ul>
                     {item.links.map((link, linkIndex) => (
                       <li
@@ -117,7 +117,7 @@ export default function Nav() {
         </ul>
       </li>
       <li className={`dropdown2  ${isActive(blogPages) ? "current" : ""} `}>
-        <a href="#">Blog</a>
+        <a href="javascript:void(0)">Blog</a>
         <ul>
           {blogPages.map((item, index) => (
             <li

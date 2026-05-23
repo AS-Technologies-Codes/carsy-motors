@@ -58,13 +58,13 @@ export default function ProfileInfo() {
       <div className="profile-contact">
         <h6>Contact dealer</h6>
         <div className="btn-contact flex-two">
-          <a href="#" className="btn-pf bg-orange">
+          <a href="javascript:void(0)" className="btn-pf bg-orange">
             <i className="icon-autodeal-phone2" />
             <span className="fs-16 fw-5 lh-20 font text-color-1">
               Call to seller
             </span>
           </a>
-          <a href="#" className="btn-pf bg-green">
+          <a href="javascript:void(0)" className="btn-pf bg-green">
             <i className="icon-autodeal-chat" />
             <span className="fs-16 fw-5 lh-20 font text-color-1">Chat</span>
           </a>

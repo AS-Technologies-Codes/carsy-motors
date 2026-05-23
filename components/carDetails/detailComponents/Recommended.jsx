@@ -18,7 +18,7 @@ export default function Recommended() {
           </div>
           <div className="content">
             <h6>
-              <a href="#">{elm.title}</a>
+              <a href="javascript:void(0)">{elm.title}</a>
             </h6>
             <p className="fs-14 fw-7 text-color-2 font-1">
               ${elm.price.toLocaleString()}

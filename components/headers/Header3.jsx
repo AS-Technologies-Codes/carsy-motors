@@ -81,27 +81,27 @@ export default function Header3() {
                 <p>Follow us:</p>
                 <ul className="flex-three">
                   <li>
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <i className="icon-autodeal-facebook" />
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <i className="icon-autodeal-linkedin" />
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <i className="icon-autodeal-twitter" />
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <i className="icon-autodeal-instagram" />
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <i className="icon-autodeal-youtube" />
                     </a>
                   </li>
@@ -181,7 +181,7 @@ export default function Header3() {
                     </div>
                   </div>
                   <a
-                    href="#"
+                    href="javascript:void(0)"
                     className="header-favorite flex items-center justify-center"
                   >
                     <i className="icon-autodeal-favorite fs-18" />
@@ -193,7 +193,7 @@ export default function Header3() {
                       </li>
                       <li className="">
                         <a
-                          href="#"
+                          href="javascript:void(0)"
                           data-bs-toggle="modal"
                           data-bs-target="#popup_bid"
                         >
@@ -205,7 +205,7 @@ export default function Header3() {
                       </li>
                       <li className="">
                         <a
-                          href="#"
+                          href="javascript:void(0)"
                           data-bs-toggle="modal"
                           data-bs-target="#popup_bid2"
                         >
@@ -295,7 +295,7 @@ export default function Header3() {
             <div className="login-box flex align-center">
               <i className="icon-autodeal-user fs-20" />
               <a
-                href="#"
+                href="javascript:void(0)"
                 data-bs-toggle="modal"
                 data-bs-target="#popup_bid"
                 className="fw-7 font-2"

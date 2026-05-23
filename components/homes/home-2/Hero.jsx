@@ -1,4 +1,4 @@
-"use client";
+  "use client";
 import DropdownSelect from "@/components/common/DropDownSelect";
 import React, { useState } from "react";
 
@@ -83,7 +83,7 @@ export default function Hero() {
                           </div>
                         </div>
                         <div className="button-search sc-btn-top radio-wrap">
-                          <a className="sc-button" href="#">
+                          <a className="sc-button" href="javascript:void(0)">
                             <span>Search</span>
                             <i className="far fa-search text-color-1" />
                           </a>
@@ -523,7 +523,7 @@ export default function Hero() {
             <div className="wrap-icon trending2">
               <div className="icon-box text-color-1 fs-14 fw-4 flex align-center font">
                 <span className="icon-autodeal-trending" />
-                <a href="#">
+                <a href="javascript:void(0)">
                   <strong className="font-2 fw-7">Trending:</strong> Volkswagen
                   Scirocco, Honda Civic, Audi A3, Toyota Vios, Nissan GTR,
                   Subaru Impreza

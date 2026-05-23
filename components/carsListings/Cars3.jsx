@@ -627,7 +627,7 @@ export default function Cars3() {
                                         >
                                           View car
                                         </Link>
-                                        <a href="#" className="chat">
+                                        <a href="javascript:void(0)" className="chat">
                                           <div className="icon">
                                             <svg
                                               width={18}

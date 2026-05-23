@@ -52,7 +52,7 @@ export default function CarBrands() {
                 Search by body
               </h2>
               <a
-                href="#"
+                href="javascript:void(0)"
                 className="tf-btn-arrow wow fadeInUpSmall"
                 data-wow-delay="0.2s"
                 data-wow-duration="1000ms"
@@ -69,13 +69,13 @@ export default function CarBrands() {
               className="swiper carousel-1 overflow-hidden"
             >
               <SwiperSlide className="swiper-slide">
-                <a href="#" className="partner-item style-2">
-                  <div className="icon flex-five">
+                <a href="javascript:void(0)" className="partner-item style-2">
+                  <div className="icon flex-five text-color-2">
                     <svg
                       width={58}
                       height={28}
                       viewBox="0 0 58 28"
-                      fill="none"
+                      fill="text-color-2"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
@@ -97,7 +97,7 @@ export default function CarBrands() {
                 </a>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
-                <a href="#" className="partner-item style-2">
+                <a href="javascript:void(0)" className="partner-item style-2">
                   <div className="icon flex-five">
                     <svg
                       width={58}
@@ -125,7 +125,7 @@ export default function CarBrands() {
                 </a>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
-                <a href="#" className="partner-item style-2">
+                <a href="javascript:void(0)" className="partner-item style-2">
                   <div className="icon flex-five">
                     <svg
                       width={58}
@@ -153,7 +153,7 @@ export default function CarBrands() {
                 </a>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
-                <a href="#" className="partner-item style-2">
+                <a href="javascript:void(0)" className="partner-item style-2">
                   <div className="icon flex-five">
                     <svg
                       width={58}
@@ -181,7 +181,7 @@ export default function CarBrands() {
                 </a>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
-                <a href="#" className="partner-item style-2">
+                <a href="javascript:void(0)" className="partner-item style-2">
                   <div className="icon flex-five">
                     <svg
                       width={58}
@@ -210,7 +210,7 @@ export default function CarBrands() {
               </SwiperSlide>
 
               <SwiperSlide className="swiper-slide">
-                <a href="#" className="partner-item style-2">
+                <a href="javascript:void(0)" className="partner-item style-2">
                   <div className="icon flex-five">
                     <svg
                       width={58}
@@ -238,7 +238,7 @@ export default function CarBrands() {
                 </a>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
-                <a href="#" className="partner-item style-2">
+                <a href="javascript:void(0)" className="partner-item style-2">
                   <div className="icon flex-five">
                     <svg
                       width={58}
@@ -266,7 +266,7 @@ export default function CarBrands() {
                 </a>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
-                <a href="#" className="partner-item style-2">
+                <a href="javascript:void(0)" className="partner-item style-2">
                   <div className="icon flex-five">
                     <svg
                       width={58}
@@ -294,7 +294,7 @@ export default function CarBrands() {
                 </a>
               </SwiperSlide>
               <SwiperSlide className="swiper-slide">
-                <a href="#" className="partner-item style-2">
+                <a href="javascript:void(0)" className="partner-item style-2">
                   <div className="icon flex-five">
                     <svg
                       width={58}

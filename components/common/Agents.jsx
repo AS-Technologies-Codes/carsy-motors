@@ -32,16 +32,16 @@ export default function Agents({ parentClass = "tf-section" }) {
                     />
                   </Link>
                   <div className="icon-socials">
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <i className="icon-autodeal-facebook" />
                     </a>
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <i className="icon-autodeal-twitter" />
                     </a>
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <i className="icon-autodeal-linkedin" />
                     </a>
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       <i className="icon-autodeal-instagram" />
                     </a>
                   </div>

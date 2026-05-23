@@ -102,7 +102,7 @@ export default function Features() {
                   </div>
                   <div className="content">
                     <h5>
-                      <a href="#">New range rover, defender, discovery</a>
+                      <a href="javascript:void(0)">New range rover, defender, discovery</a>
                     </h5>
                     <p>
                       Experience the joy of owning a brand new Range Rover,
@@ -142,7 +142,7 @@ export default function Features() {
                   </div>
                   <div className="content">
                     <h5>
-                      <a href="#">Pre-Owned vehicles</a>
+                      <a href="javascript:void(0)">Pre-Owned vehicles</a>
                     </h5>
                     <p>
                       AutoDecar has a great selection of pre-owned vehicles.
@@ -182,7 +182,7 @@ export default function Features() {
                   </div>
                   <div className="content">
                     <h5>
-                      <a href="#">Certified pre-owned vehicles</a>
+                      <a href="javascript:void(0)">Certified pre-owned vehicles</a>
                     </h5>
                     <p>
                       AutoDecar Demo has a great selection of certified
@@ -226,7 +226,7 @@ export default function Features() {
                   </div>
                   <div className="content">
                     <h5>
-                      <a href="#">Financing</a>
+                      <a href="javascript:void(0)">Financing</a>
                     </h5>
                     <p>
                       Get approved today and drive off in a new or used vehicle.

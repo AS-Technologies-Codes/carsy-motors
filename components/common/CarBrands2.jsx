@@ -50,7 +50,7 @@ export default function CarBrands2() {
               >
                 {carBrands.map((slide, index) => (
                   <SwiperSlide className="swiper-slide" key={index}>
-                    <a href="#" className="partner-item style-1">
+                    <a href="javascript:void(0)" className="partner-item style-1">
                       <div className="image">
                         <Image
                           className="lazyload"

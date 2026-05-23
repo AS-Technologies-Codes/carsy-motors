@@ -17,7 +17,7 @@ export default function Banner() {
                   buy <br />
                   cars that are right for them
                 </p>
-                <a href="#" className="sc-button btn-svg">
+                <a href="javascript:void(0)" className="sc-button btn-svg">
                   <span>Search for your favorite car</span>
                   <i className="icon-autodeal-next" />
                 </a>

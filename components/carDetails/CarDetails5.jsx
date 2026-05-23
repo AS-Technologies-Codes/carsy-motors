@@ -200,7 +200,7 @@ export default function CarDetails5({ carItem = allCars[0] }) {
                     <p>Showing 26 more cars you might like</p>
                   </div>
                   <Recommended />
-                  <a href="#" className="fs-16 fw-5 font text-color-3 lh-22">
+                  <a href="javascript:void(0)" className="fs-16 fw-5 font text-color-3 lh-22">
                     View more reviews <i className="icon-autodeal-view-more" />
                   </a>
                 </div>

@@ -188,7 +188,7 @@ export default function MyListings() {
                                           />
                                         </span>{" "}
                                         <a
-                                          href="#"
+                                          href="javascript:void(0)"
                                           className="btn-action tfcl-dashboard-action-edit"
                                         >
                                           Edit
@@ -204,7 +204,7 @@ export default function MyListings() {
                                           />
                                         </span>{" "}
                                         <a
-                                          href="#"
+                                          href="javascript:void(0)"
                                           className="btn-action tfcl-dashboard-action-edit"
                                         >
                                           Sold
@@ -220,7 +220,7 @@ export default function MyListings() {
                                           />
                                         </span>{" "}
                                         <a
-                                          href="#"
+                                          href="javascript:void(0)"
                                           className="btn-action tfcl-dashboard-action-edit"
                                         >
                                           Delete

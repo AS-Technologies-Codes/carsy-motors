@@ -12,16 +12,16 @@ export default function Blogs2() {
           <div className="social-listing flex-six flex-wrap">
             <p>Share this page:</p>
             <div className="icon-social style1">
-              <a href="#">
+              <a href="javascript:void(0)">
                 <i className="icon-autodeal-facebook" />
               </a>
-              <a href="#">
+              <a href="javascript:void(0)">
                 <i className="icon-autodeal-linkedin" />
               </a>
-              <a href="#">
+              <a href="javascript:void(0)">
                 <i className="icon-autodeal-twitter" />
               </a>
-              <a href="#">
+              <a href="javascript:void(0)">
                 <i className="icon-autodeal-instagram" />
               </a>
             </div>
@@ -46,10 +46,10 @@ export default function Blogs2() {
                         </div>
                         <div className="content">
                           <div className="sub-box flex align-center fs-13 fw-6">
-                            <a href="#" className="admin fw-7 text-color-2">
+                            <a href="javascript:void(0)" className="admin fw-7 text-color-2">
                               {post.admin}
                             </a>
-                            <a href="#" className="category text-color-3">
+                            <a href="javascript:void(0)" className="category text-color-3">
                               {post.category}
                             </a>
                           </div>

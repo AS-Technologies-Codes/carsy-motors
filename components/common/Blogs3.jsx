@@ -51,10 +51,10 @@ export default function Blogs3({ parentClass = "section-blog tf-section" }) {
                       </div>
                       <div className="content">
                         <div className="sub-box flex align-center fs-13 fw-6">
-                          <a href="#" className="admin fw-7 text-color-2">
+                          <a href="javascript:void(0)" className="admin fw-7 text-color-2">
                             {article.admin}
                           </a>
-                          <a href="#" className="category text-color-3">
+                          <a href="javascript:void(0)" className="category text-color-3">
                             {article.category}
                           </a>
                         </div>
@@ -103,10 +103,10 @@ export default function Blogs3({ parentClass = "section-blog tf-section" }) {
                     </div>
                     <div className="content">
                       <div className="sub-box flex align-center fs-13 fw-6">
-                        <a href="#" className="admin fw-7 text-color-2">
+                        <a href="javascript:void(0)" className="admin fw-7 text-color-2">
                           {article.admin}
                         </a>
-                        <a href="#" className="category text-color-3">
+                        <a href="javascript:void(0)" className="category text-color-3">
                           {article.category}
                         </a>
                       </div>

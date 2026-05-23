@@ -19,13 +19,13 @@ export default function Banner() {
               </div>
               <div className="content">
                 <h3 className="text-color-1">
-                  <a href="#">Are you looking for a car?</a>
+                  <a href="javascript:void(0)">Are you looking for a car?</a>
                 </h3>
                 <p className="text-color-1">
                   Save time and effort as you no longer need to visit multiple
                   stores to find the right car.
                 </p>
-                <a href="#" className="find-cars">
+                <a href="javascript:void(0)" className="find-cars">
                   <span>Find cars</span>
                   <i className="icon-autodeal-search" />
                 </a>
@@ -46,13 +46,13 @@ export default function Banner() {
               </div>
               <div className="content">
                 <h3 className="text-color-1">
-                  <a href="#">Do you want to sell a car?</a>
+                  <a href="javascript:void(0)">Do you want to sell a car?</a>
                 </h3>
                 <p className="text-color-1">
                   Find your perfect car match and sell your car quickly with our
                   user-friendly online service.
                 </p>
-                <a href="#" className="find-cars">
+                <a href="javascript:void(0)" className="find-cars">
                   <span>Find cars</span>
                   <i className="icon-autodeal-search" />
                 </a>

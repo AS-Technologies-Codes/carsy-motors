@@ -64,7 +64,7 @@ export default function Features() {
                   </div>
                   <div className="content">
                     <h5>
-                      <a href="#">Proven Expertise</a>
+                      <a href="javascript:void(0)">Proven Expertise</a>
                     </h5>
                     <p>
                       Our experienced team excels in car sales with many years
@@ -98,7 +98,7 @@ export default function Features() {
                   </div>
                   <div className="content">
                     <h5>
-                      <a href="#">Customized Solutions</a>
+                      <a href="javascript:void(0)">Customized Solutions</a>
                     </h5>
                     <p>
                       We pride ourselves on creating personalized strategies to
@@ -164,7 +164,7 @@ export default function Features() {
                   </div>
                   <div className="content">
                     <h5>
-                      <a href="#">Transparent Partnerships</a>
+                      <a href="javascript:void(0)">Transparent Partnerships</a>
                     </h5>
                     <p>
                       Transparency is key in our client relationships. We

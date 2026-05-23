@@ -5,16 +5,25 @@ export const slides = [
 
 export const slides2 = [
   {
+    name: "Electric Vihicles (EV's)",
+    description:
+      "Rent a Polestar 2 EV. Refined performance meets cutting-edge technology.",
     imgSrc: "/assets/images/slider/slide3.jpg",
     heading: "Over 95,000 classified ads listing",
     subHeading: "Find what are you looking for",
   },
   {
+    name: "Electric Vihicles (EV's)",
+    description:
+      "Rent a Polestar 2 EV. Refined performance meets cutting-edge technology.",
     imgSrc: "/assets/images/slider/slide2.jpg",
     heading: "Over 95,000 classified ads listing",
     subHeading: "Find what are you looking for",
   },
-   {
+  {
+    name: "Electric Vihicles (EV's)",
+    description:
+      "Rent a Polestar 2 EV. Refined performance meets cutting-edge technology.",
     imgSrc: "/assets/images/slider/slide7.jpg",
     heading: "Over 95,000 classified ads listing",
     subHeading: "Find what are you looking for",

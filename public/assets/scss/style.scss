@@ -2268,6 +2268,11 @@ fieldset {
       padding-bottom: 4px;
     }
   }
+
+.sm-img-fluid {
+  max-width: 311%;
+}
+
 }
 @media (max-width: 430px) {
   .page-numbers {

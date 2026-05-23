@@ -229,7 +229,7 @@ export default function ListingMap({ height }) {
           data-wow-delay="0.2s"
           data-wow-duration="1000ms"
         >
-          <h2>Nearby Locations</h2>
+          <h2 className="text-center text-md-start">Nearby Locations</h2>
         </div>
       </div>
       {!isLoaded ? (
@@ -302,7 +302,7 @@ export default function ListingMap({ height }) {
           </GoogleMap>
 
           <div
-            className="tf-icon-box style-1 w-75 my-10 position-absolute"
+            className="tf-icon-box style-1 mx-3 my-10 position-absolute"
             style={{ top: "70%" }}
           >
             <div className="content d-flex align-items-center flex-column">

@@ -42,8 +42,8 @@ export default function page() {
       <Cars2 />
       <Trending /> */}
       <Cta />
-      <div>
-        <Image src={Banner} alt="image" className="img-fluid" />
+      <div className="my-5">
+        <Image src={Banner} alt="image" className="img-fluid sm-img-fluid" />
       </div>
       <Achievements />
       <YardsMap height={"600px"} />

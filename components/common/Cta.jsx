@@ -4,33 +4,132 @@ import carCash from "../../public/assets/images/cars-emojis/carcash.PNG";
 import carMap from "../../public/assets/images/cars-emojis/carmap.PNG";
 import carCheck from "../../public/assets/images/cars-emojis/carcheck.PNG";
 export default function Cta() {
+  const featList = [
+    {
+      head: "Trusted & Reliable",
+      des: "Your satisfaction, our priority",
+      icon: (
+        <svg
+          width={45}
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1}
+          stroke="#FF7101"
+          className="size-3"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"
+          />
+        </svg>
+      ),
+    },
+    {
+      head: "Best Prices",
+      des: "Competitive and transparent",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          width={45}
+          strokeWidth={1}
+          stroke="#FF7101"
+          class="size-3"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 6h.008v.008H6V6Z"
+          />
+        </svg>
+      ),
+    },
+    {
+      head: "Quick & Easy",
+      des: "Save time, drive more",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          width={45}
+          strokeWidth={1}
+          stroke="#FF7101"
+          className="size-3"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+          />
+        </svg>
+      ),
+    },
+    {
+      head: "24/7 Support",
+      des: "We're here for you",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          width={45}
+          strokeWidth={1}
+          stroke="#FF7101"
+          className="size-3"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"
+          />
+        </svg>
+      ),
+    },
+  ];
   return (
-    <section className="my-5">
-      <div className="container">
-        <div className="row mx-2 align-items-center">
-          <div className="col-lg-12">
-            <div className="center w-560 m0-auto">
-              <h2
-                className="wow fadeInUpSmall heading mb-5 mb-md-0"
-                data-wow-delay="0.2s"
-                data-wow-duration="1000ms"
-              >
-                Search for your favorite car or sell your car on Carsy Moters
-              </h2>
+    <>
+      <style>{`
+      @media (min-width: 768px) {
+        .border-md-end {
+          border-right: 1px solid #dee2e6 !important;
+        }
+      }
+    `}</style>
+      <section className="my-5">
+        <div className="container">
+          <div className="row mx-md-2 align-items-center">
+            <div className="col-lg-12">
+              <div className="center w-560 m0-auto">
+                <h2
+                  className="wow fadeInUpSmall heading mb-5 mb-md-0"
+                  data-wow-delay="0.2s"
+                  data-wow-duration="1000ms"
+                >
+                  Search for your favorite car and get the best deal on Carsy Moters
+                </h2>
+              </div>
             </div>
-          </div>
-          <div className="col-md-4 hover-zoom">
-            <div className="tf-icon-box style-3 mg-42">
-              <div className="inner-wrap flex-three">
-                <div className="icon">
-                  <Image
-                    src={carCash}
-                    alt="Cash for Car"
-                    width={50}
-                    className="rounded-circle overflow-hidden"
-                  />
+            <div className="col-md-4 hover-zoom">
+              <div className="tf-icon-box style-3 mg-42">
+                <div className="inner-wrap flex-three mb-2 mb-md-4">
+                  <div className="icon">
+                    <Image
+                      src={carCash}
+                      alt="Cash for Car"
+                      width={50}
+                      className="rounded-circle overflow-hidden"
+                    />
 
-                  {/* <svg
+                    {/* <svg
                         width={60}
                         height={60}
                         viewBox="0 0 60 60"
@@ -46,39 +145,39 @@ export default function Cta() {
                           fill="CurrentColor"
                         /> 
                       </svg>*/}
+                  </div>
+                  <h3>
+                    <a href="javascript:void(0)">Cash for Car</a>
+                  </h3>
                 </div>
-                <h3>
-                  <a href="#">Cash for Car</a>
-                </h3>
-              </div>
-              <div className="content">
-                <p>
-                  Instant offers with quick secure payments and free pickup.
-                </p>
-                <div className="meta style">
-                  <a
-                    href="#loan-calculator"
-                    className="sc-button btn-svg btn-55"
-                  >
-                    <span>Get an Offer</span>
-                    <i className="icon-autodeal-next" />
-                  </a>
+                <div className="content">
+                  <p className="mb-2 mb-md-4">
+                    Instant offers with quick secure payments and free pickup.
+                  </p>
+                  <div className="meta style">
+                    <a
+                      href="#loan-calculator"
+                      className="sc-button btn-svg btn-55"
+                    >
+                      <span>Get an Offer</span>
+                      <i className="icon-autodeal-next" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col-md-4 hover-zoom">
-            <div className="tf-icon-box style-3 mg-42 py-5 mb-5">
-              <div className="inner-wrap flex-three">
-                <div className="icon">
-                  <Image
-                    src={carCheck}
-                    alt="Cash for Car"
-                    width={50}
-                    className="rounded-circle overflow-hidden"
-                  />
+            <div className="col-md-4 hover-zoom">
+              <div className="tf-icon-box style-3 mg-42 py-5 mb-md-5">
+                <div className="inner-wrap flex-three mb-2 mb-md-4">
+                  <div className="icon">
+                    <Image
+                      src={carCheck}
+                      alt="Cash for Car"
+                      width={50}
+                      className="rounded-circle overflow-hidden"
+                    />
 
-                  {/* <svg
+                    {/* <svg
                         width={58}
                         height={60}
                         viewBox="0 0 58 60"
@@ -98,36 +197,37 @@ export default function Cta() {
                           fill="CurrentColor"
                         />
                       </svg> */}
+                  </div>
+                  <h3>
+                    <a href="javascript:void(0)">Buy Pre-owned Cars</a>
+                  </h3>
                 </div>
-                <h3>
-                  <a href="#">Buy Pre-owned Cars</a>
-                </h3>
-              </div>
-              <div className="content">
-                <p>
-                  Quality cars inspected ready ownership transfer and warranty.
-                </p>
-                <div className="meta style">
-                  <a href="/car-sells" className="sc-button btn-svg btn-55">
-                    <span>View Inventory</span>
-                    <i className="icon-autodeal-next" />
-                  </a>
+                <div className="content">
+                  <p className="mb-2 mb-md-4">
+                    Quality cars inspected ready ownership transfer and
+                    warranty.
+                  </p>
+                  <div className="meta style">
+                    <a href="/car-sells" className="sc-button btn-svg">
+                      <span>View Inventory</span>
+                      <i className="icon-autodeal-next" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col-md-4 hover-zoom">
-            <div className="tf-icon-box style-3 mg-42">
-              <div className="inner-wrap flex-three">
-                <div className="icon">
-                  <Image
-                    src={carMap}
-                    alt="Cash for Car"
-                    width={50}
-                    className="rounded-circle overflow-hidden"
-                  />
+            <div className="col-md-4 hover-zoom">
+              <div className="tf-icon-box style-3 mg-42">
+                <div className="inner-wrap flex-three  mb-2 mb-md-4">
+                  <div className="icon">
+                    <Image
+                      src={carMap}
+                      alt="Cash for Car"
+                      width={50}
+                      className="rounded-circle overflow-hidden"
+                    />
 
-                  {/* <svg
+                    {/* <svg
                         width={58}
                         height={60}
                         viewBox="0 0 58 60"
@@ -147,27 +247,42 @@ export default function Cta() {
                           fill="CurrentColor"
                         />
                       </svg> */}
+                  </div>
+                  <h3>
+                    <a href="javascript:void(0)">Car Hire Service</a>
+                  </h3>
                 </div>
-                <h3>
-                  <a href="#">Car Hire Service</a>
-                </h3>
-              </div>
-              <div className="content">
-                <p>
-                  Flexible rentals for your needs. Book now and hit the road
-                  with confidence.
-                </p>
-                <div className="meta style">
-                  <a href="/car-rentals" className="sc-button btn-svg btn-55">
-                    <span>View Rental Offers</span>
-                    <i className="icon-autodeal-next" />
-                  </a>
+                <div className="content">
+                  <p className="mb-2 mb-md-4">
+                    Flexible rentals for your needs. Book now and hit the road
+                    with confidence.
+                  </p>
+                  <div className="meta style">
+                    <a href="/car-rentals" className="sc-button btn-svg">
+                      <span>View Rental Offers</span>
+                      <i className="icon-autodeal-next" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+
+        <div className="container flex flex-column ms-3 ms-md-0 flex-md-row my-3 justify-content-center mb-5">
+          {featList.map((item, index) => (
+            <div
+              className={`d-flex align-items-center my-3 ${index === featList.length - 1 ? "" : "border-md-end"}  px-md-5 border-color-gray text-color-2`}
+            >
+              {item.icon}
+              <div className="mx-1">
+                <h5>{item.head}</h5>
+                <p>{item.des}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }

@@ -82,8 +82,8 @@ export default function Achievements() {
               data-wow-delay="0.2s"
               data-wow-duration="1000ms"
             >
-              <h2>Why Us?</h2>
-              <p className="mt-18">
+              <h2 className="text-center text-md-start">Why Us?</h2>
+              <p className="mt-18 text-center text-md-start">
                 We are committed to providing you with the best car service experience. Here are some reasons why you should choose us
             </p>
             </div>
@@ -111,7 +111,7 @@ export default function Achievements() {
             >
               {achievements.map((achievement, index) => (
                 <SwiperSlide className="swiper-slide" key={index}>
-                  <div className="tf-icon-box style-1">
+                  <div className="tf-icon-box style-1 text-center text-md-start">
                     <div className="icon">
                       {achievement.icon}
                     </div>

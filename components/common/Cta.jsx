@@ -15,7 +15,7 @@ export default function Cta() {
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1}
-          stroke="#FF7101"
+          stroke="#fd5a21"
           className="size-3"
         >
           <path
@@ -36,7 +36,7 @@ export default function Cta() {
           viewBox="0 0 24 24"
           width={45}
           strokeWidth={1}
-          stroke="#FF7101"
+          stroke="#fd5a21"
           class="size-3"
         >
           <path
@@ -62,7 +62,7 @@ export default function Cta() {
           viewBox="0 0 24 24"
           width={45}
           strokeWidth={1}
-          stroke="#FF7101"
+          stroke="#fd5a21"
           className="size-3"
         >
           <path
@@ -83,7 +83,7 @@ export default function Cta() {
           viewBox="0 0 24 24"
           width={45}
           strokeWidth={1}
-          stroke="#FF7101"
+          stroke="#fd5a21"
           className="size-3"
         >
           <path

@@ -1,3 +1,4 @@
+
 @use "./abstracts/" as *;
 
 /**
@@ -15,6 +16,7 @@
 @import "../../assets/fonts/style.css";
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap");
 @import "../css/bootstrap.css";
+@import "../css/variables.css";
 
 /**
   	* Reset Browsers
@@ -2314,7 +2316,7 @@ body {
 }
 
 .rc-slider .rc-slider-handle {
-  border: solid 2px #ff7101;
+  border: solid 2px --var(--primary-color);
   opacity: 1 !important;
   background-color: #fff !important;
   width: 16px;
@@ -2323,17 +2325,17 @@ body {
 }
 
 .rc-slider .rc-slider-handle:hover {
-  border-color: #ff7101;
+  border-color: --var(--primary-color);
 }
 
 .rc-slider .rc-slider-handle-dragging {
-  border-color: #ff7101 !important;
+  border-color: --var(--primary-color) !important;
   box-shadow: none !important;
 }
 
 .rc-slider .rc-slider-track,
 .rc-slider .rc-slider-tracks {
-  background-color: #ff7101;
+  background-color: --var(--primary-color);
 }
 .nice-select {
   span.current {

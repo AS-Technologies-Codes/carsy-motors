@@ -255,7 +255,7 @@ export default function Compare() {
                       >
                         <path
                           d="M1.5 8.25L7.5 14.25L16.5 0.75"
-                          stroke="#FF7101"
+                          stroke="#fd5a21"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -277,7 +277,7 @@ export default function Compare() {
                       >
                         <path
                           d="M1.5 8.25L7.5 14.25L16.5 0.75"
-                          stroke="#FF7101"
+                          stroke="#fd5a21"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -297,7 +297,7 @@ export default function Compare() {
                       >
                         <path
                           d="M1.5 8.25L7.5 14.25L16.5 0.75"
-                          stroke="#FF7101"
+                          stroke="#fd5a21"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -319,7 +319,7 @@ export default function Compare() {
                       >
                         <path
                           d="M1.5 8.25L7.5 14.25L16.5 0.75"
-                          stroke="#FF7101"
+                          stroke="#fd5a21"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -342,7 +342,7 @@ export default function Compare() {
                       >
                         <path
                           d="M1.5 8.25L7.5 14.25L16.5 0.75"
-                          stroke="#FF7101"
+                          stroke="#fd5a21"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -363,7 +363,7 @@ export default function Compare() {
                       >
                         <path
                           d="M1.5 8.25L7.5 14.25L16.5 0.75"
-                          stroke="#FF7101"
+                          stroke="#fd5a21"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -385,7 +385,7 @@ export default function Compare() {
                       >
                         <path
                           d="M1.5 8.25L7.5 14.25L16.5 0.75"
-                          stroke="#FF7101"
+                          stroke="#fd5a21"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -402,7 +402,7 @@ export default function Compare() {
                       >
                         <path
                           d="M1.5 8.25L7.5 14.25L16.5 0.75"
-                          stroke="#FF7101"
+                          stroke="#fd5a21"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -419,7 +419,7 @@ export default function Compare() {
                       >
                         <path
                           d="M1.5 8.25L7.5 14.25L16.5 0.75"
-                          stroke="#FF7101"
+                          stroke="#fd5a21"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -445,7 +445,7 @@ export default function Compare() {
                       >
                         <path
                           d="M1.5 8.25L7.5 14.25L16.5 0.75"
-                          stroke="#FF7101"
+                          stroke="#fd5a21"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -462,7 +462,7 @@ export default function Compare() {
                       >
                         <path
                           d="M1.5 8.25L7.5 14.25L16.5 0.75"
-                          stroke="#FF7101"
+                          stroke="#fd5a21"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -485,7 +485,7 @@ export default function Compare() {
                       >
                         <path
                           d="M1.5 8.25L7.5 14.25L16.5 0.75"
-                          stroke="#FF7101"
+                          stroke="#fd5a21"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"

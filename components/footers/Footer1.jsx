@@ -317,7 +317,7 @@ export default function Footer1() {
                   <ul className="box-menu tf-collapse-content">
                     {column.menuItems.map((item, itemIndex) => (
                       <li key={itemIndex}>
-                        <Link href={item.href}>{item.text}</Link>
+                        <Link href="javascript:void(0)">{item.text}</Link>
                       </li>
                     ))}
                   </ul>

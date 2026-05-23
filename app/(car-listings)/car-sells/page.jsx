@@ -3,6 +3,7 @@ import Footer1 from "@/components/footers/Footer1";
 import Header2 from "@/components/headers/Header2";
 import React from "react";
 import Link from "next/link";
+import CarSells from "@/components/carsListings/CarSells";
 export const metadata = {
   title:
     "Car Listing List || AutoDeal - Car Dealer, Rental & Listing React Nextjs Template",
@@ -23,14 +24,14 @@ export default function page() {
                   <Link className="home fw-6 text-color-3" href={`/`}>
                     Home
                   </Link>
-                  <span>Used cars for sale</span>
+                  <span>Car sells</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <Cars1 />
+      <CarSells />
       <Footer1 />
     </>
   );

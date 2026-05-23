@@ -32,7 +32,7 @@ export default function Nav() {
         } `}
       >
         <a href="javascript:void(0)">Home</a>
-        <ul>
+        {/* <ul>
           {homepages.map((page, index) => (
             <li
               key={index}
@@ -45,7 +45,7 @@ export default function Nav() {
               <Link href={page.href}>{page.text}</Link>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </li>
       <li
         className={`tfcl-mega-menu dropdown2  ${
@@ -53,7 +53,7 @@ export default function Nav() {
         } `}
       >
         <a href="javascript:void(0)">Listing Car</a>
-        <ul>
+        {/* <ul>
           {listingPages.map((item, index) => (
             <li key={index} className={item.className}>
               <a href="javascript:void(0)">{item.title}</a>
@@ -74,11 +74,11 @@ export default function Nav() {
               <div className="dropdown2-btn" />
             </li>
           ))}
-        </ul>
+        </ul> */}
       </li>
       <li className={`dropdown2  ${isActive(otherPages) ? "current" : ""} `}>
         <a href="javascript:void(0)">Page</a>
-        <ul>
+        {/* <ul>
           {otherPages.map((item, index) => (
             <li
               key={index}
@@ -114,11 +114,11 @@ export default function Nav() {
               )}
             </li>
           ))}
-        </ul>
+        </ul> */}
       </li>
       <li className={`dropdown2  ${isActive(blogPages) ? "current" : ""} `}>
         <a href="javascript:void(0)">Blog</a>
-        <ul>
+        {/* <ul>
           {blogPages.map((item, index) => (
             <li
               key={index}
@@ -131,10 +131,10 @@ export default function Nav() {
               <Link href={item.href}>{item.text}</Link>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </li>
       <li className={"contact" == pathname.split("/")[1] ? "current" : ""}>
-        <Link href={`/contact`}>Contact</Link>
+        <Link href={`/`}>Contact</Link>
       </li>
     </>
   );

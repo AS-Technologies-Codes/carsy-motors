@@ -98,8 +98,8 @@ export default function Header1() {
                       <li className="">
                         <a
                           href="javascript:void(0)"
-                          data-bs-toggle="modal"
-                          data-bs-target="#popup_bid"
+                          // data-bs-toggle="modal"
+                          // data-bs-target="#popup_bid"
                         >
                           Login
                         </a>
@@ -110,8 +110,8 @@ export default function Header1() {
                       <li className="">
                         <a
                           href="javascript:void(0)"
-                          data-bs-toggle="modal"
-                          data-bs-target="#popup_bid2"
+                          // data-bs-toggle="modal"
+                          // data-bs-target="#popup_bid2"
                         >
                           Register
                         </a>
@@ -119,7 +119,8 @@ export default function Header1() {
                     </ul>
                   </div>
                   <div className="flat-bt-top">
-                    <Link className="sc-button" href={`/add-listing`}>
+                    {/* <Link className="sc-button" href={`/add-listing`}> */}
+                    <Link className="sc-button" href={`/`}>
                       <svg
                         width={21}
                         height={20}

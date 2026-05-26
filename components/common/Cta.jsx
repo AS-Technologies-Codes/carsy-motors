@@ -259,8 +259,8 @@ export default function Cta() {
                     with confidence.
                   </p>
                   <div className="meta style">
-                    {/* <a href="/car-rentals" className="sc-button btn-svg"> */}
-                    <a href="javascript:void(0)" className="sc-button btn-svg">
+                    <a href="/car-rentals" className="sc-button btn-svg">
+                    {/* <a href="javascript:void(0)" className="sc-button btn-svg"> */}
                       <span>View Rental Offers</span>
                       <i className="icon-autodeal-next" />
                     </a>

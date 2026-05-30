@@ -22,6 +22,7 @@ import Image from "next/image";
 import Banner from "@/public/assets/images/dashboard/banner-exp.jpg";
 import Achievements from "@/components/homes/home-1/Achievements";
 import YardsMap from "@/components/carsListings/YardsMap";
+import CarsHero from "@/components/homes/home-7/CarsHero";
 
 export const metadata = {
   title:
@@ -34,7 +35,7 @@ export default function page() {
       <div className="header-fixed">
         <Header1 />
       </div>
-      <Hero />
+      <CarsHero />
       {/* 
       <Filter />
       <CarBrands />

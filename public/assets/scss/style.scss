@@ -981,6 +981,14 @@ a {
   color: $color-4 !important;
 }
 
+.text-color-5 {
+  color: $color-10 !important;
+}
+
+.text-color-6 {
+  color: $color-11 !important;
+}
+
 path {
   @include transition3;
 }

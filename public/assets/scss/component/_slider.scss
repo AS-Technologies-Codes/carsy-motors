@@ -1029,8 +1029,21 @@
     }
   }
 }
+.text-capitalize {
+  text-transform: capitalize;
+}
 
 .specifications-wrap {
+  .specifications-bg{
+    // background-image: url(/assets/images/hero-banner/car2.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: unset !important;
+    width: 350px !important;
+    height: 430px;
+    background-size: cover;
+    background-color: unset;
+  }
   .specifications {
     background-color: rgba(255, 255, 255, 0.12);
     border-radius: 16px;

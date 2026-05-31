@@ -27,114 +27,25 @@ export default function Nav() {
   return (
     <>
       <li
-        className={`tf-megamenu dropdown2 ${
-          isActive(homepages) ? "current" : ""
-        } `}
+        className={"/"  == pathname.split("/")[1] ? "current" : ""}
       >
-        <a href="javascript:void(0)">Home</a>
-        {/* <ul>
-          {homepages.map((page, index) => (
-            <li
-              key={index}
-              className={
-                page.href.split("/")[1] == pathname.split("/")[1]
-                  ? "current"
-                  : ""
-              }
-            >
-              <Link href={page.href}>{page.text}</Link>
-            </li>
-          ))}
-        </ul> */}
+        <Link href="/">Home</Link>
       </li>
-      <li
-        className={`tfcl-mega-menu dropdown2  ${
-          isActive(listingPages) ? "current" : ""
-        } `}
-      >
-        <a href="javascript:void(0)">Listing Car</a>
-        {/* <ul>
-          {listingPages.map((item, index) => (
-            <li key={index} className={item.className}>
-              <a href="javascript:void(0)">{item.title}</a>
-              <ul>
-                {item.links.map((link, linkIndex) => (
-                  <li
-                    key={linkIndex}
-                    className={`${link.className || ""} ${
-                      link.href.split("/")[1] == pathname.split("/")[1]
-                        ? "current"
-                        : ""
-                    }`}
-                  >
-                    <Link href={link.href}>{link.text}</Link>
-                  </li>
-                ))}
-              </ul>
-              <div className="dropdown2-btn" />
-            </li>
-          ))}
-        </ul> */}
+      <li className={"car-sells"  == pathname.split("/")[1] ? "current" : ""}>
+        <Link href="/car-sells">Car Sells</Link>
       </li>
-      <li className={`dropdown2  ${isActive(otherPages) ? "current" : ""} `}>
-        <a href="javascript:void(0)">Page</a>
-        {/* <ul>
-          {otherPages.map((item, index) => (
-            <li
-              key={index}
-              className={`${item.className || ""}  ${
-                item.links ? (isActive(item.links) ? "current" : "") : ""
-              } ${
-                item.href?.split("/")[1] == pathname.split("/")[1]
-                  ? "current"
-                  : ""
-              }`}
-            >
-              {item.title ? (
-                <>
-                  <a href="javascript:void(0)">{item.title}</a>
-                  <ul>
-                    {item.links.map((link, linkIndex) => (
-                      <li
-                        key={linkIndex}
-                        className={
-                          link.href.split("/")[1] == pathname.split("/")[1]
-                            ? "current"
-                            : ""
-                        }
-                      >
-                        <Link href={link.href}>{link.text}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="dropdown2-btn" />
-                </>
-              ) : (
-                <Link href={item.href}>{item.text}</Link>
-              )}
-            </li>
-          ))}
-        </ul> */}
+      <li className={"car-rentals" == pathname.split("/")[1] ? "current" : ""}>
+        <Link href={`/car-rentals`}>Car Rentals</Link>
       </li>
-      <li className={`dropdown2  ${isActive(blogPages) ? "current" : ""} `}>
-        <a href="javascript:void(0)">Blog</a>
-        {/* <ul>
-          {blogPages.map((item, index) => (
-            <li
-              key={index}
-              className={
-                item.href.split("/")[1] == pathname.split("/")[1]
-                  ? "current"
-                  : ""
-              }
-            >
-              <Link href={item.href}>{item.text}</Link>
-            </li>
-          ))}
-        </ul> */}
+
+      <li className={"blog"  == pathname.split("/")[1] ? "current" : ""}>
+        <Link href="/blog">Blogs</Link>
+      </li>
+      <li className={"about-us" == pathname.split("/")[1] ? "current" : ""}>
+        <Link href={`/about-us`}>About Us</Link>
       </li>
       <li className={"contact" == pathname.split("/")[1] ? "current" : ""}>
-        <Link href={`/`}>Contact</Link>
+        <Link href={`/contact`}>Contact</Link>
       </li>
     </>
   );

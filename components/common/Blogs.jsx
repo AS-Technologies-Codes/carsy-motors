@@ -82,13 +82,23 @@ export default function Blogs({ parentClass = "section-blog tf-section" }) {
                         <div className="images img-style relative flex-none">
                           <Image
                             className="lazyload"
-                            data-src={slide.image.replace("carsy.astechnologies.p","carsy.astechnologies.pk") }
+                            data-src={
+                              slide.image.includes(".pk")
+                                ? slide.image
+                                : slide.image.replace(".p", ".pk")
+                            }
                             alt={slide.link_name}
-                            src={slide.image.replace("carsy.astechnologies.p","carsy.astechnologies.pk")}
+                            src={
+                              slide.image.includes(".pk")
+                                ? slide.image
+                                : slide.image.replace(".p", ".pk")
+                            }
                             width={500}
                             height={300}
                           />
-                          <div className="date">{slide.created_at.split(" ")[0]}</div>
+                          <div className="date">
+                            {slide.created_at.split(" ")[0]}
+                          </div>
                         </div>
                         <div className="content">
                           <div className="sub-box flex align-center fs-13 fw-6">

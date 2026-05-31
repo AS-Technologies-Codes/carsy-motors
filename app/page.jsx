@@ -42,7 +42,7 @@ export default function page() {
       <Cars />
       <Cars2 />
       <Trending /> */}
-      <Cta />
+      {/* <Cta /> */}
       <div className="my-5">
         <Image src={Banner} alt="image" className="img-fluid sm-img-fluid" />
       </div>

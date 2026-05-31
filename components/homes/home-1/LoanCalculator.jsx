@@ -4,14 +4,14 @@ import React from "react";
 
 export default function LoanCalculator() {
   return (
-    <section className="loan-calculator inner-1 bg-2">
+    <section className="loan-calculator inner-1 bg-2 mt-5">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
             <div className="loan-calculator-form w-560">
               <div className="box-title">
-                <h2 className="title-ct">Auto Loan Calculator</h2>
-                <p>Use our calculator to estimate your monthly car payments.</p>
+                <h2 className="title-ct">Car for Cash</h2>
+                <p>Use our calculator to estimate your car price.</p>
               </div>
               <div id="comments" className="comments">
                 <div className="respond-comment">
@@ -113,7 +113,7 @@ export default function LoanCalculator() {
                     </div>
                     <div className="button-boxs">
                       <button className="sc-button" name="submit" type="submit">
-                        <span>Apply for a loan</span>
+                        <span>Calculate Rate</span>
                       </button>
                     </div>
                   </form>

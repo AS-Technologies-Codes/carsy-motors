@@ -30,10 +30,10 @@ export default function Testimonials() {
   }, []);
 
   const swiperOptions = {
-    // autoplay: {
-    //     delay: 5000,
-    //     disableOnInteraction: false,
-    // },
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: true,
+    },
     loop: true,
     slidesPerView: 1,
     spaceBetween: 30,
@@ -113,7 +113,11 @@ export default function Testimonials() {
                           <Image
                             className="ls-is-cached lazyloaded"
                             alt="images"
-                            src={elm.image.replace("carsy.astechnologies.p","carsy.astechnologies.pk")}
+                            src={
+                              elm.image.includes(".pk")
+                                ? elm.image
+                                : elm.image.replace(".p", ".pk")
+                            }
                             width={57}
                             height={57}
                           />

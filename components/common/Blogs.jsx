@@ -11,7 +11,7 @@ export default function Blogs({ parentClass = "section-blog tf-section" }) {
   const fecthBlogs = async () => {
     setBlogsLoading(true);
     const getBlogsRequest = await fetch(
-      "https://carsymotors.com.au/api_carsy/carsy_api/cars_api.php?action=get_whats_new",
+      "https://carsy.astechnologies.pk/api_carsy/carsy_api/cars_api.php?action=get_whats_new",
       {
         method: "GET",
         headers: {

@@ -12,7 +12,7 @@ export default function Testimonials() {
   const fecthReviews = async () => {
     setReviewsLoading(true);
     const getReviewsRequest = await fetch(
-      "https://carsymotors.com.au/api_carsy/carsy_api/cars_api.php?action=get_reviews",
+      "https://carsy.astechnologies.pk/api_carsy/carsy_api/cars_api.php?action=get_reviews",
       {
         method: "GET",
         headers: {

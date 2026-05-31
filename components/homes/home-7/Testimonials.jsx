@@ -113,7 +113,7 @@ export default function Testimonials() {
                           <Image
                             className="ls-is-cached lazyloaded"
                             alt="images"
-                            src={elm.image}
+                            src={elm.image.replace("carsy.astechnologies.p","carsy.astechnologies.pk")}
                             width={57}
                             height={57}
                           />

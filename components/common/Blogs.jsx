@@ -82,9 +82,9 @@ export default function Blogs({ parentClass = "section-blog tf-section" }) {
                         <div className="images img-style relative flex-none">
                           <Image
                             className="lazyload"
-                            data-src={slide.image}
+                            data-src={slide.image.replace("carsy.astechnologies.p","carsy.astechnologies.pk") }
                             alt={slide.link_name}
-                            src={slide.image}
+                            src={slide.image.replace("carsy.astechnologies.p","carsy.astechnologies.pk")}
                             width={500}
                             height={300}
                           />

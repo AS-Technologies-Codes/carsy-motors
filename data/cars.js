@@ -1490,8 +1490,8 @@ export const carListings2 = [
 
 export const allCars = [
   ...carListings,
-  ...carData,
-  ...carData2,
-  ...cars,
-  ...carListings2,
+  // ...carData,
+  // ...carData2,
+  // ...cars,
+  // ...carListings2,
 ];

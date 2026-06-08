@@ -5,7 +5,10 @@ export default function ListGridToggler({ isGrid, setIsGrid }) {
       <a
         href="javascript:void(0)"
         className={`btn-view grid ${isGrid ? "active" : ""}`}
-        onClick={() => setIsGrid(true)}
+        onClick={() => {
+          setIsGrid(true);
+          window.localStorage.setItem("isGrid", true);
+        }}
       >
         <svg
           width={25}
@@ -54,7 +57,10 @@ export default function ListGridToggler({ isGrid, setIsGrid }) {
       </a>
       <a
         className={`btn-view list ${!isGrid ? "active" : ""}`}
-        onClick={() => setIsGrid(false)}
+        onClick={() => {
+          setIsGrid(false);
+          window.localStorage.setItem("isGrid", false);
+        }}
       >
         <svg
           width={25}

@@ -5,28 +5,24 @@ import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { getReviewsApi } from "@/utils/APIs";
 export default function Testimonials() {
   const [ReviewsListing, setReviewsListing] = useState([]);
   const [ReviewsLoading, setReviewsLoading] = useState(true);
 
-  const fecthReviews = async () => {
-    setReviewsLoading(true);
-    const getReviewsRequest = await fetch(
-      "https://carsy.astechnologies.pk/api_carsy/carsy_api/cars_api.php?action=get_reviews",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer dfsdgs43543534543gdsfdsfdsfa22342222@@222",
-        },
-      },
-    );
-    const getReviewsResponse = await getReviewsRequest.json();
-    setReviewsListing(getReviewsResponse?.data);
-    setReviewsLoading(false);
+  const fetchReviews = async () => {
+    try {
+      setReviewsLoading(true);
+      const getReviewsData = await getReviewsApi();
+      setReviewsListing(getReviewsData);
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+    } finally {
+      setReviewsLoading(false);
+    }
   };
   useEffect(() => {
-    fecthReviews();
+    fetchReviews();
   }, []);
 
   const swiperOptions = {

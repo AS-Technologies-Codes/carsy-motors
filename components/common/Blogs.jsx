@@ -4,28 +4,24 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { getBlogsListingApi } from "@/utils/APIs";
 export default function Blogs({ parentClass = "section-blog tf-section" }) {
   const [BlogsListing, setBlogsListing] = useState([]);
   const [BlogsLoading, setBlogsLoading] = useState(true);
 
-  const fecthBlogs = async () => {
-    setBlogsLoading(true);
-    const getBlogsRequest = await fetch(
-      "https://carsy.astechnologies.pk/api_carsy/carsy_api/cars_api.php?action=get_whats_new",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer dfsdgs43543534543gdsfdsfdsfa22342222@@222",
-        },
-      },
-    );
-    const getBlogsResponse = await getBlogsRequest.json();
-    setBlogsListing(getBlogsResponse?.data);
-    setBlogsLoading(false);
+  const fetchBlogs = async () => {
+    try {
+      setBlogsLoading(true);
+      const getBlogsData = await getBlogsListingApi();
+      setBlogsListing(getBlogsData);
+    } catch (error) {
+    } finally {
+      setBlogsLoading(false);
+    }
   };
+
   useEffect(() => {
-    fecthBlogs();
+    fetchBlogs();
   }, []);
 
   return (

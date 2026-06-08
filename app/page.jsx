@@ -17,9 +17,7 @@ import Blogs from "@/components/common/Blogs";
 import DownloadApp from "@/components/common/DownloadApp";
 import Brands from "@/components/common/Brands";
 import Footer1 from "@/components/footers/Footer1";
-import Banner2 from "@/components/homes/home-6/Banner2";
-import Image from "next/image";
-import Banner from "@/public/assets/images/dashboard/banner-exp.jpg";
+import Banner from "@/components/homes/home-7/Banner";
 import Achievements from "@/components/homes/home-1/Achievements";
 import YardsMap from "@/components/carsListings/YardsMap";
 import CarsHero from "@/components/homes/home-7/CarsHero";
@@ -43,9 +41,7 @@ export default function page() {
       <Cars2 />
       <Trending /> */}
       {/* <Cta /> */}
-      <div className="my-5">
-        <Image src={Banner} alt="image" className="img-fluid sm-img-fluid" />
-      </div>
+      <Banner />
       <Achievements />
       <YardsMap height={"600px"} />
       <Slider />

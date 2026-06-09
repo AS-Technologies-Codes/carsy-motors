@@ -49,7 +49,7 @@ export const sliderData = [
 
 export const slider3 = [
   {
-    imgSrc: "/assets/images/slider/slide6.jpg",
+    imgSrc: "/assets/images/slider/slide2.jpg",
     title: "  2012 Nissan Leaf SV",
     type: "Used car",
     speed: "66.332 mi",
@@ -59,7 +59,7 @@ export const slider3 = [
     activeTime: "3 hours ago",
   },
   {
-    imgSrc: "/assets/images/slider/slide2.jpg",
+    imgSrc: "/assets/images/slider/slide3.jpg",
     title: "  2012 Nissan Leaf SV",
     type: "Used car",
     speed: "66.332 mi",

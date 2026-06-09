@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Filter() {
   return (
-    <div className="flat-filter-search home">
+    <div className="flat-filter-search home3">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">

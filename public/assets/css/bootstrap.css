@@ -12111,4 +12111,12 @@ a.bg-blue:hover {
   }
   }
 
+
+.box-car-list.style-2 > .image-group .img-style, .box-car-list.style-2 > .image-group img {
+  width: 100% !important;
+  height: auto !important;
+  
+}
+
+
 /*# sourceMappingURL=bootstrap.css.map */

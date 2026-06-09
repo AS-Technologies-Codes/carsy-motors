@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useCarFilter } from "@/context/providers/CarFilterContext";
 import { accessToken, URL } from "@/utils/URL";
 
-const carTypes = ["All Cars", "New Cars", "Used Cars", "Demo Cars"];
 export default function FlatFilter({
   styleClass = "",
   justifyClass = "",
@@ -13,7 +12,7 @@ export default function FlatFilter({
   const [activeIndex, setActiveIndex] = useState(0);
 
   const { state, dispatch } = useCarFilter();
-  const { condition, countMake, countModel, countPrice } = state;
+  const { countMake, countModel, countPrice } = state;
 
   const handleClick = (index) => {
     setActiveIndex(index);
@@ -35,12 +34,7 @@ export default function FlatFilter({
         : {}),
       ...(countMake !== "Any Make" ? { make: countMake } : {}),
       ...(countModel !== "Any Model" ? { model: countModel } : {}),
-      ...(activeIndex !== 0
-        ? {
-            condition: carTypes[activeIndex].replace(" Cars", "").toLowerCase(),
-          }
-        : {}),
-    });
+      });
 
     const getGetCarsRequest = await fetch(
       `${URL.getCars}&${params.toString()}`,
@@ -65,10 +59,6 @@ export default function FlatFilter({
     dispatch({ type: "SET_MAKE", payload: countMake });
     dispatch({ type: "SET_MODEL", payload: countModel });
     dispatch({
-      type: "SET_CONDITION",
-      payload: carTypes[activeIndex].replace(" Cars", "").toLowerCase(),
-    });
-    dispatch({
       type: "SET_PRICE",
       payload: [countPrice.split(",")[0], countPrice.split(",")[1]],
     });
@@ -76,21 +66,6 @@ export default function FlatFilter({
 
   return (
     <>
-      <div className={`box-tab ${styleClass} center`}>
-        <ul className={`menu-tab tab-title ${justifyClass} flex`}>
-          {carTypes.map((car, index) => (
-            <li
-              key={index}
-              className={`item-title style ${
-                index === activeIndex ? "active" : ""
-              }`}
-              onClick={() => handleClick(index)} // Set active when clicked
-            >
-              <span className="inner fs-16 fw-5 lh-20">{car}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
       <div className={`content-tab ${tabStyle}`}>
         <div className="content-inner tab-content">
           <div className="form-sl">

@@ -640,6 +640,8 @@
 
         &>.image-group {
             width: 300px !important;
+            display: flex;
+            align-items: center;
         }
 
         .content {

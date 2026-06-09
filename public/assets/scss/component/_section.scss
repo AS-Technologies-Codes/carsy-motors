@@ -5155,12 +5155,14 @@
 
       .image-group {
         width: 100% !important;
+        height: 12rem;
       }
 
       .content {
         padding: 16px !important;
         display: flex;
         justify-content: space-between;
+        height: 100%;
         gap: 0px;
         flex-wrap: wrap;
         flex-direction: column;

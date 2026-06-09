@@ -297,20 +297,6 @@ export default function CarSells() {
                       <div className="form-group">
                         <div className="group-select">
                           <DropdownSelect
-                            selectedValue={cylinder}
-                            onChange={allProps.setCylinder}
-                            options={[
-                              "Any Cylinder",
-                              "2 Cylinder",
-                              "3 Cylinder",
-                              "4 Cylinder",
-                            ]}
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <div className="group-select">
-                          <DropdownSelect
                             selectedValue={color}
                             onChange={allProps.setColor}
                             options={[

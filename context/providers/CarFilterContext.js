@@ -18,6 +18,13 @@ export const CarFilterProvider = ({ children }) => {
 export const useCarFilter = () => {
   const context = useContext(CarFilterContext);
   if (!context) {
+    // Return a dummy context during build/prerendering
+    if (typeof window === "undefined") {
+      return { 
+        state: {}, 
+        dispatch: () => {} 
+      };
+    }
     throw new Error("useCarFilter must be used within CarFilterProvider");
   }
   return context;

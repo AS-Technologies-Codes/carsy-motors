@@ -10,6 +10,7 @@ import Pagination from "../common/Pagination";
 import ListGridToggler from "./ListGridToggler";
 import FilterSidebar from "./FilterSidebar";
 import { accessToken, URL } from "@/utils/URL";
+import Slider1 from "../carDetails/sliders/Slider1";
 export default function CarSells() {
   const [PaginationKeys, setPaginationKeys] = useState({});
   const [CarsLoading, setCarsLoading] = useState(true);
@@ -144,7 +145,7 @@ export default function CarSells() {
     dispatch({ type: "CLEAR_FILTER" });
   };
 
-  useEffect(() => {    
+  useEffect(() => {
     if (sortingOption === "Price Ascending") {
       dispatch({
         type: "SET_SORTED",
@@ -162,9 +163,9 @@ export default function CarSells() {
   }, [filtered, sortingOption]);
 
   useEffect(() => {
-       setIsGrid(window.localStorage.getItem("isGrid") === "true");
-  }, [])
-  
+    setIsGrid(window.localStorage.getItem("isGrid") === "true");
+  }, []);
+
   return (
     <>
       <section className="listing-grid tf-section3">
@@ -475,7 +476,7 @@ export default function CarSells() {
                                       {car.year}
                                     </div>
                                   </div>
-                                  <ul className="change-heart flex">
+                                  {/* <ul className="change-heart flex">
                                     <li className="box-icon w-32">
                                       <a
                                         data-bs-toggle="offcanvas"
@@ -522,14 +523,17 @@ export default function CarSells() {
                                         </svg>
                                       </Link>
                                     </li>
-                                  </ul>
+                                  </ul> */}
                                   <div className="img-style">
-                                    <Image
+                                    {/* <Image
                                       className="lazyload"
                                       alt="image"
                                       src={car.imgSrc}
                                       width={450}
                                       height={338}
+                                    /> */}
+                                    <Slider1
+                                      images={car?.images.map((img) => img.src)}
                                     />
                                   </div>
                                 </div>

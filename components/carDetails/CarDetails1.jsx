@@ -1,8 +1,11 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Slider1 from "./sliders/Slider1";
 import Image from "next/image";
 import Description from "./detailComponents/Description";
 import Overview from "./detailComponents/Overview";
+import toast from "react-hot-toast";
 
 import LoanCalculator from "./detailComponents/LoanCalculator";
 import CarReview from "./detailComponents/CarReview";
@@ -11,7 +14,35 @@ import ProfileInfo from "./detailComponents/ProfileInfo";
 import Recommended from "./detailComponents/Recommended";
 import Features from "./detailComponents/Features";
 import SidebarToggleButton from "./SidebarToggleButton";
+import { getCarDetailsApi } from "@/utils/APIs";
 export default function CarDetails1({ carItem }) {
+  const [CarDetailsListing, setCarDetailsListing] = useState({});
+  const [CarDetailsLoading, setCarDetailsLoading] = useState(true);
+
+  const fetchCarDetails = async () => {
+    try {
+      setCarDetailsLoading(true);
+      const getCarDetailsData = await getCarDetailsApi(carItem);
+      setCarDetailsListing(getCarDetailsData);
+    } catch (error) {
+      toast.error(error);
+      return;
+    } finally {
+      setCarDetailsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchCarDetails();
+  }, []);
+
+  if (CarDetailsLoading) {
+    return (
+      <div className="center my-5">
+        <span className="loader"></span>
+      </div>
+    );
+  }
   return (
     <>
       <section className="tf-section3 listing-detail style-1">
@@ -19,7 +50,7 @@ export default function CarDetails1({ carItem }) {
           <div className="row">
             <div className="col-lg-8">
               <div className="listing-detail-wrap">
-                <Slider1 />
+                <Slider1 images={CarDetailsListing?.images.map(img => img.src)} />
                 <div className="row">
                   <div className="col-lg-12">
                     <nav
@@ -146,8 +177,8 @@ export default function CarDetails1({ carItem }) {
               <div className="listing-sidebar">
                 <div className="widget-listing mb-40">
                   <div className="heading-widget">
-                    <h2 className="title">{carItem.title}</h2>
-                    <CarInfo carItem={carItem} />
+                    <h2 className="title">{CarDetailsListing.title}</h2>
+                    <CarInfo carItem={CarDetailsListing} />
                   </div>
                 </div>
                 <div className="widget-listing mb-30">
@@ -163,7 +194,10 @@ export default function CarDetails1({ carItem }) {
                     <p>Showing 26 more cars you might like</p>
                   </div>
                   <Recommended />
-                  <a href="javascript:void(0)" className="fs-16 fw-5 font text-color-3 lh-22">
+                  <a
+                    href="javascript:void(0)"
+                    className="fs-16 fw-5 font text-color-3 lh-22"
+                  >
                     View more reviews <i className="icon-autodeal-view-more" />
                   </a>
                 </div>

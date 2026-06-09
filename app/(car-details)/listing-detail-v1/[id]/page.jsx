@@ -1,9 +1,9 @@
 import CarDetails1 from "@/components/carDetails/CarDetails1";
 import Footer1 from "@/components/footers/Footer1";
 import Header2 from "@/components/headers/Header2";
-import React from "react";
 import Link from "next/link";
 import { allCars } from "@/data/cars";
+
 export const metadata = {
   title:
     "Car Details 01 || AutoDeal - Car Dealer, Rental & Listing React Nextjs Template",
@@ -11,6 +11,7 @@ export const metadata = {
 };
 export default function page({ params }) {
   const carItem = allCars.filter((elm) => elm.id == params.id)[0] || allCars[0];
+  
   return (
     <>
       <div className="header-fixed">
@@ -32,7 +33,7 @@ export default function page({ params }) {
           </div>
         </div>
       </section>
-      <CarDetails1 carItem={carItem} />
+      <CarDetails1 carItem={params?.id} />
       <Footer1 />
     </>
   );

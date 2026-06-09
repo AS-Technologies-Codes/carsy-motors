@@ -4,7 +4,7 @@ import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 import Image from "next/image";
-export default function Slider1() {
+export default function Slider1({images}) {
   const swiperOptions = {
     autoplay: {
       delay: 6000,
@@ -21,10 +21,6 @@ export default function Slider1() {
       prevEl: ".snbp1",
     },
   };
-  const images = [
-    "/assets/images/section/slider-listing1.jpg",
-    "/assets/images/section/slider-listing1.jpg",
-  ];
   useEffect(() => {
     const lightbox = new PhotoSwipeLightbox({
       gallery: "#my-gallery",

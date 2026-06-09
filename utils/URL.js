@@ -6,9 +6,11 @@ const URL = {
   getWhatsNew: baseUrl + "get_whats_new",
   getBanner: baseUrl + "get_banners",
   getCars: baseUrl + "get_cars",
+  getCarsDetails: baseUrl + "get_car_details",
   getWhyUs: baseUrl + "get_why_us",
   getNearby: baseUrl + "get_nearby",
   getFleet: baseUrl + "get_fleet",
+  saveNewsLetter: baseUrl + "save_newsletter",
   // getCashForCarPrice: baseUrl + "get_cash_price",
   // getBlogDetails: baseUrl + "get_news",
 };

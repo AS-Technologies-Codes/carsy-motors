@@ -54,6 +54,27 @@ export const getBannerListingApi = async () => {
   });
 };
 
+export const getCarDetailsApi = async (carId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const getCarDetailsRequest = await fetch(`${URL.getCarsDetails}&id=${carId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
+      });
+      const getCarDetailsResponse = await getCarDetailsRequest.json();
+      if(getCarDetailsResponse?.status === "error") {
+        return reject(new Error(getCarDetailsResponse?.message || "Failed to fetch car details"));
+      }
+      return resolve(getCarDetailsResponse?.data);
+    } catch (error) {
+      return reject(error.message || "Failed to fetch car details");
+    }
+  });
+};
+
 export const getFleetListingApi = async () => {
   return new Promise(async (resolve, reject) => {
     try {

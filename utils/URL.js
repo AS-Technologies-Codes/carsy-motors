@@ -8,11 +8,12 @@ const URL = {
   getCars: baseUrl + "get_cars",
   getCarsDetails: baseUrl + "get_car_details",
   getWhyUs: baseUrl + "get_why_us",
-  getNearby: baseUrl + "get_nearby",
-  getFleet: baseUrl + "get_fleet",
+  getNearby: baseUrl + "get_nearby_locations",
+  getFleet: baseUrl + "get_cars&car_type=fleet",
   saveNewsLetter: baseUrl + "save_newsletter",
   // getCashForCarPrice: baseUrl + "get_cash_price",
   // getBlogDetails: baseUrl + "get_news",
 };
 
 export { URL, accessToken };
+

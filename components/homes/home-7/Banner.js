@@ -30,7 +30,7 @@ const Banner = () => {
         </div>
       ) : (
         <Image
-          src={BannerListing[0].link}
+          src={BannerListing[0].image}
           width={100}
           height={400}
           alt="image"

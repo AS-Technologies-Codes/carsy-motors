@@ -38,21 +38,21 @@ const Banner = () => {
         <>
           <Image
             src={BannerListing[0]?.sm}
-            alt={BannerListing[0]?.title + ", " + BannerListing[0]?.desc}
+            alt={BannerListing[0]?.title + ", " + BannerListing[0]?.description}
             width={100}
             height={400}
             className="img-fluid sm-img-fluid w-100 d-md-none"
           />
           <Image
             src={BannerListing[0]?.md}
-            alt={BannerListing[0]?.title + ", " + BannerListing[0]?.desc}
+            alt={BannerListing[0]?.title + ", " + BannerListing[0]?.description}
             width={100}
             height={400}
             className="img-fluid sm-img-fluid w-100 d-none d-md-block d-lg-none"
           />
           <Image
             src={BannerListing[0]?.lg}
-            alt={BannerListing[0]?.title + ", " + BannerListing[0]?.desc}
+            alt={BannerListing[0]?.title + ", " + BannerListing[0]?.description}
             width={100}
             height={400}
             className="img-fluid sm-img-fluid w-100 d-none d-lg-block"

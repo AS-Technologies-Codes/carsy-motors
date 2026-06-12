@@ -12,7 +12,6 @@ import {
 import { Swiper, SwiperSlide } from "swiper/react";
 import { getFleetListingApi } from "@/utils/APIs";
 import toast from "react-hot-toast";
-import { toCamelCase } from "@/utils/Utils";
 
 export default function Hero() {
   const swiperOptions = {
@@ -138,7 +137,7 @@ export default function Hero() {
                               data-wow-delay="0.2s"
                               data-wow-duration="1000ms"
                             >
-                              {toCamelCase(slide.title)}
+                              {slide?.title}
                             </h2>
                             <p
                               className="mt-18 wow fadeInUpSmall"

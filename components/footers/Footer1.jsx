@@ -1,13 +1,15 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, {useRef, useState } from "react";
 import Image from "next/image";
-import emailjs from "@emailjs/browser";
 import Link from "next/link";
 import { footerData } from "@/data/footerLinks";
+import { saveEmail } from "@/utils/APIs";
+import toast from "react-hot-toast";
 export default function Footer1() {
-  const formRef = useRef();
+  const emailRef = useRef();
   const [success, setSuccess] = useState(true);
   const [showMessage, setShowMessage] = useState(false);
+  const [SavingEmail, setSavingEmail] = useState(false);
 
   const handleShowMessage = () => {
     setShowMessage(true);
@@ -16,56 +18,43 @@ export default function Footer1() {
     }, 2000);
   };
 
-  const sendMail = (e) => {
+
+  const sendMail = async (e) => {
     e.preventDefault();
-    emailjs
-      .sendForm("service_noj8796", "template_fs3xchn", formRef.current, {
-        publicKey: "iG4SCmR-YtJagQ4gV",
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          setSuccess(true);
-          handleShowMessage();
-
-          formRef.current.reset();
-        } else {
-          setSuccess(false);
-          handleShowMessage();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setSavingEmail(true);
+    try {
+      await saveEmail(emailRef.current.value);
+      setSuccess(true);
+      handleShowMessage();
+      emailRef.current.reset();
+    } catch (error) {
+      toast.error(error);
+    } finally {
+      setSavingEmail(false);
+    }
   };
-  useEffect(() => {
-    const headings = document.querySelectorAll(".footer-heading-mobie");
 
-    const toggleOpen = (event) => {
-      const parent = event.target.closest(".footer-col-block");
-      const content = parent.querySelector(".tf-collapse-content");
+  // const sendMail = (e) => {
+  //   e.preventDefault();
+  //   emailjs
+  //     .sendForm("service_noj8796", "template_fs3xchn", formRef.current, {
+  //       publicKey: "iG4SCmR-YtJagQ4gV",
+  //     })
+  //     .then((res) => {
+  //       if (res.status === 200) {
+  //         setSuccess(true);
+  //         handleShowMessage();
 
-      if (parent.classList.contains("open")) {
-        parent.classList.remove("open");
-        content.style.height = "0px";
-        content.style.padding = "0px 0px";
-      } else {
-        parent.classList.add("open");
-        content.style.height = content.scrollHeight + 10 + "px";
-        content.style.padding = "10px 0px";
-      }
-    };
-
-    headings.forEach((heading) => {
-      heading.addEventListener("click", toggleOpen);
-    });
-
-    // Clean up event listeners when the component unmounts
-    return () => {
-      headings.forEach((heading) => {
-        heading.removeEventListener("click", toggleOpen);
-      });
-    };
-  }, []); // Empty dependency array means this will run only once on mount
+  //         formRef.current.reset();
+  //       } else {
+  //         setSuccess(false);
+  //         handleShowMessage();
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
   return (
     <footer id="footer" className="clearfix home">
       <div className="container">
@@ -348,7 +337,6 @@ export default function Footer1() {
                   </div>
                   <form
                     onSubmit={sendMail}
-                    ref={formRef}
                     className="comment-form form-submit"
                     acceptCharset="utf-8"
                   >
@@ -360,7 +348,9 @@ export default function Footer1() {
                       <fieldset className="email-wrap style-text">
                         <input
                           type="email"
+                          ref={emailRef}
                           className="tb-my-input"
+                          disabled={SavingEmail}
                           name="email"
                           placeholder="Your email address"
                           required
@@ -369,10 +359,11 @@ export default function Footer1() {
                     </div>
                     <button
                       name="submit"
+                      disabled={SavingEmail}
                       type="submit"
                       className="button btn-submit-comment btn-1 btn-8"
                     >
-                      <span>Send</span>
+                      <span>{SavingEmail ? "Please Wait..." : "Send"}</span>
                     </button>
                   </form>
                 </div>

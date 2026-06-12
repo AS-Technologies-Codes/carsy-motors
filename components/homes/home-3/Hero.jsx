@@ -11,6 +11,7 @@ import {
 } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { getFleetListingApi } from "@/utils/APIs";
+import toast from "react-hot-toast";
 
 export default function Hero() {
   const swiperOptions = {
@@ -39,6 +40,7 @@ export default function Hero() {
       const getFleetData = await getFleetListingApi();
       setFleetListing(getFleetData);
     } catch (error) {
+      toast.error(error);
     } finally {
       setFleetLoading(false);
     }
@@ -68,9 +70,9 @@ export default function Hero() {
           {...swiperOptions}
           className="swiper mainslider slider home3"
         >
-          {slides2.map((slide, index) => (
+          {FleetListing.map((slide, index) => (
             <SwiperSlide className="swiper-slide" key={index}>
-              <div className="mt-5 mt-md-3">
+              <div className="mt-3">
                 <section className="tf-section3 section-why-choose-us d-none d-md-block">
                   <div className="container">
                     <div className="row">
@@ -80,28 +82,30 @@ export default function Hero() {
                             <li className="tf-icon-list ani5">
                               <i className="icon-autodeal-check" />
                               <span className="fs-18 fw-6 lh-25 text-color-2">
-                                Proven Expertise
+                                Premium {slide?.year} Series
                               </span>
                             </li>
                             <li className="tf-icon-list ani4">
                               <i className="icon-autodeal-check" />
                               <span className="fs-18 fw-6 lh-25 text-color-2">
-                                1 million visits per day
+                                {slide?.transmission === "Automatic"
+                                  ? "Smooth Automatic Drive"
+                                  : "Safe Manual Driving"}
                               </span>
                             </li>
                             <li className="tf-icon-list ani5">
                               <i className="icon-autodeal-check" />
                               <span className="fs-18 fw-6 lh-25 text-color-2">
-                                7,800 car sellers
+                                Seats Up To {slide?.seats} People
                               </span>
                             </li>
                           </ul>
                           <div className="image-inner1 hover-img-wrap img-style-hover">
                             <Image
                               className="ls-is-cached lazyloaded"
-                              data-src="/assets/images/section/wcu-1.jpg"
+                              data-src="/assets/images/section/wcu-1.png"
                               alt="images"
-                              src="/assets/images/section/wcu-1.jpg"
+                              src="/assets/images/section/wcu-1.png"
                               width={615}
                               height={890}
                             />
@@ -109,9 +113,15 @@ export default function Hero() {
                           <div className="image-inner2">
                             <Image
                               className="ls-is-cached lazyloaded"
-                              data-src="/assets/images/section/wcu-2.png"
+                              data-src={
+                                slide?.make +
+                                ", " +
+                                slide?.model +
+                                ", " +
+                                slide?.series
+                              }
                               alt="images"
-                              src="/assets/images/section/wcu-2.png"
+                              src={slide?.imgSrc}
                               width={661}
                               height={307}
                             />
@@ -175,12 +185,17 @@ export default function Hero() {
                               <div className="content">
                                 <h5>
                                   <a href="javascript:void(0)">
-                                    New range rover, defender, discovery
+                                    {slide?.title}
                                   </a>
                                 </h5>
                                 <p>
-                                  Experience the joy of owning a brand new Range
-                                  Rover, Defender or Discovery today!
+                                  A stylish {slide?.color?.toLowerCase()}{" "}
+                                  {slide?.make?.toLowerCase()}{" "}
+                                  {slide?.model?.toLowerCase()} featuring a
+                                  durable {slide?.type?.toLowerCase()} body
+                                  construction, combining reliability, safety,
+                                  and a clean modern appearance for everyday
+                                  driving.
                                 </p>
                               </div>
                             </div>
@@ -221,12 +236,12 @@ export default function Hero() {
                               <div className="content">
                                 <h5>
                                   <a href="javascript:void(0)">
-                                    Pre-Owned vehicles
+                                    Strong Performance{" "}
                                   </a>
                                 </h5>
                                 <p>
-                                  AutoDecar has a great selection of pre-owned
-                                  vehicles.
+                                  {slide?.power} power output from a robust
+                                  {slide?.engine_size} engine.
                                 </p>
                               </div>
                             </div>
@@ -264,12 +279,12 @@ export default function Hero() {
                               <div className="content">
                                 <h5>
                                   <a href="javascript:void(0)">
-                                    Certified pre-owned vehicles
+                                    Premium Comfort
                                   </a>
                                 </h5>
                                 <p>
-                                  AutoDecar Demo has a great selection of
-                                  certified pre-owned vehicles.
+                                  Spacious {slide?.seats}-seat interior designed
+                                  for families and group travel.
                                 </p>
                               </div>
                             </div>
@@ -386,12 +401,17 @@ export default function Hero() {
                               <div className="content">
                                 <h5>
                                   <a href="javascript:void(0)">
-                                    New range rover, defender, discovery
+                                    {slide?.title}
                                   </a>
                                 </h5>
                                 <p>
-                                  Experience the joy of owning a brand new Range
-                                  Rover, Defender or Discovery today!
+                                  A stylish {slide?.color?.toLowerCase()}{" "}
+                                  {slide?.make?.toLowerCase()}{" "}
+                                  {slide?.model?.toLowerCase()} featuring a
+                                  durable {slide?.type?.toLowerCase()} body
+                                  construction, combining reliability, safety,
+                                  and a clean modern appearance for everyday
+                                  driving.
                                 </p>
                               </div>
                             </div>
@@ -432,12 +452,12 @@ export default function Hero() {
                               <div className="content">
                                 <h5>
                                   <a href="javascript:void(0)">
-                                    Pre-Owned vehicles
+                                    Strong Performance{" "}
                                   </a>
                                 </h5>
                                 <p>
-                                  AutoDecar has a great selection of pre-owned
-                                  vehicles.
+                                  {slide?.power} power output from a robust
+                                  {slide?.engine_size} engine.
                                 </p>
                               </div>
                             </div>
@@ -475,12 +495,12 @@ export default function Hero() {
                               <div className="content">
                                 <h5>
                                   <a href="javascript:void(0)">
-                                    Certified pre-owned vehicles
+                                    Premium Comfort
                                   </a>
                                 </h5>
                                 <p>
-                                  AutoDecar Demo has a great selection of
-                                  certified pre-owned vehicles.
+                                  Spacious {slide?.seats}-seat interior designed
+                                  for families and group travel.
                                 </p>
                               </div>
                             </div>
@@ -541,28 +561,30 @@ export default function Hero() {
                             <li className="tf-icon-list ani5">
                               <i className="icon-autodeal-check" />
                               <span className="fs-18 fw-6 lh-25 text-color-2">
-                                Proven Expertise
+                                Premium {slide?.year} Series
                               </span>
                             </li>
                             <li className="tf-icon-list ani4">
                               <i className="icon-autodeal-check" />
                               <span className="fs-18 fw-6 lh-25 text-color-2">
-                                1 million visits per day
+                                {slide?.transmission === "Automatic"
+                                  ? "Smooth Automatic Drive"
+                                  : "Safe Manual Driving"}{" "}
                               </span>
                             </li>
                             <li className="tf-icon-list ani5">
                               <i className="icon-autodeal-check" />
                               <span className="fs-18 fw-6 lh-25 text-color-2">
-                                7,800 car sellers
+                                Seats Up To {slide?.seats} People
                               </span>
                             </li>
                           </ul>
                           <div className="image-inner1 hover-img-wrap img-style-hover">
                             <Image
                               className="ls-is-cached lazyloaded"
-                              data-src="/assets/images/section/wcu-1.jpg"
+                              data-src="/assets/images/section/wcu-1.png"
                               alt="images"
-                              src="/assets/images/section/wcu-1.jpg"
+                              src="/assets/images/section/wcu-1.png"
                               width={615}
                               height={890}
                             />
@@ -570,9 +592,15 @@ export default function Hero() {
                           <div className="image-inner2">
                             <Image
                               className="ls-is-cached lazyloaded"
-                              data-src="/assets/images/section/wcu-2.png"
+                              data-src={
+                                slide?.make +
+                                ", " +
+                                slide?.model +
+                                ", " +
+                                slide?.series
+                              }
                               alt="images"
-                              src="/assets/images/section/wcu-2.png"
+                              src={slide?.imgSrc}
                               width={661}
                               height={307}
                             />

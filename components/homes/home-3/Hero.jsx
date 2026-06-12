@@ -12,6 +12,7 @@ import {
 import { Swiper, SwiperSlide } from "swiper/react";
 import { getFleetListingApi } from "@/utils/APIs";
 import toast from "react-hot-toast";
+import { toCamelCase } from "@/utils/Utils";
 
 export default function Hero() {
   const swiperOptions = {
@@ -137,14 +138,17 @@ export default function Hero() {
                               data-wow-delay="0.2s"
                               data-wow-duration="1000ms"
                             >
-                              {slide.name}
+                              {toCamelCase(slide.title)}
                             </h2>
                             <p
                               className="mt-18 wow fadeInUpSmall"
                               data-wow-delay="0.2s"
                               data-wow-duration="1000ms"
                             >
-                              {slide.description}
+                              A stylish {slide?.color?.toLowerCase()}{" "}
+                              {slide?.make?.toLowerCase()}{" "}
+                              {slide?.model?.toLowerCase()} featuring a durable{" "}
+                              {slide?.type?.toLowerCase()} body construction.
                             </p>
                           </div>
                           <div className="tf-icon-box-list">
@@ -185,17 +189,12 @@ export default function Hero() {
                               <div className="content">
                                 <h5>
                                   <a href="javascript:void(0)">
-                                    {slide?.title}
+                                    Ready For Any Road{" "}
                                   </a>
                                 </h5>
                                 <p>
-                                  A stylish {slide?.color?.toLowerCase()}{" "}
-                                  {slide?.make?.toLowerCase()}{" "}
-                                  {slide?.model?.toLowerCase()} featuring a
-                                  durable {slide?.type?.toLowerCase()} body
-                                  construction, combining reliability, safety,
-                                  and a clean modern appearance for everyday
-                                  driving.
+                                  {slide?.drive_type} capability with dependable
+                                  handling in all driving conditions.
                                 </p>
                               </div>
                             </div>
@@ -401,17 +400,12 @@ export default function Hero() {
                               <div className="content">
                                 <h5>
                                   <a href="javascript:void(0)">
-                                    {slide?.title}
+                                    Ready For Any Road{" "}
                                   </a>
                                 </h5>
                                 <p>
-                                  A stylish {slide?.color?.toLowerCase()}{" "}
-                                  {slide?.make?.toLowerCase()}{" "}
-                                  {slide?.model?.toLowerCase()} featuring a
-                                  durable {slide?.type?.toLowerCase()} body
-                                  construction, combining reliability, safety,
-                                  and a clean modern appearance for everyday
-                                  driving.
+                                  {slide?.drive_type} capability with dependable
+                                  handling in all driving conditions.
                                 </p>
                               </div>
                             </div>

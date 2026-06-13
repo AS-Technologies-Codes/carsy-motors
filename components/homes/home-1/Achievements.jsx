@@ -1,9 +1,31 @@
 "use client";
 
+import { getAchievementsListingApi } from "@/utils/APIs";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 export default function Achievements() {
+  const [AchievementsListing, setAchievementsListing] = useState([]);
+  const [AchievementsLoading, setAchievementsLoading] = useState(true);
+
+  const fetchAchievements = async () => {
+    try {
+      setAchievementsLoading(true);
+      const getAchievementsData = await getAchievementsListingApi();
+      setAchievementsListing(getAchievementsData);
+    } catch (error) {
+      toast.error(error);
+    } finally {
+      setAchievementsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAchievements();
+  }, []);
+
   const achievements = [
     {
       heading: "Global reach",
@@ -32,7 +54,7 @@ export default function Achievements() {
       text: "Diverse fleet of premium vehicles",
       icon: (
         <svg
-         width={50}
+          width={50}
           height={50}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -54,8 +76,8 @@ export default function Achievements() {
       text: "Stress-free, trustworthy, no hidden costs",
       icon: (
         <svg
-         width={50}
-          height={50} 
+          width={50}
+          height={50}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -84,72 +106,86 @@ export default function Achievements() {
             >
               <h2 className="text-center text-md-start">Why Us?</h2>
               <p className="mt-18 text-center text-md-start">
-                We are committed to providing you with the best car service experience. Here are some reasons why you should choose us
-            </p>
+                We are committed to providing you with the best car service
+                experience. Here are some reasons why you should choose us
+              </p>
             </div>
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-12">
-            <Swiper
-              spaceBetween={30}
-              slidesPerView={3}
-              breakpoints={{
-                1000: {
-                  slidesPerView: 3,
-                },
-                600: {
-                  slidesPerView: 2,
-                },
-                0: {
-                  slidesPerView: 1,
-                },
-              }}
-              modules={[Pagination]}
-              pagination={{ clickable: true, el: ".spd30" }}
-              className="swiper-container overflow-visible tf-sw-mobile4-swiper"
-            >
-              {achievements.map((achievement, index) => (
-                <SwiperSlide className="swiper-slide" key={index}>
-                  <div className="tf-icon-box style-1 text-center text-md-start">
-                    <div className="icon">
-                      {achievement.icon}
-                    </div>
-                    <div className="content">
-                      <h3>
-                        <a href="javascript:void(0)">{achievement.heading}</a>
-                      </h3>
-                      <p>{achievement.text}</p>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
-
-              <div className="swiper-pagination5 spd30" />
-            </Swiper>
-            <div
-              className="swiper-container overflow-visible tf-sw-mobile4"
-              data-preview={3}
-              data-space={30}
-            >
-              <div className="swiper-wrapper grid-sw-3">
-                {achievements.map((achievement, index) => (
-                  <div className="swiper-slide" key={index}>
-                    <div className="tf-icon-box style-1">
+          {AchievementsLoading ? (
+            <div className="center my-5">
+              <span className="loader"></span>
+            </div>
+          ) : (
+            <div className="col-lg-12">
+              <Swiper
+                spaceBetween={30}
+                slidesPerView={3}
+                breakpoints={{
+                  1000: {
+                    slidesPerView: 3,
+                  },
+                  600: {
+                    slidesPerView: 2,
+                  },
+                  0: {
+                    slidesPerView: 1,
+                  },
+                }}
+                modules={[Pagination]}
+                pagination={{ clickable: true, el: ".spd30" }}
+                className="swiper-container overflow-visible tf-sw-mobile4-swiper"
+              >
+                {AchievementsListing.map((achievement, index) => (
+                  <SwiperSlide className="swiper-slide" key={index}>
+                    <div className="tf-icon-box style-1 text-center text-md-start">
                       <div className="icon">{achievement.icon}</div>
                       <div className="content">
                         <h3>
-                          <a href="javascript:void(0)">{achievement.heading}</a>
+                          <a href="javascript:void(0)">{achievement.title}</a>
                         </h3>
-                        <p>{achievement.text}</p>
+                        <p>{achievement.description}</p>
                       </div>
                     </div>
-                  </div>
+                  </SwiperSlide>
                 ))}
+
+                <div className="swiper-pagination5 spd30" />
+              </Swiper>
+              <div
+                className="swiper-container overflow-visible tf-sw-mobile4"
+                data-preview={3}
+                data-space={30}
+              >
+                <div className="swiper-wrapper grid-sw-3">
+                  {AchievementsListing.map((achievement, index) => (
+                    <div className="swiper-slide" key={index}>
+                      <div className="tf-icon-box style-1">
+                        <div className="icon">
+                            <Image
+                              src={achievement.image}
+                              alt="Logo"
+                              width={100}
+                              height={100}
+                            />
+                        </div>
+                        <div className="content">
+                          <h3>
+                            <a href="javascript:void(0)">
+                              {achievement.title}
+                            </a>
+                          </h3>
+                          <p>{achievement.description}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="swiper-pagination5" />
               </div>
-              <div className="swiper-pagination5" />
             </div>
-          </div>
+          )}
         </div>
       </div>
     </section>

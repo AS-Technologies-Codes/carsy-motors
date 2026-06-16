@@ -146,9 +146,9 @@ const allCars = [
 ];
 
 export const initialState = {
-  price: [0, 99999],
-  km: [0, 99999],
-  year: [1997, new Date().getFullYear() - 1],
+  price: [0, 100000],
+  km: [0, 100000],
+  year: [1997, new Date().getFullYear() + 1],
   body: "Any Body",
   make: "Any Make",
   model: "Any Model",
@@ -156,6 +156,7 @@ export const initialState = {
   transmission: "Any Transmission",
   location: "Any Location",
   door: "Any Door",
+  seat: "Any Seat",
   cylinder: "Any Cylinder",
   color: "Any Color",
   condition: "All",
@@ -166,7 +167,7 @@ export const initialState = {
   sorted: allCars,
   currentPage: 1,
   itemPerPage: 20,
-
+  filterOptions: {},
   countMake: "Any Make",
   countModel: "Any Model",
   countPrice: "",
@@ -196,6 +197,8 @@ export function reducer(state, action) {
       return { ...state, location: action.payload };
     case "SET_DOOR":
       return { ...state, door: action.payload };
+    case "SET_SEAT":
+      return { ...state, seat: action.payload };
     case "SET_CYLINDER":
       return { ...state, cylinder: action.payload };
     case "SET_COLOR":
@@ -222,12 +225,15 @@ export function reducer(state, action) {
       return { ...state, condition: action.payload };
     case "SET_EVS_ONLY":
       return { ...state, evsOnly: action.payload };
+    case "SET_FILTER_OPTIONS":
+      return { ...state, filterOptions: action.payload };
+
     case "CLEAR_FILTER":
       return {
         ...state,
-        price: [0, 99999],
-        km: [0, 99999],
-        year: [1997, new Date().getFullYear() - 1],
+        price: [0, 100000],
+        km: [0, 100000],
+        year: [1997, new Date().getFullYear() + 1],
         body: "Any Body",
         make: "Any Make",
         model: "Any Model",
@@ -235,6 +241,7 @@ export function reducer(state, action) {
         transmission: "Any Transmission",
         location: "Any Location",
         door: "Any Door",
+        Seat: "Any seat",
         cylinder: "Any Cylinder",
         color: "Any Color",
         condition: "All",

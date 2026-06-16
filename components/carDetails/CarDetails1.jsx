@@ -50,7 +50,7 @@ export default function CarDetails1({ carItem }) {
           <div className="row">
             <div className="col-lg-8">
               <div className="listing-detail-wrap">
-                <Slider1 images={CarDetailsListing?.images.map(img => img.src)} />
+                <Slider1 images={CarDetailsListing?.images?.map(img => img.src)} />
                 <div className="row">
                   <div className="col-lg-12">
                     <nav

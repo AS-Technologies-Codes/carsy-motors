@@ -10,9 +10,8 @@ export default function FlatFilter({
   tabStyle = "",
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
-
   const { state, dispatch } = useCarFilter();
-  const { countMake, countModel, countPrice } = state;
+  const { countMake, countModel, countPrice, filterOptions } = state;
 
   const handleClick = (index) => {
     setActiveIndex(index);
@@ -34,7 +33,7 @@ export default function FlatFilter({
         : {}),
       ...(countMake !== "Any Make" ? { make: countMake } : {}),
       ...(countModel !== "Any Model" ? { model: countModel } : {}),
-      });
+    });
 
     const getGetCarsRequest = await fetch(
       `${URL.getCars}&${params.toString()}`,
@@ -47,8 +46,11 @@ export default function FlatFilter({
       },
     );
     const getGetCarsResponse = await getGetCarsRequest.json();
-    const { pagination } = getGetCarsResponse;
+    const { filters_count, pagination } = getGetCarsResponse;
     setTotal(pagination.total);
+    console.log("dsds", filters_count);
+
+    dispatch({ type: "SET_FILTER_OPTIONS", payload: filters_count });
     setCarsLoading(false);
   };
   useEffect(() => {
@@ -76,6 +78,7 @@ export default function FlatFilter({
                     <label>Make</label>
                     <div className="group-select tf-select">
                       <select
+                        disabled={CarsLoading}
                         className="nice-select"
                         value={countMake}
                         onChange={(e) =>
@@ -86,14 +89,11 @@ export default function FlatFilter({
                         }
                       >
                         <option>Any Make</option>
-                        <option value="audi">Audi</option>
-                        <option value="bmw">BMW</option>
-                        <option value="dongfeng">Dongfeng</option>
-                        <option value="ford">Ford</option>
-                        <option value="foton">Foton</option>
-                        <option value="kia">Kia</option>
-                        <option value="nissan">Nissan</option>
-                        <option value="isuzu">Isuzu</option>
+                        {filterOptions?.make?.map((make) => (
+                          <option value={make?.name}>
+                            {make?.name} ({make?.count || 0})
+                          </option>
+                        ))}
                       </select>
                     </div>
                   </div>
@@ -101,6 +101,7 @@ export default function FlatFilter({
                     <label>Model</label>
                     <div className="group-select tf-select">
                       <select
+                        disabled={CarsLoading}
                         className="nice-select"
                         value={countModel}
                         onChange={(e) =>
@@ -111,14 +112,11 @@ export default function FlatFilter({
                         }
                       >
                         <option>Any Model</option>
-                        <option value="A4">A4</option>
-                        <option value="Almera">Almera</option>
-                        <option value="Bellett">Bellett</option>
-                        <option value="C-Class">C-Class</option>
-                        <option value="Camry">Camry</option>
-                        <option value="Carnival">Carnival</option>
-                        <option value="Mondeo Sport">Mondeo Sport</option>
-                        <option value="Territory">Territory</option>
+                        {filterOptions?.model?.map((model) => (
+                          <option value={model?.name}>
+                            {model?.name} ({model?.count || 0})
+                          </option>
+                        ))}
                       </select>
                     </div>
                   </div>
@@ -144,6 +142,7 @@ export default function FlatFilter({
                     <div className="group-select tf-select">
                       <select
                         className="nice-select"
+                        disabled={CarsLoading}
                         value={countPrice}
                         onChange={(e) =>
                           dispatch({
@@ -153,7 +152,12 @@ export default function FlatFilter({
                         }
                       >
                         <option>Any Price</option>
-                        <option value="10000,15000">$10,000 - $15,000</option>
+                        {filterOptions?.price?.map((price) => (
+                          <option value={price?.name}>
+                            {price?.name} ({price?.count || 0})
+                          </option>
+                        ))}
+                        {/* <option value="10000,15000">$10,000 - $15,000</option>
                         <option value="15000,20000">$15,000 - $20,000</option>
                         <option value="20000,25000">$20,000 - $25,000</option>
                         <option value="25000,30000">$25,000 - $30,000</option>
@@ -164,7 +168,7 @@ export default function FlatFilter({
                         <option value="80000,100000">$80,000 - $100,000</option>
                         <option value="100000,150000">
                           $100,000 - $150,000
-                        </option>
+                        </option> */}
                       </select>
                     </div>
                   </div>

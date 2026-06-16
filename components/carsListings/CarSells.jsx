@@ -3,7 +3,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import Pricing from "../common/Pricing";
 import Image from "next/image";
 import Link from "next/link";
-import DropdownSelect from "../common/DropDownSelect";
+import DropdownSelect from "../common/DropDownSelectFilter";
 import { featureOptions } from "@/data/filterOptions";
 import { useCarFilter } from "@/context/providers/CarFilterContext";
 import Pagination from "../common/Pagination";
@@ -34,10 +34,11 @@ export default function CarSells() {
     filtered,
     sortingOption,
     evsOnly,
-    condition,
     sorted,
     currentPage,
     itemPerPage,
+    filterOptions,
+    seat,
   } = state;
 
   const allProps = {
@@ -54,6 +55,7 @@ export default function CarSells() {
       dispatch({ type: "SET_TRANSMISSION", payload: value }),
     setLocation: (value) => dispatch({ type: "SET_LOCATION", payload: value }),
     setDoor: (value) => dispatch({ type: "SET_DOOR", payload: value }),
+    setSeat: (value) => dispatch({ type: "SET_SEAT", payload: value }),
     setCylinder: (value) => dispatch({ type: "SET_CYLINDER", payload: value }),
     setColor: (value) => dispatch({ type: "SET_COLOR", payload: value }),
     setEvsOnly: (value) => dispatch({ type: "SET_EVS_ONLY", payload: value }),
@@ -81,26 +83,23 @@ export default function CarSells() {
     const params = new URLSearchParams({
       page: allProps.currentPage,
       ...(price[0] ? { priceMin: price[0] } : {}),
-      ...(price[1] > 99999 ? { priceMax: price[1] } : {}),
+      ...(price[1] <= 99999 ? { priceMax: price[1] } : {}),
       ...(km[0] ? { kmMin: km[0] } : {}),
-      ...(km[1] > 99999 ? { kmMax: km[1] } : {}),
+      ...(km[1] <= 99999 ? { kmMax: km[1] } : {}),
       ...(year[0] > 1997 ? { yearMin: year[0] } : {}),
-      ...(year[1] > new Date().getFullYear() - 1 ? { yearMax: year[1] } : {}),
-      ...(body !== "Any Body" ? { body } : {}),
-      ...(make !== "Any Make" ? { make } : {}),
-      ...(model !== "Any Model" ? { model } : {}),
-      ...(fuel !== "Any Fuel" ? { fuelType: fuel } : {}),
-      ...(transmission !== "Any Transmission" ? { transmission } : {}),
-      ...(location !== "Any Location" ? { location } : {}),
+      ...(year[1] <= new Date().getFullYear() ? { yearMax: year[1] } : {}),
+      ...(!body.includes("Any") ? { body } : {}),
+      ...(!make.includes("Any") ? { make } : {}),
+      ...(!model.includes("Any") ? { model } : {}),
+      ...(!fuel.includes("Any") ? { fuelType: fuel } : {}),
+      ...(!transmission.includes("Any") ? { transmission } : {}),
+      ...(!location.includes("Any") ? { location } : {}),
       // ...(condition !== "All" ? { condition } : {}),
       ...(evsOnly ? { evsOnly } : {}),
-      ...(door !== "Any Door"
-        ? { door: parseInt(door.match(/\d+/)[0], 10) }
-        : {}),
-      ...(cylinder !== "Any Cylinder"
-        ? { cylinder: parseInt(cylinder.match(/\d+/)[0], 10) }
-        : {}),
-      ...(color !== "Any Color" ? { color } : {}),
+      ...(!door.includes("Any") ? { door } : {}),
+      ...(!seat.includes("Any") ? { seat } : {}),
+      ...(!cylinder.includes("Any") ? { cylinder } : {}),
+      ...(!color.includes("Any") ? { color } : {}),
       ...(features.length ? { features: features.join(",") } : {}),
     });
 
@@ -136,9 +135,11 @@ export default function CarSells() {
     transmission,
     location,
     door,
+    seat,
     cylinder,
     color,
     features,
+    featureOptions,
   ]);
 
   const clearFilter = () => {
@@ -198,13 +199,57 @@ export default function CarSells() {
                     <div className="wd-find-select">
                       <div className="form-group">
                         <DropdownSelect
+                          disabled
+                          selectedValue={`${make} ${make !== "Any Make" ? `(${filterOptions.make[0].count})` : ""}`}
+                          // onChange={allProps.setMake}
+                          // options={[
+                          //   "Any Make",
+                          //   "Audi",
+                          //   "BMW",
+                          //   "Dongfeng",
+                          //   "Ford",
+                          //   "Foton",
+                          //   "Kia",
+                          //   "Nissan",
+                          //   "Isuzu",
+                          // ]}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <div>
+                          <DropdownSelect
+                            disabled
+                            selectedValue={`${model} ${model !== "Any Model" ? `(${filterOptions.model[0].count})` : ""}`}
+                            onChange={allProps.setModel}
+                            // options={[
+                            //   "Any Type",
+                            //   "Diesel",
+                            //   "Fuel",
+                            //   "Hybrid",
+                            //   "Electric",
+                            // ]}
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <div>
+                          <DropdownSelect
+                            disabled
+                            selectedValue={price[0]}
+                            onChange={allProps.setPrice}
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <DropdownSelect
                           selectedValue={body}
                           onChange={allProps.setBody}
                           options={[
                             "Any Body",
-                            "Convertible",
-                            "Coupe",
-                            "Crossover",
+                            ...(filterOptions?.body_type?.map(
+                              (body_type) =>
+                                `${body_type?.name} (${body_type?.count || 0})`,
+                            ) || []),
                           ]}
                         />
                       </div>
@@ -226,23 +271,23 @@ export default function CarSells() {
                         </div>
                       </div> */}
                       <div className="form-group">
-                        <div className="group-select">
+                        <div>
                           <DropdownSelect
                             selectedValue={fuel}
                             onChange={allProps.setFuel}
                             options={[
                               "Any Type",
-                              "Diesel",
-                              "Fuel",
-                              "Hybrid",
-                              "Electric",
+                              ...(filterOptions?.fuel_type?.map(
+                                (fuel_type) =>
+                                  `${fuel_type?.name} (${fuel_type?.count || 0})`,
+                              ) || []),
                             ]}
                           />
                         </div>
                       </div>
 
                       <div className="form-group">
-                        <div className="group-select">
+                        <div>
                           <label className="flex-three">
                             <input
                               readOnly
@@ -260,52 +305,76 @@ export default function CarSells() {
                       </div>
 
                       <div className="form-group">
-                        <div className="group-select">
+                        <div>
                           <DropdownSelect
                             selectedValue={transmission}
                             onChange={allProps.setTransmission}
                             options={[
                               "Any Transmission",
-                              "Automatic",
-                              "Manual",
+                              ...(filterOptions?.transmission?.map(
+                                (transmission) =>
+                                  `${transmission?.name} (${transmission?.count || 0})`,
+                              ) || []),
                             ]}
                           />
                         </div>
                       </div>
                       <div className="form-group">
-                        <div className="group-select">
+                        <div>
                           <DropdownSelect
                             selectedValue={location}
                             onChange={allProps.setLocation}
                             options={[
-                              "Any Location",
-                              "London",
-                              "New York",
-                              "Paris",
+                              "Any State / Region",
+                              ...(filterOptions?.state_region?.map(
+                                (state_region) =>
+                                  `${state_region?.name} (${state_region?.count || 0})`,
+                              ) || []),
                             ]}
                           />
                         </div>
                       </div>
                       <div className="form-group">
-                        <div className="group-select">
+                        <div>
                           <DropdownSelect
                             selectedValue={door}
                             onChange={allProps.setDoor}
-                            options={["Any Door", "2 Door", "3 Door", "4 Door"]}
+                            options={[
+                              "Any Doors",
+                              ...(filterOptions?.doors?.map(
+                                (doors) =>
+                                  `${doors?.name} (${doors?.count || 0})`,
+                              ) || []),
+                            ]}
                           />
                         </div>
                       </div>
                       <div className="form-group">
-                        <div className="group-select">
+                        <div>
+                          <DropdownSelect
+                            selectedValue={seat}
+                            onChange={allProps.setSeat}
+                            options={[
+                              "Any Seats",
+                              ...(filterOptions?.seats?.map(
+                                (seats) =>
+                                  `${seats?.name} (${seats?.count || 0})`,
+                              ) || []),
+                            ]}
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <div>
                           <DropdownSelect
                             selectedValue={color}
                             onChange={allProps.setColor}
                             options={[
-                              "Any Color",
-                              "Black",
-                              "White",
-                              "Blue",
-                              "Red",
+                              "Any Colors",
+                              ...(filterOptions?.color?.map(
+                                (color) =>
+                                  `${color?.name} (${color?.count || 0})`,
+                              ) || []),
                             ]}
                           />
                         </div>
@@ -400,7 +469,7 @@ export default function CarSells() {
                           setIsGrid={setIsGrid}
                         />
                         <div className="wd-find-select flex gap-8">
-                          <div className="group-select">
+                          <div>
                             <DropdownSelect
                               selectedValue={sortingOption}
                               onChange={allProps.setSortingOption}
@@ -548,7 +617,7 @@ export default function CarSells() {
                                       <Link
                                         href={`/listing-detail-v1/${car.id}`}
                                       >
-                                        {car.title}
+                                        {car.year} {car.make} {car.model}
                                       </Link>
                                     </h5>
                                     <div className="icon-box flex flex-wrap">

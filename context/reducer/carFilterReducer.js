@@ -154,8 +154,9 @@ export const initialState = {
   model: "Any Model",
   fuel: "Any Fuel",
   transmission: "Any Transmission",
-  location: "Any Location",
+  location: "Any State / Region",
   door: "Any Door",
+  drive_type: "Any Type",
   seat: "Any Seat",
   cylinder: "Any Cylinder",
   color: "Any Color",
@@ -196,6 +197,8 @@ export function reducer(state, action) {
     case "SET_LOCATION":
       return { ...state, location: action.payload };
     case "SET_DOOR":
+      return { ...state, door: action.payload };
+    case "SET_DRIVE_TYPE":
       return { ...state, door: action.payload };
     case "SET_SEAT":
       return { ...state, seat: action.payload };
@@ -239,8 +242,9 @@ export function reducer(state, action) {
         model: "Any Model",
         fuel: "Any Fuel",
         transmission: "Any Transmission",
-        location: "Any Location",
+        location: "Any State / Region",
         door: "Any Door",
+        drive_type: "Any Type",
         Seat: "Any seat",
         cylinder: "Any Cylinder",
         color: "Any Color",

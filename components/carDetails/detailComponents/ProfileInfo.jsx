@@ -16,7 +16,7 @@ export default function ProfileInfo() {
           />
         </div>
         <div className="content">
-          <h4>Car Empire</h4>
+          <h4>Cary Dealers</h4>
           <div className="verified flex-three">
             <div className="icon">
               <svg
@@ -35,7 +35,7 @@ export default function ProfileInfo() {
                 />
               </svg>
             </div>
-            <span className="fs-12 fw-6 lh-16">Verified dealer</span>
+            <span className="fs-12 fw-6 lh-16">Verified authurity</span>
           </div>
         </div>
       </div>
@@ -58,12 +58,6 @@ export default function ProfileInfo() {
       <div className="profile-contact">
         <h6>Contact dealer</h6>
         <div className="btn-contact flex-two">
-          <a href="javascript:void(0)" className="btn-pf bg-orange">
-            <i className="icon-autodeal-phone2" />
-            <span className="fs-16 fw-5 lh-20 font text-color-1">
-              Call to seller
-            </span>
-          </a>
           <a href="javascript:void(0)" className="btn-pf bg-green">
             <i className="icon-autodeal-chat" />
             <span className="fs-16 fw-5 lh-20 font text-color-1">Chat</span>

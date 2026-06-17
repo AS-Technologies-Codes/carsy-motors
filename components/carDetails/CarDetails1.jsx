@@ -50,7 +50,9 @@ export default function CarDetails1({ carItem }) {
           <div className="row">
             <div className="col-lg-8">
               <div className="listing-detail-wrap">
-                <Slider1 images={CarDetailsListing?.images?.map(img => img.src)} />
+                <Slider1
+                  images={CarDetailsListing?.images?.map((img) => img.src)}
+                />
                 <div className="row">
                   <div className="col-lg-12">
                     <nav
@@ -70,19 +72,19 @@ export default function CarDetails1({ carItem }) {
                         </li>
                         <li className="nav-item">
                           <a className="nav-link" href="#scrollspyHeading3">
-                            Recommended cars
+                            Comfort & Convenience
                           </a>
                         </li>
                         <li className="nav-item">
                           <a className="nav-link" href="#scrollspyHeading4">
-                            Loan calculator
+                            Car for Cash Calculator
                           </a>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                           <a className="nav-link" href="#scrollspyHeading5">
                             New car reviews
                           </a>
-                        </li>
+                        </li> */}
                       </ul>
                     </nav>
                     <div
@@ -92,12 +94,9 @@ export default function CarDetails1({ carItem }) {
                       className="scrollspy-example"
                       tabIndex={0}
                     >
-                      <div className="listing-description mb-40">
-                        <div className="tfcl-listing-header">
-                          <h2>Description</h2>
-                        </div>
-                        <Description />
-                      </div>
+                      {CarDetailsListing?.description && (
+                        <Description desc={CarDetailsListing.description} />
+                      )}
                       <div
                         className="listing-description footer-col-block"
                         id="scrollspyHeading1"
@@ -108,7 +107,7 @@ export default function CarDetails1({ carItem }) {
                         <div className="footer-heading-mobie listing-details-mobie">
                           <h2>Car overview</h2>
                         </div>
-                        <Overview />
+                        <Overview car={CarDetailsListing}/>
                       </div>
                       <div className="listing-line" />
                       <div
@@ -118,10 +117,7 @@ export default function CarDetails1({ carItem }) {
                         <div className="footer-heading-desktop mb-30">
                           <h2>Features</h2>
                         </div>
-                        <div className="footer-heading-mobie listing-details-mobie mb-30">
-                          <h2>Features</h2>
-                        </div>
-                        <Features />
+                        <Features feat={[...CarDetailsListing?.features, ...CarDetailsListing?.safety_features]}/>
                       </div>
                       <div className="listing-line" />
                       <div
@@ -129,15 +125,14 @@ export default function CarDetails1({ carItem }) {
                         id="scrollspyHeading4"
                       >
                         <div className="box-title">
-                          <h2 className="title-ct">Auto Loan Calculator</h2>
+                          <h2 className="title-ct">Car for Cash</h2>
                           <p>
-                            Use our calculator to estimate your monthly car
-                            payments.
+                            Use our calculator to estimate your car price.
                           </p>
                         </div>
                         <LoanCalculator />
                       </div>
-                      <div className="listing-line" />
+                      {/* <div className="listing-line" />
                       <div className="listing-location" id="scrollspyHeading3">
                         <div className="box-title">
                           <h2 className="title-ct">Location</h2>
@@ -154,8 +149,8 @@ export default function CarDetails1({ carItem }) {
                           allowFullScreen=""
                           loading="lazy"
                         />
-                      </div>
-                      <div className="listing-line" />
+                      </div> */}
+                      {/* <div className="listing-line" />
                       <div
                         className="listing-reviews flat-property-detail"
                         id="scrollspyHeading5"
@@ -166,7 +161,7 @@ export default function CarDetails1({ carItem }) {
                           </h2>
                         </div>
                         <CarReview />
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
@@ -190,7 +185,7 @@ export default function CarDetails1({ carItem }) {
                 </div>
                 <div className="widget-listing">
                   <div className="listing-header mb-30">
-                    <h3>Recommended Used Cars</h3>
+                    <h3>Recommended Cars</h3>
                     <p>Showing 26 more cars you might like</p>
                   </div>
                   <Recommended />

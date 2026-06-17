@@ -86,7 +86,7 @@ export default function LoanCalculator() {
           </div>
           <div className="button-boxs">
             <button className="sc-button" name="submit" type="submit">
-              <span>Apply for a loan</span>
+              <span>Calculate Rate</span>
             </button>
           </div>
         </form>

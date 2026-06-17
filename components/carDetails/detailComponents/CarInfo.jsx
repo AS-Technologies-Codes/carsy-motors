@@ -22,9 +22,7 @@ export default function CarInfo({ carItem = allCars[0] }) {
           <span>1st owner</span>
         </div>
       </div>
-      <div className="money text-color-3 font">
-        ${carItem.price}
-      </div>
+      <div className="money text-color-3 font">${carItem.price}</div>
       <div className="price-wrap">
         <p className="fs-12 lh-16 text-color-2">
           Monthly installment payment:
@@ -52,7 +50,7 @@ export default function CarInfo({ carItem = allCars[0] }) {
             </svg>
           </a>
         </li>
-        <li>
+        {/* <li>
           <a href="javascript:void(0)" className="icon">
             <svg
               width={16}
@@ -70,7 +68,7 @@ export default function CarInfo({ carItem = allCars[0] }) {
               />
             </svg>
           </a>
-        </li>
+        </li> */}
         <li>
           <a href="javascript:void(0)" className="icon">
             <svg
@@ -110,6 +108,38 @@ export default function CarInfo({ carItem = allCars[0] }) {
           </a>
         </li>
       </ul>
+      {/* <div className="profile-contact mt-3">
+        <div className="btn-contact ">
+          <a href="javascript:void(0)" className="btn-pf bg-orange">
+            <i className="icon-autodeal-phone2" />
+            <span className="fs-16 fw-5 lh-20 font text-color-1">
+              Call to seller
+            </span>
+          </a>
+          <a href="javascript:void(0)" className="btn-pf bg-orange">
+            <i className="icon-autodeal-phone2" />
+            <span className="fs-16 fw-5 lh-20 font text-color-1">
+              Call to seller
+            </span>
+          </a>
+          <a href="javascript:void(0)" className="btn-pf bg-orange">
+            <i className="icon-autodeal-phone2" />
+            <span className="fs-16 fw-5 lh-20 font text-color-1">
+              Call to seller
+            </span>
+          </a>
+          <a href="javascript:void(0)" className="btn-pf bg-orange">
+            <i className="icon-autodeal-phone2" />
+            <span className="fs-16 fw-5 lh-20 font text-color-1">
+              Call to seller
+            </span>
+          </a>
+          <a href="javascript:void(0)" className="btn-pf bg-green">
+            <i className="icon-autodeal-chat" />
+            <span className="fs-16 fw-5 lh-20 font text-color-1">Chat</span>
+          </a>
+        </div>
+      </div> */}
     </>
   );
 }

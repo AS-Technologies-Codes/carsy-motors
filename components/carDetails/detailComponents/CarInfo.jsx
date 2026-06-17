@@ -1,24 +1,41 @@
 import { allCars } from "@/data/cars";
 import React from "react";
+import toast from "react-hot-toast";
 
 export default function CarInfo({ carItem = allCars[0] }) {
+  const handlePrint = () => {
+    if (typeof window !== "undefined") {
+      window.print();
+    }
+  };
+  const handleCopy = async () => {
+    if (typeof window !== "undefined") {
+      try {
+        // Gets the complete browser URL
+        await navigator.clipboard.writeText(window.location.href);
+        toast.success("copied");
+      } catch (err) {
+        console.error("Failed to copy URL: ", err);
+      }
+    }
+  };
   return (
     <>
       <div className="icon-box flex flex-wrap">
         <div className="icons flex-three">
-          <i className="icon-autodeal-km1" />
+          <i className="icon-autodeal-km1 me-1" />
           <span>{carItem.km} kms</span>
         </div>
         <div className="icons flex-three">
-          <i className="icon-autodeal-diesel" />
+          <i className="icon-autodeal-diesel me-1" />
           <span>{carItem.fuelType}</span>
         </div>
         <div className="icons flex-three">
-          <i className="icon-autodeal-automatic" />
+          <i className="icon-autodeal-automatic me-1" />
           <span>{carItem.transmission}</span>
         </div>
         <div className="icons flex-three">
-          <i className="icon-autodeal-owner" />
+          <i className="icon-autodeal-owner me-1" />
           <span>1st owner</span>
         </div>
       </div>
@@ -70,7 +87,7 @@ export default function CarInfo({ carItem = allCars[0] }) {
           </a>
         </li> */}
         <li>
-          <a href="javascript:void(0)" className="icon">
+          <a href="javascript:void(0)" onClick={handleCopy} className="icon">
             <svg
               width={16}
               height={18}
@@ -89,7 +106,7 @@ export default function CarInfo({ carItem = allCars[0] }) {
           </a>
         </li>
         <li>
-          <a href="javascript:void(0)" className="icon">
+          <a href="javascript:void(0)" onClick={handlePrint} className="icon">
             <svg
               width={16}
               height={18}
@@ -108,38 +125,15 @@ export default function CarInfo({ carItem = allCars[0] }) {
           </a>
         </li>
       </ul>
-      {/* <div className="profile-contact mt-3">
-        <div className="btn-contact ">
-          <a href="javascript:void(0)" className="btn-pf bg-orange">
-            <i className="icon-autodeal-phone2" />
-            <span className="fs-16 fw-5 lh-20 font text-color-1">
-              Call to seller
-            </span>
-          </a>
-          <a href="javascript:void(0)" className="btn-pf bg-orange">
-            <i className="icon-autodeal-phone2" />
-            <span className="fs-16 fw-5 lh-20 font text-color-1">
-              Call to seller
-            </span>
-          </a>
-          <a href="javascript:void(0)" className="btn-pf bg-orange">
-            <i className="icon-autodeal-phone2" />
-            <span className="fs-16 fw-5 lh-20 font text-color-1">
-              Call to seller
-            </span>
-          </a>
-          <a href="javascript:void(0)" className="btn-pf bg-orange">
-            <i className="icon-autodeal-phone2" />
-            <span className="fs-16 fw-5 lh-20 font text-color-1">
-              Call to seller
-            </span>
-          </a>
+      <div className="profile-contact mt-3">
+        <h6>Contact dealer</h6>
+        <div className="btn-contact flex-two">
           <a href="javascript:void(0)" className="btn-pf bg-green">
             <i className="icon-autodeal-chat" />
             <span className="fs-16 fw-5 lh-20 font text-color-1">Chat</span>
           </a>
         </div>
-      </div> */}
+      </div>
     </>
   );
 }

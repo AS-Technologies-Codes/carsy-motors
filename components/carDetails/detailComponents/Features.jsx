@@ -18,7 +18,7 @@ export default function Features({ feat }) {
               </div>
             ))
           ) : (
-            <div className="listing-feature-wrap flex" key={f}>
+            <div className="listing-feature-wrap flex">
               <p>Stay Tuned! More Content is Coming</p>
             </div>
           )}

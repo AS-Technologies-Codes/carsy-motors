@@ -177,24 +177,21 @@ export default function CarDetails1({ carItem }) {
                   </div>
                 </div>
                 <div className="widget-listing mb-30">
-                  <ProfileInfo />
+                  <ProfileInfo  car={CarDetailsListing}/>
                 </div>
                 <div className="list-icon-pf gap-8 flex-three mb-40">
                   <i className="far fa-flag" />
                   <p className="font-1">Report this listing</p>
                 </div>
                 <div className="widget-listing">
-                  <div className="listing-header mb-30">
-                    <h3>Recommended Cars</h3>
-                    <p>Showing 26 more cars you might like</p>
-                  </div>
-                  <Recommended />
-                  <a
+                 
+                  <Recommended make={CarDetailsListing?.make} />
+                  {/* <a
                     href="javascript:void(0)"
                     className="fs-16 fw-5 font text-color-3 lh-22"
                   >
                     View more reviews <i className="icon-autodeal-view-more" />
-                  </a>
+                  </a> */}
                 </div>
               </div>
             </div>

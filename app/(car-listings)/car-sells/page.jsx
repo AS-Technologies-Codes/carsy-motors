@@ -1,6 +1,6 @@
 import Cars1 from "@/components/carsListings/Cars1";
 import Footer1 from "@/components/footers/Footer1";
-import Header2 from "@/components/headers/Header2";
+import Header1 from "@/components/headers/Header1";
 import Filter from "@/components/homes/home-1/Filter";
 import Hero from "@/components/homes/home-6/Hero";
 import React from "react";
@@ -16,7 +16,7 @@ export default function page() {
   return (
     <CarFilterProvider>
       <div className="header-fixed">
-        <Header2 />
+        <Header1 />
       </div>
       <Hero />
       <Filter />

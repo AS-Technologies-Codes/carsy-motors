@@ -39,7 +39,7 @@ export default function ProfileInfo({ car }) {
           </div>
         </div>
       </div> */}
-        <h6>Interest</h6>
+        <h6>Insurance</h6>
 
       <div className="mt-3 ">
         <div className="inner listing-infor-box ">
@@ -67,7 +67,7 @@ export default function ProfileInfo({ car }) {
           </div>
         </div>
       </div>
-      <div className="">
+      {/* <div className="">
         <div className="inner listing-infor-box">
           <div className="icon">
             <svg
@@ -95,7 +95,7 @@ export default function ProfileInfo({ car }) {
             <p className="listing-info-value">{car?.interest_rate || "Not found"}</p>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="">
         <div className="inner listing-infor-box">
           <div className="icon">

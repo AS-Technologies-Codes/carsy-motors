@@ -72,7 +72,7 @@ export default function Slider1({ images, viewer }) {
         </Swiper>
       )}
 
-      {viewer.length ? (
+      {viewer?.length ? (
         <div
           className="d-flex"
           style={{ position: "absolute", zIndex: 999, bottom: 15 }}

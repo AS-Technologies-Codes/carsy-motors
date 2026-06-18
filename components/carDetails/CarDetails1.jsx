@@ -125,10 +125,7 @@ export default function CarDetails1({ carItem }) {
                           <h2>Features</h2>
                         </div>
                         <Features
-                          feat={[
-                            ...CarDetailsListing?.features,
-                            ...CarDetailsListing?.safety_features,
-                          ]}
+                          feat={CarDetailsListing}
                         />
                       </div>
                       <div className="listing-line" />

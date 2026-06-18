@@ -706,10 +706,10 @@ export default function CarSells() {
                                         </div>
                                         <span>Chat</span>
                                       </a>
-                                      <p className="fs-12 lh-16">
+                                      {/* <p className="fs-12 lh-16">
                                         View 20 variants matching your search
                                         criteria
-                                      </p>
+                                      </p> */}
                                     </div>
                                   </div>
                                 </div>

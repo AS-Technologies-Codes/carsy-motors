@@ -2,6 +2,8 @@ import Accordion from "@/components/common/Accordions";
 import React from "react";
 
 export default function Features({ feat }) {
+  console.log({ feat });
+
   const features = [
     {
       title: "Comfort & Convenience",
@@ -17,13 +19,14 @@ export default function Features({ feat }) {
     },
     {
       title: "Safety",
-      content: feat?.comfort_convenience,
+      content: feat?.safety_features,
     },
     {
       title: "Entertainment & Communication",
-      content: feat?.safty,
+      content: feat?.entertainment_communication,
     },
   ];
+
 
   return (
     <>
@@ -32,8 +35,8 @@ export default function Features({ feat }) {
       </div>
       <div className="features-inner tf-collapse-content">
         <div className="inner">
-          {feat.length ? (
-            feat?.map((f) => (
+          {feat?.features.length ? (
+            feat?.features?.map((f) => (
               <div className="listing-feature-wrap flex" key={f}>
                 <i className="icon-autodeal-check" />
                 <p>{f}</p>

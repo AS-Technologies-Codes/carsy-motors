@@ -52,6 +52,13 @@ export default function CarDetails1({ carItem }) {
               <div className="listing-detail-wrap">
                 <Slider1
                   images={CarDetailsListing?.images?.map((img) => img.src)}
+                  viewer={
+                    CarDetailsListing?.sepriteiamge.length
+                      ? JSON.parse(
+                          CarDetailsListing?.sepriteiamge[0].sprite_url,
+                        )
+                      : []
+                  }
                 />
                 <div className="row">
                   <div className="col-lg-12">
@@ -107,7 +114,7 @@ export default function CarDetails1({ carItem }) {
                         <div className="footer-heading-mobie listing-details-mobie">
                           <h2>Car overview</h2>
                         </div>
-                        <Overview car={CarDetailsListing}/>
+                        <Overview car={CarDetailsListing} />
                       </div>
                       <div className="listing-line" />
                       <div
@@ -117,7 +124,12 @@ export default function CarDetails1({ carItem }) {
                         <div className="footer-heading-desktop mb-30">
                           <h2>Features</h2>
                         </div>
-                        <Features feat={[...CarDetailsListing?.features, ...CarDetailsListing?.safety_features]}/>
+                        <Features
+                          feat={[
+                            ...CarDetailsListing?.features,
+                            ...CarDetailsListing?.safety_features,
+                          ]}
+                        />
                       </div>
                       <div className="listing-line" />
                       <div
@@ -126,9 +138,7 @@ export default function CarDetails1({ carItem }) {
                       >
                         <div className="box-title">
                           <h2 className="title-ct">Car for Cash</h2>
-                          <p>
-                            Use our calculator to estimate your car price.
-                          </p>
+                          <p>Use our calculator to estimate your car price.</p>
                         </div>
                         <LoanCalculator />
                       </div>
@@ -177,14 +187,13 @@ export default function CarDetails1({ carItem }) {
                   </div>
                 </div>
                 <div className="widget-listing mb-30">
-                  <ProfileInfo  car={CarDetailsListing}/>
+                  <ProfileInfo car={CarDetailsListing} />
                 </div>
                 <div className="list-icon-pf gap-8 flex-three mb-40">
                   <i className="far fa-flag" />
                   <p className="font-1">Report this listing</p>
                 </div>
                 <div className="widget-listing">
-                 
                   <Recommended make={CarDetailsListing?.make} />
                   {/* <a
                     href="javascript:void(0)"

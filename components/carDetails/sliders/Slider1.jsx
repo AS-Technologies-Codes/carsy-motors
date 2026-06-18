@@ -77,7 +77,9 @@ export default function Slider1({images}) {
                     />
                   </svg>
                 </div>
-                <span className="fw-5 font text-color-2 lh-16">Video</span>
+                <span className="fw-5 w-100 font text-color-2 lh-16">
+                  View 360
+                </span>
               </a>
               <a
                 className="specs-features image"

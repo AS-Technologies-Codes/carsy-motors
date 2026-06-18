@@ -65,8 +65,8 @@ export default function Overview({ car }) {
               </svg>
             </div>
             <div className="content-listing-info">
-              <span className="listing-info-title">Fuel Type:</span>
-              <p className="listing-info-value">{car?.fuelType}</p>
+              <span className="listing-info-title">Fuel Type / Capacity:</span>
+              <p className="listing-info-value">{car?.fuelType} / {car?.fuel_capacity}</p>
             </div>
           </div>
         </div>
@@ -176,8 +176,8 @@ export default function Overview({ car }) {
              
             </div>
             <div className="content-listing-info">
-              <span className="listing-info-title">Fuel Capacity</span>
-              <p className="listing-info-value">{car?.fuel_capacity}</p>
+              <span className="listing-info-title">Body Type</span>
+              <p className="listing-info-value">{car?.body}</p>
             </div>
           </div>
         </div>
@@ -264,8 +264,8 @@ export default function Overview({ car }) {
               </svg>
             </div>
             <div className="content-listing-info">
-              <span className="listing-info-title">Engine Size:</span>
-              <p className="listing-info-value">{car?.engine_size}</p>
+              <span className="listing-info-title">Engine:</span>
+              <p className="listing-info-value">{car?.engine}</p>
             </div>
           </div>
         </div>
@@ -308,8 +308,8 @@ export default function Overview({ car }) {
               </svg>
             </div>
             <div className="content-listing-info">
-              <span className="listing-info-title">Drive Type:</span>
-              <p className="listing-info-value">{car?.drive_type}</p>
+              <span className="listing-info-title">Drive Type / Economy:</span>
+              <p className="listing-info-value">{car?.drive_type} / {car?.economy}</p>
             </div>
           </div>
         </div>

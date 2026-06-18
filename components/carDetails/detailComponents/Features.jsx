@@ -1,8 +1,30 @@
 import Accordion from "@/components/common/Accordions";
-import { features } from "@/data/faqs";
 import React from "react";
 
-export default function Features({ feat }) { 
+export default function Features({ feat }) {
+  const features = [
+    {
+      title: "Comfort & Convenience",
+      content: feat?.comfort_convenience,
+    },
+    {
+      title: "Interior",
+      content: feat?.interior,
+    },
+    {
+      title: "Exterior",
+      content: feat?.exterior,
+    },
+    {
+      title: "Safety",
+      content: feat?.comfort_convenience,
+    },
+    {
+      title: "Entertainment & Communication",
+      content: feat?.safty,
+    },
+  ];
+
   return (
     <>
       <div className="footer-heading-mobie listing-details-mobie mb-30">

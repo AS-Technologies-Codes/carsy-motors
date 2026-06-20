@@ -9,6 +9,7 @@ export default function DropdownSelect({
   selectedValue,
   disabled,
   addtionalParentClass = "",
+  width = "auto",
 }) {
   const selectRef = useRef();
   const optionsRef = useRef();
@@ -61,6 +62,7 @@ export default function DropdownSelect({
     <>
       <div
         className={`nice-select ${addtionalParentClass} ${disabled ? "opacity-50 pe-none" : ""}`}
+        style={{width}}
         ref={selectRef}
       >
         <span className="current">

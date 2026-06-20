@@ -394,7 +394,7 @@ export default function CarsHero() {
                                   featList2.map((item, index) => (
                                     <div
                                       key={index}
-                                      className={`d-flex align-items-center mx-1 justify-content-center flex-column border-color-gray text-color-2 border-half border-sm-0 rounded-4`}
+                                      className={`d-flex align-items-center mx-1 justify-content-center flex-column border-color-gray text-color-2 border-half rounded-4`}
                                     >
                                       {item.icon}
                                       <h6 className="text-color-3 fw-bold fs-12">
@@ -420,7 +420,7 @@ export default function CarsHero() {
                                   featList3.map((item, index) => (
                                     <div
                                       key={index}
-                                      className={`d-flex align-items-center p-2 mx-1 justify-content-center border-color-gray text-color-2 border-half border-sm-0 rounded-4`}
+                                      className={`d-flex align-items-center p-2 mx-1 justify-content-center border-color-gray text-color-2 border-half rounded-4`}
                                     >
                                       {item.icon}
                                       <h6 className="text-color-1 opacity-75 fw-bold fs-12 ps-1">

@@ -56,7 +56,8 @@ export default function CarSells() {
       dispatch({ type: "SET_TRANSMISSION", payload: value }),
     setLocation: (value) => dispatch({ type: "SET_LOCATION", payload: value }),
     setDoor: (value) => dispatch({ type: "SET_DOOR", payload: value }),
-    setDriveType: (value) => dispatch({ type: "SET_DRIVE_TYPE", payload: value }),
+    setDriveType: (value) =>
+      dispatch({ type: "SET_DRIVE_TYPE", payload: value }),
     setSeat: (value) => dispatch({ type: "SET_SEAT", payload: value }),
     setCylinder: (value) => dispatch({ type: "SET_CYLINDER", payload: value }),
     setColor: (value) => dispatch({ type: "SET_COLOR", payload: value }),
@@ -98,7 +99,7 @@ export default function CarSells() {
       ...(!transmission.includes("Any") ? { transmission } : {}),
       ...(!location.includes("Any") ? { location } : {}),
       // ...(condition !== "All" ? { condition } : {}),
-      ...(evsOnly ? { evsOnly } : {}),
+      ...(evsOnly ? { fuelType: "electric" } : {}),
       ...(!door.includes("Any") ? { door } : {}),
       ...(!seat.includes("Any") ? { seat } : {}),
       ...(!cylinder.includes("Any") ? { cylinder } : {}),
@@ -159,7 +160,8 @@ export default function CarSells() {
     } else if (sortingOption === "Price Descending") {
       dispatch({
         type: "SET_SORTED",
-        payload: [...filtered].sort((a, b) => b.price - a.price),
+        payload: filtered,
+        // payload: [...filtered].sort((a, b) => b.price - a.price),
       });
     } else {
       dispatch({ type: "SET_SORTED", payload: filtered });
@@ -168,7 +170,10 @@ export default function CarSells() {
   }, [filtered, sortingOption]);
 
   useEffect(() => {
-    setIsGrid(window.localStorage.getItem("isGrid") === "true");
+    setIsGrid(
+      window.innerWidth > 775 &&
+        window.localStorage.getItem("isGrid") === "true",
+    );
   }, []);
 
   return (
@@ -289,7 +294,7 @@ export default function CarSells() {
                           />
                         </div>
                       </div>
-                        <div className="form-group">
+                      <div className="form-group">
                         <div>
                           <DropdownSelect
                             selectedValue={drive_type}
@@ -490,6 +495,7 @@ export default function CarSells() {
                         <div className="wd-find-select flex gap-8">
                           <div>
                             <DropdownSelect
+                              width="178px"
                               selectedValue={sortingOption}
                               onChange={allProps.setSortingOption}
                               addtionalParentClass="list-sort"

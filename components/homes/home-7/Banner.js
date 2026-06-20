@@ -27,7 +27,7 @@ const Banner = () => {
     fetchBanner();
   }, []);
   return (
-    <div className="my-5">
+    <div className="">
       {BannerLoading ? (
         <div className="center my-5">
           <span className="loader"></span>

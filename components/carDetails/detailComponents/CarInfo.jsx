@@ -1,11 +1,10 @@
-import { allCars } from "@/data/cars";
 import React from "react";
 import toast from "react-hot-toast";
 
-export default function CarInfo({ carItem = allCars[0] }) {
-  const handlePrint = () => {
+export default function CarInfo({ carItem }) {
+  const handlePrint = (id) => {
     if (typeof window !== "undefined") {
-      window.print();
+      window.open(`https://carsy.astechnologies.pk/api_carsy/car_view.php?id=${id}&token=dfaf55df456ds4ds5f4ds33`);
     }
   };
   const handleCopy = async () => {
@@ -106,7 +105,7 @@ export default function CarInfo({ carItem = allCars[0] }) {
           </a>
         </li>
         <li>
-          <a href="javascript:void(0)" onClick={handlePrint} className="icon">
+          <a href="javascript:void(0)" onClick={() => handlePrint(carItem?.id)} className="icon">
             <svg
               width={16}
               height={18}

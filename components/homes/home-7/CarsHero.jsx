@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link"; 
+import Link from "next/link";
 export default function CarsHero() {
   const swiperOptions = {
     autoplay: {
@@ -232,6 +232,96 @@ export default function CarsHero() {
     },
   ];
 
+  const featList2 = [
+    {
+      head: "Wide Selection",
+      des: "Find the perfect car for your needs",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width={45}
+          strokeWidth={1}
+          fill="#fd5a21"
+          stroke="white"
+          class="size-3"
+        >
+          <path d="M8 2v4" />
+          <path d="M16 2v4" />
+          <rect width="18" height="18" x="3" y="4" rx="2" />
+          <path d="M3 10h18" />
+          <path d="m9 16 2 2 4-4" />
+        </svg>
+      ),
+    },
+    {
+      head: "Inspected & Verified",
+      des: "Every car is quality checked for peace of mind.",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width={45}
+          strokeWidth={1}
+          fill="#fd5a21"
+          stroke="white"
+          class="size-3"
+        >
+          <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+      ),
+    },
+  ];
+
+  const featList3 = [
+    {
+      head: "Short-term rentals",
+      des: "Find the perfect car for your needs",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          width={45}
+          strokeWidth={1}
+          stroke="#fd5a21"
+          className="size-3"
+        >
+          <path d="M11 14h1v4" />
+          <path d="M16 2v4" />
+          <path d="M3 10h18" />
+          <path d="M8 2v4" />
+          <rect x="3" y="4" width="18" height="18" rx="2" />
+        </svg>
+      ),
+    },
+    {
+      head: "Long-term rentals",
+      des: "Every car is quality checked for peace of mind.",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          width={45}
+          strokeWidth={1}
+          stroke="#fd5a21"
+          className="size-3"
+        >
+          <rect width="18" height="18" x="3" y="4" rx="2" />
+          <path d="M16 2v4" />
+          <path d="M3 10h18" />
+          <path d="M8 2v4" />
+          <path d="M17 14h-6" />
+          <path d="M13 18H7" />
+          <path d="M7 14h.01" />
+          <path d="M17 18h.01" />
+        </svg>
+      ),
+    },
+  ];
+
   return slides4.map((slide, index) => (
     <>
       <style>{`
@@ -297,6 +387,53 @@ export default function CarsHero() {
                                 {spec.description}
                               </div>
                             </div>
+
+                            <div className="d-flex justify-content-center w-full">
+                              <div className="d-flex  justify-content-between">
+                                {specIndex == 1 &&
+                                  featList2.map((item, index) => (
+                                    <div
+                                      key={index}
+                                      className={`d-flex align-items-center mx-1 justify-content-center flex-column border-color-gray text-color-2 border-half border-sm-0 rounded-4`}
+                                    >
+                                      {item.icon}
+                                      <h6 className="text-color-3 fw-bold fs-12">
+                                        {item.head}
+                                      </h6>
+                                      <p className="text-color-1 text-center fw-normal  fs-12 opacity-75">
+                                        {item.des}
+                                      </p>
+                                    </div>
+                                  ))}
+                              </div>
+                            </div>
+
+                            {specIndex == 2 && (
+                              <h6 className="text-color-1  text-center fs-6 ps-1">
+                                Flexibal rentals with easy <br /> booking options
+                              </h6>
+                            )}
+
+                            <div className="d-flex justify-content-center w-full">
+                              <div className="d-flex justify-content-between">
+                                {specIndex == 2 &&
+                                  featList3.map((item, index) => (
+                                    <div
+                                      key={index}
+                                      className={`d-flex align-items-center p-2 mx-1 justify-content-center border-color-gray text-color-2 border-half border-sm-0 rounded-4`}
+                                    >
+                                      {item.icon}
+                                      <h6 className="text-color-1 opacity-75 fw-bold fs-12 ps-1">
+                                        {item.head}
+                                      </h6>
+                                      {/* <p className="text-color-1 text-center fw-normal  fs-12 opacity-75">
+                                        {item.des}
+                                      </p> */}
+                                    </div>
+                                  ))}
+                              </div>
+                            </div>
+
                             <Link
                               href={spec.href}
                               className={`sc-button btn-svg btn-55 ${spec?.color ? spec.color : ""}`}

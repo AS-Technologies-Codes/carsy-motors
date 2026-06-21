@@ -522,10 +522,13 @@
   }
 
   .icon {
-    color: $color-3;
+    // color: $color-3;
 
-    svg {
+    img, svg {
       transition: all 0.4s ease;
+      fill: black !important;
+      width: 44px !important;
+      height: 44px !important;
     }
   }
 

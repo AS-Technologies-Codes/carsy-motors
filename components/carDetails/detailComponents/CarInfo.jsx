@@ -35,17 +35,17 @@ export default function CarInfo({ carItem }) {
         </div>
         <div className="icons flex-three">
           <i className="icon-autodeal-owner me-1" />
-          <span>1st owner</span>
+          <span>{carItem?.ownerNumber || 1} Owner</span>
         </div>
       </div>
       <div className="money text-color-3 font">${carItem.price}</div>
-      <div className="price-wrap">
+      {/* <div className="price-wrap">
         <p className="fs-12 lh-16 text-color-2">
           Monthly installment payment:
           <span className="fs-14 fw-5 font">$4,000</span>
         </p>
         <p className="fs-12 lh-16">New car price: $100.000</p>
-      </div>
+      </div> */}
       <ul className="action-icon flex flex-wrap">
         <li>
           <a href="javascript:void(0)" className="icon">

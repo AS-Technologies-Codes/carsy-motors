@@ -140,7 +140,14 @@ export default function Achievements() {
                 {AchievementsListing.map((achievement, index) => (
                   <SwiperSlide className="swiper-slide" key={index}>
                     <div className="tf-icon-box style-1 text-center text-md-start">
-                      <div className="icon">{achievement.icon}</div>
+                      <div className="icon">
+                        <Image
+                          src={achievement.image}
+                          alt="Logo"
+                          width={100}
+                          height={100}
+                        />
+                      </div>{" "}
                       <div className="content">
                         <h3>
                           <a href="javascript:void(0)">{achievement.title}</a>
@@ -161,20 +168,18 @@ export default function Achievements() {
                 <div className="swiper-wrapper grid-sw-3">
                   {AchievementsListing.map((achievement, index) => (
                     <div className="swiper-slide" key={index}>
-                      <div className="tf-icon-box style-1">
+                      <div className="tf-icon-box h-100 style-1">
                         <div className="icon">
-                            <Image
-                              src={achievement.image}
-                              alt="Logo"
-                              width={100}
-                              height={100}
-                            />
+                          <Image
+                            src={achievement.image}
+                            alt="Logo"
+                            width={100}
+                            height={100}
+                          />
                         </div>
                         <div className="content">
                           <h3>
-                            <a href="javascript:void(0)">
-                              {achievement.title}
-                            </a>
+                            <a href="javascript:void(0)">{achievement.title}</a>
                           </h3>
                           <p>{achievement.description}</p>
                         </div>

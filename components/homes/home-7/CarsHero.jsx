@@ -281,18 +281,23 @@ export default function CarsHero() {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
           viewBox="0 0 24 24"
           width={45}
           strokeWidth={1}
-          stroke="#fd5a21"
-          className="size-3"
+          fill="#fd5a21"
+          stroke="white"
+          class="size-3"
         >
-          <path d="M11 14h1v4" />
-          <path d="M16 2v4" />
-          <path d="M3 10h18" />
           <path d="M8 2v4" />
-          <rect x="3" y="4" width="18" height="18" rx="2" />
+          <path d="M16 2v4" />
+          <rect width="18" height="18" x="3" y="4" rx="2" />
+          <path d="M3 10h18" />
+          <path d="M8 14h.01" />
+          <path d="M12 14h.01" />
+          <path d="M16 14h.01" />
+          <path d="M8 18h.01" />
+          <path d="M12 18h.01" />
+          <path d="M16 18h.01" />
         </svg>
       ),
     },
@@ -302,12 +307,12 @@ export default function CarsHero() {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
           viewBox="0 0 24 24"
           width={45}
           strokeWidth={1}
-          stroke="#fd5a21"
-          className="size-3"
+          fill="#fd5a21"
+          stroke="white"
+          class="size-3"
         >
           <rect width="18" height="18" x="3" y="4" rx="2" />
           <path d="M16 2v4" />
@@ -322,7 +327,7 @@ export default function CarsHero() {
     },
   ];
 
-  return slides4.map((slide, index) => (
+  return (
     <>
       <style>{`
       @media (max-width: 768px) {
@@ -331,132 +336,140 @@ export default function CarsHero() {
             }
       }
     `}</style>
-      <div className="swiper mainslider slider home7">
-        <div className="swiper-slide">
-          <div className="slider-item">
-            <div className="img-slider">
-              <Image
-                className="img-item lazyload"
-                data-src={slide.imgSrc}
-                alt=""
-                src={slide.imgSrc}
-                width={3840}
-                height={1920}
-              />
-            </div>
-            <div className="container2 relative">
-              <div className="row">
-                <div className="col-lg-12">
-                  <div className="content flex justify-space">
-                    <div className="po-content w-100">
-                      <div className="heading text-center">
-                        <p className="text-color-3 text-capitalize font fs-5 fade-item-2">
-                          {slide.label}
-                        </p>
-                        <h1 className="text-color-1 fade-item-1 fs-1">
-                          {slide.title}
-                        </h1>
-                        <p className="text-color-1 fs-6 font fade-item-2">
-                          {slide.description}
-                        </p>
-                      </div>
-                      <div className="specifications-wrap d-flex justify-content-center">
-                        {slide.specifications.map((spec, specIndex) => (
-                          <div
-                            style={{ backgroundImage: spec?.image }}
-                            key={specIndex}
-                            className="specifications specifications-bg  hover-zoom border border-primary-half wow px-4 fadeInUp d-flex flex-column justify-content-between mx-3"
-                            data-wow-delay={spec.delay}
-                            data-wow-duration="1000ms"
-                          >
-                            <div className="specifications-content text-center">
-                              <div className="specifications-title controller-button text-center">
-                                <div
-                                  className={`icon-controller m0-auto mb-2 ${spec?.color ? spec.color : "bg-primary"}`}
-                                >
-                                  {spec?.icon}
-                                </div>
-                                {/* <div className="title fs-20 fw-5 lh-25 text-color-3">
+      {slides4.map((slide, index) => (
+        <div className="swiper mainslider slider home7">
+          <div className="swiper-slide">
+            <div className="slider-item">
+              <div className="img-slider">
+                <Image
+                  className="img-item lazyload"
+                  data-src={slide.imgSrc}
+                  alt=""
+                  src={slide.imgSrc}
+                  width={3840}
+                  height={1920}
+                />
+              </div>
+              <div className="container2 relative">
+                <div className="row">
+                  <div className="col-lg-12">
+                    <div className="content flex justify-space">
+                      <div className="po-content w-100">
+                        <div className="heading text-center">
+                          <p className="text-color-3 text-capitalize font fs-5 fade-item-2">
+                            {slide.label}
+                          </p>
+                          <h1 className="text-color-1 fade-item-1 fs-1">
+                            {slide.title}
+                          </h1>
+                          <p className="text-color-1 fs-6 font fade-item-2">
+                            {slide.description}
+                          </p>
+                        </div>
+                        <div className="specifications-wrap d-flex justify-content-center">
+                          {slide.specifications.map((spec, specIndex) => (
+                            <div
+                              style={{ backgroundImage: spec?.image }}
+                              key={specIndex}
+                              className="specifications specifications-bg  hover-zoom border border-primary-half wow px-4 fadeInUp d-flex flex-column justify-content-between mx-3"
+                              data-wow-delay={spec.delay}
+                              data-wow-duration="1000ms"
+                            >
+                              <div className="specifications-content text-center">
+                                <div className="specifications-title controller-button text-center">
+                                  <div
+                                    className={`icon-controller m0-auto mb-2 ${spec?.color ? spec.color : "bg-primary"}`}
+                                  >
+                                    {spec?.icon}
+                                  </div>
+                                  {/* <div className="title fs-20 fw-5 lh-25 text-color-3">
                               {spec.title}
                             </div> */}
+                                </div>
+                                <p className="text-color-3 font fs-4 fw-medium  mb-2">
+                                  {spec.title}
+                                </p>
+                                <div className="font text-color-1">
+                                  {specIndex !== 0 && spec.description}
+                                </div>
                               </div>
-                              <p className="text-color-3 font fs-4 fw-medium  mb-2">
-                                {spec.title}
-                              </p>
-                              <div className="font text-color-1">
-                                {spec.description}
+
+                              <div className="d-flex justify-content-center w-full">
+                                <div className="d-flex  justify-content-between">
+                                  {specIndex == 1 &&
+                                    featList2.map((item, index) => (
+                                      <div
+                                        key={index}
+                                        className={`d-flex align-items-center mx-1 justify-content-center flex-column border-color-gray text-color-2 border-half rounded-4`}
+                                      >
+                                        {item.icon}
+                                        <h6 className="text-color-3 fw-bold fs-12">
+                                          {item.head}
+                                        </h6>
+                                        <p className="text-color-1 text-center fw-normal  fs-12 opacity-75">
+                                          {item.des}
+                                        </p>
+                                      </div>
+                                    ))}
+                                </div>
                               </div>
-                            </div>
+                              {specIndex == 0 && (
+                                <h6 className="text-color-1  text-center fs-5 ps-1 lh-sm">
+                                 Instant offers with quick <br /> secure payments and free pickup.
+                                </h6>
+                              )}
 
-                            <div className="d-flex justify-content-center w-full">
-                              <div className="d-flex  justify-content-between">
-                                {specIndex == 1 &&
-                                  featList2.map((item, index) => (
-                                    <div
-                                      key={index}
-                                      className={`d-flex align-items-center mx-1 justify-content-center flex-column border-color-gray text-color-2 border-half rounded-4`}
-                                    >
-                                      {item.icon}
-                                      <h6 className="text-color-3 fw-bold fs-12">
-                                        {item.head}
-                                      </h6>
-                                      <p className="text-color-1 text-center fw-normal  fs-12 opacity-75">
-                                        {item.des}
-                                      </p>
-                                    </div>
-                                  ))}
-                              </div>
-                            </div>
+                              {specIndex == 2 && (
+                                <h6 className="text-color-1  text-center fs-6 ps-1">
+                                  Flexibal rentals with easy <br /> booking
+                                  options
+                                </h6>
+                              )}
 
-                            {specIndex == 2 && (
-                              <h6 className="text-color-1  text-center fs-6 ps-1">
-                                Flexibal rentals with easy <br /> booking options
-                              </h6>
-                            )}
-
-                            <div className="d-flex justify-content-center w-full">
-                              <div className="d-flex justify-content-between">
-                                {specIndex == 2 &&
-                                  featList3.map((item, index) => (
-                                    <div
-                                      key={index}
-                                      className={`d-flex align-items-center p-2 mx-1 justify-content-center border-color-gray text-color-2 border-half rounded-4`}
-                                    >
-                                      {item.icon}
-                                      <h6 className="text-color-1 opacity-75 fw-bold fs-12 ps-1">
-                                        {item.head}
-                                      </h6>
-                                      {/* <p className="text-color-1 text-center fw-normal  fs-12 opacity-75">
+                              <div className="d-flex justify-content-center w-full">
+                                <div className="d-flex justify-content-between">
+                                  {specIndex == 2 &&
+                                    featList3.map((item, index) => (
+                                      <div
+                                        key={index}
+                                        className={`d-flex align-items-center p-2 mx-1 justify-content-center border-color-gray text-color-2 border-half rounded-4`}
+                                      >
+                                        {item.icon}
+                                        <h6 className="text-color-1 opacity-75 fw-bold fs-12 ps-1">
+                                          {item.head}
+                                        </h6>
+                                        {/* <p className="text-color-1 text-center fw-normal  fs-12 opacity-75">
                                         {item.des}
                                       </p> */}
-                                    </div>
-                                  ))}
+                                      </div>
+                                    ))}
+                                </div>
                               </div>
-                            </div>
 
-                            <Link
-                              href={spec.href}
-                              className={`sc-button btn-svg btn-55 ${spec?.color ? spec.color : ""}`}
-                            >
-                              <span>{spec.value}</span>
-                              <i className="icon-autodeal-next" />
-                            </Link>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="d-flex justify-content-center w-full">
-                        <div className=" flex flex-column ms-3 ms-md-0 flex-md-row my-3 justify-content-center mt-5 border-half border-sm-0 rounded-4">
-                          {featList.map((item, index) => (
-                            <div
-                              className={`d-flex align-items-center my-3 ${index === featList.length - 1 ? "" : "border-md-end"}  px-md-5 border-color-gray text-color-2`}
-                            >
-                              {item.icon}
-                              <div className="mx-1">
-                                <h5 className="text-color-1">{item.head}</h5>
-                                <p className="text-color-6">{item.des}</p>
-                              </div>
+                              <Link
+                                href={spec.href}
+                                className={`sc-button btn-svg btn-55 ${spec?.color ? spec.color : ""}`}
+                              >
+                                <span>{spec.value}</span>
+                                <i className="icon-autodeal-next" />
+                              </Link>
                             </div>
                           ))}
+                        </div>
+                        <div className="d-flex justify-content-center w-full">
+                          <div className=" flex flex-column ms-3 ms-md-0 flex-md-row my-3 justify-content-center mt-5 border-half border-sm-0 rounded-4">
+                            {featList.map((item, index) => (
+                              <div
+                                className={`d-flex align-items-center my-3 ${index === featList.length - 1 ? "" : "border-md-end"}  px-md-5 border-color-gray text-color-2`}
+                              >
+                                {item.icon}
+                                <div className="mx-1">
+                                  <h5 className="text-color-1">{item.head}</h5>
+                                  <p className="text-color-6">{item.des}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -466,7 +479,7 @@ export default function CarsHero() {
             </div>
           </div>
         </div>
-      </div>
+      ))}
     </>
-  ));
+  );
 }

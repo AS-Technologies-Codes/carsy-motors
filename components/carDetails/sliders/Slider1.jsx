@@ -6,6 +6,8 @@ import PhotoSwipeLightbox from "photoswipe/lightbox";
 import Image from "next/image";
 import Product360Viewer from "@/components/product360Viewer/Product360Viewer";
 export default function Slider1({ images, viewer }) {
+  const [Toggle, setToggle] = useState(false);
+
   const swiperOptions = {
     autoplay: {
       delay: 6000,
@@ -23,6 +25,7 @@ export default function Slider1({ images, viewer }) {
     },
   };
   useEffect(() => {
+    setToggle(viewer?.length || false);
     const lightbox = new PhotoSwipeLightbox({
       gallery: "#my-gallery",
       children: ".image",
@@ -34,7 +37,6 @@ export default function Slider1({ images, viewer }) {
     };
   }, []);
 
-  const [Toggle, setToggle] = useState(false);
   return (
     <div className="relative">
       {Toggle ? (

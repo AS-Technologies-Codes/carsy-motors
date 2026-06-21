@@ -84,7 +84,7 @@ export default function Testimonials() {
               >
                 {ReviewsListing.map((elm, i) => (
                   <SwiperSlide key={i} className="swiper-slide">
-                    <div className="tf-testimonial style-3 box-tes center">
+                    <div className="tf-testimonial style-3 d-flex flex-column h-600 justify-content-start box-tes center">
                       <div className="inner-top">
                         <div className="icon">
                           <svg
@@ -106,17 +106,32 @@ export default function Testimonials() {
                       </p>
                       <div className="author-box flex">
                         <div className="images">
-                          <Image
-                            className="ls-is-cached lazyloaded"
-                            alt="images"
-                            src={
-                              elm.image.includes(".pk")
-                                ? elm.image
-                                : elm.image.replace(".p", ".pk")
-                            }
-                            width={57}
-                            height={57}
-                          />
+                          {elm.image ? (
+                            <Image
+                              className="ls-is-cached lazyloaded"
+                              alt="images"
+                              src={elm.image}
+                              width={57}
+                              height={57}
+                            />
+                          ) : (
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="57"
+                              height="57"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="1"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              class="lucide lucide-circle-user-round-icon lucide-circle-user-round"
+                            >
+                              <path d="M17.925 20.056a6 6 0 0 0-11.851.001" />
+                              <circle cx="12" cy="11" r="4" />
+                              <circle cx="12" cy="12" r="10" />
+                            </svg>
+                          )}
                         </div>
                         <div className="content">
                           <h5>{elm.name}</h5>

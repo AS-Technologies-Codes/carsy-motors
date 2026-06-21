@@ -10,6 +10,7 @@ import Link from "next/link";
 
 import { cars } from "@/data/cars";
 import { getMapListingApi } from "@/utils/APIs";
+import Image from "next/image";
 
 const option = {
   zoomControl: true,
@@ -300,7 +301,12 @@ export default function ListingMap({ height }) {
                   <div className="inner-box">
                     <div className="image-box">
                       <figure className="image">
-                        <img src={getLocation.image} alt="" />
+                        <Image
+                          src={getLocation.image}
+                          height={100}
+                          width={100}
+                          style={{ height: "200px" }}
+                        />
                       </figure>
                     </div>
                     <div className="content">

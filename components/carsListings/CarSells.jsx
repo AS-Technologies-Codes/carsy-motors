@@ -99,7 +99,7 @@ export default function CarSells() {
       ...(!transmission.includes("Any") ? { transmission } : {}),
       ...(!location.includes("Any") ? { location } : {}),
       // ...(condition !== "All" ? { condition } : {}),
-      ...(evsOnly ? { fuelType: "electric" } : {}),
+      ...(evsOnly ? { is_ev: 1 } : {}),
       ...(!door.includes("Any") ? { door } : {}),
       ...(!seat.includes("Any") ? { seat } : {}),
       ...(!cylinder.includes("Any") ? { cylinder } : {}),

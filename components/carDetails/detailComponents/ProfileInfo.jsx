@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function ProfileInfo({ car }) {
@@ -90,7 +91,8 @@ export default function ProfileInfo({ car }) {
       <div className="profile-contact">
         {/* <h6>Contact dealer</h6> */}
         <div className="btn-contact">
-          <a href="javascript:void(0)" className="btn-pf bg-orange mt-3">
+        <div className="btn-contact flex">
+          <Link href="javascript:void(0)" className="btn-pf bg-orange mt-3 p-3 p-md-0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -109,8 +111,8 @@ export default function ProfileInfo({ car }) {
             <span className="fs-16 fw-5 lh-20 font text-color-1">
               Enquire Now
             </span>
-          </a>
-          <a href="javascript:void(0)" className="btn-pf bg-orange mt-3">
+          </Link>
+          <Link href={"/finance/"+car?.id} className="btn-pf bg-orange mt-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -128,8 +130,32 @@ export default function ProfileInfo({ car }) {
             <span className="fs-16 fw-5 lh-20 font text-color-1">
               Get Finance
             </span>
-          </a>
-          <a href="javascript:void(0)" className="btn-pf bg-orange mt-3">
+          </Link>
+        </div>
+         <Link href="javascript:void(0)" className="btn-pf bg-green mt-3">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-shopping-cart-icon lucide-shopping-cart"
+            >
+              <circle cx="8" cy="21" r="1" />
+              <circle cx="19" cy="21" r="1" />
+              <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+            </svg>{" "}
+            <span className="fs-16 fw-5 lh-20 font text-color-1">
+              Online Booking
+            </span>
+          </Link>
+      </div>
+
+          {/* <a href="javascript:void(0)" className="btn-pf bg-orange mt-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -170,7 +196,7 @@ export default function ProfileInfo({ car }) {
               Online Purchase
             </span>
           </a>
-        </div>
+           */}
       </div>
     </>
   );

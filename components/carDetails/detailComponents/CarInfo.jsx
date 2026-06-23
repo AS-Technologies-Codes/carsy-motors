@@ -35,7 +35,7 @@ export default function CarInfo({ carItem }) {
         </div>
         <div className="icons flex-three">
           <i className="icon-autodeal-owner me-1" />
-          <span>{carItem?.ownerNumber || 1} Owner</span>
+          <span>Owner {carItem?.ownerNumber || 1}</span>
         </div>
       </div>
       <div className="money text-color-3 font">${carItem.price}</div>

@@ -129,7 +129,7 @@ export default function CarDetails1({ carItem }) {
                         />
                       </div>
                       <div className="listing-line" />
-                      <div
+                      {/* <div
                         className="listing-calculator loan-calculator-form"
                         id="scrollspyHeading4"
                       >
@@ -138,7 +138,7 @@ export default function CarDetails1({ carItem }) {
                           <p>Use our calculator to estimate your car price.</p>
                         </div>
                         <LoanCalculator />
-                      </div>
+                      </div> */}
                       {/* <div className="listing-line" />
                       <div className="listing-location" id="scrollspyHeading3">
                         <div className="box-title">

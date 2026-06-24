@@ -14,19 +14,15 @@ import LoanCalculator from "@/components/homes/home-1/LoanCalculator";
 import React from "react";
 import Testimonials from "@/components/homes/home-7/Testimonials";
 import Blogs from "@/components/common/Blogs";
-import DownloadApp from "@/components/common/DownloadApp";
-import Brands from "@/components/common/Brands";
 import Footer1 from "@/components/footers/Footer1";
 import Banner from "@/components/homes/home-7/Banner";
 import Achievements from "@/components/homes/home-1/Achievements";
 import YardsMap from "@/components/carsListings/YardsMap";
 import CarsHero from "@/components/homes/home-7/CarsHero";
+import { Metadata } from "@/utils/metadata";
 
-export const metadata = {
-  title:
-    "Home 07 || AutoDeal - Car Dealer, Rental & Listing React Nextjs Template",
-  description: "AutoDeal - Car Dealer, Rental & Listing React Nextjs Template",
-};
+export const metadata = Metadata("Home");
+
 export default function page() {
   return (
     <>
@@ -52,7 +48,7 @@ export default function page() {
       <DownloadApp />
       <div className="mt-5 pt-5"></div>
       <Brands /> */}
-      <LoanCalculator />
+      {/* <LoanCalculator /> */}
       <Testimonials />
       <Blogs />
       <Footer1 />

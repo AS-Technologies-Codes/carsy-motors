@@ -104,10 +104,9 @@ export default function Achievements() {
               data-wow-delay="0.2s"
               data-wow-duration="1000ms"
             >
-              <h2 className="text-center text-md-start">Why Us?</h2>
+              <h2 className="text-center text-md-start">Why Brissie Locals Choose Carsy Motors?</h2>
               <p className="mt-18 text-center text-md-start">
-                We are committed to providing you with the best car service
-                experience. Here are some reasons why you should choose us
+                We're not a big chain. We're your neighbours — and we do things differently.
               </p>
             </div>
           </div>

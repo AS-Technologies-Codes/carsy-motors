@@ -197,7 +197,7 @@ export default function ListingMap({ height }) {
     googleMapsApiKey: process.env.NEXT_PUBLIC_PRIVATE_MAP_API_KEY,
   });
   const center = useMemo(
-    () => ({ lat: -33.794180834121846, lng: 150.8865883451136 }),
+    () => ({ lat: -27.5436, lng: 153.0099 }),
     [],
   );
 
@@ -274,7 +274,7 @@ export default function ListingMap({ height }) {
           <GoogleMap
             mapContainerStyle={containerStyle}
             center={center}
-            zoom={4}
+            zoom={16}
             options={option}
           >
             {MapListing.map((marker, i) => (

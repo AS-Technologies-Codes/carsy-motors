@@ -22,9 +22,9 @@ export default function CarsHero() {
   const slides4 = [
     {
       imgSrc: "/assets/images/slider/slide7.jpg",
-      title: "Your Complete Automotive Solution",
+      title: "Life's Too Short for a Dodgy Deal",
       label: `WELCOME TO CARSY MOTORS`,
-      description: `Buy, Rent, or Sell Your Vehicle with Carsy Motors.`,
+      description: `We help everyday Queenslanders buy smarter, sell faster, and hire without blowing the budget — right here in Brissie.`,
       reserveLink: "#",
       specifications: [
         {
@@ -89,7 +89,7 @@ export default function CarsHero() {
         {
           title: "Car Hire Service",
           value: "View Rental Offers",
-          href: "/car-rentals",
+          href: "/#",
           description:
             "Flexible rentals for your needs. Book now and hit the road with confidence.",
           delay: "200ms",
@@ -406,7 +406,7 @@ export default function CarsHero() {
                                         <h6 className="text-color-3 fw-bold fs-12">
                                           {item.head}
                                         </h6>
-                                        <p className="text-color-1 text-center fw-normal  fs-12 opacity-75">
+                                        <p className="text-color-1 text-center fw-normal  fs-12">
                                           {item.des}
                                         </p>
                                       </div>
@@ -415,7 +415,8 @@ export default function CarsHero() {
                               </div>
                               {specIndex == 0 && (
                                 <h6 className="text-color-1  text-center fs-5 ps-1 lh-sm">
-                                 Instant offers with quick <br /> secure payments and free pickup.
+                                  Instant offers with quick <br /> secure
+                                  payments and free pickup.
                                 </h6>
                               )}
 
@@ -435,7 +436,7 @@ export default function CarsHero() {
                                         className={`d-flex align-items-center p-2 mx-1 justify-content-center border-color-gray text-color-2 border-half rounded-4`}
                                       >
                                         {item.icon}
-                                        <h6 className="text-color-1 opacity-75 fw-bold fs-12 ps-1">
+                                        <h6 className="text-color-1 fw-bold fs-12 ps-1">
                                           {item.head}
                                         </h6>
                                         {/* <p className="text-color-1 text-center fw-normal  fs-12 opacity-75">
@@ -446,13 +447,15 @@ export default function CarsHero() {
                                 </div>
                               </div>
 
-                              <Link
-                                href={spec.href}
-                                className={`sc-button btn-svg btn-55 ${spec?.color ? spec.color : ""}`}
-                              >
-                                <span>{spec.value}</span>
-                                <i className="icon-autodeal-next" />
-                              </Link>
+                              {specIndex != 2 && (
+                                <Link
+                                  href={spec.href}
+                                  className={`sc-button btn-svg btn-55 ${spec?.color ? spec.color : ""}`}
+                                >
+                                  <span>{spec.value}</span>
+                                  <i className="icon-autodeal-next" />
+                                </Link>
+                              )}
                             </div>
                           ))}
                         </div>

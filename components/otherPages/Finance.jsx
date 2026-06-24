@@ -37,18 +37,6 @@ export default function Finance() {
   };
   return (
     <>
-      <div className="slider home2 position-relative">
-        <video autoPlay muted loop style={{height: "100vh"}}>
-          <source src="/assets/images/section/video.mp4" type="video/mp4" />
-        </video>
-        <div className="content po-content-two position-absolute top-50 w-100" style={{zIndex: 999}}>
-          <div className="heading">
-            <h1 className="text-color-1 text-center">
-              Car Finance
-            </h1>
-          </div>
-        </div>
-      </div>
       <section className="tf-section-contact">
         <div className="container">
           <div className="row">

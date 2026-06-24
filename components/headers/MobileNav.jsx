@@ -59,7 +59,7 @@ export default function MobileNav() {
   };
   const handleActive2 = (event) => {
     const dropdown = event.currentTarget.closest(
-      ".dropdown2:not(.parent-menu-1)"
+      ".dropdown2:not(.parent-menu-1)",
     );
     if (dropdown) {
       const ulElement = dropdown.querySelector("ul");
@@ -91,27 +91,56 @@ export default function MobileNav() {
         id="navbarSupportedContent"
       >
         <ul className="navigation clearfix">
+          <li className={"/" == pathname.split("/")[1] ? "current" : ""}>
+            <Link href="/">Home</Link>
+          </li>
           <li
-        className={"/"  == pathname.split("/")[1] ? "current" : ""}
-      >
-        <Link href="/">Home</Link>
-      </li>
-      <li className={"car-sells"  == pathname.split("/")[1] ? "current" : ""}>
-        <Link href="/car-sells">Car Sells</Link>
-      </li>
-      <li className={"car-rentals" == pathname.split("/")[1] ? "current" : ""}>
-        <Link href={`/car-rentals`}>Car Rentals</Link>
-      </li>
+            className={"car-sells" == pathname.split("/")[1] ? "current" : ""}
+          >
+            <Link href="/car-sells">Sell</Link>
+          </li>
+          <li
+            className={`tf-megamenu dropdown2 parent-menu-1 ${
+              isActive([
+                { text: "Short-term Hire", href: "/car-rentals/short" },
+                { text: "Long-term Hire", href: "/car-rentals/long" },
+              ])
+                ? "current"
+                : ""
+            } `}
+          >
+            <Link href="#">Hire</Link>
+            <ul>
+              {[
+                { text: "Short-term Hire", href: "#" },
+                { text: "Long-term Hire", href: "#" },
+              ].map((page, index) => (
+                <li
+                  key={index}
+                  className={
+                    page.href.split("/")[2] == pathname.split("/")[2]
+                      ? ""
+                      : ""
+                  }
+                >
+                  <Link href={page.href}>{page.text}</Link>
+                </li>
+              ))}
+            </ul>
+            <div className="dropdown2-btn" onClick={handleActive1} />
+          </li>
 
-      <li className={"blog"  == pathname.split("/")[1] ? "current" : ""}>
+          {/* <li className={"blog" == pathname.split("/")[1] ? "current" : ""}>
         <Link href="/blog">Blogs</Link>
-      </li>
-      <li className={"about-us" == pathname.split("/")[1] ? "current" : ""}>
-        <Link href={`/about-us`}>About Us</Link>
-      </li>
-      <li className={"contact" == pathname.split("/")[1] ? "current" : ""}>
-        <Link href={`/contact`}>Contact</Link>
-      </li>
+      </li> */}
+          <li className={"about-us" == pathname.split("/")[1] ? "current" : ""}>
+            <Link href={`/about-us`}>About Us</Link>
+          </li>
+          <li
+            className={"contact-us" == pathname.split("/")[1] ? "current" : ""}
+          >
+            <Link href={`/contact-us`}>Contact Us</Link>
+          </li>
         </ul>
       </div>
     </div>

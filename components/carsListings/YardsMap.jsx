@@ -164,7 +164,24 @@ function LeafletMap({
         const lng = Number(markerData.lng);
 
         if (!isNaN(lat) && !isNaN(lng)) {
-          const leafletMarker = L.marker([lat, lng])
+          // Create an inline SVG marker to avoid external image assets
+          const svg = `
+            <svg xmlns='http://www.w3.org/2000/svg' width='36' height='46' viewBox='0 0 36 46'>
+              <path d='M18 0C11 0 6 5 6 12c0 10 12 34 12 34s12-24 12-34C30 5 25 0 18 0z' fill='#fd5a21'/>
+              <circle cx='18' cy='12' r='5' fill='white'/>
+            </svg>
+          `;
+          const encoded = encodeURIComponent(svg).replace(/'/g, "%27").replace(/\(/g, "%28").replace(/\)/g, "%29");
+          const imgSrc = `data:image/svg+xml;charset=UTF-8,${encoded}`;
+
+          const icon = L.divIcon({
+            html: `<img src="${imgSrc}" style="width:36px;height:46px;display:block;"/>`,
+            className: "",
+            iconSize: [36, 46],
+            iconAnchor: [18, 46],
+          });
+
+          const leafletMarker = L.marker([lat, lng], { icon })
             .addTo(mapInstanceRef.current)
             .on("click", () => onMarkerClick(markerData));
 
@@ -174,45 +191,20 @@ function LeafletMap({
                   <div class="inner-box">
                     <div class="image-box">
                       <figure class="image">
-                        <img
-                          src="${markerData.image}"
-                          height={100}
-                          width={100}
-                          style="height: 200px"
-                        />
+                        <img src="${markerData.image}" style="height:120px;width:100%;object-fit:cover;border-radius:4px;" />
                       </figure>
                     </div>
                     <div class="content">
                       <p class="text-color-3 font">${markerData.name}</p>
                       <h5>
-                        <a href="${`javascript:void(0)`}">
-                          ${markerData.address}
-                        </a>
+                        <a href="javascript:void(0)">${markerData.address}</a>
                       </h5>
-                      <button
-                        onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}', '_blank')"
-                        class="${`sc-button border-0 btn-svg p-2 mt-3 d-flex align-items-center w-50 justify-content-center`}"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="white"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="lucide lucide-map-pin-icon lucide-map-pin me-1"
-                        >
-                          <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
-                          <circle cx="12" cy="10" r="3" />
-                        </svg>
+                      <button onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}', '_blank')" class="sc-button border-0 btn-svg p-2 mt-3 d-flex align-items-center w-50 justify-content-center">
                         <span>Direction</span>
                       </button>
                     </div>
                   </div>
-                </div> `;
+                </div>`;
           leafletMarker.bindPopup(popupContent);
           markersRef.current.push(leafletMarker);
         }

@@ -30,7 +30,8 @@ export default function CarsHero() {
         {
           title: "Cash for Car",
           value: "Get an Offer",
-          href: "#loan-calculator",
+          href: "javascipt:void(0)",
+          // href: "#loan-calculator",
           description:
             "Instant offers with quick secure payments and free pickup.",
           delay: "0ms",

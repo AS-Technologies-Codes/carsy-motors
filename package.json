@@ -13,6 +13,7 @@
     "@react-google-maps/api": "^2.20.3",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.6",
+    "leaflet": "^1.9.4",
     "next": "14.2.15",
     "photoswipe": "^5.4.4",
     "rc-slider": "^11.1.7",

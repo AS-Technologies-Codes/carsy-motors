@@ -1,8 +1,8 @@
 import CarBrands2 from "@/components/common/CarBrands2";
 import Cta from "@/components/common/Cta";
+import CarReview from "@/components/common/CarReview";
 import Trending from "@/components/common/Trending";
 import Header1 from "@/components/headers/Header1";
-import CarReview from "@/components/common/CarReview";
 
 import CarBrands from "@/components/homes/home-7/CarBrands";
 import Cars from "@/components/homes/home-7/Cars";
@@ -40,11 +40,11 @@ export default function page() {
       <Banner />
       <Achievements />
       <YardsMap height={"600px"} />
-      <Slider />
-      {/* <Banner2 />
-      <CarBrands2 />
+      {/* <Slider /> */}
       <CarReview />
-      <div className="mt-5 pt-5"></div>
+      {/* <Banner2 />
+      <CarBrands2 /> */}
+      {/* <div className="mt-5 pt-5"></div>
       <DownloadApp />
       <div className="mt-5 pt-5"></div>
       <Brands /> */}

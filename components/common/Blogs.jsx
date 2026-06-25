@@ -30,9 +30,9 @@ export default function Blogs({ parentClass = "section-blog tf-section" }) {
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <div className=" flex align-center justify-space flex-wrap gap-20">
+              <div className="container flex align-center justify-space flex-wrap gap-20">
                 <h2
-                  className="wow fadeInUpSmall"
+                  className="wow fadeInUpSmall center text-md-start w-100"
                   data-wow-delay="0.2s"
                   data-wow-duration="1000ms"
                 >
@@ -47,10 +47,11 @@ export default function Blogs({ parentClass = "section-blog tf-section" }) {
                 View all
                 <i className="icon-autodeal-btn-right" />
               </Link> */}
-              </div>
-              <p className="mt-18 heading-section">
+              <p className="mt-18 heading-section  center text-md-start">
                 Find all the latest and intresting news about our cars here!
               </p>
+              </div>
+
               <Swiper
                 className="swiper tf-sw-mobile"
                 slidesPerView={3}

@@ -4,9 +4,9 @@ import Nav from "./Nav";
 import Link from "next/link";
 import Image from "next/image";
 import MobileNav from "./MobileNav";
-export default function Header1() {
+export default function Header1({ bg = "style2" }) {
   return (
-    <header className="main-header style2">
+    <header className={"main-header " + bg}>
       {/* Header Lower */}
       <div className="header-lower">
         <div className="container2">
@@ -21,7 +21,7 @@ export default function Header1() {
                         className="lazyload img-none"
                         data-src="/assets/images/logo/logo.png"
                         alt=""
-                        width={225}
+                        width={100}
                         height={40}
                         src="/assets/images/logo/logo.png"
                       />
@@ -29,7 +29,7 @@ export default function Header1() {
                         className="lazyload img-is-fixed"
                         data-src="/assets/images/logo/logo.png"
                         alt=""
-                        width={225}
+                        width={100}
                         height={40}
                         src="/assets/images/logo/logo.png"
                       />
@@ -122,11 +122,11 @@ export default function Header1() {
             <Link href={`/`}>
               <Image
                 className="lazyload"
-                data-src="/assets/images/logo/logo@2x.png"
+                data-src="/assets/images/logo/logo.png"
                 alt=""
                 width={197}
                 height={48}
-                src="/assets/images/logo/logo@2x.png"
+                src="/assets/images/logo/logo.png"
               />
             </Link>
           </div>

@@ -9784,6 +9784,9 @@ a.bg-blue:hover {
   }
 }
 @media (min-width: 768px) {
+  .w-md-50 {
+  width: 50% !important;
+}
   .float-md-start {
     float: left !important;
   }
@@ -12118,5 +12121,15 @@ a.bg-blue:hover {
   
 }
 
+
+.leaflet-container a.leaflet-popup-close-button{
+  top: 27px !important;
+  right: 36px !important;
+}
+
+.leaflet-container a.leaflet-popup-close-button span{
+  font-size: 32px !important;
+    color: white !important;
+}
 
 /*# sourceMappingURL=bootstrap.css.map */

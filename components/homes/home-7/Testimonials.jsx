@@ -64,7 +64,7 @@ export default function Testimonials() {
         <div className="row">
           <div className="col-lg-12">
             <div
-              className="heading-section wow fadeInUpSmall"
+              className="heading-section wow fadeInUpSmall center text-md-start mb-4"
               data-wow-delay="0.2s"
               data-wow-duration="1000ms"
             >

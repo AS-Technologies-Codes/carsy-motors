@@ -1,205 +1,19 @@
 "use client";
-import {
-  GoogleMap,
-  OverlayView,
-  useJsApiLoader,
-  InfoWindow,
-} from "@react-google-maps/api";
-import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 import { cars } from "@/data/cars";
 import { getMapListingApi } from "@/utils/APIs";
-import Image from "next/image";
+import { useResponsive } from "@/utils/useResponsive";
 
-const option = {
-  zoomControl: true,
-  disableDefaultUI: true,
-  scrollwheel: false,
-  styles: [
-    {
-      featureType: "all",
-      elementType: "geometry.fill",
-      stylers: [
-        {
-          weight: "2.00",
-        },
-      ],
-    },
-    {
-      featureType: "all",
-      elementType: "geometry.stroke",
-      stylers: [
-        {
-          color: "#9c9c9c",
-        },
-      ],
-    },
-    {
-      featureType: "all",
-      elementType: "labels.text",
-      stylers: [
-        {
-          visibility: "on",
-        },
-      ],
-    },
-    {
-      featureType: "landscape",
-      elementType: "all",
-      stylers: [
-        {
-          color: "#f2f2f2",
-        },
-      ],
-    },
-    {
-      featureType: "landscape",
-      elementType: "geometry.fill",
-      stylers: [
-        {
-          color: "#ffffff",
-        },
-      ],
-    },
-    {
-      featureType: "landscape.man_made",
-      elementType: "geometry.fill",
-      stylers: [
-        {
-          color: "#ffffff",
-        },
-      ],
-    },
-    {
-      featureType: "poi",
-      elementType: "all",
-      stylers: [
-        {
-          visibility: "off",
-        },
-      ],
-    },
-    {
-      featureType: "road",
-      elementType: "all",
-      stylers: [
-        {
-          saturation: -100,
-        },
-        {
-          lightness: 45,
-        },
-      ],
-    },
-    {
-      featureType: "road",
-      elementType: "geometry.fill",
-      stylers: [
-        {
-          color: "#eeeeee",
-        },
-      ],
-    },
-    {
-      featureType: "road",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#7b7b7b",
-        },
-      ],
-    },
-    {
-      featureType: "road",
-      elementType: "labels.text.stroke",
-      stylers: [
-        {
-          color: "#ffffff",
-        },
-      ],
-    },
-    {
-      featureType: "road.highway",
-      elementType: "all",
-      stylers: [
-        {
-          visibility: "simplified",
-        },
-      ],
-    },
-    {
-      featureType: "road.arterial",
-      elementType: "labels.icon",
-      stylers: [
-        {
-          visibility: "off",
-        },
-      ],
-    },
-    {
-      featureType: "transit",
-      elementType: "all",
-      stylers: [
-        {
-          visibility: "off",
-        },
-      ],
-    },
-    {
-      featureType: "water",
-      elementType: "all",
-      stylers: [
-        {
-          color: "#46bcec",
-        },
-        {
-          visibility: "on",
-        },
-      ],
-    },
-    {
-      featureType: "water",
-      elementType: "geometry.fill",
-      stylers: [
-        {
-          color: "#c8d7d4",
-        },
-      ],
-    },
-    {
-      featureType: "water",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#070707",
-        },
-      ],
-    },
-    {
-      featureType: "water",
-      elementType: "labels.text.stroke",
-      stylers: [
-        {
-          color: "#ffffff",
-        },
-      ],
-    },
-  ],
-};
+const defaultCenter = [-27.544, 153.0092];
 
 export default function ListingMap({ height }) {
+  const mapRef = useRef(null);
   const [getLocation, setLocation] = useState(null);
   const [MapListing, setMapListing] = useState([]);
   const [MapLoading, setMapLoading] = useState(true);
-
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_PRIVATE_MAP_API_KEY,
-  });
-  const center = useMemo(
-    () => ({ lat: -27.5436, lng: 153.0099 }),
-    [],
-  );
+  const [mapReady, setMapReady] = useState(false);
+  const { isMobile, isTablet, isDesktop, current } = useResponsive();
 
   const fetchMap = async () => {
     try {
@@ -214,43 +28,14 @@ export default function ListingMap({ height }) {
     }
   };
 
-  console.log(MapListing);
-
   useEffect(() => {
+    // Initialize Leaflet map
+    if (typeof window !== "undefined" && !mapReady) {
+      setMapReady(true);
+    }
     fetchMap();
   }, []);
 
-  const containerStyle = {
-    width: "100%",
-    height: height || "100%",
-  };
-  const CustomMarker = ({ elm }) => {
-    return (
-      <div className="marker-container" onClick={() => setLocation(elm)}>
-        <div className="marker-card">
-          <div className="front face">
-            <div />
-          </div>
-          <div className="back face">
-            <div />
-          </div>
-          <div className="marker-arrow" />
-        </div>
-      </div>
-    );
-  };
-
-  // close handler
-  const closeCardHandler = () => {
-    setLocation(null);
-  };
-  const getDirection = (lat, lng) => {
-    if (window !== undefined) {
-      window.open(
-        `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`,
-      );
-    }
-  };
   return (
     <div className="container">
       <div className="col-lg-12">
@@ -265,80 +50,136 @@ export default function ListingMap({ height }) {
           </p>
         </div>
       </div>
-      {!isLoaded || MapLoading ? (
+      {MapLoading ? (
         <div className="center my-5">
           <span className="loader"></span>
         </div>
       ) : (
-        <div className="position-relative d-flex justify-content-center mb-5  rounded-4">
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={16}
-            options={option}
-          >
-            {MapListing.map((marker, i) => (
-              <OverlayView
-                key={i}
-                position={{
-                  lat: Number(marker.lat),
-                  lng: Number(marker.lng),
-                }}
-                mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-              >
-                <CustomMarker elm={marker} />
-              </OverlayView>
-            ))}
-            {getLocation?.lat != null && getLocation?.lng != null && (
-              <InfoWindow
-                position={{
-                  lat: Number(getLocation.lat),
-                  lng: Number(getLocation.lng),
-                }}
-                onCloseClick={closeCardHandler}
-              >
-                <div className="map-listing-item">
-                  <div className="inner-box">
-                    <div className="image-box">
-                      <figure className="image">
-                        <Image
-                          src={getLocation.image}
+        <div className="position-relative d-flex justify-content-center mb-5 rounded-4">
+          <LeafletMap
+            mapRef={mapRef}
+            center={defaultCenter}
+            zoom={isMobile || isTablet ? 14 : 16}
+            markers={MapListing}
+            selectedLocation={getLocation}
+            onMarkerClick={setLocation}
+            height={height || "100%"}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Leaflet Map Component
+function LeafletMap({
+  mapRef,
+  center,
+  zoom,
+  markers,
+  selectedLocation,
+  onMarkerClick,
+  height,
+}) {
+  const mapInstanceRef = useRef(null);
+  const markersRef = useRef([]);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !mapRef.current) return;
+
+    // Initialize map only once
+    if (mapInstanceRef.current) return;
+
+    // Dynamically import Leaflet
+    import("leaflet").then((L) => {
+      import("leaflet/dist/leaflet.css");
+
+      // Check if map already exists on container and remove it
+      if (mapRef.current._leaflet_id) {
+        mapRef.current._leaflet_id = null;
+      }
+
+      // Fix marker icons
+      delete L.Icon.Default.prototype._getIconUrl;
+      L.Icon.Default.mergeOptions({
+        iconRetinaUrl:
+          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
+        iconUrl:
+          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
+        shadowUrl:
+          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+      });
+
+      const map = L.map(mapRef.current, {
+        touchZoom: true,
+        doubleClickZoom: true,
+        scrollWheelZoom: false,
+        dragging: true,
+      }).setView(center, zoom);
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19,
+      }).addTo(map);
+
+      mapInstanceRef.current = map;
+    });
+
+    // Cleanup on unmount
+    return () => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
+  }, []); // Only initialize once
+
+  // Update markers when they change
+  useEffect(() => {
+    if (!mapInstanceRef.current) return;
+
+    import("leaflet").then((L) => {
+      // Clear old markers
+      markersRef.current.forEach((marker) => {
+        mapInstanceRef.current.removeLayer(marker);
+      });
+      markersRef.current = [];
+
+      // Add new markers
+      markers.forEach((markerData) => {
+        const lat = Number(markerData.lat);
+        const lng = Number(markerData.lng);
+
+        if (!isNaN(lat) && !isNaN(lng)) {
+          const leafletMarker = L.marker([lat, lng])
+            .addTo(mapInstanceRef.current)
+            .on("click", () => onMarkerClick(markerData));
+
+          // Add popup
+          const popupContent = document.createElement("div");
+          popupContent.innerHTML = `<div class="map-listing-item">
+                  <div class="inner-box">
+                    <div class="image-box">
+                      <figure class="image">
+                        <img
+                          src="${markerData.image}"
                           height={100}
                           width={100}
-                          style={{ height: "200px" }}
+                          style="height: 200px"
                         />
                       </figure>
                     </div>
-                    <div className="content">
-                      <p className="text-color-3 font">{getLocation.name}</p>
+                    <div class="content">
+                      <p class="text-color-3 font">${markerData.name}</p>
                       <h5>
-                        {/* <Link href={`/property-detail-v1/${getLocation.id}`}> */}
-                        <Link href={`javascript:void(0)`}>
-                          {getLocation.address}
-                        </Link>
+                        <a href="${`javascript:void(0)`}">
+                          ${markerData.address}
+                        </a>
                       </h5>
-                      {/* <div className="flex flex-wrap gap-8">
-                        <p className="location">
-                          <i className="icon-autodeal-km1" />
-                          {getLocation.km.toLocaleString()} kms
-                        </p>
-                        <p className="location">
-                          <i className="icon-autodeal-diesel" />
-                          {getLocation.fuelType}
-                        </p>
-                        <p className="location">
-                          <i className="icon-autodeal-automatic" />
-                          {getLocation.transmission}
-                        </p>
-                      </div>
-                      <h3>
-                        <a>${getLocation.price.toLocaleString()}</a>
-                      </h3> */}
                       <button
-                        onClick={() =>
-                          getDirection(getLocation.lat, getLocation.lng)
-                        }
-                        className={`sc-button border-0 btn-svg p-2 mt-2 d-flex align-items-center w-50 justify-content-center`}
+                        onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}', '_blank')"
+                        class="${`sc-button border-0 btn-svg p-2 mt-3 d-flex align-items-center w-50 justify-content-center`}"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -350,7 +191,7 @@ export default function ListingMap({ height }) {
                           stroke-width="2"
                           stroke-linecap="round"
                           stroke-linejoin="round"
-                          className="lucide lucide-map-pin-icon lucide-map-pin me-1"
+                          class="lucide lucide-map-pin-icon lucide-map-pin me-1"
                         >
                           <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
                           <circle cx="12" cy="10" r="3" />
@@ -359,32 +200,23 @@ export default function ListingMap({ height }) {
                       </button>
                     </div>
                   </div>
-                </div>
-              </InfoWindow>
-            )}
-          </GoogleMap>
+                </div> `;
+          leafletMarker.bindPopup(popupContent);
+          markersRef.current.push(leafletMarker);
+        }
+      });
+    });
+  }, [markers, onMarkerClick]);
 
-          {/* <div
-            className="tf-icon-box style-1 mx-3 my-10 position-absolute"
-            style={{ top: "70%" }}
-          >
-            <div className="content d-flex align-items-center flex-column">
-              <h3>
-                <a href="javascript:void(0)">The right ride, right nearby</a>
-              </h3>
-              <p>
-                With neighbourhood locations nationwide, a Hertz car rental
-                location is right around the corner.{" "}
-              </p>
-              <div className="meta style">
-                <a href="javascript:void(0)" className="btn-button">
-                  <span>Find Nearby Locations</span>
-                </a>
-              </div>
-            </div>
-          </div> */}
-        </div>
-      )}
-    </div>
+  return (
+    <div
+      ref={mapRef}
+      style={{
+        width: "100%",
+        height: height || "100%",
+        minHeight: "500px",
+        borderRadius: "8px",
+      }}
+    />
   );
 }

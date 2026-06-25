@@ -56,15 +56,27 @@ export default function ListingMap({ height }) {
         </div>
       ) : (
         <div className="position-relative d-flex justify-content-center mb-5 rounded-4">
-          <LeafletMap
-            mapRef={mapRef}
-            center={defaultCenter}
-            zoom={isMobile || isTablet ? 14 : 16}
-            markers={MapListing}
-            selectedLocation={getLocation}
-            onMarkerClick={setLocation}
-            height={height || "100%"}
-          />
+          {isMobile || isTablet ? (
+            <LeafletMap
+              mapRef={mapRef}
+              center={defaultCenter}
+              zoom={14}
+              markers={MapListing}
+              selectedLocation={getLocation}
+              onMarkerClick={setLocation}
+              height={height || "100%"}
+            />
+          ) : (
+            <LeafletMap
+              mapRef={mapRef}
+              center={defaultCenter}
+              zoom={16}
+              markers={MapListing}
+              selectedLocation={getLocation}
+              onMarkerClick={setLocation}
+              height={height || "100%"}
+            />
+          )}
         </div>
       )}
     </div>

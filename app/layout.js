@@ -1,6 +1,7 @@
 "use client";
 import "rc-slider/assets/index.css";
 import "../public/assets/scss/app.scss";
+import "leaflet/dist/leaflet.css";
 import "swiper/css/effect-fade";
 import "swiper/css/grid";
 import "photoswipe/style.css";

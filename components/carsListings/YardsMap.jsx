@@ -6,6 +6,16 @@ import { getMapListingApi } from "@/utils/APIs";
 import { useResponsive } from "@/utils/useResponsive";
 
 const defaultCenter = [-27.544, 153.0092];
+const fallbackMarkers = [
+  {
+    id: 1,
+    name: "Rocklea Warehouse",
+    address: "Rocklea, QLD",
+    lat: -27.544,
+    lng: 153.0092,
+    image: "/assets/img/car/1.jpg",
+  },
+];
 
 export default function ListingMap({ height }) {
   const mapRef = useRef(null);
@@ -19,10 +29,12 @@ export default function ListingMap({ height }) {
     try {
       setMapLoading(true);
       const getMapData = await getMapListingApi();
-      const filterMapData = getMapData.map((item) => ({ ...cars[0], ...item }));
-      setMapListing(filterMapData);
+      const sourceData = Array.isArray(getMapData) ? getMapData : fallbackMarkers;
+      const filterMapData = sourceData.map((item) => ({ ...cars[0], ...item }));
+      setMapListing(filterMapData.length ? filterMapData : fallbackMarkers);
     } catch (error) {
-      toast.error(error);
+      console.error("Failed to fetch map listing data", error);
+      setMapListing(fallbackMarkers);
     } finally {
       setMapLoading(false);
     }
@@ -95,32 +107,27 @@ function LeafletMap({
 }) {
   const mapInstanceRef = useRef(null);
   const markersRef = useRef([]);
+  const markerLayerRef = useRef(null);
 
   useEffect(() => {
     if (typeof window === "undefined" || !mapRef.current) return;
 
-    // Initialize map only once
-    if (mapInstanceRef.current) return;
+    if (mapInstanceRef.current) {
+      mapInstanceRef.current.setView(center, zoom);
+      setTimeout(() => mapInstanceRef.current.invalidateSize(), 150);
+      return;
+    }
 
-    // Dynamically import Leaflet
+    let isCancelled = false;
+
     import("leaflet").then((L) => {
+      if (isCancelled) return;
+
       import("leaflet/dist/leaflet.css");
 
-      // Check if map already exists on container and remove it
-      if (mapRef.current._leaflet_id) {
+      if (mapRef.current && mapRef.current._leaflet_id) {
         mapRef.current._leaflet_id = null;
       }
-
-      // Fix marker icons
-      delete L.Icon.Default.prototype._getIconUrl;
-      L.Icon.Default.mergeOptions({
-        iconRetinaUrl:
-          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
-        iconUrl:
-          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
-        shadowUrl:
-          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
-      });
 
       const map = L.map(mapRef.current, {
         touchZoom: true,
@@ -135,36 +142,34 @@ function LeafletMap({
         maxZoom: 19,
       }).addTo(map);
 
+      markerLayerRef.current = L.layerGroup().addTo(map);
       mapInstanceRef.current = map;
+
+      setTimeout(() => map.invalidateSize(), 250);
     });
 
-    // Cleanup on unmount
     return () => {
+      isCancelled = true;
       if (mapInstanceRef.current) {
         mapInstanceRef.current.remove();
         mapInstanceRef.current = null;
+        markerLayerRef.current = null;
       }
     };
-  }, []); // Only initialize once
+  }, [center, zoom]);
 
-  // Update markers when they change
   useEffect(() => {
-    if (!mapInstanceRef.current) return;
+    if (!mapInstanceRef.current || !markerLayerRef.current) return;
 
     import("leaflet").then((L) => {
-      // Clear old markers
-      markersRef.current.forEach((marker) => {
-        mapInstanceRef.current.removeLayer(marker);
-      });
+      markerLayerRef.current.clearLayers();
       markersRef.current = [];
 
-      // Add new markers
       markers.forEach((markerData) => {
         const lat = Number(markerData.lat);
         const lng = Number(markerData.lng);
 
         if (!isNaN(lat) && !isNaN(lng)) {
-          // Create an inline SVG marker to avoid external image assets
           const svg = `
             <svg xmlns='http://www.w3.org/2000/svg' width='36' height='46' viewBox='0 0 36 46'>
               <path d='M18 0C11 0 6 5 6 12c0 10 12 34 12 34s12-24 12-34C30 5 25 0 18 0z' fill='#fd5a21'/>
@@ -173,7 +178,6 @@ function LeafletMap({
           `;
           const encoded = encodeURIComponent(svg).replace(/'/g, "%27").replace(/\(/g, "%28").replace(/\)/g, "%29");
           const imgSrc = `data:image/svg+xml;charset=UTF-8,${encoded}`;
-
           const icon = L.divIcon({
             html: `<img src="${imgSrc}" style="width:36px;height:46px;display:block;"/>`,
             className: "",
@@ -181,11 +185,9 @@ function LeafletMap({
             iconAnchor: [18, 46],
           });
 
-          const leafletMarker = L.marker([lat, lng], { icon })
-            .addTo(mapInstanceRef.current)
-            .on("click", () => onMarkerClick(markerData));
+          const leafletMarker = L.marker([lat, lng], { icon }).on("click", () => onMarkerClick(markerData));
+          leafletMarker.addTo(markerLayerRef.current);
 
-          // Add popup
           const popupContent = document.createElement("div");
           popupContent.innerHTML = `<div class="map-listing-item">
                   <div class="inner-box">
@@ -209,6 +211,8 @@ function LeafletMap({
           markersRef.current.push(leafletMarker);
         }
       });
+
+      setTimeout(() => mapInstanceRef.current.invalidateSize(), 100);
     });
   }, [markers, onMarkerClick]);
 

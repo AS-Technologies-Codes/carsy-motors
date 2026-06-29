@@ -1,6 +1,6 @@
 import CarDetails1 from "@/components/carDetails/CarDetails1";
 import Footer1 from "@/components/footers/Footer1";
-import Header2 from "@/components/headers/Header2";
+import Header2 from "@/components/headers/Header1";
 import Link from "next/link";
 import { allCars } from "@/data/cars";
 
@@ -15,7 +15,7 @@ export default function page({ params }) {
   return (
     <>
       <div className="header-fixed">
-        <Header2 />
+        <Header2 bg="style-1"/>
       </div>
       <section className="flat-title mb-40">
         <div className="container2">

@@ -48,8 +48,6 @@ export default function FlatFilter({
     const getGetCarsResponse = await getGetCarsRequest.json();
     const { filters_count, pagination } = getGetCarsResponse;
     setTotal(pagination.total);
-    console.log("dsds", filters_count);
-
     dispatch({ type: "SET_FILTER_OPTIONS", payload: filters_count });
     setCarsLoading(false);
   };

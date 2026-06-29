@@ -23,9 +23,9 @@ export default function Accordion({
       el.style.transition = "all 0.5s ease-in-out";
       //   el.style.marginTop = "0px";
     });
-    if (currentIndex !== -1) {
-      questionRefs.current[currentIndex].classList.add("active");
-      parentRefs.current[currentIndex].classList.add("active");
+    if (currentIndex !== -1 && questionRefs.current[currentIndex]) {
+      questionRefs.current[currentIndex]?.classList.add("active");
+      parentRefs.current[currentIndex]?.classList.add("active");
       const element = answerRefs.current[currentIndex];
       element.style.height = element.scrollHeight + "px";
       element.style.overflow = "hidden";

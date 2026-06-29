@@ -310,7 +310,7 @@ export default function CarSells() {
                         </div>
                       </div>
 
-                      <div className="form-group">
+                      {/* <div className="form-group">
                         <div>
                           <label className="flex-three">
                             <input
@@ -326,7 +326,7 @@ export default function CarSells() {
                             </span>
                           </label>
                         </div>
-                      </div>
+                      </div> */}
 
                       <div className="form-group">
                         <div>
@@ -343,7 +343,7 @@ export default function CarSells() {
                           />
                         </div>
                       </div>
-                      <div className="form-group">
+                      {/* <div className="form-group">
                         <div>
                           <DropdownSelect
                             selectedValue={location}
@@ -357,7 +357,7 @@ export default function CarSells() {
                             ]}
                           />
                         </div>
-                      </div>
+                      </div> */}
                       <div className="form-group">
                         <div>
                           <DropdownSelect
@@ -440,7 +440,7 @@ export default function CarSells() {
                         {/* /.widget_price */}
                       </div>
 
-                      <div className="features-wrap">
+                      {/* <div className="features-wrap">
                         <h4>Featured</h4>
                         <div className="form-group">
                           <div className="tf-amenities bg-white">
@@ -460,7 +460,7 @@ export default function CarSells() {
                             ))}
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </form>
                 </div>
@@ -673,28 +673,40 @@ export default function CarSells() {
                                     </Link>
                                   </div>
                                   <div className="inner2">
-                                    <div className="days-box">
-                                      <div className="img-author">
-                                        <Image
-                                          className="lazyload"
-                                          alt="image"
-                                          src={car.authorImage}
-                                          width={120}
-                                          height={120}
-                                        />
-                                        <span className="font text-color-2 fw-5">
-                                          {car.authorName}
-                                        </span>
-                                      </div>
+                                    <div className={`days-box d-flex ${!isGrid ? "flex-column": "flex-row"} justify-content-between ${isGrid ? "align-items-center" : ""} h-100`}>
                                       <Link
                                         href={`/listing-detail-v1/${car.id}`}
                                         className="view-car"
                                       >
                                         View car
                                       </Link>
-                                      <a
+
+                                      <div className="d-flex justify-content-end">
+                                        <Link
+                                          href={`/my-favorite`}
+                                          className="text-color-3"
+                                        >
+                                          <svg
+                                            width={18}
+                                            height={16}
+                                            viewBox="0 0 18 16"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                          >
+                                            <path
+                                              d="M16.5 4.875C16.5 2.80417 14.7508 1.125 12.5933 1.125C10.9808 1.125 9.59583 2.06333 9 3.4025C8.40417 2.06333 7.01917 1.125 5.40583 1.125C3.25 1.125 1.5 2.80417 1.5 4.875C1.5 10.8917 9 14.875 9 14.875C9 14.875 16.5 10.8917 16.5 4.875Z"
+                                              stroke="CurrentColor"
+                                              strokeWidth="1.5"
+                                              strokeLinecap="round"
+                                              strokeLinejoin="round"
+                                            />
+                                          </svg>
+                                        </Link>
+                                      </div>
+
+                                      <Link
                                         href="javascript:void(0)"
-                                        className="chat"
+                                        className="chat m-0"
                                       >
                                         <div className="icon">
                                           <svg
@@ -711,11 +723,7 @@ export default function CarSells() {
                                           </svg>
                                         </div>
                                         <span>Chat</span>
-                                      </a>
-                                      {/* <p className="fs-12 lh-16">
-                                        View 20 variants matching your search
-                                        criteria
-                                      </p> */}
+                                      </Link>
                                     </div>
                                   </div>
                                 </div>

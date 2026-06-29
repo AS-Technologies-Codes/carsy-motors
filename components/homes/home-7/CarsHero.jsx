@@ -391,7 +391,7 @@ export default function CarsHero() {
                                   {spec.title}
                                 </p>
                                 <div className="font text-color-1">
-                                  {specIndex !== 0 && spec.description}
+                                  {specIndex == 1 && spec.description}
                                 </div>
                               </div>
 
@@ -422,9 +422,9 @@ export default function CarsHero() {
                               )}
 
                               {specIndex == 2 && (
-                                <h6 className="text-color-1  text-center fs-6 ps-1">
-                                  Flexibal rentals with easy <br /> booking
-                                  options
+                                <h6 className="text-color-1  text-center fs-5 ps-1 lh-sm">
+                                  Flexible rentals for your needs. Book now and
+                                  hit the road with confidence.
                                 </h6>
                               )}
 

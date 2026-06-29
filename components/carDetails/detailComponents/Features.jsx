@@ -5,28 +5,50 @@ export default function Features({ feat }) {
   console.log({ feat });
 
   const features = [
-    {
-      title: "Comfort & Convenience",
-      content: feat?.comfort_convenience,
-    },
-    {
-      title: "Interior",
-      content: feat?.interior,
-    },
-    {
-      title: "Exterior",
-      content: feat?.exterior,
-    },
-    {
-      title: "Safety",
-      content: feat?.safety_features,
-    },
-    {
-      title: "Entertainment & Communication",
-      content: feat?.entertainment_communication,
-    },
+    ...(feat?.comfort_convenience && feat?.comfort_convenience?.length
+      ? [
+          {
+            title: "Comfort & Convenience",
+            content: feat?.comfort_convenience,
+          },
+        ]
+      : []),
+    ...(feat?.interior && feat?.interior?.length
+      ? [
+          {
+            title: "Interior",
+            content: feat?.interior,
+          },
+        ]
+      : []),
+    ...(feat?.exterior && feat?.exterior?.length
+      ? [
+          {
+            title: "Exterior",
+            content: feat?.exterior,
+          },
+        ]
+      : []),
+    ...(feat?.safety_features && feat?.safety_features?.length
+      ? [
+          {
+            title: "Safety",
+            content: feat?.safety_features,
+          },
+        ]
+      : []),
+    ...(feat?.entertainment_communication &&
+    feat?.entertainment_communication?.length
+      ? [
+          {
+            title: "Entertainment & Communication",
+            content: feat?.entertainment_communication,
+          },
+        ]
+      : []),
   ];
 
+  console.log(features);
 
   return (
     <>
@@ -35,7 +57,7 @@ export default function Features({ feat }) {
       </div>
       <div className="features-inner tf-collapse-content">
         <div className="inner">
-          {feat?.features.length ? (
+          {feat?.features?.length ? (
             feat?.features?.map((f) => (
               <div className="listing-feature-wrap flex" key={f}>
                 <i className="icon-autodeal-check" />

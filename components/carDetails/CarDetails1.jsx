@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import Slider1 from "./sliders/Slider1";
-import Image from "next/image";
+// import Image from "next/image";
 import Description from "./detailComponents/Description";
 import Overview from "./detailComponents/Overview";
 import toast from "react-hot-toast";
 
-import LoanCalculator from "./detailComponents/LoanCalculator";
-import CarReview from "./detailComponents/CarReview";
+// import LoanCalculator from "./detailComponents/LoanCalculator";
+// import CarReview from "./detailComponents/CarReview";
 import CarInfo from "./detailComponents/CarInfo";
 import ProfileInfo from "./detailComponents/ProfileInfo";
 import Recommended from "./detailComponents/Recommended";
@@ -53,7 +53,7 @@ export default function CarDetails1({ carItem }) {
                 <Slider1
                   images={CarDetailsListing?.images?.map((img) => img.src)}
                   viewer={
-                    CarDetailsListing?.sepriteiamge.length
+                    CarDetailsListing?.sepriteiamge?.length
                       ? JSON.parse(
                           CarDetailsListing?.sepriteiamge[0].sprite_url,
                         )
@@ -124,9 +124,7 @@ export default function CarDetails1({ carItem }) {
                         <div className="footer-heading-desktop mb-30">
                           <h2>Features</h2>
                         </div>
-                        <Features
-                          feat={CarDetailsListing}
-                        />
+                        <Features feat={CarDetailsListing} />
                       </div>
                       <div className="listing-line" />
                       {/* <div

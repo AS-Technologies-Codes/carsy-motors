@@ -6,7 +6,7 @@ export default function DropdownSelect({
   onChange = (elm) => {},
   options = optionsDefault,
   defaultOption,
-  selectedValue,
+  selectedValue = "",
   disabled,
   addtionalParentClass = "",
   width = "auto",
@@ -57,7 +57,7 @@ export default function DropdownSelect({
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-
+  
   return (
     <>
       <div
@@ -66,7 +66,7 @@ export default function DropdownSelect({
         ref={selectRef}
       >
         <span className="current">
-          {selectedValue || selected || defaultOption || options[0]}
+          {(selectedValue.toString().replace("Any", "") || selected.toString().replace("Any", "") || defaultOption || options[0].replace("Any", ""))}
         </span>
         {!disabled && (
           <ul className="list" ref={optionsRef}>

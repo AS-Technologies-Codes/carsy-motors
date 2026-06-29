@@ -48,7 +48,7 @@ export default function Slider1({ images, viewer }) {
           className="swiper mainslider slider home mb-40"
           id="my-gallery"
         >
-          {images.map((elm, i) => (
+          {images?.map((elm, i) => (
             <SwiperSlide key={i} className="swiper-slide">
               <div className="image-list-details">
                 <a

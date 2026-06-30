@@ -85,8 +85,9 @@ export default function CarSells() {
     // Build URL with filter parameters
     const params = new URLSearchParams({
       page: allProps.currentPage,
-      ...(price[0] ? { priceMin: price[0] } : {}),
-      ...(price[1] <= 99999 ? { priceMax: price[1] } : {}),
+      // ...(price[0] ? { priceMin: price[0] } : {}),
+      // ...(price[1] <= 99999 ? { priceMax: price[1] } : {}),
+      ...(!price.includes("Any") ? { price } : {}),
       ...(km[0] ? { kmMin: km[0] } : {}),
       ...(km[1] <= 99999 ? { kmMax: km[1] } : {}),
       ...(year[0] > 1997 ? { yearMin: year[0] } : {}),
@@ -208,44 +209,46 @@ export default function CarSells() {
                     <div className="wd-find-select">
                       <div className="form-group">
                         <DropdownSelect
-                          disabled
-                          selectedValue={`${make} ${make !== "Any Make" ? `(${filterOptions.make[0].count})` : ""}`}
-                          // onChange={allProps.setMake}
-                          // options={[
-                          //   "Any Make",
-                          //   "Audi",
-                          //   "BMW",
-                          //   "Dongfeng",
-                          //   "Ford",
-                          //   "Foton",
-                          //   "Kia",
-                          //   "Nissan",
-                          //   "Isuzu",
-                          // ]}
+                          // selectedValue={`${make} ${make !== "Any Make" ? `(${filterOptions.make[0].count})` : ""}`}
+                          selectedValue={make}
+                          onChange={allProps.setMake}
+                          options={[
+                            "Any Body",
+                            ...(filterOptions?.make?.map(
+                              (body_type) =>
+                                `${body_type?.name} (${body_type?.count || 0})`,
+                            ) || []),
+                          ]}
                         />
                       </div>
                       <div className="form-group">
                         <div>
                           <DropdownSelect
-                            disabled
-                            selectedValue={`${model} ${model !== "Any Model" ? `(${filterOptions.model[0].count})` : ""}`}
+                            // selectedValue={`${model} ${model !== "Any Model" ? `(${filterOptions.model[0].count})` : ""}`}
+                          selectedValue={model}
                             onChange={allProps.setModel}
-                            // options={[
-                            //   "Any Type",
-                            //   "Diesel",
-                            //   "Fuel",
-                            //   "Hybrid",
-                            //   "Electric",
-                            // ]}
+                            options={[
+                              "Any Model",
+                              ...(filterOptions?.model?.map(
+                                (body_type) =>
+                                  `${body_type?.name} (${body_type?.count || 0})`,
+                              ) || []),
+                            ]}
                           />
                         </div>
                       </div>
                       <div className="form-group">
                         <div>
                           <DropdownSelect
-                            disabled
-                            selectedValue={price[0]}
+                            selectedValue={price}
                             onChange={allProps.setPrice}
+                            options={[
+                              "Any Price",
+                              ...(filterOptions?.price?.map(
+                                (body_type) =>
+                                  `${body_type?.name} (${body_type?.count || 0})`,
+                              ) || []),
+                            ]}
                           />
                         </div>
                       </div>
@@ -673,7 +676,9 @@ export default function CarSells() {
                                     </Link>
                                   </div>
                                   <div className="inner2">
-                                    <div className={`days-box d-flex ${!isGrid ? "flex-column": "flex-row"} justify-content-between ${isGrid ? "align-items-center" : ""} h-100`}>
+                                    <div
+                                      className={`days-box d-flex ${!isGrid ? "flex-column" : "flex-row"} justify-content-between ${isGrid ? "align-items-center" : ""} h-100`}
+                                    >
                                       <Link
                                         href={`/listing-detail-v1/${car.id}`}
                                         className="view-car"

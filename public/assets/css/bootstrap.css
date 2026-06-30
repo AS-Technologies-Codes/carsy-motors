@@ -12148,5 +12148,8 @@ a.bg-blue:hover {
   /* width: auto !important; */
   height: auto !important;
 }
-
+.leaflet-top, .leaflet-bottom,
+.leaflet-pane, .leaflet-control{
+  z-index: 9 !important;
+}
 /*# sourceMappingURL=bootstrap.css.map */

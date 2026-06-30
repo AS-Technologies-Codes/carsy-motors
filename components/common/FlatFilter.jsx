@@ -25,12 +25,13 @@ export default function FlatFilter({
 
     // Build URL with filter parameters
     const params = new URLSearchParams({
-      ...(countPrice.split(",")[0]
-        ? { priceMin: countPrice.split(",")[0] }
-        : {}),
-      ...(countPrice.split(",")[1]
-        ? { priceMax: countPrice.split(",")[1] }
-        : {}),
+      // ...(countPrice.split(",")[0]
+      //   ? { priceMin: countPrice.split(",")[0] }
+      //   : {}),
+      // ...(countPrice.split(",")[1]
+      //   ? { priceMax: countPrice.split(",")[1] }
+      //   : {}),
+      ...(countPrice !== "Any Price" ? { price: countPrice } : {}),
       ...(countMake !== "Any Make" ? { make: countMake } : {}),
       ...(countModel !== "Any Model" ? { model: countModel } : {}),
     });
@@ -60,7 +61,7 @@ export default function FlatFilter({
     dispatch({ type: "SET_MODEL", payload: countModel });
     dispatch({
       type: "SET_PRICE",
-      payload: [countPrice.split(",")[0], countPrice.split(",")[1]],
+      payload: countPrice,
     });
   };
 

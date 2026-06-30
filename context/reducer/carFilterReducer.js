@@ -146,7 +146,8 @@ const allCars = [
 ];
 
 export const initialState = {
-  price: [0, 100000],
+  // price: [0, 100000],
+  price: "Any Price",
   km: [0, 100000],
   year: [1997, new Date().getFullYear() + 1],
   body: "Any Body",
@@ -234,7 +235,8 @@ export function reducer(state, action) {
     case "CLEAR_FILTER":
       return {
         ...state,
-        price: [0, 100000],
+        // price: [0, 100000],
+        price: "Any Price",
         km: [0, 100000],
         year: [1997, new Date().getFullYear() + 1],
         body: "Any Body",

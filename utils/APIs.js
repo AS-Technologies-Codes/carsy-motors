@@ -143,6 +143,81 @@ export const saveEmail = async (email) => {
   });
 };
 
+export const postFinance = async (financeData) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const postFinanceRequest = await fetch(URL.postFinance, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
+        body: JSON.stringify(financeData),
+      });
+      const postFinanceResponse = await postFinanceRequest.json();
+      if (postFinanceResponse?.status === "error") {
+        return reject(
+          postFinanceResponse?.message ||
+            "Failed to submit finance information",
+        );
+      }
+      return resolve(postFinanceResponse?.message);
+    } catch (error) {
+      return reject(error);
+    }
+  });
+};
+
+export const postEnquiry = async (enquiryData) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const postEnquiryRequest = await fetch(URL.postEnquiry, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
+        body: JSON.stringify(enquiryData),
+      });
+      const postEnquiryResponse = await postEnquiryRequest.json();
+      if (postEnquiryResponse?.status === "error") {
+        return reject(
+          postEnquiryResponse?.message ||
+            "Failed to submit enquiry information",
+        );
+      }
+      return resolve(postEnquiryResponse?.message);
+    } catch (error) {
+      return reject(error);
+    }
+  });
+};
+
+export const saveBooking = async (bookingData) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const saveBookingRequest = await fetch(URL.saveBooking, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
+        body: JSON.stringify(bookingData),
+      });
+      const saveBookingResponse = await saveBookingRequest.json();
+      if (saveBookingResponse?.status === "error") {
+        return reject(
+          saveBookingResponse?.message ||
+            "Failed to submit booking information",
+        );
+      }
+      return resolve(saveBookingResponse?.message);
+    } catch (error) {
+      return reject(error);
+    }
+  });
+};
+
 export const getAchievementsListingApi = async () => {
   return new Promise(async (resolve, reject) => {
     try {

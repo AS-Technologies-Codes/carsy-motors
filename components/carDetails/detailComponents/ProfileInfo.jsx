@@ -40,7 +40,7 @@ export default function ProfileInfo({ car }) {
           </div>
         </div>
       </div> */}
-       
+
       {/* <div className="">
         <div className="inner listing-infor-box">
           <div className="icon">
@@ -70,69 +70,57 @@ export default function ProfileInfo({ car }) {
           </div>
         </div>
       </div> */}
-    
-      <div className="profile-map mb-30">
-        <h6>Location</h6>
-
-        <div className="list-icon-pf gap-8 mt-3 flex-three">
-          <i className="far fa-map" />
-          <p className="font-1">{car?.location || "Not found"}</p>
-        </div>
-        {/* <div className="map">
-          <iframe
-            className="map-content"
-            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7302.453092836291!2d90.47477022812872!3d23.77494577893369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1627293157601!5m2!1svi!2s"
-            allowFullScreen=""
-            loading="lazy"
-          ></iframe>
-        </div> */}
-      </div>
-      <div className="listing-line" />
       <div className="profile-contact">
         {/* <h6>Contact dealer</h6> */}
         <div className="btn-contact">
-        <div className="btn-contact flex">
-          <Link href="javascript:void(0)" className="btn-pf bg-orange mt-3 p-3 p-md-0">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-mail-icon lucide-mail"
+          <div className="btn-contact flex">
+            <Link
+              href="javascript:void(0)"
+              className="btn-pf bg-orange mt-3 p-3 p-md-0"
             >
-              <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
-              <rect x="2" y="4" width="20" height="16" rx="2" />
-            </svg>{" "}
-            <span className="fs-16 fw-5 lh-20 font text-color-1">
-              Enquire Now
-            </span>
-          </Link>
-          <Link href={"/finance/"+car?.id} className="btn-pf bg-orange mt-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-navigation-icon lucide-navigation"
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-mail-icon lucide-mail"
+              >
+                <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+              </svg>{" "}
+              <span className="fs-16 fw-5 lh-20 font text-color-1">
+                Enquire Now
+              </span>
+            </Link>
+            <Link
+              href={"/finance/" + car?.id}
+              className="btn-pf bg-orange mt-3"
             >
-              <polygon points="3 11 22 2 13 21 11 13 3 11" />
-            </svg>{" "}
-            <span className="fs-16 fw-5 lh-20 font text-color-1">
-              Get Finance
-            </span>
-          </Link>
-        </div>
-         <Link href="javascript:void(0)" className="btn-pf bg-green mt-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-navigation-icon lucide-navigation"
+              >
+                <polygon points="3 11 22 2 13 21 11 13 3 11" />
+              </svg>{" "}
+              <span className="fs-16 fw-5 lh-20 font text-color-1">
+                Get Finance
+              </span>
+            </Link>
+          </div>
+          <Link href="javascript:void(0)" className="btn-pf bg-green mt-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -153,9 +141,9 @@ export default function ProfileInfo({ car }) {
               Online Booking
             </span>
           </Link>
-      </div>
+        </div>
 
-          {/* <a href="javascript:void(0)" className="btn-pf bg-orange mt-3">
+        {/* <a href="javascript:void(0)" className="btn-pf bg-orange mt-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

@@ -18,6 +18,15 @@ export default function CarInfo({ carItem }) {
       }
     }
   };
+
+  const handleWhatsApp = () => {
+    if (typeof window !== "undefined") {
+      const phoneNumber = "+923473456750"; // Replace with your actual phone number
+      const message = `Hi! I'm interested in this car:\n\nModel: ${carItem?.model || "N/A"}\nPrice: $${carItem?.price || "N/A"}\nKM: ${carItem?.km || "N/A"}\nFuel: ${carItem?.fuelType || "N/A"}\n\nPlease provide more details.`;
+      const encodedMessage = encodeURIComponent(message);
+      window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, "_blank");
+    }
+  };
   return (
     <>
       <div className="icon-box flex flex-wrap">
@@ -127,7 +136,11 @@ export default function CarInfo({ carItem }) {
       <div className="profile-contact mt-3">
         <h6>Contact dealer</h6>
         <div className="btn-contact flex-two">
-          <a href="javascript:void(0)" className="btn-pf bg-green">
+          <a
+            href="#"
+            onClick={handleWhatsApp}
+            className="btn-pf bg-green"
+          >
             <i className="icon-autodeal-chat" />
             <span className="fs-16 fw-5 lh-20 font text-color-1">Chat</span>
           </a>

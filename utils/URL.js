@@ -11,6 +11,9 @@ const URL = {
   getNearby: baseUrl + "get_nearby_locations",
   getFleet: baseUrl + "get_cars&car_type=fleet",
   saveNewsLetter: baseUrl + "save_newsletter",
+  postFinance: baseUrl + "submit_finance",
+  postEnquiry: baseUrl + "submit_enquiry",
+  saveBooking: baseUrl + "save_booking",
   // getCashForCarPrice: baseUrl + "get_cash_price",
   // getBlogDetails: baseUrl + "get_news",
 };

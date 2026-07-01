@@ -1,11 +1,29 @@
 "use client";
 import React, { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
+// import emailjs from "@emailjs/browser";
 import Link from "next/link";
+import { postFinance } from "@/utils/APIs";
+import { useParams } from "next/navigation";
 export default function Finance() {
+  const { id } = useParams();
   const formRef = useRef();
   const [success, setSuccess] = useState(true);
   const [showMessage, setShowMessage] = useState(false);
+  const [SavingEmail, setSavingEmail] = useState(false);
+  const [formData, setFormData] = useState({
+    car_id: id,
+    first_name: "",
+    middle_name: "",
+    last_name: "",
+    email: "",
+    mobile: "",
+    dateOfBirth: "",
+    driver_license: "",
+    address: "",
+    consentPrivacy: false,
+    consentCreditScore: false,
+    consentElectronicComm: false,
+  });
 
   const handleShowMessage = () => {
     setShowMessage(true);
@@ -14,26 +32,59 @@ export default function Finance() {
     }, 2000);
   };
 
-  const sendMail = (e) => {
-    e.preventDefault();
-    emailjs
-      .sendForm("service_noj8796", "template_fs3xchn", formRef.current, {
-        publicKey: "iG4SCmR-YtJagQ4gV",
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          setSuccess(true);
-          handleShowMessage();
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
 
-          formRef.current.reset();
-        } else {
-          setSuccess(false);
-          handleShowMessage();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
+  const sendMail = async (e) => {
+    e.preventDefault();
+    console.log(formData);
+
+    // Validate required fields
+    if (
+      !formData.first_name ||
+      !formData.last_name ||
+      !formData.email ||
+      !formData.mobile ||
+      !formData.dateOfBirth ||
+      !formData.driver_license ||
+      !formData.address
+    ) {
+      toast.error("Please fill in all required fields");
+      return;
+    }
+
+    setSavingEmail(true);
+    try {
+      // Send form data as API body
+      await postFinance(formData);
+      setSuccess(true);
+      handleShowMessage();
+      // Reset form
+      setFormData({
+        first_name: "",
+        middle_name: "",
+        last_name: "",
+        email: "",
+        mobile: "",
+        dateOfBirth: "",
+        driver_license: "",
+        address: "",
+        consentPrivacy: false,
+        consentCreditScore: false,
+        consentElectronicComm: false,
       });
+    } catch (error) {
+      console.error(error);
+      setSuccess(false);
+      handleShowMessage();
+    } finally {
+      setSavingEmail(false);
+    }
   };
   return (
     <>
@@ -60,8 +111,10 @@ export default function Finance() {
                           <input
                             type="text"
                             className="tb-my-input"
-                            name="name"
+                            name="first_name"
                             placeholder="Your First Name"
+                            value={formData.first_name}
+                            onChange={handleChange}
                             required
                           />
                         </fieldset>
@@ -74,8 +127,10 @@ export default function Finance() {
                           <input
                             type="text"
                             className="tb-my-input"
-                            name="Middle Name"
+                            name="middle_name"
                             placeholder="Your Middle Name"
+                            value={formData.middle_name}
+                            onChange={handleChange}
                           />
                         </fieldset>
                       </div>
@@ -88,8 +143,10 @@ export default function Finance() {
                           <input
                             type="text"
                             className="tb-my-input"
-                            name="Middle Name"
+                            name="last_name"
                             placeholder="Your Last Name"
+                            value={formData.last_name}
+                            onChange={handleChange}
                             required
                           />
                         </fieldset>
@@ -104,6 +161,8 @@ export default function Finance() {
                             className="tb-my-input"
                             name="email"
                             placeholder="Your Email"
+                            value={formData.email}
+                            onChange={handleChange}
                             required
                           />
                         </fieldset>
@@ -116,8 +175,10 @@ export default function Finance() {
                           <input
                             type="tel"
                             className="tb-my-input"
-                            name="tel"
+                            name="mobile"
                             placeholder="Your Mobile Number"
+                            value={formData.mobile}
+                            onChange={handleChange}
                             required
                           />
                         </fieldset>
@@ -132,8 +193,10 @@ export default function Finance() {
                           <input
                             type="date"
                             className="tb-my-input"
-                            name="dob"
+                            name="dateOfBirth"
                             placeholder="Your Date of Birth"
+                            value={formData.dateOfBirth}
+                            onChange={handleChange}
                             required
                           />
                         </fieldset>
@@ -144,10 +207,12 @@ export default function Finance() {
                             Driver License Number*
                           </label>
                           <input
-                            type="text"
+                            type="number"
                             className="tb-my-input"
-                            name="subject"
+                            name="driver_license"
                             placeholder="Enter Driver License Number"
+                            value={formData.driver_license}
+                            onChange={handleChange}
                             required
                           />
                         </fieldset>
@@ -159,13 +224,14 @@ export default function Finance() {
                           </label>
                           <textarea
                             id="comment-message"
-                            name="message"
+                            name="address"
                             rows={4}
                             tabIndex={4}
                             placeholder="Your Current Address"
                             aria-required="true"
                             required
-                            defaultValue={""}
+                            value={formData.address}
+                            onChange={handleChange}
                           />
                         </fieldset>
                       </div>
@@ -174,11 +240,11 @@ export default function Finance() {
                       <div>
                         <label className="flex-three align-items-start">
                           <input
-                            readOnly
-                            className="d-none"
-                            // checked={evsOnly}
                             type="checkbox"
-                            // onClick={() => allProps.setEvsOnly(!evsOnly)}
+                            name="consentPrivacy"
+                            checked={formData.consentPrivacy}
+                            onChange={handleChange}
+                            required
                           />
                           <span className="btn-checkbox" />
                           <span className="text-color-2 font-2">
@@ -197,11 +263,11 @@ export default function Finance() {
                       <div>
                         <label className="flex-three align-items-start">
                           <input
-                            readOnly
-                            // checked={evsOnly}
-                            className="d-none"
                             type="checkbox"
-                            // onClick={() => allProps.setEvsOnly(!evsOnly)}
+                            name="consentCreditScore"
+                            checked={formData.consentCreditScore}
+                            onChange={handleChange}
+                            required
                           />
                           <span
                             className="btn-checkbox"
@@ -239,11 +305,11 @@ export default function Finance() {
                       <div>
                         <label className="flex-three align-items-start">
                           <input
-                            readOnly
-                            className="d-none"
-                            // checked={evsOnly}
                             type="checkbox"
-                            // onClick={() => allProps.setEvsOnly(!evsOnly)}
+                            name="consentElectronicComm"
+                            checked={formData.consentElectronicComm}
+                            onChange={handleChange}
+                            required
                           />
                           <span
                             className="btn-checkbox"
@@ -270,15 +336,20 @@ export default function Finance() {
                     >
                       {success ? (
                         <p style={{ color: "rgb(52, 168, 83)" }}>
-                          Message has been sent successfully
+                          Finance application submitted successfully
                         </p>
                       ) : (
                         <p style={{ color: "red" }}>Something went wrong</p>
                       )}
                     </div>
                     <div className="button-boxs mt-3">
-                      <button className="sc-button" name="submit" type="submit">
-                        <span>Submit</span>
+                      <button
+                        className="sc-button"
+                        name="submit"
+                        type="submit"
+                        disabled={SavingEmail}
+                      >
+                        <span>{SavingEmail ? "Submitting..." : "Submit"}</span>
                       </button>
                     </div>
                   </form>

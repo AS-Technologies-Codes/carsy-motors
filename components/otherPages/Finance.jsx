@@ -2,6 +2,7 @@
 import React, { useRef, useState } from "react";
 // import emailjs from "@emailjs/browser";
 import Link from "next/link";
+import toast from "react-hot-toast";
 import { postFinance } from "@/utils/APIs";
 import { useParams } from "next/navigation";
 export default function Finance() {
@@ -17,7 +18,7 @@ export default function Finance() {
     last_name: "",
     email: "",
     mobile: "",
-    dateOfBirth: "",
+    dateOfBirth: new Date().toISOString().slice(0, 10),
     driver_license: "",
     address: "",
     consentPrivacy: false,
@@ -42,6 +43,7 @@ export default function Finance() {
 
   const sendMail = async (e) => {
     e.preventDefault();
+
     console.log(formData);
 
     // Validate required fields
@@ -71,7 +73,7 @@ export default function Finance() {
         last_name: "",
         email: "",
         mobile: "",
-        dateOfBirth: "",
+        dateOfBirth: new Date().toISOString().slice(0, 10),
         driver_license: "",
         address: "",
         consentPrivacy: false,
@@ -185,7 +187,7 @@ export default function Finance() {
                       </div>
                       <h2 className="my-5 col-12">Finance Details</h2>
 
-                      <div className="col-12 col-md-6">
+                      <div className="col-12">
                         <fieldset className="phone-wrap style-text">
                           <label className="font-1 fs-14 fw-5">
                             Date of Birth*

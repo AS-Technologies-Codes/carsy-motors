@@ -35,7 +35,7 @@ export default function Nav() {
         <Link href="/car-sells">Sell</Link>
       </li>
 
-      <li className={`dropdown2  ${isActive(blogPages) ? "current" : ""} `}>
+      {/* <li className={`dropdown2  ${isActive(blogPages) ? "current" : ""} `}>
         <a href="#">Hire</a>
         <ul>
           {[
@@ -54,7 +54,7 @@ export default function Nav() {
             </li>
           ))}
         </ul>
-      </li>
+      </li> */}
 
       {/* <li className={"blog" == pathname.split("/")[1] ? "current" : ""}>
         <Link href="/blog">Blogs</Link>

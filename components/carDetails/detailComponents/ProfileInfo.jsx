@@ -1,8 +1,15 @@
-import Image from "next/image";
+import Enquiry from "@/components/otherPages/Enquiry";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 export default function ProfileInfo({ car }) {
+  const [Modal, setModal] = useState(false);
+  const [Visible, setVisible] = useState(false);
+
+  const openEnquiry = () => {
+    setModal(true);
+    setTimeout(() => setVisible(true), 350);
+  };
   return (
     <>
       {/* <div className="prolile-info flex-three mb-30">
@@ -76,6 +83,7 @@ export default function ProfileInfo({ car }) {
           <div className="btn-contact flex">
             <Link
               href="javascript:void(0)"
+              onClick={openEnquiry}
               className="btn-pf bg-orange mt-3 p-3 p-md-0"
             >
               <svg
@@ -120,7 +128,7 @@ export default function ProfileInfo({ car }) {
               </span>
             </Link>
           </div>
-          <Link href="javascript:void(0)" className="btn-pf bg-green mt-3">
+          <Link href={"/booking/" + car?.id} className="btn-pf bg-green mt-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -186,6 +194,12 @@ export default function ProfileInfo({ car }) {
           </a>
            */}
       </div>
+      <Enquiry
+        Modal={Modal}
+        setModal={setModal}
+        Visible={Visible}
+        setVisible={setVisible}
+      />
     </>
   );
 }

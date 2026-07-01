@@ -977,6 +977,35 @@ a {
   color: $color-3 !important;
 }
 
+.booking-option {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.booking-option:hover{
+  // background-color: rgba(253, 90, 33, 0.08);
+  // border-color: #fd5a21 !important;
+  // color: $color-3 !important;
+  transform: translateY(-2px);
+}
+
+.booking-option.active {
+  background-color: rgba(253, 90, 33, 0.08);
+  border-color: #fd5a21 !important;
+  color: $color-3 !important;
+  transform: translateY(-1px);
+}
+
+.booking-option:hover svg,
+.booking-option.active svg {
+  stroke: #fd5a21;
+}
+
+// .booking-option:hover .text-color-2,
+.booking-option.active .text-color-2 {
+  color: $color-3 !important;
+}
+
 .text-color-4 {
   color: $color-4 !important;
 }

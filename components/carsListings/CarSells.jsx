@@ -719,7 +719,7 @@ export default function CarSells() {
                                       </div>
                                       <Link
                                         href="javascript:void(0)"
-                                        onClick={() => handleWhatsApp(carItem)}
+                                        onClick={() => handleWhatsApp(car)}
                                         className="chat m-0"
                                       >
                                         <div className="icon">

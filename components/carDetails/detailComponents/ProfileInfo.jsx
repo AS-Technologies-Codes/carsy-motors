@@ -1,3 +1,4 @@
+"use client";
 import Enquiry from "@/components/otherPages/Enquiry";
 import Link from "next/link";
 import React, { useState } from "react";

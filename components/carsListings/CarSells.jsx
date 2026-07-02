@@ -177,7 +177,7 @@ export default function CarSells() {
     );
   }, []);
 
-   const handleWhatsApp = () => {
+   const handleWhatsApp = (carItem) => {
     if (typeof window !== "undefined") {
       const phoneNumber = "+923473456750"; // Replace with your actual phone number
       const message = `Hi! I'm interested in this car:\n\nModel: ${carItem?.model || "N/A"}\nPrice: $${carItem?.price || "N/A"}\nKM: ${carItem?.km || "N/A"}\nFuel: ${carItem?.fuelType || "N/A"}\n\nPlease provide more details.`;
@@ -719,7 +719,7 @@ export default function CarSells() {
                                       </div>
                                       <Link
                                         href="javascript:void(0)"
-                                        onClick={handleWhatsApp}
+                                        onClick={() => handleWhatsApp(carItem)}
                                         className="chat m-0"
                                       >
                                         <div className="icon">

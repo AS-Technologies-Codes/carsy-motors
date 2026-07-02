@@ -12116,8 +12116,12 @@ a.bg-blue:hover {
 
 
 .box-car-list.style-2 > .image-group .img-style, .box-car-list.style-2 > .image-group img {
-  width: 100% !important;
-  height: auto !important;
+  width: auto !important;
+  height: 265px !important;
+  /* object-fit: contain !important; */
+    background-color: #f5f5f5;
+    object-position: cover  !important;
+
   
 }
 
@@ -12148,6 +12152,11 @@ a.bg-blue:hover {
   /* width: auto !important; */
   height: auto !important;
 }
+
+.pswp img {
+transform: scale(.2) !important;
+}
+
 .leaflet-top, .leaflet-bottom,
 .leaflet-pane, .leaflet-control{
   z-index: 9 !important;

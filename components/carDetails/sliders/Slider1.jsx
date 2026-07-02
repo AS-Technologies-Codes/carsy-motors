@@ -56,10 +56,10 @@ export default function Slider1({ images, viewer }) {
                   data-pswp-width="1245"
                   data-pswp-height="701"
                   target="_blank"
-                  className="image"
+                  className="image d-flex justify-content-center w-100 "
                 >
                   <Image
-                    className="lazyload"
+                    className="lazyload" 
                     alt="image"
                     src={elm}
                     width={1245}

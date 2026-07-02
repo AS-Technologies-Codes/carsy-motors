@@ -7,8 +7,8 @@ export default function ProfileInfo({ car }) {
   const [Visible, setVisible] = useState(false);
 
   const openEnquiry = () => {
-    setModal(true);
-    setTimeout(() => setVisible(true), 350);
+    setVisible(true);
+    setTimeout(() => setModal(true), 50);
   };
   return (
     <>

@@ -1,12 +1,86 @@
-import React, { useRef } from "react";
+import { postEnquiry } from "@/utils/APIs";
+import { useParams } from "next/navigation";
+import React, { useRef, useState } from "react";
 
-const Enquiry = (Modal, setModal, Visible, setVisible) => {
+const Enquiry = ({ Modal, setModal, Visible, setVisible }) => {
   const backdropRef = useRef(null);
 
+  const { id } = useParams();
+  const formRef = useRef();
+  const [success, setSuccess] = useState(true);
+  const [showMessage, setShowMessage] = useState(false);
+  const [SavingEnquiry, setSavingEnquiry] = useState(false);
+  const [formData, setFormData] = useState({
+    car_id: id,
+    first_name: "",
+    last_name: "",
+    email: "",
+    mobile: "",
+    comments: "",
+  });
+
+  const handleShowMessage = () => {
+    setShowMessage(true);
+    setTimeout(() => {
+      setShowMessage(false);
+    }, 2000);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  
   const closeModal = () => {
     setModal(false);
     setTimeout(() => setVisible(false), 350);
   };
+
+  const saveEnquiry = async (e) => {
+    e.preventDefault();
+    // Validate required fields
+    if (
+      !formData.first_name ||
+      !formData.last_name ||
+      !formData.email ||
+      !formData.mobile ||
+      !formData.comments
+    ) {
+      toast.error("Please fill in all required fields");
+      return;
+    }
+
+    setSavingEnquiry(true);
+    try {
+      // Send form data as API body
+      await postEnquiry(formData);
+      setSuccess(true);
+      handleShowMessage();
+      // Reset form
+      setFormData({
+        first_name: "",
+        last_name: "",
+        email: "",
+        mobile: "",
+        comments: "",
+      });
+      setTimeout(() => {
+        closeModal();
+      }, 1500);
+    } catch (error) {
+      console.error(error);
+      setSuccess(false);
+      handleShowMessage();
+    } finally {
+      setSavingEnquiry(false);
+    }
+  };
+
+
   const handleBackdropClick = (e) => {
     if (e.target === backdropRef.current) closeModal();
   };
@@ -225,7 +299,7 @@ const Enquiry = (Modal, setModal, Visible, setVisible) => {
         aria-modal="true"
         aria-labelledby="autoModalTitle"
       >
-        <div className="auto-modal-dialog">
+        <div className="auto-modal-dialog w-100 w-md-50">
           <div className="auto-modal-content">
             {/* Header */}
             <div className="auto-modal-header">
@@ -243,8 +317,132 @@ const Enquiry = (Modal, setModal, Visible, setVisible) => {
             </div>
 
             <section className="">
-              <div className="container">
-                <div className="row mx-5 align-items-center"></div>
+              <div className="container m-3">
+                <div className="row">
+                  <div id="comments" className="comments">
+                    <h2 className="mb-2 text-bold">Submit an Enquiry</h2>
+                    <div className="respond-comment">
+                      <form
+                        onSubmit={saveEnquiry}
+                        ref={formRef}
+                        id="loan-calculator"
+                        className="comment-form form-submit"
+                        acceptCharset="utf-8"
+                      >
+                        <div className="row col-12">
+                          <div className="col-12 col-md-6">
+                            <fieldset className="email-wrap style-text">
+                              <label className="font-1 fs-14 fw-5">
+                                First Name*
+                              </label>
+                              <input
+                                type="text"
+                                className="tb-my-input"
+                                name="first_name"
+                                placeholder="Your First Name"
+                                value={formData.first_name}
+                                onChange={handleChange}
+                                required
+                              />
+                            </fieldset>
+                          </div>
+
+                          <div className="col-12 col-md-6">
+                            <fieldset className="email-wrap style-text">
+                              <label className="font-1 fs-14 fw-5">
+                                Last Name*
+                              </label>
+                              <input
+                                type="text"
+                                className="tb-my-input"
+                                name="last_name"
+                                placeholder="Your Last Name"
+                                value={formData.last_name}
+                                onChange={handleChange}
+                                required
+                              />
+                            </fieldset>
+                          </div>
+                          <div className="col-12">
+                            <fieldset className="phone-wrap style-text">
+                              <label className="font-1 fs-14 fw-5">
+                                Email Address*
+                              </label>
+                              <input
+                                type="email"
+                                className="tb-my-input"
+                                name="email"
+                                placeholder="Your Email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                              />
+                            </fieldset>
+                          </div>
+                          <div className="col-12">
+                            <fieldset className="phone-wrap style-text">
+                              <label className="font-1 fs-14 fw-5">
+                                Mobile Number*
+                              </label>
+                              <input
+                                type="tel"
+                                className="tb-my-input"
+                                name="mobile"
+                                placeholder="Your Mobile Number"
+                                value={formData.mobile}
+                                onChange={handleChange}
+                                required
+                              />
+                            </fieldset>
+                          </div>
+                          <div className="col-12">
+                            <fieldset className="phone-wrap style-text">
+                              <label className="font-1 fs-14 fw-5">
+                                Comments*
+                              </label>
+                              <textarea
+                                id="comment-message"
+                                name="comments"
+                                rows={4}
+                                tabIndex={4}
+                                placeholder="Your Comments"
+                                aria-required="true"
+                                required
+                                value={formData.comments}
+                                onChange={handleChange}
+                              />
+                            </fieldset>
+                          </div>
+                        </div>
+                        <div
+                          className={`tfSubscribeMsg  footer-sub-element ${
+                            showMessage ? "active" : ""
+                          }`}
+                        >
+                          {success ? (
+                            <p style={{ color: "rgb(52, 168, 83)" }}>
+                              Enquiry form submitted successfully
+                            </p>
+                          ) : (
+                            <p style={{ color: "red" }}>Something went wrong</p>
+                          )}
+                        </div>
+                        <div className="button-boxs mt-3">
+                          <button
+                            className="sc-button"
+                            name="submit"
+                            type="submit"
+                            disabled={SavingEnquiry}
+                          >
+                            <span>
+                              {SavingEnquiry ? "Submitting..." : "Submit"}
+                            </span>
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
               </div>
             </section>
           </div>

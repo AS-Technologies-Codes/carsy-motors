@@ -4,7 +4,9 @@ import toast from "react-hot-toast";
 export default function CarInfo({ carItem }) {
   const handlePrint = (id) => {
     if (typeof window !== "undefined") {
-      window.open(`https://carsy.astechnologies.pk/api_carsy/car_view.php?id=${id}&token=dfaf55df456ds4ds5f4ds33`);
+      window.open(
+        `https://carsy.astechnologies.pk/api_carsy/car_view.php?id=${id}&token=dfaf55df456ds4ds5f4ds33`,
+      );
     }
   };
   const handleCopy = async () => {
@@ -24,7 +26,10 @@ export default function CarInfo({ carItem }) {
       const phoneNumber = "+923473456750"; // Replace with your actual phone number
       const message = `Hi! I'm interested in this car:\n\nModel: ${carItem?.model || "N/A"}\nPrice: $${carItem?.price || "N/A"}\nKM: ${carItem?.km || "N/A"}\nFuel: ${carItem?.fuelType || "N/A"}\n\nPlease provide more details.`;
       const encodedMessage = encodeURIComponent(message);
-      window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, "_blank");
+      window.open(
+        `https://wa.me/${phoneNumber}?text=${encodedMessage}`,
+        "_blank",
+      );
     }
   };
   return (
@@ -44,7 +49,7 @@ export default function CarInfo({ carItem }) {
         </div>
         <div className="icons flex-three">
           <i className="icon-autodeal-owner me-1" />
-          <span>Owner {carItem?.owner_number || 1}</span>
+          <span>{carItem?.owner_number} Owner</span>
         </div>
       </div>
       <div className="money text-color-3 font">${carItem.price}</div>
@@ -114,7 +119,11 @@ export default function CarInfo({ carItem }) {
           </a>
         </li>
         <li>
-          <a href="javascript:void(0)" onClick={() => handlePrint(carItem?.id)} className="icon">
+          <a
+            href="javascript:void(0)"
+            onClick={() => handlePrint(carItem?.id)}
+            className="icon"
+          >
             <svg
               width={16}
               height={18}
@@ -136,11 +145,7 @@ export default function CarInfo({ carItem }) {
       <div className="profile-contact mt-3">
         <h6>Contact dealer</h6>
         <div className="btn-contact flex-two">
-          <a
-            href="#"
-            onClick={handleWhatsApp}
-            className="btn-pf bg-green"
-          >
+          <a href="#" onClick={handleWhatsApp} className="btn-pf bg-green">
             <i className="icon-autodeal-chat" />
             <span className="fs-16 fw-5 lh-20 font text-color-1">Chat</span>
           </a>

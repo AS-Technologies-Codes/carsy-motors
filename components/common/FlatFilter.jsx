@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useCarFilter } from "@/context/providers/CarFilterContext";
 import { accessToken, URL } from "@/utils/URL";
+import Link from "next/link";
 
 export default function FlatFilter({
   styleClass = "",
@@ -191,7 +192,11 @@ export default function FlatFilter({
                 </div>
                 <div className="form-group-2 form-style"></div>
                 <div className="button-search sc-btn-top">
-                  <a className="sc-button" onClick={searchFilter}>
+                  <Link
+                    className="sc-button"
+                    href="#section3"
+                    onClick={searchFilter}
+                  >
                     {CarsLoading ? (
                       <span>...</span>
                     ) : (
@@ -200,7 +205,7 @@ export default function FlatFilter({
                         <i className="far fa-search text-color-1" />
                       </>
                     )}
-                  </a>
+                  </Link>
                 </div>
               </div>
             </form>

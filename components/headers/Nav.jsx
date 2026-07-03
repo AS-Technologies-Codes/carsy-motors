@@ -31,8 +31,8 @@ export default function Nav() {
       <li className={"/" == pathname.split("/")[1] ? "current" : ""}>
         <Link href="/">Home</Link>
       </li>
-      <li className={"car-sells" == pathname.split("/")[1] ? "current" : ""}>
-        <Link href="/car-sells">Sell</Link>
+      <li className={"buy" == pathname.split("/")[1] ? "current" : ""}>
+        <Link href="/buy">Buy</Link>
       </li>
 
       {/* <li className={`dropdown2  ${isActive(blogPages) ? "current" : ""} `}>

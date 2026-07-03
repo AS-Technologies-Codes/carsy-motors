@@ -145,10 +145,11 @@ export default function Footer1() {
                 <Link href={`/`}>
                   <Image
                     className="lazyload"
+                    style={{ width: "auto", height: "150px" }}
                     data-src="/assets/images/logo/logo.png"
                     alt="img"
                     width={225}
-                    height={40}
+                    height={20}
                     src="/assets/images/logo/logo.png"
                   />
                 </Link>
@@ -157,7 +158,7 @@ export default function Footer1() {
             <div className="col-lg-8 col-md-12">
               <div className="footer-bottom-right flex-six flex-wrap">
                 <div className="title-bottom center">
-                  © 2026 Carsy Moters. All rights reserved
+                  © {new Date().getFullYear()} Carsy Moters. All rights reserved
                 </div>
                 <div className="icon-social box-3 text-color-1">
                   <a href="javascript:void(0)">

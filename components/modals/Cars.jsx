@@ -119,7 +119,7 @@ export default function Page() {
                       warranty.
                     </p>
                     <div className="meta style">
-                      <a href="/car-sells" className="sc-button btn-svg btn-55">
+                      <a href="/buy" className="sc-button btn-svg btn-55">
                         <span>View Inventory</span>
                         <i className="icon-autodeal-next" />
                       </a>

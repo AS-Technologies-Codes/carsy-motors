@@ -12135,27 +12135,30 @@ a.bg-blue:hover {
   font-size: 32px !important;
     color: white !important;
 }
-@media (min-width: 650) {
+
   .pswp__img{
-  width: 100vw !important;
+  width: auto !important;
+  height: 80vh !important;
+}
+
+@media (max-width: 649px) {
+  .pswp__img{
+  width: 100% !important;
   height: auto !important;
 }
 }
 
-.pswp__item{
-  /* height: 100vh !important; */
-  /* background: red !important; */
-  /* display: flex !important;
-  justify-content: center !important; */
+.pswp__zoom-wrap{
+  transform: none !important;
 }
-  .pswp__img{
-  /* width: auto !important; */
-  height: auto !important;
+.pswp__scroll-wrap, .pswp__bg, .pswp__container, .pswp__item, .pswp__content, .pswp__img, .pswp__zoom-wrap {
+  inset: 0 !important;
+  margin: auto !important;
 }
 
-.pswp img {
+/* .pswp img {
 transform: scale(.2) !important;
-}
+} */
 
 .leaflet-top, .leaflet-bottom,
 .leaflet-pane, .leaflet-control{

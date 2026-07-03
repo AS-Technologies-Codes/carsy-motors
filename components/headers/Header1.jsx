@@ -84,12 +84,12 @@ export default function Header1({ bg = "style2" }) {
                       </form>
                     </div>
                   </div>
-                  <a
-                    href="javascript:void(0)"
+                  <Link
+                    href="/favourites"
                     className="header-favorite flex items-center justify-center"
                   >
                     <i className="icon-autodeal-favorite fs-18" />
-                  </a>
+                  </Link>
                 </div>
                 <div
                   className="mobile-nav-toggler mobile-button"

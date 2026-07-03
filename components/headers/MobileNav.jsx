@@ -95,9 +95,9 @@ export default function MobileNav() {
             <Link href="/">Home</Link>
           </li>
           <li
-            className={"car-sells" == pathname.split("/")[1] ? "current" : ""}
+            className={"buy" == pathname.split("/")[1] ? "current" : ""}
           >
-            <Link href="/car-sells">Sell</Link>
+            <Link href="/buy">Buy</Link>
           </li>
           <li
             className={`tf-megamenu dropdown2 parent-menu-1 ${

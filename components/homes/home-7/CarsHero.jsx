@@ -59,7 +59,7 @@ export default function CarsHero() {
         {
           title: "Buy Pre-owned Cars",
           value: "View Inventory",
-          href: "/car-sells",
+          href: "/buy",
           description:
             "Quality cars inspected ready ownership transfer and warranty.",
           delay: "100ms",
@@ -451,7 +451,8 @@ export default function CarsHero() {
                               {specIndex != 2 && (
                                 <Link
                                   href={spec.href}
-                                  className={`sc-button btn-svg btn-55 ${spec?.color ? spec.color : ""}`}
+                                  className={`sc-button btn-svg btn-55 bg-transparent d-flex align-items-center p-2 mx-1 justify-content-center border-color-gray text-color-2 border-half rounded-4`}
+                                  // className={`sc-button btn-svg btn-55 ${spec?.color ? spec.color : ""}`}
                                 >
                                   <span>{spec.value}</span>
                                   <i className="icon-autodeal-next" />

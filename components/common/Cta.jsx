@@ -208,7 +208,7 @@ export default function Cta() {
                     warranty.
                   </p>
                   <div className="meta style">
-                    {/* <a href="/car-sells" className="sc-button btn-svg"> */}
+                    {/* <a href="/buy" className="sc-button btn-svg"> */}
                     <a href="javascript:void(0)" className="sc-button btn-svg">
                       <span>View Inventory</span>
                       <i className="icon-autodeal-next" />

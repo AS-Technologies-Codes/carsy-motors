@@ -79,17 +79,9 @@ export default function Blogs({ parentClass = "section-blog tf-section" }) {
                         <div className="images img-style relative flex-none">
                           <Image
                             className="lazyload"
-                            data-src={
-                              slide.image.includes(".pk")
-                                ? slide.image
-                                : slide.image.replace(".p", ".pk")
-                            }
+                            data-src={slide.image}
                             alt={slide.link_name}
-                            src={
-                              slide.image.includes(".pk")
-                                ? slide.image
-                                : slide.image.replace(".p", ".pk")
-                            }
+                            src={slide.image}
                             width={500}
                             height={300}
                           />
@@ -113,7 +105,8 @@ export default function Blogs({ parentClass = "section-blog tf-section" }) {
                             </a>
                           </div>
                           <h3>
-                            <Link href={`/blog-detail/${slide.id}`}>
+                            <Link href={`javascript:void(0)`}>
+                            {/* <Link href={`/blog-detail/${slide.id}`}> */}
                               {slide.link_name}
                             </Link>
                           </h3>

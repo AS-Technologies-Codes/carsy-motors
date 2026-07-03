@@ -1,5 +1,5 @@
-const baseUrl = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
-const accessToken = process.env.NEXT_PUBLIC_PRIVATE_API_KEY;
+const baseUrl = "https://carsy.astechnologies.pk/api_carsy/carsy_api/cars_api.php?action=";
+const accessToken = "Bearer dfsdgs43543534543gdsfdsfdsfa22342222@@223";
 
 const URL = {
   getReviews: baseUrl + "get_reviews",

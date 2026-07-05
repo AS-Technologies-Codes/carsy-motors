@@ -80,6 +80,12 @@ export default function CarSells() {
   };
 
   const priceFilter = (oldPrice) => {
+    if (!oldPrice.includes("-"))
+      return {
+        minPrice: oldPrice.split(",")[0],
+        maxPrice: oldPrice.split(",")[1],
+      };
+
     const price = oldPrice.replace(/[,$]/g, "");
     const priceMin = price.split("-")[0].trim();
     const priceMax = price.split("-")[1].trim();
@@ -96,7 +102,7 @@ export default function CarSells() {
       page: allProps.currentPage,
       ...(!price.includes("Any") ? priceFilter(price) : {}),
       ...(km[0] ? { kmMin: km[0] } : {}),
-      ...(km[1] > 100000 ? {} : {kmMax: km[1]}),
+      ...(km[1] > 100000 ? {} : { kmMax: km[1] }),
       ...(year[0] > 1997 ? { yearMin: year[0] } : {}),
       ...(year[1] <= new Date().getFullYear() ? { yearMax: year[1] } : {}),
       ...(!body.includes("Any") ? { body } : {}),

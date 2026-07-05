@@ -79,17 +79,24 @@ export default function CarSells() {
     },
   };
 
+  const priceFilter = (oldPrice) => {
+    const price = oldPrice.replace(/[,$]/g, "");
+    const priceMin = price.split("-")[0].trim();
+    const priceMax = price.split("-")[1].trim();
+    console.log({ priceMin, priceMax });
+
+    return { priceMin, priceMax };
+  };
+
   const fecthGetCars = async () => {
     setCarsLoading(true);
 
     // Build URL with filter parameters
     const params = new URLSearchParams({
       page: allProps.currentPage,
-      // ...(price[0] ? { priceMin: price[0] } : {}),
-      // ...(price[1] <= 99999 ? { priceMax: price[1] } : {}),
-      ...(!price.includes("Any") ? { price } : {}),
+      ...(!price.includes("Any") ? priceFilter(price) : {}),
       ...(km[0] ? { kmMin: km[0] } : {}),
-      ...(km[1] <= 99999 ? { kmMax: km[1] } : {}),
+      ...(km[1] > 100000 ? {} : {kmMax: km[1]}),
       ...(year[0] > 1997 ? { yearMin: year[0] } : {}),
       ...(year[1] <= new Date().getFullYear() ? { yearMax: year[1] } : {}),
       ...(!body.includes("Any") ? { body } : {}),
@@ -99,7 +106,6 @@ export default function CarSells() {
       ...(!fuel.includes("Any") ? { fuelType: fuel } : {}),
       ...(!transmission.includes("Any") ? { transmission } : {}),
       ...(!location.includes("Any") ? { location } : {}),
-      // ...(condition !== "All" ? { condition } : {}),
       ...(evsOnly ? { is_ev: 1 } : {}),
       ...(!door.includes("Any") ? { door } : {}),
       ...(!seat.includes("Any") ? { seat } : {}),
@@ -298,10 +304,16 @@ export default function CarSells() {
                             onChange={allProps.setPrice}
                             options={[
                               "Any Price",
-                              ...(filterOptions?.price?.map(
-                                (body_type) =>
-                                  `${body_type?.name} (${body_type?.count || 0})`,
-                              ) || []),
+                              "$10,000 - $15,000",
+                              "$15,000 - $20,000",
+                              "$20,000 - $25,000",
+                              "$25,000 - $30,000",
+                              "$30,000 - $35,000",
+                              "$35,000 - $40,000",
+                              "$40,000 - $60,000",
+                              "$60,000 - $80,000",
+                              "$80,000 - $100,000",
+                              "$100,000 - $150,000",
                             ]}
                           />
                         </div>
@@ -689,7 +701,12 @@ export default function CarSells() {
                                     </p>
                                   </div>
                                   <h5 className="link-style-1">
-                                    <Link href={`/listing-detail-v1/${car.id}`} style={{height: isMobile ? "auto" : "50px"}}>
+                                    <Link
+                                      href={`/listing-detail-v1/${car.id}`}
+                                      style={{
+                                        height: isMobile ? "auto" : "50px",
+                                      }}
+                                    >
                                       {car.title}
                                     </Link>
                                   </h5>
@@ -710,37 +727,36 @@ export default function CarSells() {
                                   <div className="money fs-20 fw-5 lh-25 text-color-3">
                                     ${car.price.toLocaleString()}
                                   </div>
-                                 
-                                  </div>
-                                 <div className="w-100 d-flex d-md-none justify-content-between align-items-center">
-                                    <Link
+                                </div>
+                                <div className="w-100 d-flex d-md-none justify-content-between align-items-center">
+                                  <Link
                                     href={`/listing-detail-v1/${car.id}`}
                                     className="view-car"
                                   >
                                     View details
                                     <i className="icon-autodeal-btn-right" />
                                   </Link>
-                                   <Link
-                                        href={`javascript:void(0)`}
-                                        onClick={() => handleFavourite(car)}
-                                        className="text-color-3"
-                                      >
-                                        <svg
-                                          width={18}
-                                          height={16}
-                                          viewBox="0 0 18 16"
-                                          fill={car?.favorite || "none"}
-                                          xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                          <path
-                                            d="M16.5 4.875C16.5 2.80417 14.7508 1.125 12.5933 1.125C10.9808 1.125 9.59583 2.06333 9 3.4025C8.40417 2.06333 7.01917 1.125 5.40583 1.125C3.25 1.125 1.5 2.80417 1.5 4.875C1.5 10.8917 9 14.875 9 14.875C9 14.875 16.5 10.8917 16.5 4.875Z"
-                                            stroke="CurrentColor"
-                                            strokeWidth="1.5"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                          />
-                                        </svg>
-                                      </Link>
+                                  <Link
+                                    href={`javascript:void(0)`}
+                                    onClick={() => handleFavourite(car)}
+                                    className="text-color-3"
+                                  >
+                                    <svg
+                                      width={18}
+                                      height={16}
+                                      viewBox="0 0 18 16"
+                                      fill={car?.favorite || "none"}
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M16.5 4.875C16.5 2.80417 14.7508 1.125 12.5933 1.125C10.9808 1.125 9.59583 2.06333 9 3.4025C8.40417 2.06333 7.01917 1.125 5.40583 1.125C3.25 1.125 1.5 2.80417 1.5 4.875C1.5 10.8917 9 14.875 9 14.875C9 14.875 16.5 10.8917 16.5 4.875Z"
+                                        stroke="CurrentColor"
+                                        strokeWidth="1.5"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                      />
+                                    </svg>
+                                  </Link>
                                 </div>
                                 <div className="inner2 w-100">
                                   <div

@@ -75,7 +75,7 @@ export default function DropdownSelect({
                 key={i}
                 onClick={() => {
                   setSelected(elm);
-                  onChange(elm.split(" ")[0]);
+                  onChange(elm);
                   toggleDropdown();
                 }}
                 className={`option ${

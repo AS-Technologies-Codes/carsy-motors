@@ -148,7 +148,7 @@ const allCars = [
 export const initialState = {
   // price: [0, 100000],
   price: "Any Price",
-  km: [0, 100000],
+  km: [0, 100001],
   year: [1997, new Date().getFullYear() + 1],
   body: "Any Body",
   make: "Any Make",
@@ -237,7 +237,7 @@ export function reducer(state, action) {
         ...state,
         // price: [0, 100000],
         price: "Any Price",
-        km: [0, 100000],
+        km: [0, 100001],
         year: [1997, new Date().getFullYear() + 1],
         body: "Any Body",
         make: "Any Make",

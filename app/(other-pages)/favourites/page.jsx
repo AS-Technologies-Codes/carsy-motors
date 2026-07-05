@@ -3,12 +3,13 @@ import Slider1 from "@/components/carDetails/sliders/Slider1";
 import Footer1 from "@/components/footers/Footer1";
 import Header1 from "@/components/headers/Header1";
 import Hero from "@/components/homes/home-6/Hero";
+import { useResponsive } from "@/utils/useResponsive";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const page = () => {
   const [Favourites, setFavourites] = useState([]);
-
+  const { isMobile } = useResponsive();
   useEffect(() => {
     if (typeof window !== "undefined") {
       setFavourites(
@@ -74,7 +75,10 @@ const page = () => {
                     </div>
                   ) : (
                     <>
-                      <div className={`list-car-list-1 list-car-grid-1`}>
+                      <div
+                        className={`list-car-list-1 ${!isMobile ? "list-car-grid-1" : ""}`}
+                      >
+                        {" "}
                         {Favourites.map((car, i) => (
                           <div key={i} className="box-car-list style-2 hv-one">
                             <div className="image-group relative">
@@ -121,8 +125,13 @@ const page = () => {
                                   </p>
                                 </div>
                                 <h5 className="link-style-1">
-                                  <Link href={`/listing-detail-v1/${car.id}`}>
-                                    {car?.title}
+                                  <Link
+                                    href={`/listing-detail-v1/${car.id}`}
+                                    style={{
+                                      height: isMobile ? "auto" : "50px",
+                                    }}
+                                  >
+                                    {car.title}
                                   </Link>
                                 </h5>
                                 <div className="icon-box flex flex-wrap">
@@ -142,6 +151,8 @@ const page = () => {
                                 <div className="money fs-20 fw-5 lh-25 text-color-3">
                                   ${car.price.toLocaleString()}
                                 </div>
+                              </div>
+                              <div className="w-100 d-flex d-md-none justify-content-between align-items-center">
                                 <Link
                                   href={`/listing-detail-v1/${car.id}`}
                                   className="view-car"
@@ -149,10 +160,31 @@ const page = () => {
                                   View details
                                   <i className="icon-autodeal-btn-right" />
                                 </Link>
+                                <Link
+                                  href={`javascript:void(0)`}
+                                  onClick={() => handleFavourite(car)}
+                                  className="text-color-3"
+                                >
+                                  <svg
+                                    width={18}
+                                    height={16}
+                                    viewBox="0 0 18 16"
+                                    fill={"#fd5a21"}
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M16.5 4.875C16.5 2.80417 14.7508 1.125 12.5933 1.125C10.9808 1.125 9.59583 2.06333 9 3.4025C8.40417 2.06333 7.01917 1.125 5.40583 1.125C3.25 1.125 1.5 2.80417 1.5 4.875C1.5 10.8917 9 14.875 9 14.875C9 14.875 16.5 10.8917 16.5 4.875Z"
+                                      stroke="CurrentColor"
+                                      strokeWidth="1.5"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />
+                                  </svg>
+                                </Link>
                               </div>
-                              <div className="inner2">
+                              <div className="inner2 w-100">
                                 <div
-                                  className={`days-box d-flex flex-row  mb-2 justify-content-between h-100`}
+                                  className={`days-box d-flex flex-row mb-2 justify-content-between h-100 w-100`}
                                 >
                                   <Link
                                     href={`/listing-detail-v1/${car.id}`}
@@ -165,7 +197,7 @@ const page = () => {
                                     <Link
                                       href={`javascript:void(0)`}
                                       onClick={() => handleFavourite(car)}
-                                      className="text-color-3"
+                                      className="text-color-3 d-none d-md-block"
                                     >
                                       <svg
                                         width={18}

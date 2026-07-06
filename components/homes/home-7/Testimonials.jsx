@@ -25,15 +25,16 @@ export default function Testimonials() {
     fetchReviews();
   }, []);
 
-  const swiperOptions = {
-    autoplay: {
-      delay: 2000,
-      disableOnInteraction: true,
-    },
-    loop: true,
-    slidesPerView: 1,
+    const swiperOptions = {
+    // autoplay: {
+    //     delay: 5000,
+    //     disableOnInteraction: false,
+    // },
+    loop: ReviewsListing.length > 3,
+    initialSlide: 0,
+    slidesPerView: 3,
     spaceBetween: 30,
-    centeredSlides: true,
+    centeredSlides: false,
 
     pagination: {
       el: ".spd18",
@@ -53,7 +54,7 @@ export default function Testimonials() {
         spaceBetween: 30,
       },
       1440: {
-        slidesPerView: 4.3,
+        slidesPerView: 3,
         spaceBetween: 30,
       },
     },
@@ -80,7 +81,7 @@ export default function Testimonials() {
               <Swiper
                 {...swiperOptions}
                 modules={[Navigation, Pagination]}
-                className="swiper-container carousel-6 mask-0-3"
+                className="swiper-container carousel-6"
               >
                 {ReviewsListing.map((elm, i) => (
                   <SwiperSlide key={i} className="swiper-slide">
@@ -101,8 +102,16 @@ export default function Testimonials() {
                           </svg>
                         </div>
                       </div>
-                      <p className="fs-16 lh-22 text-color-2">
-                        {elm.description}
+                      <p className="fs-16 lh-22 text-color-2 d-md-none">
+                        {elm.description}{" "}
+                      </p>
+                      <p
+                        className="d-none fs-16 lh-22 text-color-2 d-md-flex justfy-content-center align-items-center"
+                        style={{ height: 100 }}
+                      >
+                        {elm.description.length > 170
+                          ? elm.description.slice(0, 170) + "..."
+                          : elm.description}
                       </p>
                       <div className="author-box flex">
                         <div className="images">

@@ -39,6 +39,11 @@ export default function CarReview() {
   useEffect(() => {
     fetchFleet();
   }, []);
+
+  if (!FleetLoading && !FleetListing.length) {
+    return <></>;
+  }
+
   return (
     <section className="tf-section-banner2">
       <div className="container">

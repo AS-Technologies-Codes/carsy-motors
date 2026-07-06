@@ -1,38 +1,36 @@
+// components/Map.tsx
 "use client";
-import { useEffect, useRef, useState } from "react";
 
-import { cars } from "@/data/cars";
+import { useState, useEffect, useRef } from "react";
+import * as maptilersdk from "@maptiler/sdk";
+import "@maptiler/sdk/dist/maptiler-sdk.css";
 import { getMapListingApi } from "@/utils/APIs";
-import { useResponsive } from "@/utils/useResponsive";
 
-const defaultCenter = [-27.544, 153.0092];
-const fallbackMarkers = [
-  {
-    id: 1,
-    name: "Rocklea Warehouse",
-    address: "Rocklea, QLD",
-    lat: -27.544,
-    lng: 153.0092,
-    image: "/assets/img/car/1.jpg",
-  },
-];
-
-export default function ListingMap({ height }) {
-  const mapRef = useRef(null);
-  const [getLocation, setLocation] = useState(null);
-  const [MapListing, setMapListing] = useState([]);
+export default function Map() {
+  const mapContainer = useRef(null);
+  const map = useRef(null);
+  const fallbackMarkers = [
+    {
+      id: 1,
+      name: "Rocklea Warehouse",
+      address: "Rocklea, QLD",
+      lat: -27.544,
+      lng: 153.0092,
+      image: "/assets/img/car/1.jpg",
+    },
+  ];
+  const [MapListing, setMapListing] = useState(fallbackMarkers);
   const [MapLoading, setMapLoading] = useState(true);
-  const [mapReady, setMapReady] = useState(false);
-  const { isMobile, isTablet, isDesktop, current } = useResponsive();
+  // 🔑 Get your API key from https://maptiler.com
+  const MAPTILER_KEY = "Wo1g8lU181ICQZpv28HQ";
 
   const fetchMap = async () => {
     try {
       setMapLoading(true);
       const getMapData = await getMapListingApi();
-      const sourceData = Array.isArray(getMapData) ? getMapData : fallbackMarkers;
-      const filterMapData = sourceData.map((item) => ({ ...cars[0], ...item }));
-      setMapListing(filterMapData.length ? filterMapData : fallbackMarkers);
+      setMapListing(getMapData);
     } catch (error) {
+      setMapListing();
       console.error("Failed to fetch map listing data", error);
       setMapListing(fallbackMarkers);
     } finally {
@@ -41,12 +39,67 @@ export default function ListingMap({ height }) {
   };
 
   useEffect(() => {
-    // Initialize Leaflet map
-    if (typeof window !== "undefined" && !mapReady) {
-      setMapReady(true);
-    }
     fetchMap();
   }, []);
+
+  useEffect(() => {
+    if (map.current || !mapContainer.current) return;
+
+    maptilersdk.config.apiKey = MAPTILER_KEY;
+
+    // 1. Initialize the map canvas thread
+    map.current = new maptilersdk.Map({
+      container: mapContainer.current,
+      style: maptilersdk.MapStyle.STREETS,
+      center: [153.0092, -27.545], // [Lng, Lat]
+      zoom: 14,
+      scrollZoom: false, // ❌ Disable mouse scroll wheel zoom (scrollWheelZoom: false)
+      dragPan: true, //  Enable clicking and dragging the map (dragging: true)
+      doubleClickZoom: true, //  Enable double clicking to zoom (doubleClickZoom: true)
+      touchZoomRotate: true,
+    });
+
+    // 2. Add markers from hardcoded data
+    MapListing.forEach((marker) => {
+      const cardContent = `<div class="map-listing-item">
+                  <div class="inner-box">
+                    <div class="image-box">
+                      <figure class="image">
+                        <img src="${marker.image}" style="height:120px;width:100%;object-fit:cover;border-radius:4px;" />
+                      </figure>
+                    </div>
+                    <div class="content">
+                      <p class="text-color-3 font">${marker.name}</p>
+                      <h5>
+                        <a href="javascript:void(0)">${marker.address}</a>
+                      </h5>
+                      <button onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=${marker.lat},${marker.lng}', '_blank')" class="sc-button border-0 btn-svg p-2 mt-3 d-flex align-items-center w-50 justify-content-center">
+                        <span>Direction</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>`;
+
+      const popup = new maptilersdk.Popup({
+        offset: 25,
+        closeButton: true,
+        closeOnClick: false,
+      }).setHTML(cardContent);
+
+      new maptilersdk.Marker({ color: "#FF0000" })
+        .setLngLat([marker.lng, marker.lat])
+        .setPopup(popup)
+        .addTo(map.current);
+    });
+
+    // Clean up pipeline when component unmounts
+    return () => {
+      if (map.current) {
+        map.current.remove();
+        map.current = null;
+      }
+    };
+  }, [MapLoading]);
 
   return (
     <div className="container">
@@ -62,169 +115,9 @@ export default function ListingMap({ height }) {
           </p>
         </div>
       </div>
-      {MapLoading ? (
-        <div className="center my-5">
-          <span className="loader"></span>
-        </div>
-      ) : (
-        <div className="position-relative d-flex justify-content-center mb-5 rounded-4">
-          {isMobile || isTablet ? (
-            <LeafletMap
-              mapRef={mapRef}
-              center={defaultCenter}
-              zoom={14}
-              markers={MapListing}
-              selectedLocation={getLocation}
-              onMarkerClick={setLocation}
-              height={height || "100%"}
-            />
-          ) : (
-            <LeafletMap
-              mapRef={mapRef}
-              center={defaultCenter}
-              zoom={16}
-              markers={MapListing}
-              selectedLocation={getLocation}
-              onMarkerClick={setLocation}
-              height={height || "100%"}
-            />
-          )}
-        </div>
-      )}
+      <div style={{ width: "100%", height: "700px", position: "relative" }}>
+        <div ref={mapContainer} style={{ width: "100%", height: "100%" }} />
+      </div>
     </div>
-  );
-}
-
-// Leaflet Map Component
-function LeafletMap({
-  mapRef,
-  center,
-  zoom,
-  markers,
-  selectedLocation,
-  onMarkerClick,
-  height,
-}) {
-  const mapInstanceRef = useRef(null);
-  const markersRef = useRef([]);
-  const markerLayerRef = useRef(null);
-
-  useEffect(() => {
-    if (typeof window === "undefined" || !mapRef.current) return;
-
-    if (mapInstanceRef.current) {
-      mapInstanceRef.current.setView(center, zoom);
-      setTimeout(() => mapInstanceRef.current.invalidateSize(), 150);
-      return;
-    }
-
-    let isCancelled = false;
-
-    import("leaflet").then((L) => {
-      if (isCancelled) return;
-
-      import("leaflet/dist/leaflet.css");
-
-      if (mapRef.current && mapRef.current._leaflet_id) {
-        mapRef.current._leaflet_id = null;
-      }
-
-      const map = L.map(mapRef.current, {
-        touchZoom: true,
-        doubleClickZoom: true,
-        scrollWheelZoom: false,
-        dragging: true,
-      }).setView(center, zoom);
-
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 19,
-      }).addTo(map);
-
-      markerLayerRef.current = L.layerGroup().addTo(map);
-      mapInstanceRef.current = map;
-
-      setTimeout(() => map.invalidateSize(), 250);
-    });
-
-    return () => {
-      isCancelled = true;
-      if (mapInstanceRef.current) {
-        mapInstanceRef.current.remove();
-        mapInstanceRef.current = null;
-        markerLayerRef.current = null;
-      }
-    };
-  }, [center, zoom]);
-
-  useEffect(() => {
-    if (!mapInstanceRef.current || !markerLayerRef.current) return;
-
-    import("leaflet").then((L) => {
-      markerLayerRef.current.clearLayers();
-      markersRef.current = [];
-
-      markers.forEach((markerData) => {
-        const lat = Number(markerData.lat);
-        const lng = Number(markerData.lng);
-
-        if (!isNaN(lat) && !isNaN(lng)) {
-          const svg = `
-            <svg xmlns='http://www.w3.org/2000/svg' width='36' height='46' viewBox='0 0 36 46'>
-              <path d='M18 0C11 0 6 5 6 12c0 10 12 34 12 34s12-24 12-34C30 5 25 0 18 0z' fill='#fd5a21'/>
-              <circle cx='18' cy='12' r='5' fill='white'/>
-            </svg>
-          `;
-          const encoded = encodeURIComponent(svg).replace(/'/g, "%27").replace(/\(/g, "%28").replace(/\)/g, "%29");
-          const imgSrc = `data:image/svg+xml;charset=UTF-8,${encoded}`;
-          const icon = L.divIcon({
-            html: `<img src="${imgSrc}" style="width:36px;height:46px;display:block;"/>`,
-            className: "",
-            iconSize: [36, 46],
-            iconAnchor: [18, 46],
-          });
-
-          const leafletMarker = L.marker([lat, lng], { icon }).on("click", () => onMarkerClick(markerData));
-          leafletMarker.addTo(markerLayerRef.current);
-
-          const popupContent = document.createElement("div");
-          popupContent.innerHTML = `<div class="map-listing-item">
-                  <div class="inner-box">
-                    <div class="image-box">
-                      <figure class="image">
-                        <img src="${markerData.image}" style="height:120px;width:100%;object-fit:cover;border-radius:4px;" />
-                      </figure>
-                    </div>
-                    <div class="content">
-                      <p class="text-color-3 font">${markerData.name}</p>
-                      <h5>
-                        <a href="javascript:void(0)">${markerData.address}</a>
-                      </h5>
-                      <button onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}', '_blank')" class="sc-button border-0 btn-svg p-2 mt-3 d-flex align-items-center w-50 justify-content-center">
-                        <span>Direction</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>`;
-          leafletMarker.bindPopup(popupContent);
-          markersRef.current.push(leafletMarker);
-        }
-      });
-
-      setTimeout(() => mapInstanceRef.current.invalidateSize(), 100);
-    });
-  }, [markers, onMarkerClick]);
-
-  return (
-    <div
-      ref={mapRef}
-      style={{
-        width: "100%",
-        height: height || "100%",
-        minHeight: "500px",
-        borderRadius: "8px",
-      }}
-    />
   );
 }

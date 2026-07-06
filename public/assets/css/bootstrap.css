@@ -12126,16 +12126,6 @@ a.bg-blue:hover {
 }
 
 
-.leaflet-container a.leaflet-popup-close-button{
-  top: 27px !important;
-  right: 36px !important;
-}
-
-.leaflet-container a.leaflet-popup-close-button span{
-  font-size: 32px !important;
-    color: white !important;
-}
-
   .pswp__img{
   width: auto !important;
   height: 80vh !important;
@@ -12164,4 +12154,26 @@ transform: scale(.2) !important;
 .leaflet-pane, .leaflet-control{
   z-index: 9 !important;
 }
+
+/* Clean override rules for MapTiler popup containers */
+.maplibregl-popup-content {
+  padding: 0 !important; /* Removes default whitespace padding around your Bootstrap card */
+  border-radius: 8px !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15) !important;
+  overflow: hidden;
+}
+
+.maplibregl-popup-close-button {
+  background-color: white !important;
+  color: black !important;
+  border-radius: 50% !important;
+  width: 24px;
+  height: 24px;
+  top: 8px !important;
+  right: 8px !important;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  font-size: 16px;
+  line-height: 20px;
+}
+
 /*# sourceMappingURL=bootstrap.css.map */

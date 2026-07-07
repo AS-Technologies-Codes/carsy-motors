@@ -42,7 +42,7 @@ export default function Accordion({
 
   return (
     <>
-      {faqData.length
+      {Array.isArray(faqData)
         ? faqData?.map((item, index) => (
             <div
               ref={(el) => (parentRefs.current[index] = el)}

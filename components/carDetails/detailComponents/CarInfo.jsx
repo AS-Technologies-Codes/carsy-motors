@@ -32,12 +32,13 @@ export default function CarInfo({ carItem }) {
       );
     }
   };
+
   return (
     <>
       <div className="icon-box flex flex-wrap">
         <div className="icons flex-three">
           <i className="icon-autodeal-km1 me-1" />
-          <span>{carItem.km} kms</span>
+          <span>{carItem.km?.toLocaleString("en-AU")} kms</span>
         </div>
         <div className="icons flex-three">
           <i className="icon-autodeal-diesel me-1" />
@@ -52,7 +53,52 @@ export default function CarInfo({ carItem }) {
           <span>{carItem?.owner_number} Owner</span>
         </div>
       </div>
-      <div className="money text-color-3 font">${carItem.price}</div>
+      <div className="money text-color-3 font">
+        ${carItem.price.toLocaleString()}
+      </div>
+      {carItem?.finance_rate ? (
+        <div className="flex">
+          <div className="icons flex-three align-items-center border rounded-3 px-3 py-2  mt-2 mb-3">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="54"
+              height="54"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-landmark-icon lucide-landmark me-1 text-color-3"
+            >
+              <path d="M10 18v-7" />
+              <path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" />
+              <path d="M14 18v-7" />
+              <path d="M18 18v-7" />
+              <path d="M3 22h18" />
+              <path d="M6 18v-7" />
+            </svg>
+            <div className="lh-1 d-flex flex-column justify-content-center">
+              <span className="text-color-2 fw-5">Finance rate</span>
+              <div className="d-flex align-items-end">
+                <span className="relative fs-12" style={{ top: 3 }}>
+                  From{" "}
+                </span>
+                <div
+                  className=" money text-color-3 font p-0 m-0 px-1 fs-5"
+                  style={{ height: "25px" }}
+                >
+                  ${carItem?.finance_rate}
+                </div>
+                <span className="fs-12 relative" style={{ top: 3 }}>
+                  {" "}
+                  / week
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
       {/* <div className="price-wrap">
         <p className="fs-12 lh-16 text-color-2">
           Monthly installment payment:

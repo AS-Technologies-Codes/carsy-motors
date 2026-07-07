@@ -290,7 +290,7 @@ export default function Overview({ car }) {
               </div>
               <div className="content-listing-info">
                 <span className="listing-info-title">KM</span>
-                <p className="listing-info-value">{car?.km}</p>
+                <p className="listing-info-value">{car?.km.toLocaleString()}</p>
               </div>
             </div>
           </div>

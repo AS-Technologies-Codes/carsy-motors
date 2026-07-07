@@ -369,12 +369,12 @@ export default function CarsHero() {
                             {slide.description}
                           </p>
                         </div>
-                        <div className="specifications-wrap d-flex justify-content-center">
+                        <div className="specifications-wrap d-flex flex-wrap justify-content-center gap-5">
                           {slide.specifications.map((spec, specIndex) => (
                             <div
                               style={{ backgroundImage: spec?.image }}
                               key={specIndex}
-                              className="specifications specifications-bg  hover-zoom border border-primary-half wow px-4 fadeInUp d-flex flex-column justify-content-between mx-3"
+                              className="specifications specifications-bg  hover-zoom border border-primary-half wow px-4 fadeInUp d-flex flex-column justify-content-between"
                               data-wow-delay={spec.delay}
                               data-wow-duration="1000ms"
                             >

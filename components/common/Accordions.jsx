@@ -5,8 +5,6 @@ export default function Accordion({
   faqData,
   parentClass = "flat-toggle style-2",
 }) {
-  console.log("sdsds", faqData);
-
   const parentRefs = useRef([]);
   const questionRefs = useRef([]);
   const answerRefs = useRef([]);

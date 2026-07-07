@@ -3,7 +3,7 @@ import { toggleItems } from "@/data/faqs";
 import { useEffect, useRef, useState } from "react";
 
 export default function Accordion({
-  faqData = toggleItems,
+  faqData,
   parentClass = "flat-toggle style-2",
 }) {
   const parentRefs = useRef([]);
@@ -36,7 +36,7 @@ export default function Accordion({
 
   return (
     <>
-      {faqData.map((item, index) => (
+      {faqData?.map((item, index) => (
         <div
           ref={(el) => (parentRefs.current[index] = el)}
           className={`${currentIndex == index ? "activ" : ""} ${parentClass} `}
@@ -59,12 +59,13 @@ export default function Accordion({
             ref={(el) => (answerRefs.current[index] = el)}
           >
             <div className="inner">
-              {item?.content?.map((f) => (
-                <div className="listing-feature-wrap flex" key={f}>
+              {item?.content?.map((f) => {
+                console.log(item.content);
+                return <div className="listing-feature-wrap flex" key={f}>
                   <i className="icon-autodeal-check" />
                   <p>{f}</p>
-                </div>
-              ))}
+                </div>;
+              })}
             </div>
           </div>
         </div>

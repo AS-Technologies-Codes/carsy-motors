@@ -42,31 +42,31 @@ export default function Accordion({
 
   return (
     <>
-      {Array.isArray(faqData)
-        ? faqData?.map((item, index) => (
-            <div
-              ref={(el) => (parentRefs.current[index] = el)}
-              className={`${currentIndex == index ? "activ" : ""} ${parentClass} `}
-              onClick={() => {
-                setCurrentIndex((pre) => (pre == index ? -1 : index));
-              }}
-              key={index}
-            >
-              <div
-                className="toggle-title flex align-center"
-                role="button"
-                aria-disabled="false"
-                ref={(el) => (questionRefs.current[index] = el)}
-              >
-                <h5 className="fw-6">{item.title}</h5>
-                <div className="btn-toggle" />
-              </div>
-              <div
-                className="toggle-content section-desc features-inner"
-                ref={(el) => (answerRefs.current[index] = el)}
-              >
-                <div className="inner">
-                  {item?.content?.map((f) => {
+      {faqData?.map((item, index) => (
+        <div
+          ref={(el) => (parentRefs.current[index] = el)}
+          className={`${currentIndex == index ? "activ" : ""} ${parentClass} `}
+          onClick={() => {
+            setCurrentIndex((pre) => (pre == index ? -1 : index));
+          }}
+          key={index}
+        >
+          <div
+            className="toggle-title flex align-center"
+            role="button"
+            aria-disabled="false"
+            ref={(el) => (questionRefs.current[index] = el)}
+          >
+            <h5 className="fw-6">{item.title}</h5>
+            <div className="btn-toggle" />
+          </div>
+          <div
+            className="toggle-content section-desc features-inner"
+            ref={(el) => (answerRefs.current[index] = el)}
+          >
+            <div className="inner">
+              {Array.isArray(item?.content)
+                ? item?.content?.map((f) => {
                     console.log(item.content);
                     return (
                       <div className="listing-feature-wrap flex" key={f}>
@@ -74,12 +74,12 @@ export default function Accordion({
                         <p>{f}</p>
                       </div>
                     );
-                  })}
-                </div>
-              </div>
+                  })
+                : null}
             </div>
-          ))
-        : null}
+          </div>
+        </div>
+      ))}
     </>
   );
 }

@@ -18,15 +18,15 @@ export default function Header1({ bg = "style2" }) {
                   <div className="logo">
                     <Link href={`/`}>
                       <Image
-                        className="lazyload img-none"
-                        data-src="/assets/images/logo/logo.png"
+                        className="lazyload d-md-none"
+                        data-src="/assets/images/logo/logo-mobile.png"
                         alt=""
                         width={100}
                         height={40}
-                        src="/assets/images/logo/logo.png"
+                        src="/assets/images/logo/logo-mobile.png"
                       />
                       <Image
-                        className="lazyload img-is-fixed"
+                        className="lazyload d-none d-md-flex"
                         data-src="/assets/images/logo/logo.png"
                         alt=""
                         width={100}
@@ -68,8 +68,10 @@ export default function Header1({ bg = "style2" }) {
                     </a>
                     <div className="wd-find-select">
                       <form onSubmit={(e) => e.preventDefault()}>
-                        <div className="form-group-1 search-form form-style2 relative">
-                          <i className="icon-autodeal-search" />
+                        <div className="form-group-1 search-form form-style2 relative d-flex align-items-center">
+                          <button type="submit" className="bg-black border">
+                            <i className="icon-autodeal-search cursor-pointer" />
+                          </button>
                           <input
                             type="search"
                             className="search-field"

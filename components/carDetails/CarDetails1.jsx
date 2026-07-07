@@ -15,6 +15,7 @@ import Recommended from "./detailComponents/Recommended";
 import Features from "./detailComponents/Features";
 import SidebarToggleButton from "./SidebarToggleButton";
 import { getCarDetailsApi } from "@/utils/APIs";
+import Link from "next/link";
 export default function CarDetails1({ carItem }) {
   const [CarDetailsListing, setCarDetailsListing] = useState({});
   const [CarDetailsLoading, setCarDetailsLoading] = useState(true);
@@ -45,6 +46,22 @@ export default function CarDetails1({ carItem }) {
   }
   return (
     <>
+    <section className="flat-title mb-40">
+        <div className="container2">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="title-inner style">
+                <div className="title-group fs-12">
+                  <Link className="home fw-6 text-color-3" href={`/`}>
+                    Home
+                  </Link>
+                  <span>{CarDetailsListing?.title} for sale</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <section className="tf-section3 listing-detail style-1">
         <div className="container">
           <div className="row">
@@ -127,46 +144,6 @@ export default function CarDetails1({ carItem }) {
                         <Features feat={CarDetailsListing} />
                       </div>
                       <div className="listing-line" />
-                      {/* <div
-                        className="listing-calculator loan-calculator-form"
-                        id="scrollspyHeading4"
-                      >
-                        <div className="box-title">
-                          <h2 className="title-ct">Car for Cash</h2>
-                          <p>Use our calculator to estimate your car price.</p>
-                        </div>
-                        <LoanCalculator />
-                      </div> */}
-                      {/* <div className="listing-line" />
-                      <div className="listing-location" id="scrollspyHeading3">
-                        <div className="box-title">
-                          <h2 className="title-ct">Location</h2>
-                          <div className="list-icon-pf gap-8 flex-three">
-                            <i className="far fa-map" />
-                            <p className="font-1">
-                              2972 Westheimer Rd. Santa Ana, Illinois 85486
-                            </p>
-                          </div>
-                        </div>
-                        <iframe
-                          className="map-content"
-                          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7302.453092836291!2d90.47477022812872!3d23.77494577893369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1627293157601!5m2!1svi!2s"
-                          allowFullScreen=""
-                          loading="lazy"
-                        />
-                      </div> */}
-                      {/* <div className="listing-line" />
-                      <div
-                        className="listing-reviews flat-property-detail"
-                        id="scrollspyHeading5"
-                      >
-                        <div className="box-title">
-                          <h2 className="title-ct">
-                            Car User Reviews &amp; Rating
-                          </h2>
-                        </div>
-                        <CarReview />
-                      </div> */}
                     </div>
                   </div>
                 </div>
@@ -184,10 +161,10 @@ export default function CarDetails1({ carItem }) {
                 <div className="widget-listing mb-30">
                   <ProfileInfo car={CarDetailsListing} />
                 </div>
-                <div className="list-icon-pf gap-8 flex-three mb-40">
+                {/* <div className="list-icon-pf gap-8 flex-three mb-40">
                   <i className="far fa-flag" />
                   <p className="font-1">Report this listing</p>
-                </div>
+                </div> */}
                 <div className="widget-listing">
                   <Recommended make={CarDetailsListing?.make} />
                   {/* <a

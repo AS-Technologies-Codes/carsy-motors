@@ -54,7 +54,7 @@ export default function Map() {
       center: [153.0092, -27.545], // [Lng, Lat]
       zoom: 14,
       scrollZoom: false, // ❌ Disable mouse scroll wheel zoom (scrollWheelZoom: false)
-      dragPan: true, //  Enable clicking and dragging the map (dragging: true)
+      dragPan: false, //  Enable clicking and dragging the map (dragging: true)
       doubleClickZoom: true, //  Enable double clicking to zoom (doubleClickZoom: true)
       touchZoomRotate: true,
     });

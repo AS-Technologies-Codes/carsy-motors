@@ -12176,4 +12176,8 @@ transform: scale(.2) !important;
   line-height: 20px;
 }
 
+.cursor-pointer{
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=bootstrap.css.map */

@@ -29,7 +29,7 @@ export default function page() {
                   <Link className="home fw-6 text-color-3" href={`/`}>
                     Home
                   </Link>
-                  <span>Car sells</span>
+                  <span>Cars for sale</span>
                 </div>
               </div>
             </div>

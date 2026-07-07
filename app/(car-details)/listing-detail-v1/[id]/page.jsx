@@ -17,22 +17,6 @@ export default function page({ params }) {
       <div className="header-fixed">
         <Header2 bg="style-1"/>
       </div>
-      <section className="flat-title mb-40">
-        <div className="container2">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="title-inner style">
-                <div className="title-group fs-12">
-                  <Link className="home fw-6 text-color-3" href={`/`}>
-                    Home
-                  </Link>
-                  <span>Used cars for sale</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
       <CarDetails1 carItem={params?.id} />
       <Footer1 />
     </>

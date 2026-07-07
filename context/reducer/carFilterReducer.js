@@ -200,7 +200,7 @@ export function reducer(state, action) {
     case "SET_DOOR":
       return { ...state, door: action.payload };
     case "SET_DRIVE_TYPE":
-      return { ...state, door: action.payload };
+      return { ...state, drive_type: action.payload };
     case "SET_SEAT":
       return { ...state, seat: action.payload };
     case "SET_CYLINDER":

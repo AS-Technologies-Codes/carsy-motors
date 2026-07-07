@@ -1,7 +1,9 @@
 "use client";
+import { useResponsive } from "@/utils/useResponsive";
 import Image from "next/image";
 import Link from "next/link";
 export default function CarsHero() {
+  const {isMobile} = useResponsive();
   const swiperOptions = {
     autoplay: {
       delay: 6000,
@@ -387,7 +389,7 @@ export default function CarsHero() {
                               {spec.title}
                             </div> */}
                                 </div>
-                                <p className="text-color-3 font fs-4 fw-medium  mb-2">
+                                <p className={`text-color-3 font ${isMobile ? "fs-2" : "fs-4" } mt-2 fw-medium  mb-2`}>
                                   {spec.title}
                                 </p>
                                 <div className="font text-color-1">

@@ -25,7 +25,7 @@ export default function Testimonials() {
     fetchReviews();
   }, []);
 
-    const swiperOptions = {
+  const swiperOptions = {
     // autoplay: {
     //     delay: 5000,
     //     disableOnInteraction: false,
@@ -142,6 +142,17 @@ export default function Testimonials() {
                             </svg>
                           )}
                         </div>
+                        {parseInt(elm?.stars) ? (
+                          <div className="content">
+                            {Array(parseInt(elm.stars))
+                              .fill("⭐")
+                              .map((star, index) => (
+                                <span key={index}>{star}</span>
+                              ))}
+                          </div>
+                        ) : (
+                          ""
+                        )}
                         <div className="content">
                           <h5>{elm.name}</h5>
                           <p className="fs-12 lh-16">{elm.designation}</p>

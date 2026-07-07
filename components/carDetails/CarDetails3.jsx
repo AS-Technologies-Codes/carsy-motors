@@ -23,7 +23,7 @@ export default function CarDetails3({ carItem = allCars[0] }) {
                   <div className="icon-box flex flex-wrap">
                     <div className="icons flex-three">
                       <i className="icon-autodeal-km1" />
-                      <span>{carItem.km.toLocaleString()} kms</span>
+                      <span>{carItem.km?.toLocaleString()} kms</span>
                     </div>
                     <div className="icons flex-three">
                       <i className="icon-autodeal-diesel" />
@@ -39,7 +39,7 @@ export default function CarDetails3({ carItem = allCars[0] }) {
                     </div>
                   </div>
                   <div className="money text-color-3 font">
-                    ${carItem.price.toLocaleString()}
+                    ${carItem.price?.toLocaleString()}
                   </div>
                   <div className="price-wrap flex">
                     <p className="fs-12 lh-16 text-color-2">

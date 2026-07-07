@@ -54,7 +54,7 @@ export default function CarInfo({ carItem }) {
         </div>
       </div>
       <div className="money text-color-3 font">
-        ${carItem.price.toLocaleString()}
+        ${carItem.price?.toLocaleString()}
       </div>
       {carItem?.finance_rate ? (
         <div className="flex">

@@ -100,7 +100,7 @@ export default function Compare() {
                     </h5>
 
                     <div className="money fs-20 fw-5 lh-25 text-color-3">
-                      ${elm.price.toLocaleString()}
+                      ${elm.price?.toLocaleString()}
                     </div>
                     <div className="days-box flex justify-space align-center">
                       <div className="img-author">

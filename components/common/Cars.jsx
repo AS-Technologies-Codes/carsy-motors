@@ -155,7 +155,7 @@ export default function Cars({ parentClass = "tf-section" }) {
                           <div className="icon-box flex flex-wrap">
                             <div className="icons flex-three">
                               <i className="icon-autodeal-km1" />
-                              <span>{car.km.toLocaleString()} kms</span>
+                              <span>{car.km?.toLocaleString()} kms</span>
                             </div>
                             <div className="icons flex-three">
                               <i className="icon-autodeal-diesel" />
@@ -167,7 +167,7 @@ export default function Cars({ parentClass = "tf-section" }) {
                             </div>
                           </div>
                           <div className="money fs-20 fw-5 lh-25 text-color-3">
-                            ${car.price.toLocaleString()}
+                            ${car.price?.toLocaleString()}
                           </div>
                           <div className="days-box flex justify-space align-center">
                             <div className="img-author">

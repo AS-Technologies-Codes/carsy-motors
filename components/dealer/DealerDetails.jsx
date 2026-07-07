@@ -217,7 +217,7 @@ export default function DealerDetails({ dealerItem }) {
                           </Link>
                         </h6>
                         <p className="fs-14 fw-7 text-color-2 font-1">
-                          ${elm.price.toLocaleString()}
+                          ${elm.price?.toLocaleString()}
                         </p>
                       </div>
                     </div>

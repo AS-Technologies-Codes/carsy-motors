@@ -127,7 +127,7 @@ export default function Hero() {
                                 />
                               </svg>
                             </div>
-                            <div className="font text-color-1">{elm.km.toLocaleString()}</div>
+                            <div className="font text-color-1">{elm.km?.toLocaleString()}</div>
                           </li>
                           <li className="flex-three">
                             <div className="icon">
@@ -150,7 +150,7 @@ export default function Hero() {
                                 />
                               </svg>
                             </div>
-                            <div className="font text-color-1">{elm.price.toLocaleString()}</div>
+                            <div className="font text-color-1">{elm.price?.toLocaleString()}</div>
                           </li>
                         </ul>
                       </div>

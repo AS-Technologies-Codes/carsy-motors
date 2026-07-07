@@ -54,7 +54,7 @@ export default function Recommended({ make }) {
                 <Link href={`/listing-detail-v1/${elm.id}`}>{elm.title}</Link>
               </h6>
               <p className="fs-14 fw-7 text-color-2 font-1">
-                ${elm.price.toLocaleString()}
+                ${elm.price?.toLocaleString()}
               </p>
             </div>
           </div>

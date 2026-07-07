@@ -248,7 +248,7 @@ export default function DashBoard() {
                                           </div>
                                           <div className="price">
                                             <div className="inner tfcl-listing-price">
-                                              ${elm.price.toLocaleString()}
+                                              ${elm.price?.toLocaleString()}
                                             </div>
                                           </div>
                                         </div>

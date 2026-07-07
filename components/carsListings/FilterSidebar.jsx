@@ -1,7 +1,11 @@
+"use client";
 import Pricing from "../common/Pricing";
 import DropdownSelect from "../common/DropDownSelect";
+import { useCarFilter } from "@/context/providers/CarFilterContext";
 
-export default function FilterSidebar({ allProps, clearFilter, state }) {
+export default function FilterSidebar({ allProps, clearFilter }) {
+    const { state} = useCarFilter();
+  
   const {
     price,
     km,

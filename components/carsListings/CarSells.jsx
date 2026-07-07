@@ -849,7 +849,6 @@ const clean = (val) => typeof val === 'string' ? val.replace(/\s*\(\d+\)/g, "") 
 
       <FilterSidebar
         allProps={allProps}
-        state={state}
         clearFilter={clearFilter}
       />
     </>

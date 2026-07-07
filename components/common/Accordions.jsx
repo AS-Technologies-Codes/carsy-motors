@@ -55,10 +55,17 @@ export default function Accordion({
             <div className="btn-toggle" />
           </div>
           <div
-            className="toggle-content section-desc"
+            className="toggle-content section-desc features-inner"
             ref={(el) => (answerRefs.current[index] = el)}
           >
-            <p className="texts">{item.content}</p>
+            <div className="inner">
+              {item?.content?.map((f) => (
+                <div className="listing-feature-wrap flex" key={f}>
+                  <i className="icon-autodeal-check" />
+                  <p>{f}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       ))}

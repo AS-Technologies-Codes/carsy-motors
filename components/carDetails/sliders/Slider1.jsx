@@ -5,8 +5,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 import Image from "next/image";
 import Product360Viewer from "@/components/product360Viewer/Product360Viewer";
+import { useResponsive } from "@/utils/useResponsive";
 export default function Slider1({ images, viewer }) {
   const [Toggle, setToggle] = useState(false);
+  const { isMobile } = useResponsive();
 
   const swiperOptions = {
     autoplay: {
@@ -56,12 +58,17 @@ export default function Slider1({ images, viewer }) {
                   data-pswp-width="1245"
                   data-pswp-height="701"
                   target="_blank"
-                  className="image d-flex justify-content-center w-100 "
+                  className="image d-flex justify-content-center bg-black"
                 >
                   <Image
-                    className="lazyload" 
+                    className="lazyload"
                     alt="image"
                     src={elm}
+                    style={
+                      isMobile
+                        ? {}
+                        : { width: "auto", height: "550px", objectFit: "cover" }
+                    }
                     width={1245}
                     height={701}
                   />

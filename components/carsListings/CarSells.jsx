@@ -1,13 +1,11 @@
 "use client";
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useRef, useReducer, useState } from "react";
 import Pricing from "../common/Pricing";
-import Image from "next/image";
 import Link from "next/link";
 import DropdownSelect from "../common/DropDownSelectFilter";
 import { featureOptions } from "@/data/filterOptions";
 import { useCarFilter } from "@/context/providers/CarFilterContext";
 import Pagination from "../common/Pagination";
-import ListGridToggler from "./ListGridToggler";
 import FilterSidebar from "./FilterSidebar";
 import { accessToken, URL } from "@/utils/URL";
 import Slider1 from "../carDetails/sliders/Slider1";
@@ -93,32 +91,34 @@ export default function CarSells() {
 
     return { priceMin, priceMax };
   };
+const clean = (val) => typeof val === 'string' ? val.replace(/\s*\(\d+\)/g, "") : val;
 
   const fecthGetCars = async () => {
     setCarsLoading(true);
 
-    // Build URL with filter parameters
-    const params = new URLSearchParams({
+    const allParams = {
       page: allProps.currentPage,
       ...(!price.includes("Any") ? priceFilter(price) : {}),
       ...(km[0] ? { kmMin: km[0] } : {}),
       ...(km[1] > 100000 ? {} : { kmMax: km[1] }),
       ...(year[0] > 1997 ? { yearMin: year[0] } : {}),
       ...(year[1] <= new Date().getFullYear() ? { yearMax: year[1] } : {}),
-      ...(!body.includes("Any") ? { body } : {}),
-      ...(!make.includes("Any") ? { make } : {}),
-      ...(!model.includes("Any") ? { model } : {}),
-      ...(!drive_type.includes("Any") ? { drive_type } : {}),
-      ...(!fuel.includes("Any") ? { fuelType: fuel } : {}),
-      ...(!transmission.includes("Any") ? { transmission } : {}),
-      ...(!location.includes("Any") ? { location } : {}),
-      ...(evsOnly ? { is_ev: 1 } : {}),
-      ...(!door.includes("Any") ? { door } : {}),
-      ...(!seat.includes("Any") ? { seat } : {}),
-      ...(!cylinder.includes("Any") ? { cylinder } : {}),
-      ...(!color.includes("Any") ? { color } : {}),
-      ...(features.length ? { features: features.join(",") } : {}),
-    });
+      ...(!body.includes("Any") ? { body: clean(body) } : {}),
+      ...(!make.includes("Any") ? { make: clean(make) } : {}),
+      ...(!model.includes("Any") ? { model: clean(model) } : {}),
+      ...(!drive_type.includes("Any") ? { drive_type: clean(drive_type) } : {}),
+      ...(!fuel.includes("Any") ? { fuelType: clean(fuel) } : {}),
+      ...(!transmission.includes("Any") ? { transmission: clean(transmission) } : {}),
+      // ...(evsOnly ? { is_ev: 1 } : {}),
+      ...(!door.includes("Any")
+        ? { door: clean(door) }
+        : {}),
+      ...(!seat.includes("Any") ? { seat: clean(seat) } : {}),
+      ...(!cylinder.includes("Any") ? { cylinder: clean(cylinder) } : {}),
+      ...(!color.includes("Any") ? { color: clean(color) } : {}),
+    };
+    
+    const params = new URLSearchParams(allParams);
 
     const getGetCarsRequest = await fetch(
       `${URL.getCars}&limit=${allProps.itemPerPage}&${params.toString()}`,
@@ -544,7 +544,7 @@ export default function CarSells() {
                 <div className="row">
                   <div className="col-lg-12 listing-list-car-wrap">
                     <div className="category-filter flex justify-space align-center mb-30 flex-wrap gap-8">
-                      <div className="box-1 flex align-center flex-wrap gap-8">
+                      <div className="box-1 flex justify-space align-center flex-wrap gap-8 w-100">
                         <p className="">
                           Showing {PaginationKeys.page} -{" "}
                           {PaginationKeys.total_pages} of {PaginationKeys.total}{" "}
@@ -562,11 +562,11 @@ export default function CarSells() {
                           </a>
                         </div>
                       </div>
-                      <div className="box-2 flex flex-wrap gap-8">
-                        {/* <ListGridToggler
+                      {/* <ListGridToggler
                           isGrid={isGrid}
                           setIsGrid={setIsGrid}
                         /> */}
+                      {/* <div className="box-2 flex flex-wrap gap-8">
                         <div className="wd-find-select flex gap-8">
                           <div>
                             <DropdownSelect
@@ -583,7 +583,7 @@ export default function CarSells() {
                             />
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                     {CarsLoading ? (
                       <div className="center my-5">
@@ -847,7 +847,11 @@ export default function CarSells() {
         </div>
       </section>
 
-      <FilterSidebar allProps={allProps} clearFilter={clearFilter} />
+      <FilterSidebar
+        allProps={allProps}
+        state={state}
+        clearFilter={clearFilter}
+      />
     </>
   );
 }

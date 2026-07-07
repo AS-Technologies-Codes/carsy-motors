@@ -1,10 +1,32 @@
-"use client";
-
-import { featureOptions } from "@/data/filterOptions";
 import Pricing from "../common/Pricing";
 import DropdownSelect from "../common/DropDownSelect";
 
-export default function FilterSidebar({ allProps, clearFilter }) {
+export default function FilterSidebar({ allProps, clearFilter, state }) {
+  const {
+    price,
+    km,
+    year,
+    body,
+    make,
+    model,
+    fuel,
+    transmission,
+    location,
+    door,
+    cylinder,
+    color,
+    drive_type,
+    features,
+    filtered,
+    sortingOption,
+    evsOnly,
+    sorted,
+    currentPage,
+    itemPerPage,
+    filterOptions,
+    seat,
+  } = state;
+
   return (
     <div className="offcanvas offcanvas-end" tabIndex={-1} id="offcanvasRight">
       <div className="offcanvas-header">
@@ -29,172 +51,199 @@ export default function FilterSidebar({ allProps, clearFilter }) {
           />{" "}
           Clear Filter
         </a>
-        <div className="form-filter-siderbar">
-          <form onSubmit={(e) => e.preventDefault()}>
-            <div className="wd-find-select">
-              <div className="form-group">
-                <div className="group-select">
-                  <DropdownSelect
-                    selectedValue={allProps.make}
-                    onChange={allProps.setMake}
-                    options={["Any Make", "Audi", "Dongfeng", "BMW"]}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <div className="group-select">
-                  <DropdownSelect
-                    selectedValue={allProps.model}
-                    onChange={allProps.setModel}
-                    options={["Any Model", "A4", "Almera", "Carnival"]}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <div className="group-select">
-                  <DropdownSelect
-                    selectedValue={allProps.body}
-                    onChange={allProps.setBody}
-                    options={["Any Body", "Convertible", "Coupe", "Crossover"]}
-                  />{" "}
-                </div>
-              </div>
-              <div className="form-group wg-box3">
-                <div className="widget widget-price">
-                  <div className="caption flex-two">
-                    <div>
-                      <span className="fw-6">
-                        Price: ${allProps.price[0]} - ${allProps.price[1]}
-                      </span>
-                    </div>
-                  </div>
-                  <Pricing
-                    MIN={45000}
-                    MAX={115000}
-                    priceRange={allProps.price}
-                    setPriceRange={allProps.setPrice}
-                  />
-                </div>
-                {/* /.widget_price */}
-              </div>
-              <div className="form-group">
-                <div className="group-select">
-                  <DropdownSelect
-                    selectedValue={allProps.fuel}
-                    onChange={allProps.setFuel}
-                    options={["Any Fuel", "Diesel", "Petrol"]}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <div className="group-select">
-                  <DropdownSelect
-                    selectedValue={allProps.transmission}
-                    onChange={allProps.setTransmission}
-                    options={["Any Transmission", "Automatic", "Manual"]}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <div className="group-select">
-                  <DropdownSelect
-                    selectedValue={allProps.location}
-                    onChange={allProps.setLocation}
-                    options={["Any Location", "London", "New York", "Paris"]}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <div className="group-select">
-                  <DropdownSelect
-                    selectedValue={allProps.door}
-                    onChange={allProps.setDoor}
-                    options={["Any Door", "2 Door", "3 Door", "4 Door"]}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <div className="group-select">
-                  <DropdownSelect
-                    selectedValue={allProps.cylinder}
-                    onChange={allProps.setCylinder}
-                    options={[
-                      "Any Cylinder",
-                      "2 Cylinder",
-                      "3 Cylinder",
-                      "4 Cylinder",
-                    ]}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <div className="group-select">
-                  <DropdownSelect
-                    selectedValue={allProps.color}
-                    onChange={allProps.setColor}
-                    options={["Any Color", "Black", "White", "Blue", "Red"]}
-                  />
-                </div>
-              </div>
-              <div className="form-group wg-box3">
-                <div className="widget widget-price">
-                  <div className="caption flex-two">
-                    <div>
-                      <span className="fw-6">
-                        Year: {allProps.year[0]} - {allProps.year[1]}
-                      </span>
-                    </div>
-                  </div>
-                  <Pricing
-                    MIN={2015}
-                    MAX={2025}
-                    priceRange={allProps.year}
-                    setPriceRange={allProps.setYear}
-                  />
-                </div>
-                {/* /.widget_price */}
-              </div>
-              <div className="form-group wg-box3">
-                <div className="widget widget-price">
-                  <div className="caption flex-two">
-                    <div>
-                      <span className="fw-6">
-                        KM: {allProps.km[0]} km - {allProps.km[1]} km
-                      </span>
-                    </div>
-                  </div>
-                  <Pricing
-                    MIN={45000}
-                    MAX={115000}
-                    priceRange={allProps.km}
-                    setPriceRange={allProps.setKM}
-                  />
-                </div>
-                {/* /.widget_price */}
-              </div>
-
-              <div className="features-wrap">
-                <h4>Featured</h4>
-                <div className="form-group">
-                  <div className="tf-amenities bg-white">
-                    {featureOptions.map((feature, index) => (
-                      <label className="flex-three" key={index}>
-                        <input
-                          readOnly
-                          checked={allProps.features.includes(feature)}
-                          type="checkbox"
-                          onClick={() => allProps.setFeatures(feature)}
-                        />
-                        <span className="btn-checkbox" />
-                        <span className="text-color-2 font-2">{feature}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
+      </div>
+      <div className="form-filter-siderbar">
+        <form onSubmit={(e) => e.preventDefault()}>
+          <div className="wd-find-select">
+            <div className="form-group">
+              <DropdownSelect
+                // selectedValue={`${make} ${make !== "Any Make" ? `(${filterOptions.make[0].count})` : ""}`}
+                selectedValue={make}
+                onChange={allProps.setMake}
+                options={[
+                  "Any Body",
+                  ...(filterOptions?.make?.map(
+                    (body_type) =>
+                      `${body_type?.name} (${body_type?.count || 0})`,
+                  ) || []),
+                ]}
+              />
+            </div>
+            <div className="form-group">
+              <div>
+                <DropdownSelect
+                  // selectedValue={`${model} ${model !== "Any Model" ? `(${filterOptions.model[0].count})` : ""}`}
+                  selectedValue={model}
+                  onChange={allProps.setModel}
+                  options={[
+                    "Any Model",
+                    ...(filterOptions?.model?.map(
+                      (body_type) =>
+                        `${body_type?.name} (${body_type?.count || 0})`,
+                    ) || []),
+                  ]}
+                />
               </div>
             </div>
-          </form>
-        </div>
+            <div className="form-group">
+              <div>
+                <DropdownSelect
+                  selectedValue={price}
+                  onChange={allProps.setPrice}
+                  options={[
+                    "Any Price",
+                    "$10,000 - $15,000",
+                    "$15,000 - $20,000",
+                    "$20,000 - $25,000",
+                    "$25,000 - $30,000",
+                    "$30,000 - $35,000",
+                    "$35,000 - $40,000",
+                    "$40,000 - $60,000",
+                    "$60,000 - $80,000",
+                    "$80,000 - $100,000",
+                    "$100,000 - $150,000",
+                  ]}
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <DropdownSelect
+                selectedValue={body}
+                onChange={allProps.setBody}
+                options={[
+                  "Any Body",
+                  ...(filterOptions?.body_type?.map(
+                    (body_type) =>
+                      `${body_type?.name} (${body_type?.count || 0})`,
+                  ) || []),
+                ]}
+              />
+            </div>
+            <div className="form-group">
+              <div>
+                <DropdownSelect
+                  selectedValue={fuel}
+                  onChange={allProps.setFuel}
+                  options={[
+                    "Any Type",
+                    ...(filterOptions?.fuel_type?.map(
+                      (fuel_type) =>
+                        `${fuel_type?.name} (${fuel_type?.count || 0})`,
+                    ) || []),
+                  ]}
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <div>
+                <DropdownSelect
+                  selectedValue={drive_type}
+                  onChange={allProps.setDriveType}
+                  options={[
+                    "Any Type",
+                    ...(filterOptions?.drive_type?.map(
+                      (drive_type) =>
+                        `${drive_type?.name} (${drive_type?.count || 0})`,
+                    ) || []),
+                  ]}
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <div>
+                <DropdownSelect
+                  selectedValue={transmission}
+                  onChange={allProps.setTransmission}
+                  options={[
+                    "Any Transmission",
+                    ...(filterOptions?.transmission?.map(
+                      (transmission) =>
+                        `${transmission?.name} (${transmission?.count || 0})`,
+                    ) || []),
+                  ]}
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <div>
+                <DropdownSelect
+                  selectedValue={door}
+                  onChange={allProps.setDoor}
+                  options={[
+                    "Any Doors",
+                    ...(filterOptions?.doors?.map(
+                      (doors) => `${doors?.name} (${doors?.count || 0})`,
+                    ) || []),
+                  ]}
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <div>
+                <DropdownSelect
+                  selectedValue={seat}
+                  onChange={allProps.setSeat}
+                  options={[
+                    "Any Seats",
+                    ...(filterOptions?.seats?.map(
+                      (seats) => `${seats?.name} (${seats?.count || 0})`,
+                    ) || []),
+                  ]}
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <div>
+                <DropdownSelect
+                  selectedValue={color}
+                  onChange={allProps.setColor}
+                  options={[
+                    "Any Colors",
+                    ...(filterOptions?.color?.map(
+                      (color) => `${color?.name} (${color?.count || 0})`,
+                    ) || []),
+                  ]}
+                />
+              </div>
+            </div>
+            <div className="form-group wg-box3">
+              <div className="widget widget-price">
+                <div className="caption flex-two">
+                  <div>
+                    <span className="fw-6">
+                      Year: {year[0]} - {year[1]}
+                    </span>
+                  </div>
+                </div>
+                <Pricing
+                  MIN={1998}
+                  MAX={new Date().getFullYear()}
+                  priceRange={year}
+                  setPriceRange={allProps.setYear}
+                />
+              </div>
+              {/* /.widget_price */}
+            </div>
+            <div className="form-group wg-box3">
+              <div className="widget widget-price">
+                <div className="caption flex-two">
+                  <div>
+                    <span className="fw-6">
+                      KM: {km[0]} km - {km[1]} km
+                    </span>
+                  </div>
+                </div>
+                <Pricing
+                  MIN={0}
+                  MAX={100000}
+                  priceRange={km}
+                  setPriceRange={allProps.setKM}
+                />
+              </div>
+              {/* /.widget_price */}
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   );

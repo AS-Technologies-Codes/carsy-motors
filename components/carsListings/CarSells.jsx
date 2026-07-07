@@ -6,7 +6,7 @@ import DropdownSelect from "../common/DropDownSelectFilter";
 import { featureOptions } from "@/data/filterOptions";
 import { useCarFilter } from "@/context/providers/CarFilterContext";
 import Pagination from "../common/Pagination";
-import FilterSidebar from "./FilterSidebar";
+import FilterSidebar from "./MobileFilterSidebar";
 import { accessToken, URL } from "@/utils/URL";
 import Slider1 from "../carDetails/sliders/Slider1";
 import { useResponsive } from "@/utils/useResponsive";
@@ -91,7 +91,8 @@ export default function CarSells() {
 
     return { priceMin, priceMax };
   };
-const clean = (val) => typeof val === 'string' ? val.replace(/\s*\(\d+\)/g, "") : val;
+  const clean = (val) =>
+    typeof val === "string" ? val.replace(/\s*\(\d+\)/g, "") : val;
 
   const fecthGetCars = async () => {
     setCarsLoading(true);
@@ -108,16 +109,16 @@ const clean = (val) => typeof val === 'string' ? val.replace(/\s*\(\d+\)/g, "") 
       ...(!model.includes("Any") ? { model: clean(model) } : {}),
       ...(!drive_type.includes("Any") ? { drive_type: clean(drive_type) } : {}),
       ...(!fuel.includes("Any") ? { fuelType: clean(fuel) } : {}),
-      ...(!transmission.includes("Any") ? { transmission: clean(transmission) } : {}),
-      // ...(evsOnly ? { is_ev: 1 } : {}),
-      ...(!door.includes("Any")
-        ? { door: clean(door) }
+      ...(!transmission.includes("Any")
+        ? { transmission: clean(transmission) }
         : {}),
+      // ...(evsOnly ? { is_ev: 1 } : {}),
+      ...(!door.includes("Any") ? { door: clean(door) } : {}),
       ...(!seat.includes("Any") ? { seat: clean(seat) } : {}),
       ...(!cylinder.includes("Any") ? { cylinder: clean(cylinder) } : {}),
       ...(!color.includes("Any") ? { color: clean(color) } : {}),
     };
-    
+
     const params = new URLSearchParams(allParams);
 
     const getGetCarsRequest = await fetch(
@@ -846,11 +847,7 @@ const clean = (val) => typeof val === 'string' ? val.replace(/\s*\(\d+\)/g, "") 
           </div>
         </div>
       </section>
-
-      <FilterSidebar
-        allProps={allProps}
-        clearFilter={clearFilter}
-      />
+      <FilterSidebar allProps={allProps} clearFilter={clearFilter} />
     </>
   );
 }

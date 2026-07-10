@@ -3,7 +3,7 @@ import { useResponsive } from "@/utils/useResponsive";
 import Image from "next/image";
 import Link from "next/link";
 export default function CarsHero() {
-  const {isMobile} = useResponsive();
+  const { isMobile } = useResponsive();
   const swiperOptions = {
     autoplay: {
       delay: 6000,
@@ -374,10 +374,20 @@ export default function CarsHero() {
                             <div
                               style={{ backgroundImage: spec?.image }}
                               key={specIndex}
-                              className="specifications specifications-bg  hover-zoom border border-primary-half wow px-4 fadeInUp d-flex flex-column justify-content-between"
+                              className="specifications specifications-bg overflow-hidden position-relative  hover-zoom border border-primary-half wow px-4 fadeInUp d-flex flex-column justify-content-between"
                               data-wow-delay={spec.delay}
                               data-wow-duration="1000ms"
                             >
+                              {specIndex == 0 || specIndex == 2 ? (
+                                <div className="card-disabled d-flex justify-content-center blur align-items-center">
+                                  <div></div>
+                                  <p
+                                    className={`text-color-1 font ${isMobile ? "fs-2" : "fs-1"} fw-medium`}
+                                  >
+                                    Coming Soon
+                                  </p>
+                                </div>
+                              ) : null}
                               <div className="specifications-content text-center">
                                 <div className="specifications-title controller-button text-center">
                                   <div
@@ -389,7 +399,9 @@ export default function CarsHero() {
                               {spec.title}
                             </div> */}
                                 </div>
-                                <p className={`text-color-3 font ${isMobile ? "fs-2" : "fs-4" } mt-2 fw-medium  mb-2`}>
+                                <p
+                                  className={`text-color-3 font ${isMobile ? "fs-2" : "fs-4"} mt-2 fw-medium  mb-2`}
+                                >
                                   {spec.title}
                                 </p>
                                 <div className="font text-color-1">

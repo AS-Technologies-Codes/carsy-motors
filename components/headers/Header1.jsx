@@ -19,11 +19,11 @@ export default function Header1({ bg = "style2" }) {
                     <Link href={`/`}>
                       <Image
                         className="lazyload d-md-none"
-                        data-src="/assets/images/logo/logo-mobile.png"
+                        data-src="/assets/images/logo/logo-mobile.PNG"
                         alt=""
                         width={100}
                         height={40}
-                        src="/assets/images/logo/logo-mobile.png"
+                        src="/assets/images/logo/logo-mobile.PNG"
                       />
                       <Image
                         className="lazyload d-none d-md-flex"

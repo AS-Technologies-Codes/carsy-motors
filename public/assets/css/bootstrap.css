@@ -12845,5 +12845,9 @@ transform: scale(.2) !important;
   cursor: pointer;
 }
 
-
+.bg-1 .swiper-wrapper{
+  height: 100%;
+    display: flex;
+    align-items: center;
+}
 /*# sourceMappingURL=bootstrap.css.map */

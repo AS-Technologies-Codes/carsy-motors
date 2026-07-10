@@ -1,6 +1,5 @@
 "use client";
 
-import { testimonials } from "@/data/testimonials";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";

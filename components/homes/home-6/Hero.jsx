@@ -84,7 +84,7 @@ export default function Hero() {
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="content po-content-two">
-                      <div className="heading">
+                      <div className="heading shadow-box">
                         <Link href={`/listing-detail-v1/${elm.id}`}>
                           <h1 className="text-color-1 fade-item fade-item-1 pt-5">
                             {elm.title}

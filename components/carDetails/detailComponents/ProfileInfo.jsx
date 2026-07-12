@@ -81,11 +81,34 @@ export default function ProfileInfo({ car }) {
       <div className="profile-contact">
         {/* <h6>Contact dealer</h6> */}
         <div className="btn-contact">
-          <div className="btn-contact flex">
+           <Link
+              href={"/finance/" + car?.id}
+              // href={"/finance/" + car?.id}
+              className="btn-pf bg-orange mt-3 glow-on-hover"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-navigation-icon lucide-navigation"
+              >
+                <polygon points="3 11 22 2 13 21 11 13 3 11" />
+              </svg>{" "}
+              <span className="fs-16 fw-5 lh-20 font text-color-1  mt-1  mt-1">
+                Get Finance
+              </span>
+            </Link>
+          
             <Link
               href="javascript:void(0)"
               onClick={openEnquiry}
-              className="btn-pf bg-orange mt-3 p-3 p-md-0"
+              className="btn-pf bg-orange mt-3"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -102,34 +125,11 @@ export default function ProfileInfo({ car }) {
                 <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
                 <rect x="2" y="4" width="20" height="16" rx="2" />
               </svg>{" "}
-              <span className="fs-16 fw-5 lh-20 font text-color-1">
+              <span className="fs-16 fw-5 lh-20 font text-color-1 mt-1">
                 Enquire Now
               </span>
             </Link>
-            <Link
-              href={"/finance/" + car?.id}
-              className="btn-pf bg-orange mt-3"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-navigation-icon lucide-navigation"
-              >
-                <polygon points="3 11 22 2 13 21 11 13 3 11" />
-              </svg>{" "}
-              <span className="fs-16 fw-5 lh-20 font text-color-1">
-                Get Finance
-              </span>
-            </Link>
-          </div>
-          <Link href={"/booking/" + car?.id} className="btn-pf bg-green mt-3">
+           <Link href={"/booking/" + car?.id} className="btn-pf bg-green mt-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -146,7 +146,7 @@ export default function ProfileInfo({ car }) {
               <circle cx="19" cy="21" r="1" />
               <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
             </svg>{" "}
-            <span className="fs-16 fw-5 lh-20 font text-color-1">
+            <span className="fs-16 fw-5 lh-20 font text-color-1  mt-1">
               Online Booking
             </span>
           </Link>

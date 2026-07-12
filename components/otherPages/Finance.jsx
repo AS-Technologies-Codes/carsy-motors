@@ -5,12 +5,15 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import { postFinance } from "@/utils/APIs";
 import { useParams } from "next/navigation";
+import MultiStepForm from "./MultiStep";
 export default function Finance() {
   const { id } = useParams();
   const formRef = useRef();
   const [success, setSuccess] = useState(true);
   const [showMessage, setShowMessage] = useState(false);
   const [SavingEmail, setSavingEmail] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
+
   const [formData, setFormData] = useState({
     car_id: id,
     first_name: "",
@@ -33,6 +36,11 @@ export default function Finance() {
     }, 2000);
   };
 
+  const STEPS = [
+    { key: "contact", label: "Contact Details" },
+    { key: "finance", label: "Finance Details" },
+  ];
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -43,6 +51,11 @@ export default function Finance() {
 
   const sendMail = async (e) => {
     e.preventDefault();
+
+    if (currentStep == 1) {
+      setCurrentStep(2);
+      return;
+    }
 
     console.log(formData);
 
@@ -80,6 +93,9 @@ export default function Finance() {
         consentCreditScore: false,
         consentElectronicComm: false,
       });
+      setTimeout(() => {
+        setCurrentStep(1);
+      }, 2000);
     } catch (error) {
       console.error(error);
       setSuccess(false);
@@ -88,14 +104,28 @@ export default function Finance() {
       setSavingEmail(false);
     }
   };
+
   return (
     <>
       <section className="tf-section-contact">
-        <div className="container">
+        <div className="container p-3">
+          <div className="msf-progress">
+            {STEPS.map((step, index) => (
+              <div
+                key={step.key}
+                className={`msf-progress-item ${index === currentStep -1 ? "is-active" : ""
+                  } ${index < (currentStep -1) ? "is-complete" : ""}`}
+              >
+                <span className="msf-progress-dot">
+                  {index < (currentStep -1 ) ? "✓" : index + 1}
+                </span>
+                <span className="msf-progress-label">{step.label}</span>
+              </div>
+            ))}
+          </div>
           <div className="row">
             <div className="col-md-8 contact-left">
               <div id="comments" className="comments">
-                <h2 className="my-5">Contact Details</h2>
                 <div className="respond-comment">
                   <form
                     onSubmit={sendMail}
@@ -104,255 +134,290 @@ export default function Finance() {
                     className="comment-form form-submit"
                     acceptCharset="utf-8"
                   >
-                    <div className="row col-12">
-                      <div className="col-12 col-md-6">
-                        <fieldset className="email-wrap style-text">
-                          <label className="font-1 fs-14 fw-5">
-                            First Name*
-                          </label>
-                          <input
-                            type="text"
-                            className="tb-my-input"
-                            name="first_name"
-                            placeholder="Your First Name"
-                            value={formData.first_name}
-                            onChange={handleChange}
-                            required
-                          />
-                        </fieldset>
-                      </div>
-                      <div className="col-12 col-md-6">
-                        <fieldset className="email-wrap style-text">
-                          <label className="font-1 fs-14 fw-5">
-                            Middle Name
-                          </label>
-                          <input
-                            type="text"
-                            className="tb-my-input"
-                            name="middle_name"
-                            placeholder="Your Middle Name"
-                            value={formData.middle_name}
-                            onChange={handleChange}
-                          />
-                        </fieldset>
-                      </div>
+                    {currentStep == 1 ? (
+                      <div className="row col-12">
+                        <h2 className="my-5">Contact Details</h2>
+                        <div className="col-12">
+                          <fieldset className="email-wrap style-text">
+                            <label className="font-1 fs-14 fw-5">
+                              First Name*
+                            </label>
+                            <input
+                              type="text"
+                              className="tb-my-input"
+                              name="first_name"
+                              placeholder="Your First Name"
+                              value={formData.first_name}
+                              onChange={handleChange}
+                              required
+                            />
+                          </fieldset>
+                        </div>
+                        <div className="col-12 col-md-6">
+                          <fieldset className="email-wrap style-text">
+                            <label className="font-1 fs-14 fw-5">
+                              Middle Name
+                            </label>
+                            <input
+                              type="text"
+                              className="tb-my-input"
+                              name="middle_name"
+                              placeholder="Your Middle Name"
+                              value={formData.middle_name}
+                              onChange={handleChange}
+                            />
+                          </fieldset>
+                        </div>
 
-                      <div className="col-12 col-md-6">
-                        <fieldset className="email-wrap style-text">
-                          <label className="font-1 fs-14 fw-5">
-                            Last Name*
-                          </label>
-                          <input
-                            type="text"
-                            className="tb-my-input"
-                            name="last_name"
-                            placeholder="Your Last Name"
-                            value={formData.last_name}
-                            onChange={handleChange}
-                            required
-                          />
-                        </fieldset>
+                        <div className="col-12 col-md-6">
+                          <fieldset className="email-wrap style-text">
+                            <label className="font-1 fs-14 fw-5">
+                              Last Name*
+                            </label>
+                            <input
+                              type="text"
+                              className="tb-my-input"
+                              name="last_name"
+                              placeholder="Your Last Name"
+                              value={formData.last_name}
+                              onChange={handleChange}
+                              required
+                            />
+                          </fieldset>
+                        </div>
+                        <div className="col-12 col-md-6">
+                          <fieldset className="phone-wrap style-text">
+                            <label className="font-1 fs-14 fw-5">
+                              Email Address*
+                            </label>
+                            <input
+                              type="email"
+                              className="tb-my-input"
+                              name="email"
+                              placeholder="Your Email"
+                              value={formData.email}
+                              onChange={handleChange}
+                              required
+                            />
+                          </fieldset>
+                        </div>
+                        <div className="col-12">
+                          <fieldset className="phone-wrap style-text">
+                            <label className="font-1 fs-14 fw-5">
+                              Mobile Number*
+                            </label>
+                            <input
+                              type="tel"
+                              className="tb-my-input"
+                              name="mobile"
+                              placeholder="Your Mobile Number"
+                              value={formData.mobile}
+                              onChange={handleChange}
+                              required
+                            />
+                          </fieldset>
+                        </div>
                       </div>
-                      <div className="col-12 col-md-6">
-                        <fieldset className="phone-wrap style-text">
-                          <label className="font-1 fs-14 fw-5">
-                            Email Address*
-                          </label>
-                          <input
-                            type="email"
-                            className="tb-my-input"
-                            name="email"
-                            placeholder="Your Email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                          />
-                        </fieldset>
-                      </div>
-                      <div className="col-12">
-                        <fieldset className="phone-wrap style-text">
-                          <label className="font-1 fs-14 fw-5">
-                            Mobile Number*
-                          </label>
-                          <input
-                            type="tel"
-                            className="tb-my-input"
-                            name="mobile"
-                            placeholder="Your Mobile Number"
-                            value={formData.mobile}
-                            onChange={handleChange}
-                            required
-                          />
-                        </fieldset>
-                      </div>
-                      <h2 className="my-5 col-12">Finance Details</h2>
+                    ) : (
+                      <div className="row col-12">
+                        <h2 className="my-5 col-12">Finance Details</h2>
 
-                      <div className="col-12">
-                        <fieldset className="phone-wrap style-text">
-                          <label className="font-1 fs-14 fw-5">
-                            Date of Birth*
-                          </label>
-                          <input
-                            type="date"
-                            className="tb-my-input"
-                            name="dateOfBirth"
-                            placeholder="Your Date of Birth"
-                            value={formData.dateOfBirth}
-                            onChange={handleChange}
-                            required
-                          />
-                        </fieldset>
+                        <div className="col-12">
+                          <fieldset className="phone-wrap style-text">
+                            <label className="font-1 fs-14 fw-5">
+                              Date of Birth*
+                            </label>
+                            <input
+                              type="date"
+                              className="tb-my-input"
+                              name="dateOfBirth"
+                              placeholder="Your Date of Birth"
+                              value={formData.dateOfBirth}
+                              onChange={handleChange}
+                              required
+                            />
+                          </fieldset>
+                        </div>
+                        <div className="col-12">
+                          <fieldset className="phone-wrap style-text">
+                            <label className="font-1 fs-14 fw-5">
+                              Driver License Number*
+                            </label>
+                            <input
+                              type="number"
+                              className="tb-my-input"
+                              name="driver_license"
+                              placeholder="Enter Driver License Number"
+                              value={formData.driver_license}
+                              onChange={handleChange}
+                              required
+                            />
+                          </fieldset>
+                        </div>
+                        <div className="col-12">
+                          <fieldset className="phone-wrap style-text">
+                            <label className="font-1 fs-14 fw-5">
+                              Current Address*
+                            </label>
+                            <textarea
+                              id="comment-message"
+                              name="address"
+                              rows={4}
+                              tabIndex={4}
+                              placeholder="Your Current Address"
+                              aria-required="true"
+                              required
+                              value={formData.address}
+                              onChange={handleChange}
+                            />
+                          </fieldset>
+                        </div>
+                        <div className="form-group">
+                          <div>
+                            <label className="flex-three align-items-start">
+                              <input
+                                type="checkbox"
+                                name="consentPrivacy"
+                                checked={formData.consentPrivacy}
+                                onChange={handleChange}
+                                required
+                              />
+                              <span className="btn-checkbox" />
+                              <span className="text-color-2 font-2">
+                                I have read and agree to the Taurus Motor
+                                Finance{" "}
+                                <Link
+                                  href="#"
+                                  className="text-decoration-underline"
+                                >
+                                  Privacy and Credit Reporting notice and
+                                  consent
+                                </Link>
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                        <div className="form-group mt-3">
+                          <div>
+                            <label className="flex-three align-items-start">
+                              <input
+                                type="checkbox"
+                                name="consentCreditScore"
+                                checked={formData.consentCreditScore}
+                                onChange={handleChange}
+                                required
+                              />
+                              <span
+                                className="btn-checkbox"
+                                style={{ width: "75px" }}
+                              />
+                              <span className="text-color-2 font-2">
+                                I consent to Taurus Motor Finance accessing
+                                ScoreSeeker from Equifax to provide me with a
+                                personalised interest rate and/or determine my
+                                eligibility to apply for finance.
+                                <span className="fst-italic">
+                                  This access does not impact your credit score
+                                  or leave any record on your credit report.
+                                </span>
+                                <div className="mt-3">
+                                  Taurus Motor Finance collects your personal
+                                  information (i.e. your Name, Date of Birth,
+                                  Driver Licence, and address details) to access
+                                  your credit score for your loan interest rate
+                                  quote and/or determine your eligibility to
+                                  apply for finance. This score seeker access
+                                  does not impact your ongoing credit score or
+                                  leave any enquiry footprint on your credit
+                                  report. Further information on credit scores
+                                  and comprehensive credit reporting can be
+                                  found at{" "}
+                                  <Link href={"#"}>
+                                    https://www.creditsmart.org.au/
+                                  </Link>
+                                </div>
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                        <div className="form-group mt-3">
+                          <div>
+                            <label className="flex-three align-items-start">
+                              <input
+                                type="checkbox"
+                                name="consentElectronicComm"
+                                checked={formData.consentElectronicComm}
+                                onChange={handleChange}
+                                required
+                              />
+                              <span
+                                className="btn-checkbox"
+                                style={{ width: "33px" }}
+                              />
+                              <span className="text-color-2 font-2">
+                                I consent to electronic communication being the
+                                primary medium of communication from Taurus
+                                Motor Finance including SMS and email, using the
+                                contact details provided by me in this credit
+                                application
+                                <div className="mt-3">
+                                  If consent is provided, electronic
+                                  communications must be checked regularly and I
+                                  can withdraw consent at any time
+                                </div>
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                        <div
+                          className={`tfSubscribeMsg  footer-sub-element ${showMessage ? "active" : ""
+                            }`}
+                        >
+                          {success ? (
+                            <p style={{ color: "rgb(52, 168, 83)" }}>
+                              Finance application submitted successfully
+                            </p>
+                          ) : (
+                            <p style={{ color: "red" }}>Something went wrong</p>
+                          )}
+                        </div>
                       </div>
-                      <div className="col-12">
-                        <fieldset className="phone-wrap style-text">
-                          <label className="font-1 fs-14 fw-5">
-                            Driver License Number*
-                          </label>
-                          <input
-                            type="number"
-                            className="tb-my-input"
-                            name="driver_license"
-                            placeholder="Enter Driver License Number"
-                            value={formData.driver_license}
-                            onChange={handleChange}
-                            required
-                          />
-                        </fieldset>
-                      </div>
-                      <div className="col-12">
-                        <fieldset className="phone-wrap style-text">
-                          <label className="font-1 fs-14 fw-5">
-                            Current Address*
-                          </label>
-                          <textarea
-                            id="comment-message"
-                            name="address"
-                            rows={4}
-                            tabIndex={4}
-                            placeholder="Your Current Address"
-                            aria-required="true"
-                            required
-                            value={formData.address}
-                            onChange={handleChange}
-                          />
-                        </fieldset>
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <div>
-                        <label className="flex-three align-items-start">
-                          <input
-                            type="checkbox"
-                            name="consentPrivacy"
-                            checked={formData.consentPrivacy}
-                            onChange={handleChange}
-                            required
-                          />
-                          <span className="btn-checkbox" />
-                          <span className="text-color-2 font-2">
-                            I have read and agree to the Taurus Motor Finance{" "}
-                            <Link
-                              href="#"
-                              className="text-decoration-underline"
-                            >
-                              Privacy and Credit Reporting notice and consent
-                            </Link>
-                          </span>
-                        </label>
-                      </div>
-                    </div>
-                    <div className="form-group mt-3">
-                      <div>
-                        <label className="flex-three align-items-start">
-                          <input
-                            type="checkbox"
-                            name="consentCreditScore"
-                            checked={formData.consentCreditScore}
-                            onChange={handleChange}
-                            required
-                          />
-                          <span
-                            className="btn-checkbox"
-                            style={{ width: "75px" }}
-                          />
-                          <span className="text-color-2 font-2">
-                            I consent to Taurus Motor Finance accessing
-                            ScoreSeeker from Equifax to provide me with a
-                            personalised interest rate and/or determine my
-                            eligibility to apply for finance.
-                            <span className="fst-italic">
-                              This access does not impact your credit score or
-                              leave any record on your credit report.
-                            </span>
-                            <div className="mt-3">
-                              Taurus Motor Finance collects your personal
-                              information (i.e. your Name, Date of Birth, Driver
-                              Licence, and address details) to access your
-                              credit score for your loan interest rate quote
-                              and/or determine your eligibility to apply for
-                              finance. This score seeker access does not impact
-                              your ongoing credit score or leave any enquiry
-                              footprint on your credit report. Further
-                              information on credit scores and comprehensive
-                              credit reporting can be found at{" "}
-                              <Link href={"#"}>
-                                https://www.creditsmart.org.au/
-                              </Link>
-                            </div>
-                          </span>
-                        </label>
-                      </div>
-                    </div>
-                    <div className="form-group mt-3">
-                      <div>
-                        <label className="flex-three align-items-start">
-                          <input
-                            type="checkbox"
-                            name="consentElectronicComm"
-                            checked={formData.consentElectronicComm}
-                            onChange={handleChange}
-                            required
-                          />
-                          <span
-                            className="btn-checkbox"
-                            style={{ width: "33px" }}
-                          />
-                          <span className="text-color-2 font-2">
-                            I consent to electronic communication being the
-                            primary medium of communication from Taurus Motor
-                            Finance including SMS and email, using the contact
-                            details provided by me in this credit application
-                            <div className="mt-3">
-                              If consent is provided, electronic communications
-                              must be checked regularly and I can withdraw
-                              consent at any time
-                            </div>
-                          </span>
-                        </label>
-                      </div>
-                    </div>
-                    <div
-                      className={`tfSubscribeMsg  footer-sub-element ${
-                        showMessage ? "active" : ""
-                      }`}
-                    >
-                      {success ? (
-                        <p style={{ color: "rgb(52, 168, 83)" }}>
-                          Finance application submitted successfully
-                        </p>
-                      ) : (
-                        <p style={{ color: "red" }}>Something went wrong</p>
-                      )}
-                    </div>
+                    )}
+
                     <div className="button-boxs mt-3">
-                      <button
-                        className="sc-button"
-                        name="submit"
-                        type="submit"
-                        disabled={SavingEmail}
-                      >
-                        <span>{SavingEmail ? "Submitting..." : "Submit"}</span>
-                      </button>
+                      {
+                        currentStep == 2 ?
+                          <>
+                            <button
+                              className="sc-button me-2"
+                              name="back"
+                              type="button"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                setCurrentStep(1);
+                              }}                            >
+                              <span>Back</span>
+                            </button>
+                            <button
+                              className="sc-button"
+                              name="submit"
+                              type="submit"
+                              disabled={SavingEmail}
+                            >
+                              <span>{SavingEmail ? "Submitting..." : "Submit"}</span>
+                            </button>
+                          </>
+                          :
+                          <button
+                            className="sc-button"
+                            name="submit"
+                            type="submit"
+                          >
+                            <span>Next</span>
+                          </button>
+                      }
+
                     </div>
                   </form>
                 </div>

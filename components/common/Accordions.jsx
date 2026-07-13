@@ -62,12 +62,11 @@ export default function Accordion({
             className="toggle-content section-desc features-inner"
             ref={(el) => (answerRefs.current[index] = el)}
           >
-            <div className="inner">
+            <div className="inner d-block">
               {Array.isArray(item?.content)
                 ? item?.content?.map((f) => {
-                    console.log(item.content);
                     return (
-                      <div className="listing-feature-wrap flex" key={f}>
+                      <div className="listing-feature-wrap flex mb-2" key={f}>
                         <i className="icon-autodeal-check" />
                         <p>{f}</p>
                       </div>

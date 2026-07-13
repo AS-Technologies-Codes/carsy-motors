@@ -6,7 +6,6 @@ import Slider1 from "./sliders/Slider1";
 import Description from "./detailComponents/Description";
 import Overview from "./detailComponents/Overview";
 import toast from "react-hot-toast";
-
 // import LoanCalculator from "./detailComponents/LoanCalculator";
 // import CarReview from "./detailComponents/CarReview";
 import CarInfo from "./detailComponents/CarInfo";
@@ -24,7 +23,13 @@ export default function CarDetails1({ carItem }) {
     try {
       setCarDetailsLoading(true);
       const getCarDetailsData = await getCarDetailsApi(carItem);
-      setCarDetailsListing(getCarDetailsData);
+      const filteredData =
+        JSON.parse(window.localStorage.getItem("favouriteCar") || "[]").some(
+          (car) => car.id == carItem,
+        )
+          ? { ...getCarDetailsData, favorite: "#fd5a21" }
+          : { ...getCarDetailsData, favorite: "none" };
+      setCarDetailsListing(filteredData);
     } catch (error) {
       toast.error(error);
       return;
@@ -46,7 +51,7 @@ export default function CarDetails1({ carItem }) {
   }
   return (
     <>
-    <section className="flat-title mb-40">
+      <section className="flat-title mb-40">
         <div className="container2">
           <div className="row">
             <div className="col-lg-12">
@@ -54,6 +59,9 @@ export default function CarDetails1({ carItem }) {
                 <div className="title-group fs-12">
                   <Link className="home fw-6 text-color-3" href={`/`}>
                     Home
+                  </Link>
+                  <Link className="home fw-6 text-color-3" href={`/buy`}>
+                    Buy
                   </Link>
                   <span>{CarDetailsListing?.title} for sale</span>
                 </div>
@@ -72,8 +80,8 @@ export default function CarDetails1({ carItem }) {
                   viewer={
                     CarDetailsListing?.sepriteiamge?.length
                       ? JSON.parse(
-                          CarDetailsListing?.sepriteiamge[0].sprite_url,
-                        )
+                        CarDetailsListing?.sepriteiamge[0].sprite_url,
+                      )
                       : []
                   }
                 />
@@ -166,7 +174,7 @@ export default function CarDetails1({ carItem }) {
                   <p className="font-1">Report this listing</p>
                 </div> */}
                 <div className="widget-listing">
-                  <Recommended make={CarDetailsListing?.make} />
+                  <Recommended />
                   {/* <a
                     href="javascript:void(0)"
                     className="fs-16 fw-5 font text-color-3 lh-22"

@@ -1,7 +1,51 @@
-import React from "react";
+import Link from "next/link";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function CarInfo({ carItem }) {
+
+  const [CarData, setCarData] = useState(carItem || {});
+
+  const handleFavourite = async (car) => {
+    let favouriteCars =
+      JSON.parse(window.localStorage.getItem("favouriteCar")) || [];
+
+    const isFavourite = favouriteCars.some((car) => car.id == car.id);
+    if (isFavourite) {
+      favouriteCars = favouriteCars.filter((car) => car.id != car.id);
+    } else {
+      const {
+        id,
+        featured,
+        year,
+        type,
+        title,
+        km,
+        fuelType,
+        transmission,
+        price,
+        images,
+      } = car;
+      favouriteCars.push({
+        id,
+        featured,
+        year,
+        type,
+        title,
+        km,
+        fuelType,
+        transmission,
+        price,
+        images,
+      });
+    }
+    window.localStorage.setItem("favouriteCar", JSON.stringify(favouriteCars));
+    setCarData({ ...car, favorite: isFavourite ? "none" : "#fd5a21" });
+    // allProps.setData(updatedData);
+  };
+
+  console.log(CarData);
+
   const handlePrint = (id) => {
     if (typeof window !== "undefined") {
       window.open(
@@ -38,67 +82,65 @@ export default function CarInfo({ carItem }) {
       <div className="icon-box flex flex-wrap">
         <div className="icons flex-three">
           <i className="icon-autodeal-km1 me-1" />
-          <span>{carItem.km?.toLocaleString("en-AU")} kms</span>
+          <span>{CarData.km?.toLocaleString("en-AU")} kms</span>
         </div>
         <div className="icons flex-three">
           <i className="icon-autodeal-diesel me-1" />
-          <span>{carItem.fuelType}</span>
+          <span>{CarData.fuelType}</span>
         </div>
         <div className="icons flex-three">
           <i className="icon-autodeal-automatic me-1" />
-          <span>{carItem.transmission}</span>
+          <span>{CarData.transmission}</span>
         </div>
         <div className="icons flex-three">
           <i className="icon-autodeal-owner me-1" />
-          <span>{carItem?.owner_number} Owner</span>
+          <span>{CarData?.owner_number} Owner</span>
         </div>
       </div>
       <div className="money text-color-3 font">
-        ${carItem.price?.toLocaleString()}
+        ${CarData.price?.toLocaleString()}
       </div>
-      {carItem?.finance_rate ? (
-        <div className="flex">
-          <div className="icons flex-three align-items-center border rounded-3 px-3 py-2  mt-2 mb-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="54"
-              height="54"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-landmark-icon lucide-landmark me-1 text-color-3"
-            >
-              <path d="M10 18v-7" />
-              <path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" />
-              <path d="M14 18v-7" />
-              <path d="M18 18v-7" />
-              <path d="M3 22h18" />
-              <path d="M6 18v-7" />
-            </svg>
-            <div className="lh-1 d-flex flex-column justify-content-center">
-              <span className="text-color-2 fw-5">Finance rate</span>
-              <div className="d-flex align-items-end">
-                <span className="relative fs-12" style={{ top: 3 }}>
-                  From{" "}
-                </span>
-                <div
-                  className=" money text-color-3 font p-0 m-0 px-1 fs-5"
-                  style={{ height: "25px" }}
-                >
-                  ${carItem?.finance_rate}
-                </div>
-                <span className="fs-12 relative" style={{ top: 3 }}>
-                  {" "}
-                  / week
-                </span>
+      <div className="flex">
+        <div className="icons flex-three align-items-center border rounded-3 px-3 py-2  mt-2 mb-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="54"
+            height="54"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-landmark-icon lucide-landmark me-1 text-color-3"
+          >
+            <path d="M10 18v-7" />
+            <path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" />
+            <path d="M14 18v-7" />
+            <path d="M18 18v-7" />
+            <path d="M3 22h18" />
+            <path d="M6 18v-7" />
+          </svg>
+          <div className="lh-1 d-flex flex-column justify-content-center">
+            <span className="text-color-2 fw-5">Finance rate</span>
+            <div className="d-flex align-items-end">
+              <span className="relative fs-12" style={{ top: 3 }}>
+                From{" "}
+              </span>
+              <div
+                className=" money text-color-3 font p-0 m-0 px-1 fs-5"
+                style={{ height: "25px" }}
+              >
+                ${CarData?.price / 10000 * 39}
               </div>
+              <span className="fs-12 relative" style={{ top: 3 }}>
+                {" "}
+                / week
+              </span>
             </div>
           </div>
         </div>
-      ) : null}
+      </div>
       {/* <div className="price-wrap">
         <p className="fs-12 lh-16 text-color-2">
           Monthly installment payment:
@@ -107,25 +149,55 @@ export default function CarInfo({ carItem }) {
         <p className="fs-12 lh-16">New car price: $100.000</p>
       </div> */}
       <ul className="action-icon flex flex-wrap">
-        <li>
-          <a href="javascript:void(0)" className="icon">
-            <svg
-              width={16}
-              height={14}
-              viewBox="0 0 16 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+        {CarData?.favorite === "none" ?
+          <li>
+            <a href="javascript:void(0)" className="icon"
+              onClick={() => handleFavourite(CarData)}
             >
-              <path
-                d="M14.75 4.1875C14.75 2.32375 13.1758 0.8125 11.234 0.8125C9.78275 0.8125 8.53625 1.657 8 2.86225C7.46375 1.657 6.21725 0.8125 4.76525 0.8125C2.825 0.8125 1.25 2.32375 1.25 4.1875C1.25 9.6025 8 13.1875 8 13.1875C8 13.1875 14.75 9.6025 14.75 4.1875Z"
-                stroke="CurrentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </a>
-        </li>
+              <svg
+                width={16}
+                height={14}
+                viewBox="0 0 16 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14.75 4.1875C14.75 2.32375 13.1758 0.8125 11.234 0.8125C9.78275 0.8125 8.53625 1.657 8 2.86225C7.46375 1.657 6.21725 0.8125 4.76525 0.8125C2.825 0.8125 1.25 2.32375 1.25 4.1875C1.25 9.6025 8 13.1875 8 13.1875C8 13.1875 14.75 9.6025 14.75 4.1875Z"
+                  stroke="CurrentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
+          </li>
+          :
+          <li>
+            <Link
+              onClick={() => handleFavourite(CarData)}
+              href="javascript:void(0)"
+              className="icon"
+              style={{ backgroundColor: "f59e0b" }}
+            >
+
+              <svg
+                width={16}
+                height={14}
+                viewBox="0 0 16 14"
+                fill={"#f59e0b"}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14.75 4.1875C14.75 2.32375 13.1758 0.8125 11.234 0.8125C9.78275 0.8125 8.53625 1.657 8 2.86225C7.46375 1.657 6.21725 0.8125 4.76525 0.8125C2.825 0.8125 1.25 2.32375 1.25 4.1875C1.25 9.6025 8 13.1875 8 13.1875C8 13.1875 14.75 9.6025 14.75 4.1875Z"
+                  stroke="CurrentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Link>
+          </li>
+        }
         {/* <li>
           <a href="javascript:void(0)" className="icon">
             <svg
@@ -167,7 +239,7 @@ export default function CarInfo({ carItem }) {
         <li>
           <a
             href="javascript:void(0)"
-            onClick={() => handlePrint(carItem?.id)}
+            onClick={() => handlePrint(CarData?.id)}
             className="icon"
           >
             <svg

@@ -272,6 +272,32 @@ export const getAchievementsListingApi = async () => {
   });
 };
 
+export const getRecommendedListingApi = async () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const getRecommendedRequest = await fetch(URL.getRecommended, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
+      });
+      const getRecommendedResponse = await getRecommendedRequest.json();
+      if (getRecommendedResponse?.status === "error") {
+        return reject(
+          new Error(
+            getRecommendedResponse?.message ||
+              "Failed to fetch recommended listing",
+          ),
+        );
+      }
+      return resolve(getRecommendedResponse?.data);
+    } catch (error) {
+      return reject(error?.message || "Failed to fetch recommended listing");
+    }
+  });
+};
+
 export const getMapListingApi = async () => {
   return new Promise(async (resolve, reject) => {
     try {

@@ -12774,13 +12774,8 @@ a.bg-blue:hover {
   }
 }
 
-.box-car-list.style-2 > .image-group .img-style,
-.box-car-list.style-2 > .image-group img {
-  width: auto !important;
-  height: 265px !important;
-  /* object-fit: contain !important; */
-  background-color: #f5f5f5;
-  object-position: cover !important;
+.buy-car-slider .control-dots{
+  display: none;
 }
 
 .pswp__img {
@@ -12978,4 +12973,18 @@ transform: scale(.2) !important;
   100% {
     background-position: 0 0;
   }
+}
+
+.carousel.carousel-slider .control-arrow {
+  top: 50% !important;
+  height: 50px;
+  margin: 0px 10px !important;
+  width: 50px;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, .5) !important;
+}
+
+.carousel.carousel-slider .control-arrow:hover {
+  background-color: red !important;
+  opacity: 1 !important;
 }

@@ -1,90 +1,64 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import PhotoSwipeLightbox from "photoswipe/lightbox";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import Product360Viewer from "@/components/product360Viewer/Product360Viewer";
-import { useResponsive } from "@/utils/useResponsive";
+import ImageViewer from "react-simple-image-viewer";
+
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+
 export default function Slider1({ images, viewer }) {
   const [Toggle, setToggle] = useState(false);
-  const { isMobile } = useResponsive();
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
 
-  const swiperOptions = {
-    autoplay: {
-      delay: 6000,
-      disableOnInteraction: false,
-    },
-    slidesPerView: 1,
-    speed: 500,
-    effect: "fade",
-    fadeEffect: {
-      crossFade: true,
-    },
-    navigation: {
-      nextEl: ".snbn1",
-      prevEl: ".snbp1",
-    },
-  };
-  useEffect(() => {
-    setToggle(viewer?.length || false);
-    const lightbox = new PhotoSwipeLightbox({
-      gallery: "#my-gallery",
-      children: ".image",
-      pswpModule: () => import("photoswipe"),
-    });
-    lightbox.init();
-    return () => {
-      lightbox.destroy();
-    };
+  const openImageViewer = useCallback((index) => {
+    setCurrentImage(index);
+    setIsViewerOpen(true);
   }, []);
+
+
+  const closeImageViewer = () => {
+    setCurrentImage(0);
+    setIsViewerOpen(false);
+  };
 
   return (
     <div className="relative">
       {Toggle ? (
-        <Product360Viewer images={viewer} height={550} />
+        <div className="rounded-3 overflow-hidden">
+          <Product360Viewer images={images} height={550} />
+        </div>
       ) : (
-        <Swiper
-          {...swiperOptions}
-          modules={[Navigation, Pagination, Autoplay, EffectFade]}
-          className="swiper mainslider slider home mb-40"
-          id="my-gallery"
-        >
-          {images?.map((elm, i) => (
-            <SwiperSlide key={i} className="swiper-slide">
-              <div className="image-list-details">
-                <a
-                  href={elm}
-                  data-pswp-width="1245"
-                  data-pswp-height="701"
-                  target="_blank"
-                  className="image d-flex justify-content-center bg-black"
-                >
-                  <Image
-                    className="lazyload"
-                    alt="image"
-                    src={elm}
-                    style={
-                      isMobile
-                        ? {}
-                        : { width: "auto", height: "550px", objectFit: "cover" }
-                    }
-                    width={1245}
-                    height={701}
-                  />
-                </a>
-              </div>
-            </SwiperSlide>
-          ))}
-          <div className="swiper-button-next style-3 snbn1" />
-          <div className="swiper-button-prev style-3 snbp1" />
-        </Swiper>
+          <Carousel className="rounded-3 overflow-hidden">
+            {
+              images.map((elm, index) => <div className="cursor-pointer rounded-bottom-3 overflow-hidden"
+                onClick={() => openImageViewer(index)}>
+                <Image src={elm} width={1280} height={853} />
+              </div>)
+            }
+          </Carousel>
+      )}
+
+
+      {isViewerOpen && (
+        <ImageViewer
+          src={images}
+          currentIndex={currentImage}
+          onClose={closeImageViewer}
+          disableScroll={true}
+          backgroundStyle={{
+            backgroundColor: "rgba(0,0,0,0.9)",
+            zIndex: 999
+          }}
+          closeOnClickOutside={true}
+        />
       )}
 
       {viewer?.length ? (
         <div
           className="d-flex"
-          style={{ position: "absolute", zIndex: 999, bottom: 15 }}
+          style={{ position: "absolute", zIndex: 999, bottom: Toggle ? 40 : 80, left: 10 }}
         >
           <a className="specs-features mx-2" onClick={() => setToggle(true)}>
             <div className="icon">

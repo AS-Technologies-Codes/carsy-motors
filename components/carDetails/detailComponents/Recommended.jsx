@@ -1,44 +1,38 @@
 "use client";
-import { carListings2 } from "@/data/cars";
-import { accessToken, URL } from "@/utils/URL";
+import { getRecommendedListingApi } from "@/utils/APIs";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
-export default function Recommended({ make }) {
-  const [CarsLoading, setCarsLoading] = useState(true);
-  const [CarsData, setCarsData] = useState([]);
+export default function Recommended() {
+  const [RecommendedCarsListing, setRecommendedCarsListing] = useState([]);
+  const [RecommendedCarsLoading, setRecommendedCarsLoading] = useState(true);
 
-  const fecthGetCars = async () => {
-    setCarsLoading(true);
-
-    const getGetCarsRequest = await fetch(
-      `${URL.getCars}&limit=6&make=${make}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: accessToken,
-        },
-      },
-    );
-    const getGetCarsResponse = await getGetCarsRequest.json();
-    const { data } = getGetCarsResponse;
-    setCarsData(data);
-    setCarsLoading(false);
+  const fetchRecommendedCars = async () => {
+    try {
+      setRecommendedCarsLoading(true);
+      const getRecommendedCarsData = await getRecommendedListingApi();
+      setRecommendedCarsListing(getRecommendedCarsData);
+    } catch (error) {
+      console.log(error);
+      toast.error(error);
+    } finally {
+      setRecommendedCarsLoading(false);
+    }
   };
-  useEffect(() => {
-    fecthGetCars();
-  }, []);
 
+  useEffect(() => {
+    fetchRecommendedCars();
+  }, []);
   return (
     <>
       <div className="listing-header mb-30">
         <h3>Recommended Cars</h3>
-        <p>Showing {CarsData.length} more cars you might like</p>
+        <p>Showing {RecommendedCarsLoading.length} more cars you might like</p>
       </div>
       <div className="listing-recommended mb-30">
-        {CarsData.map((elm, i) => (
+        {RecommendedCarsListing.map((elm, i) => (
           <div key={i} className="item flex">
             <div className="image">
               <Image

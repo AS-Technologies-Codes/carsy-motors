@@ -140,7 +140,9 @@ export default function CarSells() {
         ? { ...item, favorite: "#fd5a21" }
         : { ...item, favorite: "none" },
     );
-    allProps.setData(filteredData);
+
+    const car16 = filteredData.find(car => car.id == 16)?.images;
+    allProps.setData(filteredData.map(car => ({ ...car, images: car16 })));
     allProps.setCurrentPage(pagination.page);
     allProps.setItemPerPage(pagination.limit);
     setPaginationKeys(pagination);
@@ -687,7 +689,7 @@ export default function CarSells() {
                                       </Link>
                                     </li>
                                   </ul> */}
-                                <div className="img-style">
+                                <div className="img-style buy-car-slider">
                                   {/* <Image
                                       className="lazyload"
                                       alt="image"
@@ -731,8 +733,33 @@ export default function CarSells() {
                                       <span>{car.transmission}</span>
                                     </div>
                                   </div>
-                                  <div className="money fs-20 fw-5 lh-25 text-color-3">
-                                    ${car.price?.toLocaleString()}
+                                  <div className="flex align-items-center">
+                                    <div className="money fs-20 fw-5 lh-25 text-color-3 me-2">
+                                      ${car.price?.toLocaleString()}
+                                    </div>
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      width="12"
+                                      height="12"
+                                      viewBox="0 0 24 24"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      stroke-width="2"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      class="lucide lucide-landmark-icon lucide-landmark me-1 text-color-3"
+                                    >
+                                      <path d="M10 18v-7" />
+                                      <path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" />
+                                      <path d="M14 18v-7" />
+                                      <path d="M18 18v-7" />
+                                      <path d="M3 22h18" />
+                                      <path d="M6 18v-7" />
+                                    </svg>
+                                    <div className="money fs-12 fw-5 lh-25 text-color-3">
+                                      ${(car.price / 10000 * 39).toFixed(1)}
+                                    </div>
+                                    <span className="fs-12 ms-1">/ week</span>
                                   </div>
                                 </div>
                                 <div className="w-100 d-flex d-md-none justify-content-between align-items-center">

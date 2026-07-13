@@ -202,7 +202,7 @@ export default function Booking() {
                       </fieldset>
                     </div>
 
-                    <div className="col-12 rental-type-booking">
+                    {/* <div className="col-12 rental-type-booking">
                       <fieldset className="phone-wrap style-text">
                         <label className="font-1 fs-14 fw-5">
                           Rental Type*
@@ -278,7 +278,7 @@ export default function Booking() {
                           </div>
                         </div>
                       </fieldset>
-                    </div>
+                    </div> */}
 
                     <div className="col-12">
                       <fieldset className="phone-wrap style-text">

@@ -80,8 +80,8 @@ export default function CarSells() {
   const priceFilter = (oldPrice) => {
     if (!oldPrice.includes("-"))
       return {
-        minPrice: oldPrice.split(",")[0],
-        maxPrice: oldPrice.split(",")[1],
+        priceMin: oldPrice.split(",")[0],
+        priceMax: oldPrice.split(",")[1],
       };
 
     const price = oldPrice.replace(/[,$]/g, "");
@@ -97,9 +97,11 @@ export default function CarSells() {
   const fecthGetCars = async () => {
     setCarsLoading(true);
 
+    console.log({ price });
+
     const allParams = {
       page: allProps.currentPage,
-      ...(!price.includes("Any") ? priceFilter(price) : {}),
+      ...(!price?.includes("Any") ? priceFilter(price) : {}),
       ...(km[0] ? { kmMin: km[0] } : {}),
       ...(km[1] > 100000 ? {} : { kmMax: km[1] }),
       ...(year[0] > 1997 ? { yearMin: year[0] } : {}),
@@ -140,9 +142,7 @@ export default function CarSells() {
         ? { ...item, favorite: "#fd5a21" }
         : { ...item, favorite: "none" },
     );
-
-    const car16 = filteredData.find(car => car.id == 16)?.images;
-    allProps.setData(filteredData.map(car => ({ ...car, images: car16 })));
+    allProps.setData(filteredData);
     allProps.setCurrentPage(pagination.page);
     allProps.setItemPerPage(pagination.limit);
     setPaginationKeys(pagination);
@@ -246,6 +246,7 @@ export default function CarSells() {
     allProps.setData(updatedData);
   };
 
+
   return (
     <>
       <section className="listing-grid tf-section3" id="section3">
@@ -313,16 +314,9 @@ export default function CarSells() {
                             onChange={allProps.setPrice}
                             options={[
                               "Any Price",
-                              "$10,000 - $15,000",
-                              "$15,000 - $20,000",
-                              "$20,000 - $25,000",
-                              "$25,000 - $30,000",
-                              "$30,000 - $35,000",
-                              "$35,000 - $40,000",
-                              "$40,000 - $60,000",
-                              "$60,000 - $80,000",
-                              "$80,000 - $100,000",
-                              "$100,000 - $150,000",
+                              ...(filterOptions?.price?.map(
+                                (price) => "$" + price?.name.split(",")[0] + " - " + "$" + price?.name.split(",")[1] + " (" + price?.count + ")"
+                              ) || []),
                             ]}
                           />
                         </div>

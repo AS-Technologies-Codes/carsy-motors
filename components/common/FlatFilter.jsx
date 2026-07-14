@@ -157,7 +157,13 @@ export default function FlatFilter({
                           </option>
                         ))} */}
                         <option value="Any price">Any Price</option>
-                        <option value="10000,15000">$10,000 - $15,000</option>
+
+                        {filterOptions?.price?.length ? filterOptions.price.map(price => <option value={price?.name}>
+                          ${price?.name.split(",")[0]} - ${price?.name.split(",")[1]} ({price?.count})
+                        </option>) : ""}
+
+
+                        {/* <option value="10000,15000">$10,000 - $15,000</option>
                         <option value="15000,20000">$15,000 - $20,000</option>
                         <option value="20000,25000">$20,000 - $25,000</option>
                         <option value="25000,30000">$25,000 - $30,000</option>
@@ -168,7 +174,7 @@ export default function FlatFilter({
                         <option value="80000,100000">$80,000 - $100,000</option>
                         <option value="100000,150000">
                           $100,000 - $150,000
-                        </option>
+                        </option> */}
                       </select>
                     </div>
                   </div>

@@ -68,7 +68,7 @@ export default function Hero() {
               <Image
                 className="img-item lazyload"
                 alt=""
-                src={elm?.imgSrc}
+                src={elm?.images?.length ? elm.images[0].src : ""}
                 width={3840}
                 height={1920}
               />

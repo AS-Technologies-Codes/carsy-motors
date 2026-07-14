@@ -1,10 +1,20 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Nav from "./Nav";
 import Link from "next/link";
 import Image from "next/image";
 import MobileNav from "./MobileNav";
+import { useRouter } from "next/navigation";
+
 export default function Header1({ bg = "style2" }) {
+  const router = useRouter();
+  const ref = useRef();
+
+  const onSearch = (e) => {
+    e.preventDefault();
+    router.push("/buy?search=" + ref.current.value);
+  }
+
   return (
     <header className={"main-header " + bg}>
       {/* Header Lower */}
@@ -67,18 +77,19 @@ export default function Header1({ bg = "style2" }) {
                       <i className="icon-autodeal-plus search-icon fs-20" />
                     </a>
                     <div className="wd-find-select">
-                      <form onSubmit={(e) => e.preventDefault()}>
+                      <form onSubmit={onSearch}>
                         <div className="form-group-1 search-form form-style2 relative d-flex align-items-center">
                           <button type="submit" className="bg-black border">
                             <i className="icon-autodeal-search cursor-pointer" />
                           </button>
                           <input
                             type="search"
+                            ref={ref}
                             className="search-field"
                             id="search-terms"
                             placeholder="Search..."
                             defaultValue=""
-                            name="s"
+                            name="search"
                             title="Search for"
                             required
                           />

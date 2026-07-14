@@ -61,7 +61,7 @@ export default function CarDetails1({ carItem }) {
                     Home
                   </Link>
                   <Link className="home fw-6 text-color-3" href={`/buy`}>
-                    Buy
+                    Buy Car
                   </Link>
                   <span>{CarDetailsListing?.title} for sale</span>
                 </div>

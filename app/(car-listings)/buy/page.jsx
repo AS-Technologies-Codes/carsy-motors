@@ -1,4 +1,3 @@
-import Cars1 from "@/components/carsListings/Cars1";
 import Footer1 from "@/components/footers/Footer1";
 import Header1 from "@/components/headers/Header1";
 import Filter from "@/components/homes/home-1/Filter";
@@ -29,7 +28,7 @@ export default function page() {
                   <Link className="home fw-6 text-color-3" href={`/`}>
                     Home
                   </Link>
-                  <span>Cars for sale</span>
+                  <span>Buy Car</span>
                 </div>
               </div>
             </div>

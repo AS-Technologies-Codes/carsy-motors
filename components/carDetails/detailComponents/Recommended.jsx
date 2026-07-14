@@ -38,7 +38,7 @@ export default function Recommended() {
               <Image
                 className="lazyload"
                 alt="image"
-                src={elm.imgSrc}
+                src={elm?.images?.length ? elm.images[0].src : ""}
                 width={450}
                 height={338}
               />
@@ -47,9 +47,37 @@ export default function Recommended() {
               <h6>
                 <Link href={`/listing-detail-v1/${elm.id}`}>{elm.title}</Link>
               </h6>
-              <p className="fs-14 fw-7 text-color-2 font-1">
+              {/* <p className="fs-14 fw-7 text-color-2 font-1">
                 ${elm.price?.toLocaleString()}
-              </p>
+              </p> */}
+              <div className="flex align-items-center">
+                <p className="fs-14 fw-7 text-color-2 font-1">
+                  ${elm.price?.toLocaleString()}
+                </p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-landmark-icon lucide-landmark ms-1 text-color-3"
+                >
+                  <path d="M10 18v-7" />
+                  <path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" />
+                  <path d="M14 18v-7" />
+                  <path d="M18 18v-7" />
+                  <path d="M3 22h18" />
+                  <path d="M6 18v-7" />
+                </svg>
+                <div className="money fs-12 fw-5 lh-25 text-color-3">
+                  ${(elm.price / 10000 * 39).toFixed(1)}
+                </div>
+                <span className="fs-12 ms-1">/ week</span>
+              </div>
             </div>
           </div>
         ))}

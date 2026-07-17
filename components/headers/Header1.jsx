@@ -4,16 +4,43 @@ import Nav from "./Nav";
 import Link from "next/link";
 import Image from "next/image";
 import MobileNav from "./MobileNav";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function Header1({ bg = "style2" }) {
   const router = useRouter();
   const ref = useRef();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    if (pathname.includes("/buy") && searchParams.get("search")) {
+      scrollToSection("section3");
+    }
+  }, [])
+
 
   const onSearch = (e) => {
     e.preventDefault();
     router.push("/buy?search=" + ref.current.value);
+    setTimeout(() => {
+      scrollToSection("section3");
+    }, 1000);
   }
+
+  const handleSearchClear = (e) => {
+    // If the value is empty, the user clicked the native clear (cross) button
+    if (e.target.value === "" && pathname.includes("/buy")) {
+      router.push("/buy");
+      // Put your custom logic here (e.g., resetting a list, clearing state, etc.)
+    }
+  };
 
   return (
     <header className={"main-header " + bg}>
@@ -88,9 +115,10 @@ export default function Header1({ bg = "style2" }) {
                             className="search-field"
                             id="search-terms"
                             placeholder="Search..."
-                            defaultValue=""
+                            defaultValue={searchParams.get("search")}
                             name="search"
                             title="Search for"
+                            onChange={handleSearchClear} // <-- Add this handler
                             required
                           />
                         </div>

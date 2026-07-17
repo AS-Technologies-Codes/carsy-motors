@@ -96,7 +96,7 @@ export default function RecomandedCars() {
                   className="swiper-container tf-sw-mobile3"
                 >
                   {RecommendedCarsListing.map((car, i) => (
-                    <SwiperSlide key={i} className="swiper-slide">
+                    <SwiperSlide key={i} className="swiper-slide mb-1">
                       <div className="box-car-list hv-one">
                         <div className="image-group relative">
                           <div className="top flex-two">
@@ -126,16 +126,16 @@ export default function RecomandedCars() {
                             <div className="year flag-tag">2024</div>
                           </div>
                           <div className="img-style buy-car-slider">
-                            {/* <Image
+                            <Image
                               className="lazyload"
                               alt="image"
-                              src={car.imgSrc}
+                              src={car.images[0].src}
                               width={450}
                               height={338}
-                            /> */}
-                            <Slider1
-                              images={car?.images.map((img) => img.src)}
                             />
+                            {/* <Slider1
+                              images={car?.images.map((img) => img.src)}
+                            /> */}
                           </div>
                         </div>
                         <div className="content">

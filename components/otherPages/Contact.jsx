@@ -1,5 +1,6 @@
 "use client";
 import React, { useRef, useState } from "react";
+import YardsMap from "@/components/carsListings/YardsMap";
 
 import emailjs from "@emailjs/browser";
 export default function Contact() {
@@ -41,17 +42,23 @@ export default function Contact() {
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <div className="inner-heading flex-two flex-wrap">
-                <h1 className="heading-listing">Contact us</h1>
+              <div className="inner-heading justify-content-center justify-content-md-between gap-3 mb-0 flex-two flex-wrap">
+                <div>
+                  <h1 className="heading-listing text-center text-md-start">Contact us</h1>
+                  <p className="mt-12 text-center  text-md-start">
+                    Feel free to connect with us through our online channels for
+                    updates, news, and more.
+                  </p>
+                </div>
                 <div className="social-listing flex-six flex-wrap">
                   <p>Share this page:</p>
                   <div className="icon-social style1">
                     <a href="javascript:void(0)">
                       <i className="icon-autodeal-facebook" />
                     </a>
-                    <a href="javascript:void(0)">
+                    {/* <a href="javascript:void(0)">
                       <i className="icon-autodeal-linkedin" />
-                    </a>
+                    </a> */}
                     <a href="javascript:void(0)">
                       <i className="icon-autodeal-twitter" />
                     </a>
@@ -65,28 +72,16 @@ export default function Contact() {
           </div>
         </div>
       </section>
-      <section className="tf-section-map">
-        <div className="container-fluid">
-          <div className="map">
-            <iframe
-              className="map-content"
-              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7302.453092836291!2d90.47477022812872!3d23.77494577893369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1627293157601!5m2!1svi!2s"
-              allowFullScreen=""
-              loading="lazy"
-            ></iframe>
-          </div>
-        </div>
-      </section>
       <section className="tf-section-contact">
         <div className="container">
           <div className="row">
             <div className="col-md-8 contact-left">
               <div className="heading-section mb-30">
-                <h2>Drop Us a Line</h2>
-                <p className="mt-12">
+                {/* <h2>Drop Us a Line</h2> */}
+                {/* <p className="mt-12">
                   Feel free to connect with us through our online channels for
                   updates, news, and more.
-                </p>
+                </p> */}
               </div>
               <div id="comments" className="comments">
                 <div className="respond-comment">
@@ -159,9 +154,8 @@ export default function Contact() {
                       />
                     </fieldset>
                     <div
-                      className={`tfSubscribeMsg  footer-sub-element ${
-                        showMessage ? "active" : ""
-                      }`}
+                      className={`tfSubscribeMsg  footer-sub-element ${showMessage ? "active" : ""
+                        }`}
                     >
                       {success ? (
                         <p style={{ color: "rgb(52, 168, 83)" }}>
@@ -172,9 +166,13 @@ export default function Contact() {
                       )}
                     </div>
                     <div className="button-boxs">
-                      <button className="sc-button" name="submit" type="submit">
+                      <button className="sc-button d-none d-md-block" name="submit" type="submit">
                         <span>Send Message</span>
                       </button>
+                      <button className="sc-button w-100 d-block d-md-none" name="submit" type="submit">
+                        <span>Send Message</span>
+                      </button>
+
                     </div>
                   </form>
                 </div>
@@ -196,20 +194,20 @@ export default function Contact() {
                     <p>1-333-345-6868</p>
                     <p>themesflat@gmail.com</p>
                   </div>
-                  <div className="box-info">
+                  {/* <div className="box-info">
                     <h5>Opentime:</h5>
                     <p>Monay - Friday: 08:00 - 20:00</p>
                     <p>Saturday - Sunday: 10:00 - 18:00</p>
-                  </div>
+                  </div> */}
                   <div className="box-info">
                     <h5>Follow Us:</h5>
                     <div className="icon-social style2">
                       <a href="javascript:void(0)">
                         <i className="icon-autodeal-facebook" />
                       </a>
-                      <a href="javascript:void(0)">
+                      {/* <a href="javascript:void(0)">
                         <i className="icon-autodeal-linkedin" />
-                      </a>
+                      </a> */}
                       <a href="javascript:void(0)">
                         <i className="icon-autodeal-twitter" />
                       </a>
@@ -224,6 +222,10 @@ export default function Contact() {
           </div>
         </div>
       </section>
+<div className="mb-5">
+      <YardsMap height={"600px"} />
+
+</div>
     </>
   );
 }

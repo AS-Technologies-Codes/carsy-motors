@@ -1,4 +1,3 @@
-import Brands from "@/components/common/Brands";
 import Footer1 from "@/components/footers/Footer1";
 import Header2 from "@/components/headers/Header1";
 import Contact from "@/components/otherPages/Contact";
@@ -24,7 +23,7 @@ export default function page() {
                   <Link className="home fw-6 text-color-3" href={`/`}>
                     Home
                   </Link>
-                  <span>Used cars for sale</span>
+                  <span>Contact us</span>
                 </div>
               </div>
             </div>
@@ -32,7 +31,6 @@ export default function page() {
         </div>
       </section>
       <Contact />
-      <Brands />
       <Footer1 />
     </>
   );

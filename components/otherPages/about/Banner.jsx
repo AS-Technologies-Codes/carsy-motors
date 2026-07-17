@@ -2,12 +2,12 @@ import React from "react";
 
 export default function Banner() {
   return (
-    <section className="tf-banner style-1">
+    <section className="tf-banner style-1 d-none d-md-flex" style={{height: "80vh"}}>
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
             <div className="content relative z-2">
-              <div className="heading">
+              {/* <div className="heading">
                 <h1 className="text-color-1">
                   Buying and selling cars <br />
                   has never been easier!
@@ -21,7 +21,7 @@ export default function Banner() {
                   <span>Search for your favorite car</span>
                   <i className="icon-autodeal-next" />
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

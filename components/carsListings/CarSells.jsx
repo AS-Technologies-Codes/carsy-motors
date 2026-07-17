@@ -10,7 +10,7 @@ import FilterSidebar from "./MobileFilterSidebar";
 import { accessToken, URL } from "@/utils/URL";
 import Slider1 from "../carDetails/sliders/Slider1";
 import { useResponsive } from "@/utils/useResponsive";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 import ComingSoon1 from "../../public/assets/images/car-list/buy-coming-soon.png"
 import ComingSoon2 from "../../public/assets/images/car-list/coming-soon-mobile.png"
 import Image from "next/image";
@@ -20,15 +20,15 @@ export default function CarSells() {
   const [CarsLoading, setCarsLoading] = useState(true);
   const { state, dispatch } = useCarFilter();
   const { isMobile } = useResponsive();
-  const searchParams = useSearchParams();
- const [ComingSoon, setComingSoon] = useState(false);
-  
- useEffect(() => {
+  // const searchParams = useSearchParams() || "";
+  const [ComingSoon, setComingSoon] = useState(false);
+
+  useEffect(() => {
     setTimeout(() => {
       setComingSoon(true);
     }, 2000);
   }, [])
-  
+
   const {
     price,
     km,
@@ -133,7 +133,7 @@ export default function CarSells() {
       ...(!seat.includes("Any") ? { seat: clean(seat) } : {}),
       ...(!cylinder.includes("Any") ? { cylinder: clean(cylinder) } : {}),
       ...(!color.includes("Any") ? { color: clean(color) } : {}),
-      ...(searchParams?.get("search") ? { search: searchParams?.get("search") } : {}),
+      // ...(searchParams?.get("search") ? { search: searchParams?.get("search") } : {}),
     };
 
     const params = new URLSearchParams(allParams);
@@ -265,12 +265,12 @@ export default function CarSells() {
 
   return (
     <>
-    {
-            ComingSoon && <div className="blur position-fixed w-100 top-0 left-0 d-flex justify-content-center align-items-center" style={{ zIndex: 999, height: '100vh' }}>
-              <Image src={ComingSoon1} className="w-75 d-none d-md-block border border-5 border-primary" objectFit="cover" />
-              <Image src={ComingSoon2} className="w-75 d-md-none border border-5 border-primary" objectFit="cover" />
-            </div>
-          } 
+      {
+        ComingSoon && <div className="blur position-fixed w-100 top-0 left-0 d-flex justify-content-center align-items-center" style={{ zIndex: 999, height: '100vh' }}>
+          <Image src={ComingSoon1} className="w-75 d-none d-md-block border border-5 border-primary" objectFit="cover" />
+          <Image src={ComingSoon2} className="w-75 d-md-none border border-5 border-primary" objectFit="cover" />
+        </div>
+      }
       <section className="listing-grid tf-section3" id="section3">
         <div className="container">
           <div className="row">

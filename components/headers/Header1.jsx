@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { Suspense, useEffect, useRef } from "react";
 import Nav from "./Nav";
 import Link from "next/link";
 import Image from "next/image";
@@ -10,7 +10,7 @@ export default function Header1({ bg = "style2" }) {
   const router = useRouter();
   const ref = useRef();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams() || '';
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -19,11 +19,11 @@ export default function Header1({ bg = "style2" }) {
     }
   };
 
-  useEffect(() => {
-    if (pathname.includes("/buy") && searchParams.get("search")) {
-      scrollToSection("section3");
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (pathname.includes("/buy") && searchParams?.get("search")) {
+  //     scrollToSection("section3");
+  //   }
+  // }, [])
 
 
   const onSearch = (e) => {
@@ -87,51 +87,53 @@ export default function Header1({ bg = "style2" }) {
                   </nav>
                   {/* Main Menu End*/}
                 </div>
-                <div className="header-account flex align-center ms-5">
-                  <div className="search-mobie ms-5">
-                    <a
-                      onClick={() => {
-                        document
-                          .querySelector(".header-search-icon")
-                          .classList.toggle("opened");
-                        document
-                          .querySelector(".wd-find-select")
-                          .classList.toggle("opened");
-                      }}
-                      className="header-search-icon flex items-center justify-center"
-                    >
-                      <i className="icon-autodeal-search search-icon fs-20" />
-                      <i className="icon-autodeal-plus search-icon fs-20" />
-                    </a>
-                    <div className="wd-find-select">
-                      <form onSubmit={onSearch}>
-                        <div className="form-group-1 search-form form-style2 relative d-flex align-items-center">
-                          <button type="submit" className="bg-black border">
-                            <i className="icon-autodeal-search cursor-pointer" />
-                          </button>
-                          <input
-                            type="search"
-                            ref={ref}
-                            className="search-field"
-                            id="search-terms"
-                            placeholder="Search..."
-                            defaultValue={searchParams.get("search")}
-                            name="search"
-                            title="Search for"
-                            onChange={handleSearchClear} // <-- Add this handler
-                            required
-                          />
-                        </div>
-                      </form>
+                <Suspense fallback={<div>Loading search...</div>}>
+                  <div className="header-account flex align-center ms-5">
+                    <div className="search-mobie ms-5">
+                      <a
+                        onClick={() => {
+                          document
+                            .querySelector(".header-search-icon")
+                            .classList.toggle("opened");
+                          document
+                            .querySelector(".wd-find-select")
+                            .classList.toggle("opened");
+                        }}
+                        className="header-search-icon flex items-center justify-center"
+                      >
+                        <i className="icon-autodeal-search search-icon fs-20" />
+                        <i className="icon-autodeal-plus search-icon fs-20" />
+                      </a>
+                      <div className="wd-find-select">
+                        <form onSubmit={onSearch}>
+                          <div className="form-group-1 search-form form-style2 relative d-flex align-items-center">
+                            <button type="submit" className="bg-black border">
+                              <i className="icon-autodeal-search cursor-pointer" />
+                            </button>
+                            <input
+                              type="search"
+                              ref={ref}
+                              className="search-field"
+                              id="search-terms"
+                              placeholder="Search..."
+                              // defaultValue={searchParams.get("search")}
+                              name="search"
+                              title="Search for"
+                              onChange={handleSearchClear} // <-- Add this handler
+                              required
+                            />
+                          </div>
+                        </form>
+                      </div>
                     </div>
+                    <Link
+                      href="/favourites"
+                      className="header-favorite flex items-center justify-center"
+                    >
+                      <i className="icon-autodeal-favorite fs-18" />
+                    </Link>
                   </div>
-                  <Link
-                    href="/favourites"
-                    className="header-favorite flex items-center justify-center"
-                  >
-                    <i className="icon-autodeal-favorite fs-18" />
-                  </Link>
-                </div>
+                </Suspense>
                 <div
                   className="mobile-nav-toggler mobile-button"
                   onClick={() =>

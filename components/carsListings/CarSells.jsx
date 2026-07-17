@@ -183,7 +183,7 @@ export default function CarSells() {
     features,
     drive_type,
     featureOptions,
-    searchParams
+    // searchParams
   ]);
 
   const clearFilter = () => {

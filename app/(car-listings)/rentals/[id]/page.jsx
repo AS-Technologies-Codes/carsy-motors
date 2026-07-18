@@ -7,6 +7,8 @@ import React from "react";
 import Link from "next/link";
 import CarSells from "@/components/carsListings/CarSells";
 import { CarFilterProvider } from "@/context/providers/CarFilterContext";
+import CarRent from "@/components/carsListings/CarRent";
+import FlatFilterRentals from "@/components/common/FlatFilterRentals";
 export const metadata = {
   title:
     "Car Listing List || AutoDeal - Car Dealer, Rental & Listing React Nextjs Template",
@@ -19,8 +21,17 @@ export default function page() {
         <Header1 />
       </div>
       <Hero />
-      <Filter />
-      <section className="flat-title">
+      <div className="flat-filter-search home3">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="flat-tabs">
+                <FlatFilterRentals />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>      <section className="flat-title">
         <div className="container2">
           <div className="row">
             <div className="col-lg-12">
@@ -29,14 +40,14 @@ export default function page() {
                   <Link className="home fw-6 text-color-3" href={`/`}>
                     Home
                   </Link>
-                  <span>Car sells</span>
+                  <span>Rentals Car</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <CarSells />
+      <CarRent />
       <Footer1 />
     </CarFilterProvider>
   );

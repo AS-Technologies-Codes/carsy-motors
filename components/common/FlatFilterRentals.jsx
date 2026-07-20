@@ -5,6 +5,7 @@ import { useCarFilter } from "@/context/providers/CarFilterContext";
 import { accessToken, URL } from "@/utils/URL";
 import Link from "next/link";
 import DateRange from "./DateRange";
+import toast from "react-hot-toast";
 
 export default function FlatFilterRentals({
   styleClass = "",
@@ -12,11 +13,56 @@ export default function FlatFilterRentals({
   tabStyle = "",
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const defaultValues = {
+    age: 0,
+    YardLocation: "Auto Select",
+    pickUpDate: "",
+    ReturnDate: "",
+    pickUpTime: "",
+    ReturnTime: "",
+  }
+  const [formData, setFormData] = useState(defaultValues);
   const { state, dispatch } = useCarFilter();
   const { countMake, countModel, countPrice, filterOptions } = state;
 
-  const handleClick = (index) => {
-    setActiveIndex(index);
+
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    if(Number(formData.age) < 25) {
+      showActionToast()
+    }
+  }, [formData.age])
+
+  const showActionToast = () => {
+    toast((t) => (
+      <div className="gap-3 flex justify-content-center flex-column align-items-center">
+        {/* <h1 className="fs-4">Please select an age</h1> */}
+        <div className="fw-bold mt-3">The minimum age to rent  most vehicles is 25.</div>
+        <div className="center">Drivers under 25 may drive certain vehicles, but may incur a Young Driver Surcharge.</div>
+        <div>For more details of our age policy <a className="text-color-3" href="javascipt:void(0)">click here</a>.</div>
+
+        {/* <div className="button-search sc-btn-top"> */}
+        <Link href="javascipt:void(0)"
+          onClick={() => toast.dismiss(t.id)}
+          className="sc-button"
+        >
+          <span>Got it!</span>
+        </Link>
+        {/* </div> */}
+      </div>
+    ), {
+      // Optional: Stop the toast from automatically hiding 
+      // so the user is forced to click "OK"
+      duration: Infinity,
+    });
   };
 
   const [CarsLoading, setCarsLoading] = useState(true);
@@ -67,6 +113,9 @@ export default function FlatFilterRentals({
     });
   };
 
+
+  console.log(formData);
+
   return (
     <>
       <div className={`content-tab ${tabStyle}`}>
@@ -75,19 +124,15 @@ export default function FlatFilterRentals({
             <form onSubmit={(e) => e.preventDefault()}>
               <div className="wd-find-select flex">
                 <div className="inner-group select-style">
-                  <div className="form-group-1" style={{width: "180%"}}>
+                  <div className="form-group-1" >
                     <label>Pick up & Return Location</label>
                     <div className="group-select tf-select">
                       <select
-                        disabled={CarsLoading}
+                        // disabled={CarsLoading}
                         className="nice-select"
-                        value={countMake}
-                        onChange={(e) =>
-                          dispatch({
-                            type: "SET_COUNT_MAKE",
-                            payload: e.target.value,
-                          })
-                        }
+                        name="YardLocation"
+                        value={formData.YardLocation}
+                        onChange={handleChange}
                       >
                         <option value={"auto"}>Auto Select</option>
                         {/* {filterOptions?.make?.map((make) => (
@@ -98,29 +143,41 @@ export default function FlatFilterRentals({
                       </select>
                     </div>
                   </div>
-                  <div className="form-group-1 dateRange" style={{width: "180%"}}>
-                    <label>Pick up & Return Date</label>
+                  <div className="form-group-1 dateRange" style={{ width: "150%" }}>
+                    <label>Pick up & Return</label>
                     <div className="group-select tf-select">
-                      <DateRange />
+                      <DateRange setFormData={setFormData} formData={formData} />
 
                     </div>
                   </div>
-                  <div className="form-group-1" style={{width: "120%"}}>
+                  {/* <div className="form-group-1" style={{ width: "120%" }}>
                     <label>Pick up Time</label>
                     <div className="group-select tf-select flex">
-                      <input type="time" defaultValue={"12:00"} style={{ all: 'unset' }} />
+                      <input
+                        name="pickUpTime"
+                        value={formData.pickUpTime}
+                        onChange={handleChange}
+                        type="time" defaultValue={"12:00"} style={{ all: 'unset' }} />
                     </div>
                   </div>
-                  <div className="form-group-1" style={{width: "120%"}}>
+                  <div className="form-group-1" style={{ width: "120%" }}>
                     <label>Return Time</label>
                     <div className="group-select tf-select flex">
-                      <input type="time" defaultValue={"12:00"} style={{ all: 'unset' }} />
+                      <input
+                        name="returnTime"
+                        value={formData.returnTime}
+                        onChange={handleChange}
+
+                        type="time" defaultValue={"12:00"} style={{ all: 'unset' }} />
                     </div>
-                  </div>
-                   <div className="form-group-1">
+                  </div> */}
+                  <div className="form-group-1">
                     <label>Driver Age</label>
                     <div className="group-select tf-select">
                       <select
+                        name="age"
+                        value={formData.age}
+                        onChange={handleChange}
                         className="nice-select"
                       // value={door}
                       // onChange={(e) => setDoor(e.target.value)}
@@ -134,6 +191,7 @@ export default function FlatFilterRentals({
                         <option value={23}>23</option>
                         <option value={24}>24</option>
                         <option value={25}>25</option>
+                        <option value={26}>26+</option>
                       </select>
                     </div>
                   </div>

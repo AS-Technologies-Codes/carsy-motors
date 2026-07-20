@@ -10,6 +10,7 @@ import BackToTop from "@/components/common/BacktoTop";
 import { usePathname } from "next/navigation";
 import Login from "@/components/modals/Login";
 import SignUp from "@/components/modals/SignUp";
+import { Toaster } from "react-hot-toast";
 // import Cars from "@/components/modals/Cars";
 // import { CarModalProvider } from "@/context/providers/carFilterProvider";
 export default function RootLayout({ children }) {
@@ -80,11 +81,11 @@ export default function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap"
           rel="stylesheet"
         />
-
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.css" integrity="sha512-rBi1cGvEdd3NmSAQhPWId5Nd6QxE8To4ADjM2a6n0BrqQdisZ/RPUlm0YycDzvNL1HHAh1nKZqI0kSbif+5upQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       </head>
 
       <body className="body " style={{ transition: "0s" }}>
+       <Toaster position="top-center" reverseOrder={false} />
         <div id="wrapper">
           <div id="pagee" className="clearfix">
             {children}

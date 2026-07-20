@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useCarFilter } from "@/context/providers/CarFilterContext";
 import { accessToken, URL } from "@/utils/URL";
 import Link from "next/link";
-import DateRange from "./DateRange";
+import DateRangeLong from "./DateRange";
 import toast from "react-hot-toast";
 
 export default function FlatFilterRentals({
@@ -36,7 +36,7 @@ export default function FlatFilterRentals({
   };
 
   useEffect(() => {
-    if(Number(formData.age) < 25) {
+    if (Number(formData.age) > 0 && Number(formData.age) < 25) {
       showActionToast()
     }
   }, [formData.age])
@@ -143,34 +143,10 @@ export default function FlatFilterRentals({
                       </select>
                     </div>
                   </div>
-                  <div className="form-group-1 dateRange" style={{ width: "150%" }}>
-                    <label>Pick up & Return</label>
-                    <div className="group-select tf-select">
-                      <DateRange setFormData={setFormData} formData={formData} />
+                 
+                      <DateRangeLong setFormData={setFormData} formData={formData} />
 
-                    </div>
-                  </div>
-                  {/* <div className="form-group-1" style={{ width: "120%" }}>
-                    <label>Pick up Time</label>
-                    <div className="group-select tf-select flex">
-                      <input
-                        name="pickUpTime"
-                        value={formData.pickUpTime}
-                        onChange={handleChange}
-                        type="time" defaultValue={"12:00"} style={{ all: 'unset' }} />
-                    </div>
-                  </div>
-                  <div className="form-group-1" style={{ width: "120%" }}>
-                    <label>Return Time</label>
-                    <div className="group-select tf-select flex">
-                      <input
-                        name="returnTime"
-                        value={formData.returnTime}
-                        onChange={handleChange}
-
-                        type="time" defaultValue={"12:00"} style={{ all: 'unset' }} />
-                    </div>
-                  </div> */}
+                 
                   <div className="form-group-1">
                     <label>Driver Age</label>
                     <div className="group-select tf-select">

@@ -15,6 +15,7 @@ export default function Contact() {
     "tel": "",
     "subject": "",
     "message": "",
+    user_id: 1,
   });
 
   const handleShowMessage = () => {
@@ -46,6 +47,8 @@ export default function Contact() {
         "tel": "",
         "subject": "",
         "message": "",
+        user_id: 1,
+
       });
     } catch (error) {
       setSuccess(false);

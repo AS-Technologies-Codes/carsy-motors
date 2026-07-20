@@ -2,7 +2,7 @@ import Footer1 from "@/components/footers/Footer1";
 import Header1 from "@/components/headers/Header1";
 import Filter from "@/components/homes/home-1/Filter";
 import Hero from "@/components/homes/home-6/Hero";
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import CarSells from "@/components/carsListings/CarSells";
 import { CarFilterProvider } from "@/context/providers/CarFilterContext";
@@ -35,7 +35,9 @@ export default function page() {
           </div>
         </div>
       </section>
-      <CarSells />
+      <Suspense fallback={<div>Loading...</div>}>
+        <CarSells />
+      </Suspense>
       <Footer1 />
     </CarFilterProvider>
   );

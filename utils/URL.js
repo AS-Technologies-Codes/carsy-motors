@@ -1,4 +1,5 @@
-const baseUrl = "https://carsy.astechnologies.pk/api_carsy/carsy_api/cars_api.php?action=";
+const baseUrl =
+  "https://carsy.astechnologies.pk/api_carsy/carsy_api/cars_api.php?action=";
 const accessToken = "Bearer dfsdgs43543534543gdsfdsfdsfa22342222@@223";
 
 const URL = {
@@ -14,10 +15,10 @@ const URL = {
   saveNewsLetter: baseUrl + "save_newsletter",
   postFinance: baseUrl + "submit_finance",
   postEnquiry: baseUrl + "submit_enquiry",
+  postContactUs: baseUrl.replace("cars_api.php?action=", "") + "contactus_api.php",
   saveBooking: baseUrl + "save_booking",
   // getCashForCarPrice: baseUrl + "get_cash_price",
   // getBlogDetails: baseUrl + "get_news",
 };
 
 export { URL, accessToken };
-

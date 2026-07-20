@@ -1,12 +1,21 @@
 "use client";
 import React, { useRef, useState } from "react";
 import YardsMap from "@/components/carsListings/YardsMap";
-
-import emailjs from "@emailjs/browser";
+import { postContactUs } from "@/utils/APIs";
+import toast from "react-hot-toast";
 export default function Contact() {
   const formRef = useRef();
   const [success, setSuccess] = useState(true);
+  const [ContactSending, setContactSending] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
+  const [showError, setShowError] = useState("");
+  const [formData, setFormData] = useState({
+    "name": "",
+    "email": "",
+    "tel": "",
+    "subject": "",
+    "message": "",
+  });
 
   const handleShowMessage = () => {
     setShowMessage(true);
@@ -15,27 +24,60 @@ export default function Contact() {
     }, 2000);
   };
 
-  const sendMail = (e) => {
-    e.preventDefault();
-    emailjs
-      .sendForm("service_noj8796", "template_fs3xchn", formRef.current, {
-        publicKey: "iG4SCmR-YtJagQ4gV",
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          setSuccess(true);
-          handleShowMessage();
-
-          formRef.current.reset();
-        } else {
-          setSuccess(false);
-          handleShowMessage();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
+
+  const sendContactUs = async (e) => {
+    e.preventDefault();
+    setContactSending(true);
+    setShowError("");
+    try {
+      await postContactUs(formData);
+      setSuccess(true);
+      handleShowMessage();
+      setFormData({
+        "name": "",
+        "email": "",
+        "tel": "",
+        "subject": "",
+        "message": "",
+      });
+    } catch (error) {
+      setSuccess(false);
+      setShowError(error);
+      handleShowMessage();
+      toast.error(error);
+    } finally {
+      setContactSending(false);
+    }
+  };
+
+  // const sendContactUs = (e) => {
+  //   e.preventDefault();
+  //   emailjs
+  //     .sendForm("service_noj8796", "template_fs3xchn", formRef.current, {
+  //       publicKey: "iG4SCmR-YtJagQ4gV",
+  //     })
+  //     .then((res) => {
+  //       if (res.status === 200) {
+  //         setSuccess(true);
+  //         handleShowMessage();
+
+  //         formRef.current.reset();
+  //       } else {
+  //         setSuccess(false);
+  //         handleShowMessage();
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
   return (
     <>
       <section className="flat-property">
@@ -86,7 +128,7 @@ export default function Contact() {
               <div id="comments" className="comments">
                 <div className="respond-comment">
                   <form
-                    onSubmit={sendMail}
+                    onSubmit={sendContactUs}
                     ref={formRef}
                     id="loan-calculator"
                     className="comment-form form-submit"
@@ -99,6 +141,8 @@ export default function Contact() {
                           type="text"
                           className="tb-my-input"
                           name="name"
+                          value={formData.name}
+                          onChange={handleChange}
                           placeholder="Your name"
                           required
                         />
@@ -112,6 +156,8 @@ export default function Contact() {
                           className="tb-my-input"
                           name="email"
                           placeholder="Your email"
+                          value={formData.email}
+                          onChange={handleChange}
                           required
                         />
                       </fieldset>
@@ -125,6 +171,8 @@ export default function Contact() {
                           type="tel"
                           className="tb-my-input"
                           name="tel"
+                          value={formData.tel}
+                          onChange={handleChange}
                           placeholder="Phone Numbers"
                           required
                         />
@@ -135,6 +183,8 @@ export default function Contact() {
                           type="text"
                           className="tb-my-input"
                           name="subject"
+                          value={formData.subject}
+                          onChange={handleChange}
                           placeholder="Enter Keyword"
                           required
                         />
@@ -145,12 +195,13 @@ export default function Contact() {
                       <textarea
                         id="comment-message"
                         name="message"
+                        value={formData.message}
+                        onChange={handleChange}
                         rows={4}
                         tabIndex={4}
                         placeholder="Your message"
                         aria-required="true"
                         required
-                        defaultValue={""}
                       />
                     </fieldset>
                     <div
@@ -162,15 +213,15 @@ export default function Contact() {
                           Message has been sent successfully
                         </p>
                       ) : (
-                        <p style={{ color: "red" }}>Something went wrong</p>
+                        <p style={{ color: "red" }}>Message Failed: ({showError})</p>
                       )}
                     </div>
                     <div className="button-boxs">
                       <button className="sc-button d-none d-md-block" name="submit" type="submit">
                         <span>Send Message</span>
                       </button>
-                      <button className="sc-button w-100 d-block d-md-none" name="submit" type="submit">
-                        <span>Send Message</span>
+                      <button disabled={ContactSending} className="sc-button w-100 d-block d-md-none" name="submit" type="submit">
+                        <span>{ContactSending ? "Sending Message..." : "Send Message"}</span>
                       </button>
 
                     </div>
@@ -222,10 +273,10 @@ export default function Contact() {
           </div>
         </div>
       </section>
-<div className="mb-5">
-      <YardsMap height={"600px"} />
+      <div className="mb-5">
+        <YardsMap height={"600px"} />
 
-</div>
+      </div>
     </>
   );
 }

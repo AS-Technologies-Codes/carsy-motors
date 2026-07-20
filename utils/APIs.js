@@ -11,7 +11,10 @@ export const getReviewsApi = async () => {
         },
       });
       const getReviewsResponse = await getReviewsRequest.json();
-      if (getReviewsResponse?.status === "error") {
+      if (
+        !getReviewsResponse?.status ||
+        getReviewsResponse?.status === "error"
+      ) {
         return reject(
           new Error(
             getReviewsResponse?.message || "Failed to fetch reviews listing",
@@ -36,6 +39,13 @@ export const getBlogsListingApi = async () => {
         },
       });
       const getBlogsResponse = await getBlogsRequest.json();
+      if (!getBlogsResponse?.status || getBlogsResponse?.status === "error") {
+        return reject(
+          new Error(
+            getBlogsResponse?.message || "Failed to fetch blogs listing",
+          ),
+        );
+      }
       return resolve(getBlogsResponse?.data);
     } catch (error) {
       return reject(error);
@@ -54,7 +64,7 @@ export const getBannerListingApi = async () => {
         },
       });
       const getBannerResponse = await getBannerRequest.json();
-      if (getBannerResponse?.status === "error") {
+      if (!getBannerResponse?.status || getBannerResponse?.status === "error") {
         return reject(
           new Error(
             getBannerResponse?.message || "Failed to fetch banner listing",
@@ -82,7 +92,10 @@ export const getCarDetailsApi = async (carId) => {
         },
       );
       const getCarDetailsResponse = await getCarDetailsRequest.json();
-      if (getCarDetailsResponse?.status === "error") {
+      if (
+        !getCarDetailsResponse?.status ||
+        getCarDetailsResponse?.status === "error"
+      ) {
         return reject(
           new Error(
             getCarDetailsResponse?.message || "Failed to fetch car details",
@@ -110,7 +123,10 @@ export const getSearchResults = async (text) => {
         },
       );
       const getCarDetailsResponse = await getCarDetailsRequest.json();
-      if (getCarDetailsResponse?.status === "error") {
+      if (
+        !getCarDetailsResponse?.status ||
+        getCarDetailsResponse?.status === "error"
+      ) {
         return reject(
           new Error(
             getCarDetailsResponse?.message || "Failed to fetch car details",
@@ -135,7 +151,7 @@ export const getFleetListingApi = async () => {
         },
       });
       const getFleetResponse = await getFleetRequest.json();
-      if (getFleetResponse?.status === "error") {
+      if (!getFleetResponse?.status || getFleetResponse?.status === "error") {
         return reject(
           new Error(
             getFleetResponse?.message || "Failed to fetch fleet listing",
@@ -161,7 +177,7 @@ export const saveEmail = async (email) => {
         body: JSON.stringify({ email }),
       });
       const saveEmailResponse = await saveEmailRequest.json();
-      if (saveEmailResponse?.status === "error") {
+      if (!saveEmailResponse?.status || saveEmailResponse?.status === "error") {
         return reject(saveEmailResponse?.message || "Failed to save email");
       }
       return resolve(saveEmailResponse?.message);
@@ -183,13 +199,46 @@ export const postFinance = async (financeData) => {
         body: JSON.stringify(financeData),
       });
       const postFinanceResponse = await postFinanceRequest.json();
-      if (postFinanceResponse?.status === "error") {
+      if (
+        !postFinanceResponse?.status ||
+        postFinanceResponse?.status === "error"
+      ) {
         return reject(
           postFinanceResponse?.message ||
             "Failed to submit finance information",
         );
       }
       return resolve(postFinanceResponse?.message);
+    } catch (error) {
+      return reject(error);
+    }
+  });
+};
+
+export const postContactUs = async (ContactUsData) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const postContactUsRequest = await fetch(
+        "https://carsy.astechnologies.pk/api_carsy/carsy_api/contactus_api.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: accessToken,
+          },
+          body: JSON.stringify(ContactUsData),
+        },
+      );
+      const postContactUsResponse = await postContactUsRequest.json();
+      if (
+        !postContactUsResponse?.status ||
+        postContactUsResponse?.status === "error"
+      ) {
+        return reject(
+          postContactUsResponse?.message || "Failed to submit information",
+        );
+      }
+      return resolve(postContactUsResponse?.message);
     } catch (error) {
       return reject(error);
     }
@@ -208,7 +257,10 @@ export const postEnquiry = async (enquiryData) => {
         body: JSON.stringify(enquiryData),
       });
       const postEnquiryResponse = await postEnquiryRequest.json();
-      if (postEnquiryResponse?.status === "error") {
+      if (
+        !postEnquiryResponse?.status ||
+        postEnquiryResponse?.status === "error"
+      ) {
         return reject(
           postEnquiryResponse?.message ||
             "Failed to submit enquiry information",
@@ -233,7 +285,10 @@ export const saveBooking = async (bookingData) => {
         body: JSON.stringify(bookingData),
       });
       const saveBookingResponse = await saveBookingRequest.json();
-      if (saveBookingResponse?.status === "error") {
+      if (
+        !saveBookingResponse?.status ||
+        saveBookingResponse?.status === "error"
+      ) {
         return reject(
           saveBookingResponse?.message ||
             "Failed to submit booking information",
@@ -257,7 +312,10 @@ export const getAchievementsListingApi = async () => {
         },
       });
       const getAchievementsResponse = await getAchievementsRequest.json();
-      if (getAchievementsResponse?.status === "error") {
+      if (
+        !getAchievementsResponse?.status ||
+        getAchievementsResponse?.status === "error"
+      ) {
         return reject(
           new Error(
             getAchievementsResponse?.message ||
@@ -283,7 +341,10 @@ export const getRecommendedListingApi = async () => {
         },
       });
       const getRecommendedResponse = await getRecommendedRequest.json();
-      if (getRecommendedResponse?.status === "error") {
+      if (
+        !getRecommendedResponse?.status ||
+        getRecommendedResponse?.status === "error"
+      ) {
         return reject(
           new Error(
             getRecommendedResponse?.message ||
@@ -309,7 +370,7 @@ export const getMapListingApi = async () => {
         },
       });
       const getMapResponse = await getMapRequest.json();
-      if (getMapResponse?.status === "error") {
+      if (!getMapResponse?.status || getMapResponse?.status === "error") {
         return reject(
           new Error(getMapResponse?.message || "Failed to fetch map listing"),
         );

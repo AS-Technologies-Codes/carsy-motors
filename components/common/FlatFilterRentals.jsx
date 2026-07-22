@@ -6,20 +6,27 @@ import { accessToken, URL } from "@/utils/URL";
 import Link from "next/link";
 import DateRangeLong from "./DateRange";
 import toast from "react-hot-toast";
+import { usePathname } from "next/navigation";
 
 export default function FlatFilterRentals({
   styleClass = "",
   justifyClass = "",
   tabStyle = "",
 }) {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const pathName = usePathname();
   const defaultValues = {
     age: 0,
-    YardLocation: "Auto Select",
-    pickUpDate: "",
+    YardLocation: "carsyYard",
+    pickUpDate: new Date().toISOString().toString().split("T")[0],
     ReturnDate: "",
-    pickUpTime: "",
+    pickUpTime: new Date().toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false // Forces 24-hour mode
+    }).toString(),
+    weeks: "1 Week",
     ReturnTime: "",
+    type: pathName.toString().includes("short") ? "short" : "long"
   }
   const [formData, setFormData] = useState(defaultValues);
   const { state, dispatch } = useCarFilter();
@@ -102,7 +109,10 @@ export default function FlatFilterRentals({
   };
   useEffect(() => {
     fecthGetCars();
-  }, [countPrice, countMake, countModel, activeIndex]);
+  }, [countPrice, countMake, countModel]);
+
+
+  console.log(formData);
 
   const searchFilter = () => {
     dispatch({ type: "SET_MAKE", payload: countMake });
@@ -112,9 +122,6 @@ export default function FlatFilterRentals({
       payload: countPrice,
     });
   };
-
-
-  console.log(formData);
 
   return (
     <>
@@ -134,7 +141,7 @@ export default function FlatFilterRentals({
                         value={formData.YardLocation}
                         onChange={handleChange}
                       >
-                        <option value={"auto"}>Auto Select</option>
+                        <option value={"carsyYard"}>Carsy Yard (Auto Select)</option>
                         {/* {filterOptions?.make?.map((make) => (
                           <option value={make?.name}>
                             {make?.name} ({make?.count || 0})
@@ -143,10 +150,14 @@ export default function FlatFilterRentals({
                       </select>
                     </div>
                   </div>
-                 
-                      <DateRangeLong setFormData={setFormData} formData={formData} />
 
-                 
+                  {formData.type && <DateRangeLong
+                    setFormData={setFormData}
+                    formData={formData}
+                    type={formData.type}
+                  />}
+
+
                   <div className="form-group-1">
                     <label>Driver Age</label>
                     <div className="group-select tf-select">

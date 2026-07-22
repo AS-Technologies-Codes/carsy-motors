@@ -80,7 +80,7 @@ const DateRange = ({ setFormData, formData, type }) => {
       {
         type === "short" ?
           <div className="form-group-1 dateRange" style={{ width: "150%" }}>
-            <label>Pick up & Return</label>
+            <label>Pick up & Return Duration</label>
             <div className="group-select tf-select">
               <DateRangePicker
                 initialSettings={{

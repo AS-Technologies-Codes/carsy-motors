@@ -139,7 +139,7 @@ export default function CarRent() {
     const params = new URLSearchParams(allParams);
 
     const getGetCarsRequest = await fetch(
-      `${URL.getCars}&limit=${allProps.itemPerPage}&${params.toString()}`,
+      `${URL.getCars}&car_type=rent&limit=${allProps.itemPerPage}&${params.toString()}`,
       {
         method: "GET",
         headers: {

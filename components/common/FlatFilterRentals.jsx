@@ -74,7 +74,14 @@ export default function FlatFilterRentals({
 
   const [CarsLoading, setCarsLoading] = useState(true);
   const [Total, setTotal] = useState(0);
+  const carTypes = ["Long Term", "Short Term"];
+  const [activeIndex, setActiveIndex] = useState(0); // Initially "All Car" is active
 
+
+  const handleClick = (index) => {
+    setActiveIndex(index); // Update the active index when clicked
+    setFormData(ele => ({ ...ele, type: index == 0 ? "long" : "short" }))
+  };
   const fecthGetCars = async () => {
     setCarsLoading(true);
 
@@ -109,6 +116,7 @@ export default function FlatFilterRentals({
   };
   useEffect(() => {
     fecthGetCars();
+    setActiveIndex(pathName.toString().includes("long") ? 0 : 1)
   }, [countPrice, countMake, countModel]);
 
 
@@ -125,9 +133,23 @@ export default function FlatFilterRentals({
 
   return (
     <>
+      <div className={`box-tab ${styleClass} center`}>
+        <ul className={`menu-tab tab-title ${justifyClass} flex`}>
+          {carTypes.map((car, index) => (
+            <li
+              key={index}
+              className={`item-title style ${index === activeIndex ? "active" : ""
+                }`}
+              onClick={() => handleClick(index)} // Set active when clicked
+            >
+              <span className="inner fs-16 fw-5 lh-20">{car}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div className={`content-tab ${tabStyle}`}>
         <div className="content-inner tab-content">
-          <div className="form-sl">
+          <div className="form-sl" style={{ borderTopLeftRadius: 0 }}>
             <form onSubmit={(e) => e.preventDefault()}>
               <div className="wd-find-select flex">
                 <div className="inner-group select-style">

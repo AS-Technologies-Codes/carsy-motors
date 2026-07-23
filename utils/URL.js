@@ -8,7 +8,7 @@ const URL = {
   getBanner: baseUrl + "get_banners",
   getCars: baseUrl + "get_cars",
   getCarsDetails: baseUrl + "get_car_details",
-  getRecommended: baseUrl + "get_recommended_cars",
+  getRecommended: baseUrl + "get_recommended_cars&recommendation_type=",
   getWhyUs: baseUrl + "get_why_us",
   getNearby: baseUrl + "get_nearby_locations",
   getFleet: baseUrl + "get_cars&car_type=fleet",

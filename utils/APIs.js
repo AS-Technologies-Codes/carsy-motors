@@ -330,10 +330,10 @@ export const getAchievementsListingApi = async () => {
   });
 };
 
-export const getRecommendedListingApi = async () => {
+export const getRecommendedListingApi = async (prop) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const getRecommendedRequest = await fetch(URL.getRecommended, {
+      const getRecommendedRequest = await fetch(URL.getRecommended + prop, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

@@ -9,6 +9,7 @@ import { accessToken, URL } from "@/utils/URL";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { getRecommendedListingApi } from "@/utils/APIs";
+import { usePathname } from "next/navigation";
 export default function Hero() {
   const swiperOptions = {
     autoplay: {
@@ -29,11 +30,12 @@ export default function Hero() {
 
   const [RecommendedCarsListing, setRecommendedCarsListing] = useState([]);
   const [RecommendedCarsLoading, setRecommendedCarsLoading] = useState(true);
+  const pathName = usePathname();
 
   const fetchRecommendedCars = async () => {
     try {
       setRecommendedCarsLoading(true);
-      const getRecommendedCarsData = await getRecommendedListingApi();
+      const getRecommendedCarsData = await getRecommendedListingApi(pathName.toString().includes("rentals") ? "rent" : "used");
       setRecommendedCarsListing(getRecommendedCarsData);
     } catch (error) {
       console.log(error);

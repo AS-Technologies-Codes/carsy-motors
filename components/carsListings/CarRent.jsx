@@ -208,17 +208,6 @@ export default function CarRent() {
     dispatch({ type: "SET_CURRENT_PAGE", payload: 1 });
   }, [filtered, sortingOption]);
 
-  const handleWhatsApp = (carItem) => {
-    if (typeof window !== "undefined") {
-      const phoneNumber = "+923473456750"; // Replace with your actual phone number
-      const message = `Hi! I'm interested in this car:\n\nModel: ${carItem?.model || "N/A"}\nPrice: $${carItem?.price || "N/A"}\nKM: ${carItem?.km || "N/A"}\nFuel: ${carItem?.fuelType || "N/A"}\n\nPlease provide more details.`;
-      const encodedMessage = encodeURIComponent(message);
-      window.open(
-        `https://wa.me/${phoneNumber}?text=${encodedMessage}`,
-        "_blank",
-      );
-    }
-  };
 
   const handleFavourite = async (carItem) => {
     let favouriteCars =
@@ -251,6 +240,7 @@ export default function CarRent() {
         transmission,
         price,
         images,
+        // type: "rent/"
       });
     }
     window.localStorage.setItem("favouriteCar", JSON.stringify(favouriteCars));
@@ -727,7 +717,7 @@ export default function CarRent() {
                                   </div>
                                   <h5 className="link-style-1">
                                     <Link
-                                      href={`/listing-detail-v1/${car.id}`}
+                                      href={`/rentals/listing-detail-v1/${car.id}`}
                                       style={{
                                         height: isMobile ? "auto" : "30px",
                                       }}
@@ -845,7 +835,7 @@ export default function CarRent() {
 
                                   <div className="d-flex justify-content-end">
                                     <Link
-                                      href={`javascript:void(0)`}
+                                      href={``}
                                       onClick={() => handleFavourite(car)}
                                       className="text-color-3 d-none d-md-block"
                                     >
@@ -877,7 +867,7 @@ export default function CarRent() {
                                   </div>
 
                                   <Link
-                                    href="javascript:void(0)"
+                                    href={`/rentals/listing-detail-v1/${car.id}`}
                                     // onClick={() => handleWhatsApp(car)}
                                     className="chat m-0 d-flex align-items-center"
                                   >
@@ -889,7 +879,7 @@ export default function CarRent() {
                                 </div>
                                 <div className="w-100 d-flex d-md-none justify-content-between align-items-center">
                                   <Link
-                                    href={`/listing-detail-v1/${car.id}`}
+                                    href={`/rentals/listing-detail-v1/${car.id}`}
                                     className="view-car"
                                   >
                                     View details

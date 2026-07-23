@@ -2,17 +2,20 @@
 import { getRecommendedListingApi } from "@/utils/APIs";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function Recommended() {
   const [RecommendedCarsListing, setRecommendedCarsListing] = useState([]);
   const [RecommendedCarsLoading, setRecommendedCarsLoading] = useState(true);
-
+  const pathName = usePathname();
+// alert(pathName)
   const fetchRecommendedCars = async () => {
     try {
       setRecommendedCarsLoading(true);
-      const getRecommendedCarsData = await getRecommendedListingApi();
+      
+      const getRecommendedCarsData = await getRecommendedListingApi(pathName.toString().includes("rentals") ? "rent" : "used");
       setRecommendedCarsListing(getRecommendedCarsData);
     } catch (error) {
       console.log(error);

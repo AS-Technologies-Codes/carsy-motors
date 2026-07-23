@@ -32,7 +32,7 @@ export default function Slider1({ images, viewer }) {
       ) : (
           <Carousel className="rounded-3 overflow-hidden">
             {
-              images.map((elm, index) => <div className="cursor-pointer rounded-bottom-3 overflow-hidden"
+              images?.map((elm, index) => <div className="cursor-pointer rounded-bottom-3 overflow-hidden"
                 onClick={() => openImageViewer(index)}>
                 <Image src={elm} width={1280} height={853} />
               </div>)

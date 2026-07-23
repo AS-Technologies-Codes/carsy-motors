@@ -100,7 +100,7 @@ export default function CarInfo({ carItem }) {
       <div className="money text-color-3 font">
         ${CarData.price?.toLocaleString()}
       </div>
-      <div className="flex">
+      {carItem.car_type !== "used" ? <div className="flex">
         <div className="icons flex-three align-items-center border rounded-3 px-3 py-2  mt-2 mb-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -141,6 +141,8 @@ export default function CarInfo({ carItem }) {
           </div>
         </div>
       </div>
+        :
+        null}
       {/* <div className="price-wrap">
         <p className="fs-12 lh-16 text-color-2">
           Monthly installment payment:

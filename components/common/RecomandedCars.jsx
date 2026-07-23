@@ -17,7 +17,7 @@ export default function RecomandedCars() {
   const fetchRecommendedCars = async () => {
     try {
       setRecommendedCarsLoading(true);
-      const getRecommendedCarsData = await getRecommendedListingApi();
+      const getRecommendedCarsData = await getRecommendedListingApi("used");
       setRecommendedCarsListing(getRecommendedCarsData);
     } catch (error) {
       console.log(error);

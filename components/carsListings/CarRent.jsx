@@ -709,8 +709,9 @@ export default function CarRent() {
                                 </div>
                               </div>
                               <div className="content">
-                                <div className="inner1">
-                                  <div className="text-address">
+                                <div className="inner1  flex flex-column justify-content-between">
+                                  <div>
+                                    <div className="text-address">
                                     <p className="text-color-3 font">
                                       {car.type}
                                     </p>
@@ -804,7 +805,8 @@ export default function CarRent() {
 
 
                                   </div>
-                                  <div className="flex align-items-center">
+                                  </div>
+                                  {/* <div className="flex align-items-center">
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"
                                       width="12"
@@ -828,7 +830,23 @@ export default function CarRent() {
                                       ${(car.price / 10000 * 39).toFixed(1)}
                                     </div>
                                     <span className="fs-12 ms-1">/ week</span>
+                                  </div> */}
+
+
+
+                                  <div className="features-inner m-0 p-0 bor">
+                                    <div className="inner d-flex flex-column w-100 gap-2">
+                                      <div className="listing-feature-wrap flex">
+                                        <i className="icon-autodeal-check" />
+                                        <p>Unlimited mileage</p>
+                                      </div>
+                                      <div className="listing-feature-wrap flex">
+                                        <i className="icon-autodeal-check" />
+                                        <p>Basic protection included</p>
+                                      </div>
+                                    </div>
                                   </div>
+
                                 </div>
 
                                 <div className={`inner2 flex flex-column justify-content-start justify-md-content-between ${isMobile ? "w-100" : ""}`}>

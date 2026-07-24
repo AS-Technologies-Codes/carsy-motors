@@ -31,11 +31,12 @@ export default function Hero() {
   const [RecommendedCarsListing, setRecommendedCarsListing] = useState([]);
   const [RecommendedCarsLoading, setRecommendedCarsLoading] = useState(true);
   const pathName = usePathname();
-
+  const isRental = pathName.toString().includes("rentals");
+  
   const fetchRecommendedCars = async () => {
     try {
       setRecommendedCarsLoading(true);
-      const getRecommendedCarsData = await getRecommendedListingApi(pathName.toString().includes("rentals") ? "rent" : "used");
+      const getRecommendedCarsData = await getRecommendedListingApi(isRental ? "rent" : "used");
       setRecommendedCarsListing(getRecommendedCarsData);
     } catch (error) {
       console.log(error);
@@ -147,7 +148,7 @@ export default function Hero() {
                           </div>
                           <div className="font text-color-1">{elm?.price?.toLocaleString()}</div>
                         </li>
-                        <li className="flex-three mb-1">
+                        {!isRental ? <li className="flex-three mb-1">
                           <div className="icon">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -171,6 +172,8 @@ export default function Hero() {
                           </div>
                           <div className="font text-color-1">{(elm?.price / 10000 * 39).toFixed(1)}</div>
                         </li>
+                          :
+                          null}
                       </ul>
                     </div>
                   </div>

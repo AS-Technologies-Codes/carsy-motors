@@ -53,14 +53,50 @@ export default function CarInfo({ carItem }) {
       );
     }
   };
-  const handleCopy = async () => {
-    if (typeof window !== "undefined") {
+  // const handleCopy = async () => {
+  //   if (typeof window !== "undefined") {
+  //     try {
+  //       // Gets the complete browser URL
+  //       await navigator.clipboard.writeText(window.location.href);
+  //       toast.success("copied");
+  //     } catch (err) {
+  //       console.error("Failed to copy URL: ", err);
+  //     }
+  //   }
+  // };
+
+
+
+  const handleShare = async ({ car }) => {
+    // 1. Ensure navigator exists (client-side check)
+    if (typeof window === 'undefined') return;
+
+    if (navigator.share) {
       try {
-        // Gets the complete browser URL
+        await navigator.share({
+          title: car.title,
+          text: car.description,
+          url: window.location.href, // Captures current route dynamic URL
+        });
+      } catch (error) {
+        if ((error).name !== 'AbortError') {
+          console.error('Error sharing:', error);
+          try {
+            await navigator.clipboard.writeText(window.location.href);
+            toast('Link copied to clipboard!');
+          } catch (err) {
+            console.error('Failed to copy:', err);
+          }
+
+        }
+      }
+    } else {
+      // 2. Fallback: Copy to clipboard if Web Share API is unsupported
+      try {
         await navigator.clipboard.writeText(window.location.href);
-        toast.success("copied");
+        toast('Link copied to clipboard!');
       } catch (err) {
-        console.error("Failed to copy URL: ", err);
+        console.error('Failed to copy:', err);
       }
     }
   };
@@ -100,7 +136,7 @@ export default function CarInfo({ carItem }) {
       <div className="money text-color-3 font">
         ${CarData.price?.toLocaleString()}
       </div>
-      {carItem.car_type !== "used" ? <div className="flex">
+      {carItem.car_type === "used" ? <div className="flex">
         <div className="icons flex-three align-items-center border rounded-3 px-3 py-2  mt-2 mb-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -220,7 +256,7 @@ export default function CarInfo({ carItem }) {
           </a>
         </li> */}
         <li>
-          <a href="javascript:void(0)" onClick={handleCopy} className="icon">
+          <a href="javascript:void(0)" onClick={handleShare} className="icon">
             <svg
               width={16}
               height={18}

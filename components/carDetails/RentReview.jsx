@@ -168,7 +168,7 @@ const ProfileInfo = ({ car, setCurrentStep }) => {
                         <div className="btn-contact">
                             <Link
                                 href={"javascript:void(0)"}
-                                onClick={() => setCurrentStep(2)}
+                                onClick={() => setCurrentStep(3)}
                                 className="btn-pf bg-green mt-3"
                             >
                                 <svg
@@ -220,7 +220,7 @@ const ProfileInfo = ({ car, setCurrentStep }) => {
                         <div className="btn-contact">
                             <Link
                                 href={"javascript:void(0)"}
-                                onClick={() => setCurrentStep(2)}
+                                onClick={() => setCurrentStep(3)}
                                 className="btn-pf bg-green mt-3"
                             >
                                 <svg

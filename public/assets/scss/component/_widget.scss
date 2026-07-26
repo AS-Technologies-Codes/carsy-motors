@@ -1385,10 +1385,12 @@
         }
       }
       &.de-check-icon {
+          text-decoration: line-through !important;
         &::before {
           content: "\e90d";
           color: $color-3;
         }
+   
       }
       &::before {
         font-family: "autodeal" !important;
@@ -1396,6 +1398,7 @@
         font-weight: 600;
         margin-right: 13px;
         flex: none;
+
       }
     }
   }

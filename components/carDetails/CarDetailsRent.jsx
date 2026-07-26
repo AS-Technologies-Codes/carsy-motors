@@ -6,10 +6,11 @@ import SidebarToggleButton from './SidebarToggleButton';
 import Recommended from './detailComponents/Recommended';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import CarInfo from './detailComponents/CarInfo';
+import CarInfo from './detailComponents/CarInfoRent';
+import RentBooking from './RentBooking';
 
 const CarDetailsRent = ({ carItem }) => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(2);
   const [CarDetailsListing, setCarDetailsListing] = useState({});
   const router = useRouter();
 
@@ -31,7 +32,7 @@ const CarDetailsRent = ({ carItem }) => {
   }
   return (
     <>
-    
+
       <section className="flat-title mb-40">
         <div className="container2">
           <div className="row">
@@ -74,7 +75,7 @@ const CarDetailsRent = ({ carItem }) => {
           <div className="row">
             <div className="col-lg-8">
 
-              {currentStep === 1 ?
+              {currentStep === 2 ?
                 <CarReview
                   carItem={carItem}
                   setCurrentStep={setCurrentStep}
@@ -82,11 +83,14 @@ const CarDetailsRent = ({ carItem }) => {
                   setCarDetailsListing={setCarDetailsListing}
                 />
                 :
-                currentStep === 2 ?
+                currentStep === 3 ?
                   <CarProtection />
                   :
-                  null
-              }
+                  currentStep === 4 ?
+                  <RentBooking />
+                    :
+                    null
+                    }
             </div>
             <div className="col-lg-4">
               <div className="overlay-siderbar-mobie" />
@@ -94,7 +98,7 @@ const CarDetailsRent = ({ carItem }) => {
                 <div className="widget-listing mb-40">
                   <div className="heading-widget">
                     <h2 className="title">{CarDetailsListing?.title}</h2>
-                    <CarInfo carItem={CarDetailsListing} />
+                    <CarInfo carItem={CarDetailsListing} step={currentStep} setCurrentStep={setCurrentStep} />
                   </div>
                 </div>
                 {/* <div className="list-icon-pf gap-8 flex-three mb-40">

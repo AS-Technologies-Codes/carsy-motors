@@ -99,7 +99,7 @@ export default function FlatFilterRentals({
     });
 
     const getGetCarsRequest = await fetch(
-      `${URL.getCars}&${params.toString()}`,
+      `${URL.getCars}&car_type=rent&${params.toString()}`,
       {
         method: "GET",
         headers: {

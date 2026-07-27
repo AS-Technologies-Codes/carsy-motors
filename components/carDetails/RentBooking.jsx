@@ -300,7 +300,7 @@ export default function RentBooking() {
                     <h3 className="mb-3 text-decoration-underline">Price details</h3>
 
                     <p>
-                      Refundable deposit: An additional A$ 300 security desposit will be blocked on your card
+                      Refundable deposit: An additional A$ 300 security desposit will be blocked on your card at the pickup counter and released within a few days of the vehicle's return.
                     </p>
 
                     <div className="form-group mt-3">
@@ -318,7 +318,7 @@ export default function RentBooking() {
                                 // style={{ width: "75px" }}
                               />
                               <span className="text-color-2 font-2">
-                              I have read and accept the 
+                              I have read and accept the{" "}
                                 <span className="text-decoration-underline">
                                  Rental information,
                                 </span>
@@ -326,7 +326,7 @@ export default function RentBooking() {
                                  <span className="text-decoration-underline">
                                  Terms and Conditions,
                                 </span>
-                                and the{" "}
+                                {" "}and the{" "}
                                  <span className="text-decoration-underline">
                                  Privacy Policy
                                 </span>

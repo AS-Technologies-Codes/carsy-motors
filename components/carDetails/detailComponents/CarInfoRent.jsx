@@ -293,7 +293,7 @@ export default function CarInfo({ carItem, step,  setCurrentStep}) {
 
 
       <div className="my-4">
-        {step == 3 ?
+        {step != 2 ?
           <>
             <h6 className="mb-1 fw-bold">Payemet Method: <span className="text-color-3">Online</span></h6>
             <h6 className="mb-1 fw-bold">Plan Price: <span className="text-color-3">$5,995.00</span></h6>

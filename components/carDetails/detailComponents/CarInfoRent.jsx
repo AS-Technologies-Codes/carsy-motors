@@ -1,9 +1,10 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-export default function CarInfo({ carItem, step,  setCurrentStep}) {
-
+export default function CarInfo({ carItem, step, setCurrentStep }) {
+  const router = useRouter();
   const [CarData, setCarData] = useState(carItem || {});
 
   const handleFavourite = async (car) => {
@@ -44,7 +45,14 @@ export default function CarInfo({ carItem, step,  setCurrentStep}) {
     // allProps.setData(updatedData);
   };
 
-  console.log(CarData);
+  // console.log(CarData);
+  useEffect(() => {
+    if (CarData.car_type === "used") {
+      router.push("/listing-detail-v1/" + CarData.id);
+      return;
+    }
+  }, [])
+
 
   const handlePrint = (id) => {
     if (typeof window !== "undefined") {
@@ -296,8 +304,11 @@ export default function CarInfo({ carItem, step,  setCurrentStep}) {
         {step != 2 ?
           <>
             <h6 className="mb-1 fw-bold">Payemet Method: <span className="text-color-3">Online</span></h6>
+                    <div className="listing-line my-2" />
             <h6 className="mb-1 fw-bold">Plan Price: <span className="text-color-3">$5,995.00</span></h6>
+                    <div className="listing-line my-2" />
             <h6 className="fw-bold">Available Extras: <span className="text-color-3">$12</span></h6>
+                    <div className="listing-line my-2" />
           </>
           :
           null
@@ -311,7 +322,7 @@ export default function CarInfo({ carItem, step,  setCurrentStep}) {
       </div>
       <div className="profile-contact mt-3">
         <div className="btn-contact flex-two">
-          <a href="#" onClick={step == 2 ? handleWhatsApp : () => setCurrentStep(step+1)} className="btn-pf bg-green">
+          <a href="#" onClick={step == 2 ? handleWhatsApp : () => setCurrentStep(step + 1)} className="btn-pf bg-green">
             <span className="fs-16 fw-5 lh-20 font text-color-1">
               {step == 2 ?
                 "Chat with Dealer"

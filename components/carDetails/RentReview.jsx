@@ -63,6 +63,7 @@ export default function CarReview({ carItem, setCurrentStep, CarDetailsListing, 
             <ProfileInfo
                 car={CarDetailsListing}
                 setCurrentStep={setCurrentStep}
+                setCarDetailsListing={setCarDetailsListing}
             />
 
             <div className="row">
@@ -168,7 +169,7 @@ const ProfileInfo = ({ car, setCurrentStep }) => {
                         <div className="btn-contact">
                             <Link
                                 href={"javascript:void(0)"}
-                                onClick={() => setCurrentStep(3)}
+                                onClick={() => {setCurrentStep(3); setCarDetailsListing((ele) => ({...ele, payment_type: "pay_at_desk"}))}}
                                 className="btn-pf bg-green mt-3"
                             >
                                 <svg
@@ -220,7 +221,7 @@ const ProfileInfo = ({ car, setCurrentStep }) => {
                         <div className="btn-contact">
                             <Link
                                 href={"javascript:void(0)"}
-                                onClick={() => setCurrentStep(3)}
+                                onClick={() => {setCurrentStep(3); setCarDetailsListing((ele) => ({...ele, payment_type: "pay_online"}))}}
                                 className="btn-pf bg-green mt-3"
                             >
                                 <svg

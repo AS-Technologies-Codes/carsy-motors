@@ -52,6 +52,7 @@ export default function CarRent() {
     itemPerPage,
     filterOptions,
     seat,
+    rental_type
   } = state;
 
   const allProps = {
@@ -139,7 +140,7 @@ export default function CarRent() {
     const params = new URLSearchParams(allParams);
 
     const getGetCarsRequest = await fetch(
-      `${URL.getCars}&car_type=rent&limit=${allProps.itemPerPage}&${params.toString()}`,
+      `${URL.getCars}&car_type=rent&rent_type=${rental_type}&limit=${allProps.itemPerPage}&${params.toString()}`,
       {
         method: "GET",
         headers: {
@@ -183,12 +184,14 @@ export default function CarRent() {
     features,
     drive_type,
     featureOptions,
+    rental_type
     // searchParams
   ]);
 
   const clearFilter = () => {
     dispatch({ type: "CLEAR_FILTER" });
   };
+
 
   useEffect(() => {
     if (sortingOption === "Price Ascending") {
@@ -712,99 +715,99 @@ export default function CarRent() {
                                 <div className="inner1  flex flex-column justify-content-between">
                                   <div>
                                     <div className="text-address">
-                                    <p className="text-color-3 font">
-                                      {car.type}
-                                    </p>
-                                  </div>
-                                  <h5 className="link-style-1">
-                                    <Link
-                                      href={`/rentals/listing-detail-v1/${car.id}`}
-                                      style={{
-                                        height: isMobile ? "auto" : "30px",
-                                      }}
-                                    >
-                                      {car.title}
-                                    </Link>
-                                  </h5>
-                                  <div className="icon-box flex flex-wrap">
-                                    {car?.km ?
-                                      <div className="icons flex-three">
-                                        <i className="icon-autodeal-km1" />
-                                        <span>{car.km?.toLocaleString()} kms</span>
-                                      </div>
-                                      :
-                                      null
-                                    }
-                                    {car?.fuelType ?
-                                      <div className="icons flex-three">
-                                        <i className="icon-autodeal-diesel" />
-                                        <span>{car.fuelType}</span>
-                                      </div>
-                                      :
-                                      null
-                                    }
-                                    {car.transmission ?
-                                      <div className="icons flex-three">
-                                        <i className="icon-autodeal-automatic" />
-                                        <span>{car.transmission}</span>
-                                      </div>
-                                      :
-                                      null
-                                    }
+                                      <p className="text-color-3 font">
+                                        {car.type}
+                                      </p>
+                                    </div>
+                                    <h5 className="link-style-1">
+                                      <Link
+                                        href={`/rentals/listing-detail-v1/${car.id}`}
+                                        style={{
+                                          height: isMobile ? "auto" : "30px",
+                                        }}
+                                      >
+                                        {car.title}
+                                      </Link>
+                                    </h5>
+                                    <div className="icon-box flex flex-wrap">
+                                      {car?.km ?
+                                        <div className="icons flex-three">
+                                          <i className="icon-autodeal-km1" />
+                                          <span>{car.km?.toLocaleString()} kms</span>
+                                        </div>
+                                        :
+                                        null
+                                      }
+                                      {car?.fuelType ?
+                                        <div className="icons flex-three">
+                                          <i className="icon-autodeal-diesel" />
+                                          <span>{car.fuelType}</span>
+                                        </div>
+                                        :
+                                        null
+                                      }
+                                      {car.transmission ?
+                                        <div className="icons flex-three">
+                                          <i className="icon-autodeal-automatic" />
+                                          <span>{car.transmission}</span>
+                                        </div>
+                                        :
+                                        null
+                                      }
 
-                                    {car?.seats ? (
-                                      <div className="icons flex-three">
+                                      {car?.seats ? (
+                                        <div className="icons flex-three">
 
-                                        <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          width={17}
-                                          height={17}
-                                          viewBox="0 0 20 20"
-                                          fill="none"
-                                        >
-                                          <path
-                                            d="M17.5 18.1252C17.5 18.2909 17.4341 18.4499 17.3169 18.5671C17.1997 18.6843 17.0407 18.7502 16.875 18.7502H8.74998C8.58422 18.7502 8.42525 18.6843 8.30804 18.5671C8.19083 18.4499 8.12498 18.2909 8.12498 18.1252C8.12498 17.9594 8.19083 17.8004 8.30804 17.6832C8.42525 17.566 8.58422 17.5002 8.74998 17.5002H16.875C17.0407 17.5002 17.1997 17.566 17.3169 17.6832C17.4341 17.8004 17.5 17.9594 17.5 18.1252ZM17.5 12.5002V15.0002C17.5 15.3317 17.3683 15.6496 17.1339 15.884C16.8994 16.1185 16.5815 16.2502 16.25 16.2502H8.91482C8.68238 16.2509 8.45439 16.1865 8.25666 16.0643C8.05893 15.9421 7.89938 15.767 7.79607 15.5588L3.25623 6.49626C3.16991 6.32242 3.125 6.13097 3.125 5.93688C3.125 5.7428 3.16991 5.55134 3.25623 5.37751L4.98435 1.94001C5.13103 1.64729 5.38671 1.4238 5.69642 1.31759C6.00613 1.21139 6.34515 1.23093 6.6406 1.37204L9.27263 2.48298L9.30935 2.50016C9.60567 2.6485 9.83097 2.90843 9.93571 3.22281C10.0405 3.5372 10.0161 3.88031 9.86795 4.17673C9.86555 4.18268 9.86268 4.18843 9.85935 4.19391L8.74998 6.25016L11.2328 11.2502H16.25C16.5815 11.2502 16.8994 11.3819 17.1339 11.6163C17.3683 11.8507 17.5 12.1686 17.5 12.5002ZM16.25 12.5002H11.232C10.9997 12.5009 10.7718 12.4365 10.5741 12.3143C10.3765 12.1921 10.2171 12.017 10.114 11.8088L7.63045 6.80876C7.54434 6.63528 7.49953 6.44423 7.49953 6.25055C7.49953 6.05688 7.54434 5.86583 7.63045 5.69235L7.63982 5.67516L8.74998 3.61891L6.13826 2.51657C6.12574 2.51176 6.11348 2.50628 6.10154 2.50016L4.37498 5.93766L8.91404 15.0002H16.25V12.5002Z"
-                                            fill="#696665"
-                                          />
-                                        </svg>
-                                        <span className="ms-1">{car.seats} Seats</span>
-                                      </div>
-                                    ) : null}
-                                    {car?.door ? (
-                                      <div className="icons flex-three">
+                                          <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width={17}
+                                            height={17}
+                                            viewBox="0 0 20 20"
+                                            fill="none"
+                                          >
+                                            <path
+                                              d="M17.5 18.1252C17.5 18.2909 17.4341 18.4499 17.3169 18.5671C17.1997 18.6843 17.0407 18.7502 16.875 18.7502H8.74998C8.58422 18.7502 8.42525 18.6843 8.30804 18.5671C8.19083 18.4499 8.12498 18.2909 8.12498 18.1252C8.12498 17.9594 8.19083 17.8004 8.30804 17.6832C8.42525 17.566 8.58422 17.5002 8.74998 17.5002H16.875C17.0407 17.5002 17.1997 17.566 17.3169 17.6832C17.4341 17.8004 17.5 17.9594 17.5 18.1252ZM17.5 12.5002V15.0002C17.5 15.3317 17.3683 15.6496 17.1339 15.884C16.8994 16.1185 16.5815 16.2502 16.25 16.2502H8.91482C8.68238 16.2509 8.45439 16.1865 8.25666 16.0643C8.05893 15.9421 7.89938 15.767 7.79607 15.5588L3.25623 6.49626C3.16991 6.32242 3.125 6.13097 3.125 5.93688C3.125 5.7428 3.16991 5.55134 3.25623 5.37751L4.98435 1.94001C5.13103 1.64729 5.38671 1.4238 5.69642 1.31759C6.00613 1.21139 6.34515 1.23093 6.6406 1.37204L9.27263 2.48298L9.30935 2.50016C9.60567 2.6485 9.83097 2.90843 9.93571 3.22281C10.0405 3.5372 10.0161 3.88031 9.86795 4.17673C9.86555 4.18268 9.86268 4.18843 9.85935 4.19391L8.74998 6.25016L11.2328 11.2502H16.25C16.5815 11.2502 16.8994 11.3819 17.1339 11.6163C17.3683 11.8507 17.5 12.1686 17.5 12.5002ZM16.25 12.5002H11.232C10.9997 12.5009 10.7718 12.4365 10.5741 12.3143C10.3765 12.1921 10.2171 12.017 10.114 11.8088L7.63045 6.80876C7.54434 6.63528 7.49953 6.44423 7.49953 6.25055C7.49953 6.05688 7.54434 5.86583 7.63045 5.69235L7.63982 5.67516L8.74998 3.61891L6.13826 2.51657C6.12574 2.51176 6.11348 2.50628 6.10154 2.50016L4.37498 5.93766L8.91404 15.0002H16.25V12.5002Z"
+                                              fill="#696665"
+                                            />
+                                          </svg>
+                                          <span className="ms-1">{car.seats} Seats</span>
+                                        </div>
+                                      ) : null}
+                                      {car?.door ? (
+                                        <div className="icons flex-three">
 
-                                        <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          width={14}
-                                          height={14}
-                                          viewBox="0 0 20 20"
-                                          fill="none"
-                                        >
-                                          <path
-                                            d="M18.125 16.875H16.25V3.125C16.25 2.79348 16.1183 2.47554 15.8839 2.24112C15.6495 2.0067 15.3315 1.875 15 1.875H5C4.66848 1.875 4.35054 2.0067 4.11612 2.24112C3.8817 2.47554 3.75 2.79348 3.75 3.125V16.875H1.875C1.70924 16.875 1.55027 16.9408 1.43306 17.0581C1.31585 17.1753 1.25 17.3342 1.25 17.5C1.25 17.6658 1.31585 17.8247 1.43306 17.9419C1.55027 18.0592 1.70924 18.125 1.875 18.125H18.125C18.2908 18.125 18.4497 18.0592 18.5669 17.9419C18.6842 17.8247 18.75 17.6658 18.75 17.5C18.75 17.3342 18.6842 17.1753 18.5669 17.0581C18.4497 16.9408 18.2908 16.875 18.125 16.875ZM5 3.125H15V16.875H5V3.125ZM13.125 10.3125C13.125 10.4979 13.07 10.6792 12.967 10.8333C12.864 10.9875 12.7176 11.1077 12.5463 11.1786C12.375 11.2496 12.1865 11.2682 12.0046 11.232C11.8227 11.1958 11.6557 11.1065 11.5246 10.9754C11.3935 10.8443 11.3042 10.6773 11.268 10.4954C11.2318 10.3135 11.2504 10.125 11.3214 9.95373C11.3923 9.78243 11.5125 9.63601 11.6667 9.533C11.8208 9.42998 12.0021 9.375 12.1875 9.375C12.4361 9.375 12.6746 9.47377 12.8504 9.64959C13.0262 9.8254 13.125 10.0639 13.125 10.3125Z"
-                                            fill="#696665"
-                                          />
-                                        </svg>
-                                        <span className="ms-1">{car.door} Doors</span>
-                                      </div>
-                                    ) : null}
-                                    {car?.seats ? (
-                                      <div className="icons flex-three">
+                                          <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width={14}
+                                            height={14}
+                                            viewBox="0 0 20 20"
+                                            fill="none"
+                                          >
+                                            <path
+                                              d="M18.125 16.875H16.25V3.125C16.25 2.79348 16.1183 2.47554 15.8839 2.24112C15.6495 2.0067 15.3315 1.875 15 1.875H5C4.66848 1.875 4.35054 2.0067 4.11612 2.24112C3.8817 2.47554 3.75 2.79348 3.75 3.125V16.875H1.875C1.70924 16.875 1.55027 16.9408 1.43306 17.0581C1.31585 17.1753 1.25 17.3342 1.25 17.5C1.25 17.6658 1.31585 17.8247 1.43306 17.9419C1.55027 18.0592 1.70924 18.125 1.875 18.125H18.125C18.2908 18.125 18.4497 18.0592 18.5669 17.9419C18.6842 17.8247 18.75 17.6658 18.75 17.5C18.75 17.3342 18.6842 17.1753 18.5669 17.0581C18.4497 16.9408 18.2908 16.875 18.125 16.875ZM5 3.125H15V16.875H5V3.125ZM13.125 10.3125C13.125 10.4979 13.07 10.6792 12.967 10.8333C12.864 10.9875 12.7176 11.1077 12.5463 11.1786C12.375 11.2496 12.1865 11.2682 12.0046 11.232C11.8227 11.1958 11.6557 11.1065 11.5246 10.9754C11.3935 10.8443 11.3042 10.6773 11.268 10.4954C11.2318 10.3135 11.2504 10.125 11.3214 9.95373C11.3923 9.78243 11.5125 9.63601 11.6667 9.533C11.8208 9.42998 12.0021 9.375 12.1875 9.375C12.4361 9.375 12.6746 9.47377 12.8504 9.64959C13.0262 9.8254 13.125 10.0639 13.125 10.3125Z"
+                                              fill="#696665"
+                                            />
+                                          </svg>
+                                          <span className="ms-1">{car.door} Doors</span>
+                                        </div>
+                                      ) : null}
+                                      {car?.seats ? (
+                                        <div className="icons flex-three">
 
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#696665" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2" /><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2" /><path d="M9.8 4.4A2 2 0 1 1 11 8H2" /></svg>
-                                        <span className="ms-1">A/C</span>
-                                      </div>
-                                    ) : null}
-                                    {!car?.age ? (
-                                      <div className="icons flex-three">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#696665" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2" /><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2" /><path d="M9.8 4.4A2 2 0 1 1 11 8H2" /></svg>
+                                          <span className="ms-1">A/C</span>
+                                        </div>
+                                      ) : null}
+                                      {!car?.age ? (
+                                        <div className="icons flex-three">
 
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#696665" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-plus-icon lucide-calendar-plus"><path d="M16 19h6" /><path d="M16 2v4" /><path d="M19 16v6" /><path d="M21 12.598V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8.5" /><path d="M3 10h18" /><path d="M8 2v4" /></svg>
-                                        <span className="ms-1">23+</span>
-                                      </div>
-                                    ) : null}
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#696665" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-plus-icon lucide-calendar-plus"><path d="M16 19h6" /><path d="M16 2v4" /><path d="M19 16v6" /><path d="M21 12.598V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8.5" /><path d="M3 10h18" /><path d="M8 2v4" /></svg>
+                                          <span className="ms-1">23+</span>
+                                        </div>
+                                      ) : null}
 
 
-                                  </div>
+                                    </div>
                                   </div>
                                   {/* <div className="flex align-items-center">
                                     <svg
@@ -876,8 +879,7 @@ export default function CarRent() {
                                   </div>
                                   <div className="fs-20 fw-5 lh-25  text-end text-md-center text-color-3 me-2">
                                     {/* ${car.price?.toLocaleString()} */}
-                                    $50
-                                    <span className="fw-3">{" / "}day</span>
+                                    <span className="fw-3">{rental_type == "short" ? `${car.price} / day` : `${car.price * 7} / week`}</span>
                                   </div>
 
                                   <div className="fs-13 fw-5 mb-2 lh-25 text-end text-md-center text-color-2 me-2">

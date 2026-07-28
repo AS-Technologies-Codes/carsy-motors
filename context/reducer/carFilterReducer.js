@@ -173,6 +173,7 @@ export const initialState = {
   countMake: "Any Make",
   countModel: "Any Model",
   countPrice: "",
+  rental_type: window.location.pathname.replace("/rentals/", "")+"term",
 };
 
 export function reducer(state, action) {
@@ -227,6 +228,8 @@ export function reducer(state, action) {
       return { ...state, countPrice: action.payload };
     case "SET_CONDITION":
       return { ...state, condition: action.payload };
+    case "RENTAL_TYPE":
+      return { ...state, rental_type: action.payload };
     case "SET_EVS_ONLY":
       return { ...state, evsOnly: action.payload };
     case "SET_FILTER_OPTIONS":
@@ -253,7 +256,6 @@ export function reducer(state, action) {
         condition: "All",
         evsOnly: false,
         features: [],
-
         countMake: "Any Make",
         countModel: "Any Model",
         countPrice: "",

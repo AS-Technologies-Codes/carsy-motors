@@ -6,14 +6,12 @@ import { accessToken, URL } from "@/utils/URL";
 import Link from "next/link";
 import DateRangeLong from "./DateRange";
 import toast from "react-hot-toast";
-import { usePathname } from "next/navigation";
 
 export default function FlatFilterRentals({
   styleClass = "",
   justifyClass = "",
   tabStyle = "",
 }) {
-  const pathName = usePathname();
   const defaultValues = {
     age: 0,
     YardLocation: "carsyYard",
@@ -26,13 +24,10 @@ export default function FlatFilterRentals({
     }).toString(),
     weeks: "1 Week",
     ReturnTime: "",
-    type: pathName.toString().includes("short") ? "short" : "long"
   }
-  const [formData, setFormData] = useState(defaultValues);
   const { state, dispatch } = useCarFilter();
-  const { countMake, countModel, countPrice, filterOptions } = state;
-
-
+  const { countMake, countModel, countPrice, filterOptions, rental_type } = state;
+  const [formData, setFormData] = useState(defaultValues);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -77,10 +72,18 @@ export default function FlatFilterRentals({
   const carTypes = ["Long Term", "Short Term"];
   const [activeIndex, setActiveIndex] = useState(0); // Initially "All Car" is active
 
+  const setRentalType = (payload) => {
+    dispatch({
+      type: "RENTAL_TYPE",
+      payload: payload,
+    });
+  };
+
 
   const handleClick = (index) => {
     setActiveIndex(index); // Update the active index when clicked
-    setFormData(ele => ({ ...ele, type: index == 0 ? "long" : "short" }))
+    // setFormData(ele => ({ ...ele, type: index == 0 ? "long" : "short" }))
+    setRentalType(index == 0 ? "long" : "short")
   };
   const fecthGetCars = async () => {
     setCarsLoading(true);
@@ -98,8 +101,10 @@ export default function FlatFilterRentals({
       ...(countModel !== "Any Model" ? { model: countModel } : {}),
     });
 
+    console.log({rental_type});
+    
     const getGetCarsRequest = await fetch(
-      `${URL.getCars}&car_type=rent&${params.toString()}`,
+      `${URL.getCars}&car_type=rent&rent_type=${rental_type}&${params.toString()}`,
       {
         method: "GET",
         headers: {
@@ -116,8 +121,8 @@ export default function FlatFilterRentals({
   };
   useEffect(() => {
     fecthGetCars();
-    setActiveIndex(pathName.toString().includes("long") ? 0 : 1)
-  }, [countPrice, countMake, countModel]);
+    setActiveIndex(rental_type == "long" ? 0 : 1)
+  }, [countPrice, countMake, countModel, rental_type]);
 
 
   console.log(formData);
@@ -173,10 +178,10 @@ export default function FlatFilterRentals({
                     </div>
                   </div>
 
-                  {formData.type && <DateRangeLong
+                  {rental_type && <DateRangeLong
                     setFormData={setFormData}
                     formData={formData}
-                    type={formData.type}
+                    type={rental_type}
                   />}
 
 

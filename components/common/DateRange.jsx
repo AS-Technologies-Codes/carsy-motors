@@ -69,12 +69,6 @@ const DateRange = ({ setFormData, formData, type }) => {
     setFormData(ele => ({ ...ele, pickUpDate, pickUpTime }))
   };
 
-  // useEffect(() => {
-  //   const abc = weeks.map(ele => parseFloat(ele))
-  //   console.log({abc});
-
-  // }, [formData.weeks])
-
   return (
     <>
       {

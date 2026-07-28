@@ -14,6 +14,32 @@ const CarDetailsRent = ({ carItem }) => {
   const [CarDetailsListing, setCarDetailsListing] = useState({});
   const router = useRouter();
 
+
+  const defaultValues = {
+    "customer_phone": "03001234567",
+    "booking_date": "2026-07-27 14:30:00",
+    "rental_type": "short_term",
+    "type": "rent",
+    "dob": "1998-06-15",
+    "protection": "Premium Protection Cover",
+    "extra": {
+      "1": "GPS Navigation",
+      "2": "Baby Seat",
+      "3": "Additional Driver"
+    },
+    "plan":
+      "Weekly Rental Plan",
+    "plan_amount":
+      "750",
+    "start_date": "2027-01-10",
+    "end_date": "2027-01-15",
+    "pickup_location": "Carsy Yard Sydney",
+    "return_location": "Carsy Yard Sydney",
+    "total_amount": 1000,
+    "payment_type": CarDetailsListing?.payment_type
+  }
+  const [Booking, setBooking] = useState({});
+
   const STEPS = [
     { key: 0, label: "Car Selected" },
     { key: 1, label: "Car Review" },
@@ -32,7 +58,6 @@ const CarDetailsRent = ({ carItem }) => {
   }
   return (
     <>
-
       <section className="flat-title mb-40">
         <div className="container2">
           <div className="row">
@@ -87,10 +112,10 @@ const CarDetailsRent = ({ carItem }) => {
                   <CarProtection />
                   :
                   currentStep === 4 ?
-                  <RentBooking />
+                    <RentBooking />
                     :
                     null
-                    }
+              }
             </div>
             <div className="col-lg-4">
               <div className="overlay-siderbar-mobie" />

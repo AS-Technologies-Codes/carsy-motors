@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CarReview from './RentReview';
 import CarProtection from './CarProtection';
 import SidebarToggleButton from './SidebarToggleButton';
@@ -8,37 +8,42 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import CarInfo from './detailComponents/CarInfoRent';
 import RentBooking from './RentBooking';
+import { useCarFilter } from '@/context/providers/CarFilterContext';
 
 const CarDetailsRent = ({ carItem }) => {
   const [currentStep, setCurrentStep] = useState(2);
   const [CarDetailsListing, setCarDetailsListing] = useState({});
+  // const { state, dispatch } = useCarFilter();
+  // const {
+  // } = state;
   const router = useRouter();
 
 
-  const defaultValues = {
-    "customer_phone": "03001234567",
-    "booking_date": "2026-07-27 14:30:00",
-    "rental_type": "short_term",
-    "type": "rent",
-    "dob": "1998-06-15",
-    "protection": "Premium Protection Cover",
-    "extra": {
-      "1": "GPS Navigation",
-      "2": "Baby Seat",
-      "3": "Additional Driver"
-    },
-    "plan":
-      "Weekly Rental Plan",
-    "plan_amount":
-      "750",
-    "start_date": "2027-01-10",
-    "end_date": "2027-01-15",
-    "pickup_location": "Carsy Yard Sydney",
-    "return_location": "Carsy Yard Sydney",
-    "total_amount": 1000,
-    "payment_type": CarDetailsListing?.payment_type
-  }
-  const [Booking, setBooking] = useState({});
+  // const defaultValues = {
+  //   "customer_phone": "03001234567",
+  //   "booking_date": "2026-07-27 14:30:00",
+  //   "rental_type": "short_term",
+  //   "type": "rent",
+  //   "dob": "1998-06-15",
+  //   "protection": "Premium Protection Cover",
+  //   "extra": {
+  //     "1": "GPS Navigation",
+  //     "2": "Baby Seat",
+  //     "3": "Additional Driver"
+  //   },
+  //   "plan":
+  //     "Weekly Rental Plan",
+  //   "plan_amount":
+  //     "750",
+  //   "start_date": "2027-01-10",
+  //   "end_date": "2027-01-15",
+  //   "pickup_location": "Carsy Yard Sydney",
+  //   "return_location": "Carsy Yard Sydney",
+  //   "total_amount": 1000,
+  //   "payment_type": CarDetailsListing?.payment_type
+  // }
+  
+
 
   const STEPS = [
     { key: 0, label: "Car Selected" },
@@ -85,6 +90,7 @@ const CarDetailsRent = ({ carItem }) => {
         {STEPS.map((step, index) => (
           <div
             key={step.key}
+            onClick={() => setCurrentStep(currentStep)}
             className={`msf-progress-item ${index === currentStep - 1 ? "is-active" : ""
               } ${index < (currentStep - 1) ? "is-complete" : ""}`}
           >

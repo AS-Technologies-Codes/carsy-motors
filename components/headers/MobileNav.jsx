@@ -99,11 +99,11 @@ export default function MobileNav() {
           >
             <Link href="/buy">Buy</Link>
           </li>
-          {/* <li
+          <li
             className={`tf-megamenu dropdown2 parent-menu-1 ${
               isActive([
-                { text: "Short-term Hire", href: "/car-rentals/short" },
-                { text: "Long-term Hire", href: "/car-rentals/long" },
+                { text: "Short-term Hire", href: "/rentals/short" },
+                { text: "Long-term Hire", href: "/rentals/long" },
               ])
                 ? "current"
                 : ""
@@ -128,7 +128,7 @@ export default function MobileNav() {
               ))}
             </ul>
             <div className="dropdown2-btn" onClick={handleActive1} />
-          </li> */}
+          </li>
 
           {/* <li className={"blog" == pathname.split("/")[1] ? "current" : ""}>
         <Link href="/blog">Blogs</Link>

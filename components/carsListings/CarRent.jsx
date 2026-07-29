@@ -14,11 +14,15 @@ import { useResponsive } from "@/utils/useResponsive";
 // import ComingSoon1 from "../../public/assets/images/car-list/buy-coming-soon.png"
 // import ComingSoon2 from "../../public/assets/images/car-list/coming-soon-mobile.png"
 import Image from "next/image";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { setFiltersData } from "@/context/reducer/carFilterReducer";
 
 export default function CarRent() {
   const [PaginationKeys, setPaginationKeys] = useState({});
   const [CarsLoading, setCarsLoading] = useState(true);
   const { state, dispatch } = useCarFilter();
+  const router = useRouter();
   const { isMobile } = useResponsive();
   // const searchParams = useSearchParams() || "";
   // const [ComingSoon, setComingSoon] = useState(false);
@@ -52,7 +56,8 @@ export default function CarRent() {
     itemPerPage,
     filterOptions,
     seat,
-    rental_type
+    rental_type,
+    rentalFilters
   } = state;
 
   const allProps = {
@@ -116,11 +121,12 @@ export default function CarRent() {
 
     const allParams = {
       page: allProps.currentPage,
-      ...(!price?.includes("Any") ? priceFilter(price) : {}),
-      ...(km[0] ? { kmMin: km[0] } : {}),
-      ...(km[1] > 100000 ? {} : { kmMax: km[1] }),
-      ...(year[0] > 1997 ? { yearMin: year[0] } : {}),
-      ...(year[1] <= new Date().getFullYear() ? { yearMax: year[1] } : {}),
+      ...rentalFilters,
+      // ...(!price?.includes("Any") ? priceFilter(price) : {}),
+      // ...(km[0] ? { kmMin: km[0] } : {}),
+      // ...(km[1] > 100000 ? {} : { kmMax: km[1] }),
+      // ...(year[0] > 1997 ? { yearMin: year[0] } : {}),
+      // ...(year[1] <= new Date().getFullYear() ? { yearMax: year[1] } : {}),
       ...(!body.includes("Any") ? { body: clean(body) } : {}),
       ...(!make.includes("Any") ? { make: clean(make) } : {}),
       ...(!model.includes("Any") ? { model: clean(model) } : {}),
@@ -167,9 +173,9 @@ export default function CarRent() {
   useEffect(() => {
     fecthGetCars();
   }, [
-    price,
-    km,
-    year,
+    // price,
+    // km,
+    // year,
     body,
     make,
     model,
@@ -184,7 +190,8 @@ export default function CarRent() {
     features,
     drive_type,
     featureOptions,
-    rental_type
+    rental_type,
+    rentalFilters
     // searchParams
   ]);
 
@@ -256,6 +263,53 @@ export default function CarRent() {
   };
 
 
+  const saveBooking = (car) => {
+    if (car.rent_type === "short" && !rentalFilters.ReturnDate) {
+      toast.error("Please provide duration and search for available vehicles!");
+      return;
+    }
+    if (!rentalFilters.age) {
+      toast.error("Please provide your age and search for available vehicles!");
+      return;
+    }
+    let values = { ...rentalFilters };
+
+    if (!values?.ReturnDate) {
+      const dateObj = new Date(`${rentalFilters.pickUpDate}T${rentalFilters.pickUpTime}`);
+      dateObj.setDate(dateObj.getDate() + (parseFloat(rentalFilters.weeks) * 7));
+
+      const ReturnDate = dateObj.toISOString().split('T')[0];
+      values = { ...values, carId: car.id, ReturnDate, ReturnTime: rentalFilters.pickUpTime };
+    }
+
+    setFilters(values);
+    router.push(`/rentals/listing-detail-v1/${car.id}`)
+  }
+
+
+  const setFilters = (payload) => {
+    dispatch({
+      type: "SET_RENT_FILTER_VALUES",
+      payload,
+    });
+  };
+
+
+  const getDifference = () => {
+    // 3. Create valid Date objects (Format: YYYY-MM-DDTHH:mm)
+    const start = new Date(`${rentalFilters.pickUpDate}T${rentalFilters.pickUpTime}`);
+    const end = new Date(`${rentalFilters.ReturnDate}T${rentalFilters.ReturnTime}`);
+
+    // 4. Calculate the difference in milliseconds
+    const differenceInMs = end - start;
+
+    // 5. Convert milliseconds to days
+    return differenceInMs / (1000 * 60 * 60 * 24);
+  }
+
+  console.log({ sorted });
+
+
   return (
     <>
       {/* {
@@ -322,7 +376,7 @@ export default function CarRent() {
                           />
                         </div>
                       </div>
-                      <div className="form-group">
+                      {/* <div className="form-group">
                         <div>
                           <DropdownSelect
                             selectedValue={price}
@@ -335,7 +389,7 @@ export default function CarRent() {
                             ]}
                           />
                         </div>
-                      </div>
+                      </div> */}
                       <div className="form-group">
                         <DropdownSelect
                           selectedValue={body}
@@ -490,7 +544,7 @@ export default function CarRent() {
                           />
                         </div>
                       </div>
-                      <div className="form-group wg-box3">
+                      {/* <div className="form-group wg-box3">
                         <div className="widget widget-price">
                           <div className="caption flex-two">
                             <div>
@@ -506,9 +560,8 @@ export default function CarRent() {
                             setPriceRange={allProps.setYear}
                           />
                         </div>
-                        {/* /.widget_price */}
-                      </div>
-                      <div className="form-group wg-box3">
+                      </div> */}
+                      {/* <div className="form-group wg-box3">
                         <div className="widget widget-price">
                           <div className="caption flex-two">
                             <div>
@@ -524,8 +577,7 @@ export default function CarRent() {
                             setPriceRange={allProps.setKM}
                           />
                         </div>
-                        {/* /.widget_price */}
-                      </div>
+                      </div> */}
 
                       {/* <div className="features-wrap">
                         <h4>Featured</h4>
@@ -740,7 +792,7 @@ export default function CarRent() {
                                       }
                                       {car?.fuelType ?
                                         <div className="icons flex-three">
-                                          <i className="icon-autodeal-diesel" />
+                                          <i className="icon-autodeal-diesel me-1" />
                                           <span>{car.fuelType}</span>
                                         </div>
                                         :
@@ -791,7 +843,7 @@ export default function CarRent() {
                                           <span className="ms-1">{car.door} Doors</span>
                                         </div>
                                       ) : null}
-                                      {car?.seats ? (
+                                      {car?.aircondition ? (
                                         <div className="icons flex-three">
 
                                           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#696665" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2" /><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2" /><path d="M9.8 4.4A2 2 0 1 1 11 8H2" /></svg>
@@ -802,7 +854,7 @@ export default function CarRent() {
                                         <div className="icons flex-three">
 
                                           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#696665" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-plus-icon lucide-calendar-plus"><path d="M16 19h6" /><path d="M16 2v4" /><path d="M19 16v6" /><path d="M21 12.598V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8.5" /><path d="M3 10h18" /><path d="M8 2v4" /></svg>
-                                          <span className="ms-1">23+</span>
+                                          <span className="ms-1">{car?.age}+ Years</span>
                                         </div>
                                       ) : null}
 
@@ -879,23 +931,25 @@ export default function CarRent() {
                                   </div>
                                   <div className="fs-20 fw-5 lh-25  text-end text-md-center text-color-3 me-2">
                                     {/* ${car.price?.toLocaleString()} */}
-                                    <span className="fw-3">{rental_type == "short" ? `${car.price} / day` : `${car.price * 7} / week`}</span>
+                                    <span className="fw-3">${rental_type == "short" ? `${car?.per_day_price || 0} / day` : `${(car?.per_day_price * 7) || 0} / week`}</span>
                                   </div>
 
                                   <div className="fs-13 fw-5 mb-2 lh-25 text-end text-md-center text-color-2 me-2">
-                                    Total: 100,000
+                                    Total: ${rentalFilters?.pickUpDate && rentalFilters?.ReturnDate ? getDifference() * car?.per_day_price || 0 :
+                                      rental_type == "short" ? car?.per_day_price : car?.per_day_price * 7}
                                   </div>
 
-                                  <Link
-                                    href={`/rentals/listing-detail-v1/${car.id}`}
-                                    // onClick={() => handleWhatsApp(car)}
+                                  <button
+                                    type="button"
+                                    // href={`javascript:void(0)`}
+                                    onClick={() => saveBooking(car)}
                                     className="chat m-0 d-flex align-items-center"
                                   >
                                     <span className="relative me-1">Select Car</span>
                                     <div className="icon text-color-2">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-car-icon lucide-car"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /><circle cx="7" cy="17" r="2" /><path d="M9 17h6" /><circle cx="17" cy="17" r="2" /></svg>
                                     </div>
-                                  </Link>
+                                  </button>
                                 </div>
                                 <div className="w-100 d-flex d-md-none justify-content-between align-items-center">
                                   <Link

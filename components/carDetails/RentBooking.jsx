@@ -5,26 +5,43 @@ import toast from "react-hot-toast";
 import { saveBooking } from "@/utils/APIs";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { getFiltersData } from "@/context/reducer/carFilterReducer";
+import { useCarFilter } from "@/context/providers/CarFilterContext";
+import { useRouter } from "next/navigation";
 
 export default function RentBooking() {
-  const { id } = useParams();
   const formRef = useRef(null);
   const [success, setSuccess] = useState(true);
   const [showMessage, setShowMessage] = useState(false);
   const [saving, setSaving] = useState(false);
+  const router = useRouter();
+  // const { state, dispatch } = useCarFilter();
+  // const { rentalFilters } = state;
+  const filtersData = getFiltersData();
+  console.log(filtersData);
+
+  const getDifference = () => {
+    // 3. Create valid Date objects (Format: YYYY-MM-DDTHH:mm)
+    const start = new Date(`${filtersData?.pickUpDate}T${filtersData?.pickUpTime}`);
+    const end = new Date(`${filtersData?.ReturnDate}T${filtersData?.ReturnTime}`);
+
+    // 4. Calculate the difference in milliseconds
+    const differenceInMs = end - start;
+
+    // 5. Convert milliseconds to days
+    return differenceInMs / (1000 * 60 * 60 * 24);
+  }
 
   const [formData, setFormData] = useState({
-    car_id: id ? Number(id) : "",
-    customer_name: "",
+    first_name: "",
+    last_name: "",
     customer_email: "",
     customer_phone: "",
-    booking_date: new Date().toISOString().slice(0, 10),
-    start_date: new Date().toISOString().slice(0, 10),
-    end_date: new Date().toISOString().slice(0, 10),
-    rental_type: "short_term",
-    amount: "",
-    notes: "",
+    dob: new Date().toISOString().slice(0, 10),
+    amount: (getDifference() * filtersData?.per_day_price),
   });
+
+  console.log({ formData });
 
   const handleShowMessage = () => {
     setShowMessage(true);
@@ -45,47 +62,58 @@ export default function RentBooking() {
     e.preventDefault();
 
     if (
-      !formData.car_id ||
-      !formData.customer_name ||
+      !formData.first_name ||
+      !formData.last_name ||
       !formData.customer_email ||
       !formData.customer_phone ||
-      !formData.booking_date ||
-      !formData.start_date ||
-      !formData.end_date ||
-      !formData.rental_type ||
-      !formData.amount
+      !formData.dob
     ) {
       toast.error("Please fill in all required booking fields");
       return;
     }
 
-    if (new Date(formData.end_date) <= new Date(formData.start_date)) {
-      toast.error("End date must be after start date");
-      return;
-    }
 
+    const body = {
+      car_id: filtersData.id,
+      customer_name: `${formData.first_name} ${formData.last_name}`,
+      customer_email: formData.customer_email,
+      customer_phone: formData.customer_phone,
+      dob: formData.dob,
+      end_date: `${filtersData.ReturnDate}-${filtersData.ReturnTime}`,
+      start_date: `${filtersData.pickUpDate}-${filtersData.pickUpTime}`,
+      plan: filtersData.plan,
+      plan_amount: filtersData.plan_amount.replace("$", ""),
+      pickup_location: filtersData.YardLocation,
+      return_location: filtersData.YardLocation,
+      // extra: {},
+      type: filtersData.car_type,
+      rental_type: filtersData.rent_type,
+      total_amount: formData.amount,
+      payment_type: filtersData.short_term_rate,
+      booking_date: new Date().toISOString(),
+    }
+    console.log({ body });
     setSaving(true);
     try {
-      await saveBooking(formData);
+      await saveBooking(body);
       setSuccess(true);
       handleShowMessage();
       setFormData({
-        car_id: id ? Number(id) : "",
+        // car_id: Number(id),
         customer_name: "",
         customer_email: "",
         customer_phone: "",
-        booking_date: new Date().toISOString().slice(0, 10),
-        start_date: new Date().toISOString().slice(0, 10),
-        end_date: new Date().toISOString().slice(0, 10),
-        rental_type: "short_term",
+        dob: new Date().toISOString().slice(0, 10),
+        rental_type: "short",
         amount: "",
-        notes: "",
       });
+      window.localStorage.removeItem("filters");
+      router.push(`/rentals/${body.rental_type}`)
     } catch (error) {
-      console.error(error);
+      console.log({ error });
       setSuccess(false);
       handleShowMessage();
-      toast.error(error?.message || "Booking submission failed");
+      toast.error(error || "Booking submission failed");
     } finally {
       setSaving(false);
     }
@@ -162,7 +190,7 @@ export default function RentBooking() {
                         <input
                           type="email"
                           className="tb-my-input"
-                          name="email"
+                          name="customer_email"
                           placeholder="Your Email"
                           value={formData.email}
                           onChange={handleChange}
@@ -288,8 +316,8 @@ export default function RentBooking() {
                         <label className="font-1 fs-14 fw-5">Do you have a frequent traveller program?</label>
                         <select
                           className="nice-select p-3"
-                          name="amount"
-                          value={formData.amount}
+                          name="program"
+                          value={formData.program}
                           onChange={handleChange}
                         >
                           <option>Select Option</option>
@@ -304,36 +332,36 @@ export default function RentBooking() {
                     </p>
 
                     <div className="form-group mt-3">
-                          <div>
-                            <label className="flex-three align-items-start">
-                              <input
-                                type="checkbox"
-                                name="consentCreditScore"
-                                checked={formData?.consentCreditScore}
-                                onChange={handleChange}
-                                required
-                              />
-                              <span
-                                className="btn-checkbox"
-                                // style={{ width: "75px" }}
-                              />
-                              <span className="text-color-2 font-2">
-                              I have read and accept the{" "}
-                                <span className="text-decoration-underline">
-                                 Rental information,
-                                </span>
-                                {" "}the{" "} 
-                                 <span className="text-decoration-underline">
-                                 Terms and Conditions,
-                                </span>
-                                {" "}and the{" "}
-                                 <span className="text-decoration-underline">
-                                 Privacy Policy
-                                </span>
-                              </span>
-                            </label>
-                          </div>
-                        </div>
+                      <div>
+                        <label className="flex-three align-items-start">
+                          <input
+                            type="checkbox"
+                            name="consentCreditScore"
+                            checked={formData?.consentCreditScore}
+                            onChange={handleChange}
+                            required
+                          />
+                          <span
+                            className="btn-checkbox"
+                          // style={{ width: "75px" }}
+                          />
+                          <span className="text-color-2 font-2">
+                            I have read and accept the{" "}
+                            <span className="text-decoration-underline">
+                              Rental information,
+                            </span>
+                            {" "}the{" "}
+                            <span className="text-decoration-underline">
+                              Terms and Conditions,
+                            </span>
+                            {" "}and the{" "}
+                            <span className="text-decoration-underline">
+                              Privacy Policy
+                            </span>
+                          </span>
+                        </label>
+                      </div>
+                    </div>
 
                   </div>
 

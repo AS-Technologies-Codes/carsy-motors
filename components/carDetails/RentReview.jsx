@@ -14,6 +14,9 @@ import Features from "./detailComponents/Features";
 import SidebarToggleButton from "./SidebarToggleButton";
 import { getCarDetailsApi } from "@/utils/APIs";
 import Link from "next/link";
+import { useCarFilter } from "@/context/providers/CarFilterContext";
+import { getFiltersData } from "@/context/reducer/carFilterReducer";
+// import { setFiltersData } from "@/context/reducer/carFilterReducer";
 
 export default function CarReview({ carItem, setCurrentStep, CarDetailsListing, setCarDetailsListing }) {
     const [CarDetailsLoading, setCarDetailsLoading] = useState(true);
@@ -61,9 +64,7 @@ export default function CarReview({ carItem, setCurrentStep, CarDetailsListing, 
             />
 
             <ProfileInfo
-                car={CarDetailsListing}
                 setCurrentStep={setCurrentStep}
-                setCarDetailsListing={setCarDetailsListing}
             />
 
             <div className="row">
@@ -140,7 +141,22 @@ export default function CarReview({ carItem, setCurrentStep, CarDetailsListing, 
     );
 }
 
-const ProfileInfo = ({ car, setCurrentStep }) => {
+const ProfileInfo = ({ setCurrentStep }) => {
+
+    const { state, dispatch } = useCarFilter();
+
+
+    const setFilters = (values) => {
+        const oldValues =
+            JSON.parse(window.localStorage.getItem("filters")) || {};
+        const payload = { ...oldValues || {}, ...values }
+        // console.log(payload);
+        dispatch({
+            type: "SET_RENT_FILTER_VALUES",
+            payload,
+        });
+    };
+
     return (
         <div className="row col-md-12">
             <div className="col-md-6 p-2">
@@ -169,7 +185,7 @@ const ProfileInfo = ({ car, setCurrentStep }) => {
                         <div className="btn-contact">
                             <Link
                                 href={"javascript:void(0)"}
-                                onClick={() => {setCurrentStep(3); setCarDetailsListing((ele) => ({...ele, payment_type: "pay_at_desk"}))}}
+                                onClick={() => { setFilters({ payment_type: "pay_at_desk" }); setCurrentStep(3); }}
                                 className="btn-pf bg-green mt-3"
                             >
                                 <svg
@@ -221,7 +237,7 @@ const ProfileInfo = ({ car, setCurrentStep }) => {
                         <div className="btn-contact">
                             <Link
                                 href={"javascript:void(0)"}
-                                onClick={() => {setCurrentStep(3); setCarDetailsListing((ele) => ({...ele, payment_type: "pay_online"}))}}
+                                onClick={() => { setFilters({ payment_type: "pay_online" }); setCurrentStep(3); }}
                                 className="btn-pf bg-green mt-3"
                             >
                                 <svg

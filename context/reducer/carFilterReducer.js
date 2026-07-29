@@ -1,5 +1,32 @@
 // import { allCars } from "@/data/cars";
 
+export const defaultValuesRentFilter = {
+  age: 0,
+  YardLocation: "carsyYard",
+  pickUpDate: new Date().toISOString().toString().split("T")[0],
+  ReturnDate: "",
+  pickUpTime: new Date()
+    .toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false, // Forces 24-hour mode
+    })
+    .toString(),
+  weeks: "1 Week",
+  ReturnTime: "",
+};
+
+export const getFiltersData = () =>
+  JSON.parse(window.localStorage.getItem("filters"));
+
+export const setFiltersData = (values) => {
+  const oldValues = JSON.parse(window.localStorage.getItem("filters"));
+
+  window.localStorage.setItem(
+    "filters",
+    JSON.stringify({ ...oldValues, ...values }),
+  );
+};
 const allCars = [
   {
     id: 4,
@@ -173,7 +200,14 @@ export const initialState = {
   countMake: "Any Make",
   countModel: "Any Model",
   countPrice: "",
-  rental_type: window.location.pathname.replace("/rentals/", "")+"term",
+  rental_type:
+    typeof window !== "undefined"
+      ? window.location.pathname.replace("/rentals/", "")
+      : "",
+  rentalFilters:
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("filters") || "{}")
+      : {},
 };
 
 export function reducer(state, action) {
@@ -230,12 +264,20 @@ export function reducer(state, action) {
       return { ...state, condition: action.payload };
     case "RENTAL_TYPE":
       return { ...state, rental_type: action.payload };
+    case "SET_RENT_FILTER_VALUES": {
+      console.log("state.rentalFilters", action.payload);
+      const rentalFilters = action.payload;
+
+      window.localStorage.setItem("filters", JSON.stringify(rentalFilters));
+      return { ...state, rentalFilters };
+    }
     case "SET_EVS_ONLY":
       return { ...state, evsOnly: action.payload };
     case "SET_FILTER_OPTIONS":
       return { ...state, filterOptions: action.payload };
 
-    case "CLEAR_FILTER":
+    case "CLEAR_FILTER": {
+      window.localStorage.removeItem("filters");
       return {
         ...state,
         // price: [0, 100000],
@@ -259,7 +301,9 @@ export function reducer(state, action) {
         countMake: "Any Make",
         countModel: "Any Model",
         countPrice: "",
+        rentalFilters: {},
       };
+    }
     default:
       return state;
   }

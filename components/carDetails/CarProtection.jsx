@@ -1,10 +1,41 @@
 "use client";
+import { useCarFilter } from '@/context/providers/CarFilterContext';
+// import { setFiltersData } from '@/context/reducer/carFilterReducer';
 import { pricingPlans } from '@/data/pricing'
 import Link from 'next/link';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const CarProtection = () => {
     const [Plan, setPlan] = useState(2);
+    const [extraValues, setextraValues] = useState({});
+    const { state, dispatch } = useCarFilter();
+    const { rentalFilters } = state;
+
+    const setFilters = (values) => {
+        const payload = { ...rentalFilters, extra: values };
+        console.log('state.rentalFilters', values);
+        dispatch({
+            type: "SET_RENT_FILTER_VALUES",
+            payload,
+        });
+    };
+
+    const setPlans = (values) => {
+        const payload = { ...rentalFilters, ...values };
+        dispatch({
+            type: "SET_RENT_FILTER_VALUES",
+            payload,
+        });
+    };
+
+    // const extraValues = {};
+    // useEffect(() => {
+    //     setFilters({ extra: extraValues });
+    // }, [extraValues])
+
+
+    console.log({ extraValues });
+
     const extras = [
         {
             id: "1",
@@ -100,7 +131,7 @@ const CarProtection = () => {
                                         <div>
                                             <h3 className="sub-title mb-1">{plan?.title2}</h3>
                                             <h4 className="text-sub lh-16 fs-16">
-                                                {plan.price}
+                                                {plan.price ? `Total ${plan.price}` : null}
                                             </h4>
                                         </div>
                                     </div>
@@ -118,7 +149,7 @@ const CarProtection = () => {
                                         ))}
                                     </ul>
                                     <div className="button-pricing"
-                                        onClick={() => setPlan(index)}>
+                                        onClick={() => { setPlans(index); setPlans({ plan: plan.title, plan_amount: plan.price }) }}>
                                         <a className={`sc-button ${Plan == index ? "btn-2" : "btn-1"} w-100`} href="javascript:void(0)">
                                             <span>{Plan == index ? "Selected" : "Select Plan"}</span>
                                         </a>
@@ -135,7 +166,13 @@ const CarProtection = () => {
             </h3>
 
             <div className="row col-md-12">
-                {extras.map(item => <Extra item={item} />)}
+                {extras.map((item, index) =>
+                    <Extra
+                        item={item}
+                        extraValues={rentalFilters?.extra || []}
+                        setextraValues={setFilters}
+                        index={index}
+                    />)}
             </div>
         </div>
     )
@@ -144,8 +181,9 @@ const CarProtection = () => {
 export default CarProtection
 
 
-const Extra = ({ item }) => {
-    let [Increment, setIncrement] = useState(1);
+const Extra = ({ item, extraValues, setextraValues, index }) => {
+    let [Increment, setIncrement] = useState(0);
+
     return (
         <div className="col-md-6 p-2">
             <div className="widget-listing h-100">
@@ -157,7 +195,7 @@ const Extra = ({ item }) => {
                             </div> */}
                     <h3 className='flex align-items-end text-color-3'>
                         {item?.icon}
-                        {item?.title}</h3>
+                        {item?.title + " " + item?.id}</h3>
                     <p>
                         {item?.desc}
                     </p>
@@ -175,7 +213,11 @@ const Extra = ({ item }) => {
                         <div className="btn-contact">
                             <Link
                                 href={"javascript:void(0)"}
-                                // onClick={() => setIncrement(Increment++)}
+                                onClick={() => {
+                                    extraValues[index] = 1;
+                                    setextraValues([...extraValues]);
+                                    setIncrement(1)
+                                }}
                                 className="btn-pf bg-green mt-3"
                             >
                                 <span className="fs-16 fw-5 lh-20 font text-color-1  mt-1">
@@ -187,7 +229,12 @@ const Extra = ({ item }) => {
                         <div className="btn-contact flex align-items-center">
                             <Link
                                 href={"javascript:void(0)"}
-                                onClick={() => setIncrement(Increment - 1)}
+                                onClick={() => {
+                                    const exp = Increment == 0 ? 0 : Increment - 1;
+                                    extraValues[index] = exp;
+                                    setextraValues([...extraValues]);
+                                    setIncrement(exp)
+                                }}
                                 className="btn-pf bg-green mt-3"
                             >
                                 <span className="fs-22 fw-5 lh-20 font text-color-1  mt-1">
@@ -197,7 +244,11 @@ const Extra = ({ item }) => {
                             <h3 className='relative center' style={{ top: 10, minWidth: 20 }}>{Increment}</h3>
                             <Link
                                 href={"javascript:void(0)"}
-                                onClick={() => setIncrement(Increment + 1)}
+                                onClick={() => {
+                                    extraValues[index] = Increment + 1;
+                                    setextraValues([...extraValues]);
+                                    setIncrement(Increment + 1)
+                                }}
                                 className="btn-pf bg-orange mt-3"
                             >
                                 <span className="fs-22 fw-5 lh-20 font text-color-1  mt-1">

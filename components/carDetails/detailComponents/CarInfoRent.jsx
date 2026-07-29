@@ -1,3 +1,5 @@
+import { useCarFilter } from "@/context/providers/CarFilterContext";
+import { getFiltersData } from "@/context/reducer/carFilterReducer";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -6,7 +8,7 @@ import toast from "react-hot-toast";
 export default function CarInfo({ carItem, step, setCurrentStep }) {
   const router = useRouter();
   const [CarData, setCarData] = useState(carItem || {});
-
+  const [Filters, setFilters] = useState(null);
   const handleFavourite = async (car) => {
     let favouriteCars =
       JSON.parse(window.localStorage.getItem("favouriteCar")) || [];
@@ -44,9 +46,21 @@ export default function CarInfo({ carItem, step, setCurrentStep }) {
     setCarData({ ...car, favorite: isFavourite ? "none" : "#fd5a21" });
     // allProps.setData(updatedData);
   };
+  const { state, dispatch } = useCarFilter();
+  console.log("state.rentalFilters", state.rentalFilters);
+  const { rentalFilters } = state;
 
-  // console.log(CarData);
+  console.log({ Filters });
   useEffect(() => {
+    const filters = getFiltersData();
+    setFilters(filters);
+    const { car_type, rent_type, per_day_price, id } = carItem;
+
+    dispatch({
+      type: "SET_RENT_FILTER_VALUES",
+      payload: { ...filters, car_type, rent_type, per_day_price, id },
+    });
+
     if (CarData.car_type === "used") {
       router.push("/listing-detail-v1/" + CarData.id);
       return;
@@ -61,17 +75,6 @@ export default function CarInfo({ carItem, step, setCurrentStep }) {
       );
     }
   };
-  // const handleCopy = async () => {
-  //   if (typeof window !== "undefined") {
-  //     try {
-  //       // Gets the complete browser URL
-  //       await navigator.clipboard.writeText(window.location.href);
-  //       toast.success("copied");
-  //     } catch (err) {
-  //       console.error("Failed to copy URL: ", err);
-  //     }
-  //   }
-  // };
 
 
 
@@ -121,71 +124,100 @@ export default function CarInfo({ carItem, step, setCurrentStep }) {
     }
   };
 
+
+  const getDifference = () => {
+    // 3. Create valid Date objects (Format: YYYY-MM-DDTHH:mm)
+    const start = new Date(`${Filters?.pickUpDate}T${Filters?.pickUpTime}`);
+    const end = new Date(`${Filters?.ReturnDate}T${Filters?.ReturnTime}`);
+
+    // 4. Calculate the difference in milliseconds
+    const differenceInMs = end - start;
+
+    // 5. Convert milliseconds to days
+    return differenceInMs / (1000 * 60 * 60 * 24);
+  }
+
   return (
     <>
       <div className="icon-box flex flex-wrap">
-        <div className="icons flex-three">
-          <i className="icon-autodeal-km1 me-1" />
-          <span>{CarData.km?.toLocaleString("en-AU")} kms</span>
-        </div>
-        <div className="icons flex-three">
-          <i className="icon-autodeal-diesel me-1" />
-          <span>{CarData.fuelType}</span>
-        </div>
-        <div className="icons flex-three">
-          <i className="icon-autodeal-automatic me-1" />
-          <span>{CarData.transmission}</span>
-        </div>
-        <div className="icons flex-three">
-          <i className="icon-autodeal-owner me-1" />
-          <span>{CarData?.owner_number} Owner</span>
-        </div>
-      </div>
-
-      {carItem.car_type === "used" ? <div className="flex">
-        <div className="icons flex-three align-items-center border rounded-3 px-3 py-2  mt-2 mb-3">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="54"
-            height="54"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-landmark-icon lucide-landmark me-1 text-color-3"
-          >
-            <path d="M10 18v-7" />
-            <path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" />
-            <path d="M14 18v-7" />
-            <path d="M18 18v-7" />
-            <path d="M3 22h18" />
-            <path d="M6 18v-7" />
-          </svg>
-          <div className="lh-1 d-flex flex-column justify-content-center">
-            <span className="text-color-2 fw-5">Finance rate</span>
-            <div className="d-flex align-items-end">
-              <span className="relative fs-12" style={{ top: 3 }}>
-                From{" "}
-              </span>
-              <div
-                className=" money text-color-3 font p-0 m-0 px-1 fs-5"
-                style={{ height: "25px" }}
-              >
-                ${(CarData?.price / 10000 * 39).toFixed(1)}
-              </div>
-              <span className="fs-12 relative" style={{ top: 3 }}>
-                {" "}
-                / week
-              </span>
+        <div className="icon-box flex flex-wrap">
+          {CarData?.km ?
+            <div className="icons flex-three">
+              <i className="icon-autodeal-km1" />
+              <span>{CarData.km?.toLocaleString()} kms</span>
             </div>
-          </div>
+            :
+            null
+          }
+          {CarData?.fuelType ?
+            <div className="icons flex-three">
+              <i className="icon-autodeal-diesel me-1" />
+              <span>{CarData.fuelType}</span>
+            </div>
+            :
+            null
+          }
+          {CarData.transmission ?
+            <div className="icons flex-three">
+              <i className="icon-autodeal-automatic" />
+              <span>{CarData.transmission}</span>
+            </div>
+            :
+            null
+          }
+
+          {CarData?.seats ? (
+            <div className="icons flex-three">
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width={17}
+                height={17}
+                viewBox="0 0 20 20"
+                fill="none"
+              >
+                <path
+                  d="M17.5 18.1252C17.5 18.2909 17.4341 18.4499 17.3169 18.5671C17.1997 18.6843 17.0407 18.7502 16.875 18.7502H8.74998C8.58422 18.7502 8.42525 18.6843 8.30804 18.5671C8.19083 18.4499 8.12498 18.2909 8.12498 18.1252C8.12498 17.9594 8.19083 17.8004 8.30804 17.6832C8.42525 17.566 8.58422 17.5002 8.74998 17.5002H16.875C17.0407 17.5002 17.1997 17.566 17.3169 17.6832C17.4341 17.8004 17.5 17.9594 17.5 18.1252ZM17.5 12.5002V15.0002C17.5 15.3317 17.3683 15.6496 17.1339 15.884C16.8994 16.1185 16.5815 16.2502 16.25 16.2502H8.91482C8.68238 16.2509 8.45439 16.1865 8.25666 16.0643C8.05893 15.9421 7.89938 15.767 7.79607 15.5588L3.25623 6.49626C3.16991 6.32242 3.125 6.13097 3.125 5.93688C3.125 5.7428 3.16991 5.55134 3.25623 5.37751L4.98435 1.94001C5.13103 1.64729 5.38671 1.4238 5.69642 1.31759C6.00613 1.21139 6.34515 1.23093 6.6406 1.37204L9.27263 2.48298L9.30935 2.50016C9.60567 2.6485 9.83097 2.90843 9.93571 3.22281C10.0405 3.5372 10.0161 3.88031 9.86795 4.17673C9.86555 4.18268 9.86268 4.18843 9.85935 4.19391L8.74998 6.25016L11.2328 11.2502H16.25C16.5815 11.2502 16.8994 11.3819 17.1339 11.6163C17.3683 11.8507 17.5 12.1686 17.5 12.5002ZM16.25 12.5002H11.232C10.9997 12.5009 10.7718 12.4365 10.5741 12.3143C10.3765 12.1921 10.2171 12.017 10.114 11.8088L7.63045 6.80876C7.54434 6.63528 7.49953 6.44423 7.49953 6.25055C7.49953 6.05688 7.54434 5.86583 7.63045 5.69235L7.63982 5.67516L8.74998 3.61891L6.13826 2.51657C6.12574 2.51176 6.11348 2.50628 6.10154 2.50016L4.37498 5.93766L8.91404 15.0002H16.25V12.5002Z"
+                  fill="#696665"
+                />
+              </svg>
+              <span className="ms-1">{CarData.seats} Seats</span>
+            </div>
+          ) : null}
+          {CarData?.door ? (
+            <div className="icons flex-three">
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width={14}
+                height={14}
+                viewBox="0 0 20 20"
+                fill="none"
+              >
+                <path
+                  d="M18.125 16.875H16.25V3.125C16.25 2.79348 16.1183 2.47554 15.8839 2.24112C15.6495 2.0067 15.3315 1.875 15 1.875H5C4.66848 1.875 4.35054 2.0067 4.11612 2.24112C3.8817 2.47554 3.75 2.79348 3.75 3.125V16.875H1.875C1.70924 16.875 1.55027 16.9408 1.43306 17.0581C1.31585 17.1753 1.25 17.3342 1.25 17.5C1.25 17.6658 1.31585 17.8247 1.43306 17.9419C1.55027 18.0592 1.70924 18.125 1.875 18.125H18.125C18.2908 18.125 18.4497 18.0592 18.5669 17.9419C18.6842 17.8247 18.75 17.6658 18.75 17.5C18.75 17.3342 18.6842 17.1753 18.5669 17.0581C18.4497 16.9408 18.2908 16.875 18.125 16.875ZM5 3.125H15V16.875H5V3.125ZM13.125 10.3125C13.125 10.4979 13.07 10.6792 12.967 10.8333C12.864 10.9875 12.7176 11.1077 12.5463 11.1786C12.375 11.2496 12.1865 11.2682 12.0046 11.232C11.8227 11.1958 11.6557 11.1065 11.5246 10.9754C11.3935 10.8443 11.3042 10.6773 11.268 10.4954C11.2318 10.3135 11.2504 10.125 11.3214 9.95373C11.3923 9.78243 11.5125 9.63601 11.6667 9.533C11.8208 9.42998 12.0021 9.375 12.1875 9.375C12.4361 9.375 12.6746 9.47377 12.8504 9.64959C13.0262 9.8254 13.125 10.0639 13.125 10.3125Z"
+                  fill="#696665"
+                />
+              </svg>
+              <span className="ms-1">{CarData.door} Doors</span>
+            </div>
+          ) : null}
+          {CarData?.aircondition ? (
+            <div className="icons flex-three">
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#696665" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2" /><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2" /><path d="M9.8 4.4A2 2 0 1 1 11 8H2" /></svg>
+              <span className="ms-1">A/C</span>
+            </div>
+          ) : null}
+          {!CarData?.age ? (
+            <div className="icons flex-three">
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#696665" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-plus-icon lucide-calendar-plus"><path d="M16 19h6" /><path d="M16 2v4" /><path d="M19 16v6" /><path d="M21 12.598V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8.5" /><path d="M3 10h18" /><path d="M8 2v4" /></svg>
+              <span className="ms-1">{CarData?.age}+ Years</span>
+            </div>
+          ) : null}
         </div>
       </div>
-        :
-        null}
-
       <ul className="action-icon flex flex-wrap my-2">
         {CarData?.favorite === "none" ?
           <li>
@@ -300,26 +332,61 @@ export default function CarInfo({ carItem, step, setCurrentStep }) {
       </ul>
 
 
+
+      <div className="money text-color-3 font">
+        ${CarData.rent_type == "short" ?
+          <>{CarData?.per_day_price || 0}
+            <span className="fw-3"> / day</span></>
+          :
+          <>{(CarData?.per_day_price * 7) || 0}
+            <span className="fw-3">/ week</span></>}
+      </div>
+
+      <div className="fs-6 fw-5 mb-2 lh-25 text-center text-md-start text-color-2 me-2">
+        Total:
+        ${Filters?.pickUpDate && Filters?.ReturnDate ?
+          getDifference() * CarData?.per_day_price || 0 :
+          CarData.rent_type == "short" ? CarData?.per_day_price : CarData?.per_day_price * 7}
+      </div>
+
+
+      <fieldset className="email-wrap style-text">
+        <label className="font-1 fs-14 fw-5 mb-1">Pick Up</label>
+        <input
+          type="text"
+          className="tb-my-input fs-5 fw-semibold"
+          name="pickUpTime"
+          disabled
+          value={`${Filters?.pickUpDate} ${Filters?.pickUpTime}`}
+        />
+      </fieldset>
+      <fieldset className="email-wrap style-text">
+        <label className="font-1 fs-14 fw-5 mb-1">Return</label>
+        <input
+          type="text"
+          className="tb-my-input fs-5 fw-semibold"
+          name="ReturnDate"
+          disabled
+          value={`${Filters?.ReturnDate} ${Filters?.ReturnTime}`}
+        />
+      </fieldset>
+
       <div className="my-4">
         {step != 2 ?
           <>
-            <h6 className="mb-1 fw-bold">Payemet Method: <span className="text-color-3">Online</span></h6>
-                    <div className="listing-line my-2" />
-            <h6 className="mb-1 fw-bold">Plan Price: <span className="text-color-3">$5,995.00</span></h6>
-                    <div className="listing-line my-2" />
-            <h6 className="fw-bold">Available Extras: <span className="text-color-3">$12</span></h6>
-                    <div className="listing-line my-2" />
+            <h6 className="mb-1 fw-bold">Payemet Method: <span className="text-color-3">{rentalFilters.payment_type}</span></h6>
+            <div className="listing-line my-2" />
+            <h6 className="mb-1 fw-bold">Plan Price: <span className="text-color-3">({rentalFilters?.plan}) {rentalFilters?.plan_amount}</span></h6>
+            <div className="listing-line my-2" />
+            <h6 className="fw-bold">Available Extras: <span className="text-color-3">{rentalFilters?.extra}</span></h6>
+            <div className="listing-line my-2" />
           </>
           :
           null
         }
       </div>
 
-      <div className="money text-color-3 font">
-        ${CarData.price?.toLocaleString()}
-        <span className="fw-3">{" / "} Total</span>
 
-      </div>
       <div className="profile-contact mt-3">
         <div className="btn-contact flex-two">
           <a href="#" onClick={step == 2 ? handleWhatsApp : () => setCurrentStep(step + 1)} className="btn-pf bg-green">

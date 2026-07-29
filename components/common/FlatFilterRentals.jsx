@@ -6,28 +6,17 @@ import { accessToken, URL } from "@/utils/URL";
 import Link from "next/link";
 import DateRangeLong from "./DateRange";
 import toast from "react-hot-toast";
+import { defaultValuesRentFilter } from "@/context/reducer/carFilterReducer";
 
 export default function FlatFilterRentals({
   styleClass = "",
   justifyClass = "",
   tabStyle = "",
 }) {
-  const defaultValues = {
-    age: 0,
-    YardLocation: "carsyYard",
-    pickUpDate: new Date().toISOString().toString().split("T")[0],
-    ReturnDate: "",
-    pickUpTime: new Date().toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false // Forces 24-hour mode
-    }).toString(),
-    weeks: "1 Week",
-    ReturnTime: "",
-  }
+ 
   const { state, dispatch } = useCarFilter();
-  const { countMake, countModel, countPrice, filterOptions, rental_type } = state;
-  const [formData, setFormData] = useState(defaultValues);
+  const { rental_type } = state;
+  const [formData, setFormData] = useState(defaultValuesRentFilter);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -89,20 +78,24 @@ export default function FlatFilterRentals({
     setCarsLoading(true);
 
     // Build URL with filter parameters
+
+    console.log({formData});
+    
     const params = new URLSearchParams({
-      ...(countPrice.split(",")[0]
-        ? { priceMin: countPrice.split(",")[0] }
-        : {}),
-      ...(countPrice.split(",")[1]
-        ? { priceMax: countPrice.split(",")[1] }
-        : {}),
-      // ...(countPrice !== "Any Price" ? { price: countPrice } : {}),
-      ...(countMake !== "Any Make" ? { make: countMake } : {}),
-      ...(countModel !== "Any Model" ? { model: countModel } : {}),
+      ...formData
+      // ...(countPrice.split(",")[0]
+      //   ? { priceMin: countPrice.split(",")[0] }
+      //   : {}),
+      // ...(countPrice.split(",")[1]
+      //   ? { priceMax: countPrice.split(",")[1] }
+      //   : {}),
+      // // ...(countPrice !== "Any Price" ? { price: countPrice } : {}),
+      // ...(countMake !== "Any Make" ? { make: countMake } : {}),
+      // ...(countModel !== "Any Model" ? { model: countModel } : {}),
     });
 
-    console.log({rental_type});
-    
+    console.log({ rental_type });
+
     const getGetCarsRequest = await fetch(
       `${URL.getCars}&car_type=rent&rent_type=${rental_type}&${params.toString()}`,
       {
@@ -122,17 +115,17 @@ export default function FlatFilterRentals({
   useEffect(() => {
     fecthGetCars();
     setActiveIndex(rental_type == "long" ? 0 : 1)
-  }, [countPrice, countMake, countModel, rental_type]);
+  }, [rental_type, formData]);
 
 
   console.log(formData);
 
   const searchFilter = () => {
-    dispatch({ type: "SET_MAKE", payload: countMake });
-    dispatch({ type: "SET_MODEL", payload: countModel });
+    // dispatch({ type: "SET_MAKE", payload: countMake });
+    // dispatch({ type: "SET_MODEL", payload: countModel });
     dispatch({
-      type: "SET_PRICE",
-      payload: countPrice,
+      type: "SET_RENT_FILTER_VALUES",
+      payload: formData,
     });
   };
 
@@ -209,23 +202,6 @@ export default function FlatFilterRentals({
                       </select>
                     </div>
                   </div>
-                  {/* <div className="form-group-1">
-                    <label>Body</label>
-                    <div className="group-select tf-select">
-                      <select 
-                        className="nice-select"
-                        value={body}
-                        onChange={(e) => allProps.setBody(e.target.value)}
-                      >
-                        <option>Body</option>
-                        <option value="Convertible">Convertible</option>
-                        <option value="Coupe">Coupe</option>
-                        <option value="Crossover">Crossover</option>
-                        <option value="Hatchback">Hatchback</option>
-                        <option value="Minivan">Minivan</option>
-                      </select>
-                    </div>
-                  </div> */}
                 </div>
                 <div className="form-group-2 form-style"></div>
                 <div className="button-search sc-btn-top">

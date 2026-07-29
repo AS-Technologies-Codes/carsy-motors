@@ -203,7 +203,7 @@ export const initialState = {
   rental_type:
     typeof window !== "undefined"
       ? window.location.pathname.replace("/rentals/", "")
-      : "",
+      : "long",
   rentalFilters:
     typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("filters") || "{}")

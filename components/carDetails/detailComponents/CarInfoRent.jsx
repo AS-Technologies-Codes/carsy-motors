@@ -376,7 +376,7 @@ export default function CarInfo({ carItem, step, setCurrentStep }) {
           <>
             <h6 className="mb-1 fw-bold">Payemet Method: <span className="text-color-3">{rentalFilters.payment_type}</span></h6>
             <div className="listing-line my-2" />
-            <h6 className="mb-1 fw-bold">Plan Price: <span className="text-color-3">({rentalFilters?.plan}) {rentalFilters?.plan_amount}</span></h6>
+            <h6 className="mb-1 fw-bold">Plan Price: <span className="text-color-3">({rentalFilters?.plan || "Basic"}) {rentalFilters?.plan_amount}</span></h6>
             <div className="listing-line my-2" />
             <h6 className="fw-bold">Available Extras: <span className="text-color-3">{rentalFilters?.extra}</span></h6>
             <div className="listing-line my-2" />

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
 const CarProtection = () => {
-    const [Plan, setPlan] = useState(2);
+    const [Plan, setPlan] = useState(0);
     const [extraValues, setextraValues] = useState({});
     const { state, dispatch } = useCarFilter();
     const { rentalFilters } = state;

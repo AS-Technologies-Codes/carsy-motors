@@ -38,7 +38,7 @@ export default function RentBooking() {
     customer_email: "",
     customer_phone: "",
     dob: new Date().toISOString().slice(0, 10),
-    amount: (getDifference() * filtersData?.per_day_price),
+    amount: (getDifference() * filtersData?.per_day_price).toFixed(0),
   });
 
   console.log({ formData });

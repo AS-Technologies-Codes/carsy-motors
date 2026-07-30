@@ -344,9 +344,9 @@ export default function CarInfo({ carItem, step, setCurrentStep }) {
 
       <div className="fs-6 fw-5 mb-2 lh-25 text-center text-md-start text-color-2 me-2">
         Total:
-        ${Filters?.pickUpDate && Filters?.ReturnDate ?
+        ${(Filters?.pickUpDate && Filters?.ReturnDate ?
           getDifference() * CarData?.per_day_price || 0 :
-          CarData.rent_type == "short" ? CarData?.per_day_price : CarData?.per_day_price * 7}
+          CarData.rent_type == "short" ? CarData?.per_day_price : CarData?.per_day_price * 7).toFixed(0)}
       </div>
 
 

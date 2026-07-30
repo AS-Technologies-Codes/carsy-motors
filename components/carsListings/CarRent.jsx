@@ -935,8 +935,8 @@ export default function CarRent() {
                                   </div>
 
                                   <div className="fs-13 fw-5 mb-2 lh-25 text-end text-md-center text-color-2 me-2">
-                                    Total: ${rentalFilters?.pickUpDate && rentalFilters?.ReturnDate ? getDifference() * car?.per_day_price || 0 :
-                                      rental_type == "short" ? car?.per_day_price : car?.per_day_price * 7}
+                                    Total: ${(rentalFilters?.pickUpDate && rentalFilters?.ReturnDate ? getDifference() * car?.per_day_price || 0 :
+                                      rental_type == "short" ? car?.per_day_price : car?.per_day_price * 7).toFixed(0)}
                                   </div>
 
                                   <button

@@ -7,6 +7,7 @@ import Link from "next/link";
 import DateRangeLong from "./DateRange";
 import toast from "react-hot-toast";
 import { defaultValuesRentFilter } from "@/context/reducer/carFilterReducer";
+import { usePathname } from "next/navigation";
 
 export default function FlatFilterRentals({
   styleClass = "",
@@ -17,6 +18,7 @@ export default function FlatFilterRentals({
   const { state, dispatch } = useCarFilter();
   const { rental_type } = state;
   const [formData, setFormData] = useState(defaultValuesRentFilter);
+  const pathname = usePathname();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -95,9 +97,12 @@ export default function FlatFilterRentals({
     });
 
     console.log({ rental_type });
+    const rental_type_pathname = pathname.includes("short") ? "short" : "long";
+console.log("asasa", rental_type || rental_type_pathname);
+console.log("asa", rental_type_pathname);
 
     const getGetCarsRequest = await fetch(
-      `${URL.getCars}&car_type=rent&rent_type=${rental_type}&${params.toString()}`,
+      `${URL.getCars}&car_type=rent&rent_type=${rental_type || rental_type_pathname}&${params.toString()}`,
       {
         method: "GET",
         headers: {

@@ -195,8 +195,10 @@ export default function Header1({ bg = "style2" }) {
                       />
                     </svg>
                   </div>
-                  <p className="text-color-2">
-                    2972 Westheimer Rd. Santa Ana, Illinois 85486
+                  <p>
+                    <a href="https://maps.app.goo.gl/wurV65WKKcWqtX3W8" className="text-color-2">
+                    1394 Ipswich Rd, Rocklea QLD 4106, Australia
+                  </a>
                   </p>
                 </li>
                 <li className="flex-three gap-8">

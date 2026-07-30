@@ -281,6 +281,7 @@ export default function CarsHero() {
     {
       head: "Short-term rentals",
       des: "Find the perfect car for your needs",
+      href:"/rentals/short",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -307,6 +308,7 @@ export default function CarsHero() {
     {
       head: "Long-term rentals",
       des: "Every car is quality checked for peace of mind.",
+      href:"/rentals/long",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -378,7 +380,7 @@ export default function CarsHero() {
                               data-wow-delay={spec.delay}
                               data-wow-duration="1000ms"
                             >
-                              {specIndex == 0 || specIndex == 2 ? (
+                              {specIndex == 0 ? (
                                 <div className="card-disabled d-flex justify-content-center blur align-items-center">
                                   <div></div>
                                   <p
@@ -446,7 +448,9 @@ export default function CarsHero() {
                                 <div className="d-flex justify-content-between">
                                   {specIndex == 2 &&
                                     featList3.map((item, index) => (
-                                      <div
+                                      <Link
+                                      href={item.href}
+                                      // onClick={()=> Router.push(item.href)}
                                         key={index}
                                         className={`d-flex align-items-center p-2 mx-1 justify-content-center border-color-gray text-color-2 border-half rounded-4`}
                                       >
@@ -457,7 +461,7 @@ export default function CarsHero() {
                                         {/* <p className="text-color-1 text-center fw-normal  fs-12 opacity-75">
                                         {item.des}
                                       </p> */}
-                                      </div>
+                                      </Link>
                                     ))}
                                 </div>
                               </div>

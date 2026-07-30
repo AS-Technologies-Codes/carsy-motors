@@ -194,7 +194,7 @@ export default function Header2() {
                     </svg>
                   </div>
                   <p className="text-color-2">
-                    2972 Westheimer Rd. Santa Ana, Illinois 85486
+                    1394 Ipswich Rd, Rocklea QLD 4106, Australia
                   </p>
                 </li>
                 <li className="flex-three gap-8">

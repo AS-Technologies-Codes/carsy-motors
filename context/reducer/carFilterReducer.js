@@ -200,10 +200,7 @@ export const initialState = {
   countMake: "Any Make",
   countModel: "Any Model",
   countPrice: "",
-  rental_type:
-    typeof window !== "undefined"
-      ? window.location.pathname.replace("/rentals/", "")
-      : "long",
+  rental_type: "",
   rentalFilters:
     typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("filters") || "{}")

@@ -31,7 +31,7 @@ export default function Header3() {
                         />
                       </svg>
                     </div>
-                    <p>2972 Westheimer Rd. Santa Ana, Illinois 85486</p>
+                    <p>1394 Ipswich Rd, Rocklea QLD 4106, Australia</p>
                   </li>
                   <li className="flex-three">
                     <div className="icon">

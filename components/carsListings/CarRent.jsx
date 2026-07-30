@@ -15,7 +15,7 @@ import { useResponsive } from "@/utils/useResponsive";
 // import ComingSoon2 from "../../public/assets/images/car-list/coming-soon-mobile.png"
 import Image from "next/image";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { setFiltersData } from "@/context/reducer/carFilterReducer";
 
 export default function CarRent() {
@@ -25,6 +25,7 @@ export default function CarRent() {
   const router = useRouter();
   const { isMobile } = useResponsive();
   // const searchParams = useSearchParams() || "";
+  const pathname = usePathname();
   // const [ComingSoon, setComingSoon] = useState(false);
 
   // useEffect(() => {
@@ -116,7 +117,6 @@ export default function CarRent() {
 
   const fecthGetCars = async () => {
     setCarsLoading(true);
-
     console.log({ price });
 
     const allParams = {
@@ -144,9 +144,9 @@ export default function CarRent() {
     };
 
     const params = new URLSearchParams(allParams);
-
+    const rental_type_pathname = pathname.includes("short") ? "short" : "long";
     const getGetCarsRequest = await fetch(
-      `${URL.getCars}&car_type=rent&rent_type=${rental_type}&limit=${allProps.itemPerPage}&${params.toString()}`,
+      `${URL.getCars}&car_type=rent&rent_type=${rental_type || rental_type_pathname}&limit=${allProps.itemPerPage}&${params.toString()}`,
       {
         method: "GET",
         headers: {

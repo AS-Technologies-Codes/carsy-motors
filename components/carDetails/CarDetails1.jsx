@@ -31,7 +31,7 @@ export default function CarDetails1({ carItem }) {
           : { ...getCarDetailsData, favorite: "none" };
       setCarDetailsListing(filteredData);
     } catch (error) {
-      toast.error(error);
+      // toast.error(error);
       return;
     } finally {
       setCarDetailsLoading(false);

@@ -32,7 +32,7 @@ export default function CarReview({ carItem, setCurrentStep, CarDetailsListing, 
                 : { ...getCarDetailsData, favorite: "none" };
             setCarDetailsListing(filteredData);
         } catch (error) {
-            toast.error(error);
+            // toast.error(error);
             return;
         } finally {
             setCarDetailsLoading(false);

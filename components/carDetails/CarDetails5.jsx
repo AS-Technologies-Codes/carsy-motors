@@ -156,7 +156,7 @@ export default function CarDetails5({ carItem = allCars[0] }) {
                           <div className="list-icon-pf gap-8 flex-three">
                             <i className="far fa-map" />
                             <p className="font-1">
-                              2972 Westheimer Rd. Santa Ana, Illinois 85486
+                              1394 Ipswich Rd, Rocklea QLD 4106, Australia
                             </p>
                           </div>
                         </div>

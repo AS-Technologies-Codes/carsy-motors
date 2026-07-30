@@ -41,7 +41,7 @@ export default function Hero() {
       const getFleetData = await getFleetListingApi();
       setFleetListing(getFleetData);
     } catch (error) {
-      toast.error(error);
+      // toast.error(error);
     } finally {
       setFleetLoading(false);
     }

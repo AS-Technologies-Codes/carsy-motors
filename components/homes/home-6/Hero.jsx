@@ -32,7 +32,7 @@ export default function Hero() {
   const [RecommendedCarsLoading, setRecommendedCarsLoading] = useState(true);
   const pathName = usePathname();
   const isRental = pathName.toString().includes("rentals");
-  
+
   const fetchRecommendedCars = async () => {
     try {
       setRecommendedCarsLoading(true);
@@ -40,7 +40,7 @@ export default function Hero() {
       setRecommendedCarsListing(getRecommendedCarsData);
     } catch (error) {
       console.log(error);
-      toast.error(error);
+      // toast.error(error);
     } finally {
       setRecommendedCarsLoading(false);
     }

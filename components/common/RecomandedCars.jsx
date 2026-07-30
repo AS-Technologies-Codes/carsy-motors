@@ -21,7 +21,7 @@ export default function RecomandedCars() {
       setRecommendedCarsListing(getRecommendedCarsData);
     } catch (error) {
       console.log(error);
-      toast.error(error);
+      // toast.error(error);
     } finally {
       setRecommendedCarsLoading(false);
     }

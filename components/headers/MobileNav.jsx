@@ -112,8 +112,8 @@ export default function MobileNav() {
             <Link href="#">Hire</Link>
             <ul>
               {[
-                { text: "Short-term Hire", href: "#" },
-                { text: "Long-term Hire", href: "#" },
+                { text: "Short-term Hire", href: "/rentals/short" },
+                { text: "Long-term Hire", href: "/rentals/long" },
               ].map((page, index) => (
                 <li
                   key={index}

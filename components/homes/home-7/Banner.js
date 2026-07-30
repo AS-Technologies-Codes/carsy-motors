@@ -12,12 +12,10 @@ const Banner = () => {
     try {
       setBannerLoading(true);
       const getBannerData = await getBannerListingApi();
-      if (getBannerData.status == "error") {
-        setBannerListing([]);
-      }
       setBannerListing(getBannerData);
     } catch (error) {
-      toast.error(error?.message || "Error fetching banner banner image");
+      console.log(error);
+      // toast.error(error);
     } finally {
       setBannerLoading(false);
     }

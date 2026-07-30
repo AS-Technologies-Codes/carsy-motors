@@ -17,7 +17,7 @@ export default function Achievements() {
       const getAchievementsData = await getAchievementsListingApi();
       setAchievementsListing(getAchievementsData);
     } catch (error) {
-      toast.error(error);
+      // toast.error(error);
     } finally {
       setAchievementsLoading(false);
     }

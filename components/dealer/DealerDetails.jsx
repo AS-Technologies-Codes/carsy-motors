@@ -177,7 +177,7 @@ export default function DealerDetails({ dealerItem }) {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  2972 Westheimer Rd. Santa Ana, Illinois 85486
+                  1394 Ipswich Rd, Rocklea QLD 4106, Australia
                 </div>
                 <div
                   id="map-single"

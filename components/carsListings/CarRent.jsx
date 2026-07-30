@@ -26,7 +26,7 @@ export default function CarRent() {
   const { isMobile } = useResponsive();
   // const searchParams = useSearchParams() || "";
   const pathname = usePathname();
-  const rental_type = state?.rental_type || pathname.includes("short") ? "short" : "long";
+  const rental_type = state?.rental_type ? state?.rental_type : pathname.includes("short") ? "short" : "long";
 
   // const [ComingSoon, setComingSoon] = useState(false);
 

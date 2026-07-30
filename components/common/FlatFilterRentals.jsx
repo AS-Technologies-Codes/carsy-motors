@@ -18,7 +18,8 @@ export default function FlatFilterRentals({
   const { state, dispatch } = useCarFilter();
   const [formData, setFormData] = useState(defaultValuesRentFilter);
   const pathname = usePathname();
-  const rental_type = state?.rental_type || pathname.includes("short") ? "short" : "long";
+  const rental_type = state?.rental_type ? state?.rental_type : pathname.includes("short") ? "short" : "long";
+// console.log("state?.rental_type", rental_type);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -60,7 +61,7 @@ export default function FlatFilterRentals({
 
   const [CarsLoading, setCarsLoading] = useState(true);
   const [Total, setTotal] = useState(0);
-  const carTypes = ["Long Term", "Short Term"];
+  const carTypes = ["Short Term", "Long Term"];
   const [activeIndex, setActiveIndex] = useState(0); // Initially "All Car" is active
 
   const setRentalType = (payload) => {
@@ -74,7 +75,7 @@ export default function FlatFilterRentals({
   const handleClick = (index) => {
     setActiveIndex(index); // Update the active index when clicked
     // setFormData(ele => ({ ...ele, type: index == 0 ? "long" : "short" }))
-    setRentalType(index == 0 ? "long" : "short")
+    setRentalType(index == 0 ? "short" : "long")
   };
   const fecthGetCars = async () => {
     setCarsLoading(true);
@@ -114,7 +115,7 @@ export default function FlatFilterRentals({
   };
   useEffect(() => {
     fecthGetCars();
-    setActiveIndex(rental_type == "long" ? 0 : 1)
+    setActiveIndex(rental_type == "short" ? 0 : 1)
   }, [rental_type, formData]);
 
 

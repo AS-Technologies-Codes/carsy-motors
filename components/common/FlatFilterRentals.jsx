@@ -14,11 +14,11 @@ export default function FlatFilterRentals({
   justifyClass = "",
   tabStyle = "",
 }) {
- 
+
   const { state, dispatch } = useCarFilter();
-  const { rental_type } = state;
   const [formData, setFormData] = useState(defaultValuesRentFilter);
   const pathname = usePathname();
+  const rental_type = state?.rental_type || pathname.includes("short") ? "short" : "long";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -81,8 +81,8 @@ export default function FlatFilterRentals({
 
     // Build URL with filter parameters
 
-    console.log({formData});
-    
+    console.log({ formData });
+
     const params = new URLSearchParams({
       ...formData
       // ...(countPrice.split(",")[0]
@@ -96,13 +96,8 @@ export default function FlatFilterRentals({
       // ...(countModel !== "Any Model" ? { model: countModel } : {}),
     });
 
-    console.log({ rental_type });
-    const rental_type_pathname = pathname.includes("short") ? "short" : "long";
-console.log("asasa", rental_type || rental_type_pathname);
-console.log("asa", rental_type_pathname);
-
     const getGetCarsRequest = await fetch(
-      `${URL.getCars}&car_type=rent&rent_type=${rental_type || rental_type_pathname}&${params.toString()}`,
+      `${URL.getCars}&car_type=rent&rent_type=${rental_type}&${params.toString()}`,
       {
         method: "GET",
         headers: {

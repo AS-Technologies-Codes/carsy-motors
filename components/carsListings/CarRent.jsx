@@ -26,6 +26,8 @@ export default function CarRent() {
   const { isMobile } = useResponsive();
   // const searchParams = useSearchParams() || "";
   const pathname = usePathname();
+  const rental_type = state?.rental_type || pathname.includes("short") ? "short" : "long";
+
   // const [ComingSoon, setComingSoon] = useState(false);
 
   // useEffect(() => {
@@ -57,10 +59,9 @@ export default function CarRent() {
     itemPerPage,
     filterOptions,
     seat,
-    rental_type,
     rentalFilters
   } = state;
-
+  
   const allProps = {
     ...state,
     setData: (value) => dispatch({ type: "SET_Data", payload: value }),
@@ -144,9 +145,8 @@ export default function CarRent() {
     };
 
     const params = new URLSearchParams(allParams);
-    const rental_type_pathname = pathname.includes("short") ? "short" : "long";
     const getGetCarsRequest = await fetch(
-      `${URL.getCars}&car_type=rent&rent_type=${rental_type || rental_type_pathname}&limit=${allProps.itemPerPage}&${params.toString()}`,
+      `${URL.getCars}&car_type=rent&rent_type=${rental_type}&limit=${allProps.itemPerPage}&${params.toString()}`,
       {
         method: "GET",
         headers: {

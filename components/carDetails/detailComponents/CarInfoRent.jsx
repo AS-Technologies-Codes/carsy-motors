@@ -136,6 +136,7 @@ export default function CarInfo({ carItem, step, setCurrentStep }) {
     // 5. Convert milliseconds to days
     return differenceInMs / (1000 * 60 * 60 * 24);
   }
+
   return (
     <>
       <div className="icon-box flex flex-wrap">

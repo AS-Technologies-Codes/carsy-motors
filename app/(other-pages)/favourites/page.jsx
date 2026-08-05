@@ -125,14 +125,13 @@ const page = () => {
                                   </p>
                                 </div>
                                 <h5 className="link-style-1">
-                                  <Link
-                                    href={`/listing-detail-v1/${car.id}`}
+                                  <div
                                     style={{
                                       height: isMobile ? "auto" : "50px",
                                     }}
                                   >
                                     {car.title}
-                                  </Link>
+                                  </div>
                                 </h5>
                                 <div className="icon-box flex flex-wrap">
                                   <div className="icons flex-three">
@@ -149,12 +148,14 @@ const page = () => {
                                   </div>
                                 </div>
                                 <div className="money fs-20 fw-5 lh-25 text-color-3">
-                                  ${car.price?.toLocaleString()}
+                                  ${car?.rent_type ? car?.rent_type === "short" ? `${car?.per_day_price || 0} / day` : `${(car?.per_day_price * 7) || 0} / week`
+                                    : car.price?.toLocaleString()}
+
                                 </div>
                               </div>
                               <div className="w-100 d-flex d-md-none justify-content-between align-items-center">
                                 <Link
-                                  href={`/listing-detail-v1/${car.id}`}
+                                  href={car?.rent_type ? `/rentals/${car?.rent_type}${car.id}` : `/listing-detail-v1/${car.id}`}
                                   className="view-car"
                                 >
                                   View details
@@ -187,7 +188,7 @@ const page = () => {
                                   className={`days-box d-flex flex-row mb-2 justify-content-between h-100 w-100`}
                                 >
                                   <Link
-                                    href={`/listing-detail-v1/${car.id}`}
+                                    href={car?.rent_type ? `/rentals/${car?.rent_type}${car.id}` : `/listing-detail-v1/${car.id}`}
                                     className="view-car"
                                   >
                                     View car

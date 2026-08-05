@@ -127,7 +127,8 @@ const CarDetailsRent = ({ carItem }) => {
           </div>
         </div>
       </section>
-      <div className="msf-progress flex justify-content-center py-5">
+    <div className='flex justify-content-center my-3'>
+        <div className="msf-progress flex justify-content-center border px-4 py-2 border-3 rounded-5">
         {STEPS.map((step, index) => (
           <div
             key={step.key}
@@ -145,6 +146,7 @@ const CarDetailsRent = ({ carItem }) => {
           </div>
         ))}
       </div>
+    </div>
       <section className="tf-section3 listing-detail style-1">
         <div className="container">
           <div className="row">

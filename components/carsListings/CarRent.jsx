@@ -27,7 +27,6 @@ export default function CarRent() {
   // const searchParams = useSearchParams() || "";
   const pathname = usePathname();
   const rental_type = state?.rental_type ? state?.rental_type : pathname.includes("short") ? "short" : "long";
-
   // const [ComingSoon, setComingSoon] = useState(false);
 
   // useEffect(() => {
@@ -35,6 +34,11 @@ export default function CarRent() {
   //     setComingSoon(true);
   //   }, 2000);
   // }, [])
+
+  useEffect(() => {
+
+    clearFilter()
+  }, [])
 
   const {
     price,
@@ -61,7 +65,7 @@ export default function CarRent() {
     seat,
     rentalFilters
   } = state;
-  
+
   const allProps = {
     ...state,
     setData: (value) => dispatch({ type: "SET_Data", payload: value }),
@@ -119,10 +123,11 @@ export default function CarRent() {
   const fecthGetCars = async () => {
     setCarsLoading(true);
     console.log({ price });
-
+    const id = pathname.match(/\d+/);
     const allParams = {
       page: allProps.currentPage,
       ...rentalFilters,
+      ...(id ? { id } : {}),
       // ...(!price?.includes("Any") ? priceFilter(price) : {}),
       // ...(km[0] ? { kmMin: km[0] } : {}),
       // ...(km[1] > 100000 ? {} : { kmMax: km[1] }),
@@ -238,6 +243,8 @@ export default function CarRent() {
         transmission,
         price,
         images,
+        rent_type,
+        per_day_price
       } = carItem;
       favouriteCars.push({
         id,
@@ -250,6 +257,8 @@ export default function CarRent() {
         transmission,
         price,
         images,
+        rent_type,
+        per_day_price
         // type: "rent/"
       });
     }
@@ -306,8 +315,6 @@ export default function CarRent() {
     // 5. Convert milliseconds to days
     return differenceInMs / (1000 * 60 * 60 * 24);
   }
-
-  console.log({ sorted });
 
 
   return (
@@ -772,14 +779,14 @@ export default function CarRent() {
                                       </p>
                                     </div>
                                     <h5 className="link-style-1">
-                                      <Link
-                                        href={`/rentals/listing-detail-v1/${car.id}`}
+                                      <div
+                                        // href={`/rentals/listing-detail-v1/${car.id}`}
                                         style={{
                                           height: isMobile ? "auto" : "30px",
                                         }}
                                       >
                                         {car.title}
-                                      </Link>
+                                      </div>
                                     </h5>
                                     <div className="icon-box flex flex-wrap">
                                       {car?.km ?
@@ -939,17 +946,19 @@ export default function CarRent() {
                                       rental_type == "short" ? car?.per_day_price : car?.per_day_price * 7).toFixed(0)}
                                   </div>
 
-                                  <button
-                                    type="button"
-                                    // href={`javascript:void(0)`}
-                                    onClick={() => saveBooking(car)}
-                                    className="chat m-0 d-flex align-items-center"
-                                  >
-                                    <span className="relative me-1">Select Car</span>
-                                    <div className="icon text-color-2">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-car-icon lucide-car"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /><circle cx="7" cy="17" r="2" /><path d="M9 17h6" /><circle cx="17" cy="17" r="2" /></svg>
-                                    </div>
-                                  </button>
+                                  <div className="flex w-100 justify-content-center">
+                                    <button
+                                      type="button"
+                                      // href={`javascript:void(0)`}
+                                      onClick={() => saveBooking(car)}
+                                      className="sc-button m-0 py-2 w-100 w-md-auto justify-content-center px-0 ps-3 border-0 d-flex align-items-center"
+                                    >
+                                      <span className="relative me-1">Select Car</span>
+                                      <div className="icon text-color-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-car-icon lucide-car"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /><circle cx="7" cy="17" r="2" /><path d="M9 17h6" /><circle cx="17" cy="17" r="2" /></svg>
+                                      </div>
+                                    </button>
+                                  </div>
                                 </div>
                                 <div className="w-100 d-flex d-md-none justify-content-between align-items-center">
                                   <Link

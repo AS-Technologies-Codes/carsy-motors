@@ -10447,6 +10447,9 @@ a.bg-blue:hover {
   .w-md-50 {
     width: 50% !important;
   }
+   .w-md-auto {
+    width: auto !important;
+  }
   .float-md-start {
     float: left !important;
   }

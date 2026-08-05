@@ -12774,7 +12774,7 @@ a.bg-blue:hover {
   }
 }
 
-.buy-car-slider .control-dots{
+.buy-car-slider .control-dots {
   display: none;
 }
 
@@ -12877,26 +12877,61 @@ transform: scale(.2) !important;
   opacity: 1;
 }
 .msf-progress-dot {
-  width: 28px;
-  height: 28px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  border: 2px solid currentColor;
+  border: 3.5px solid currentColor;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 26px;
   font-weight: 600;
   flex-shrink: 0;
 }
 .msf-progress-item.is-complete .msf-progress-dot {
-  background: rgb(52, 168, 83);
-  border-color: rgb(52, 168, 83);
-  color: #fff;
+  background: #fff;
+  border-color: var(--bs-primary);
+  color: var(--bs-primary);
 }
+
+.msf-progress svg {
+  color: var(--bs-primary) !important;
+  width: 72px;
+  height: 72px;
+  /* fill: var(--bs-primary) !important; */
+}
+.msf-progress .second {
+  width: 55px;
+  height: 55px;
+}
+
 .msf-progress-label {
-  font-size: 14px;
+  font-size: 1.25rem;
   font-weight: 500;
   white-space: nowrap;
+}
+
+@media (max-width: 576px) {
+  .msf-progress-item {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .msf-progress-label {
+    font-size: 0.8rem;
+  }
+  .msf-progress svg {
+    width: 42px;
+    height: 42px;
+  }
+  .msf-progress-dot {
+    width: 29px;
+    height: 29px;
+    font-size: 16px;
+  }
+  .msf-progress .second {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 .glow-on-hover {
@@ -12981,7 +13016,7 @@ transform: scale(.2) !important;
   margin: 0px 10px !important;
   width: 50px;
   border-radius: 12px;
-  background-color: rgba(0, 0, 0, .5) !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
 .carousel.carousel-slider .control-arrow:hover {
@@ -12989,35 +13024,32 @@ transform: scale(.2) !important;
   opacity: 1 !important;
 }
 
-
-.dateRange input{
-border: none !important;
+.dateRange input {
+  border: none !important;
 }
 input[type="time"]::-webkit-calendar-picker-indicator {
-    /* Your styles here */
-    cursor: pointer !important;
+  /* Your styles here */
+  cursor: pointer !important;
 }
 
 /* Hides the icon in Chrome, Edge, Safari, and Opera */
 .dateRange input[type="date"]::-webkit-calendar-picker-indicator,
 .dateRange input[type="datetime-local"]::-webkit-calendar-picker-indicator {
-    background: transparent;
-    bottom: 0;
-    color: transparent;
-    cursor: pointer;
-    height: auto;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: auto;
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
 }
 
 /* Hides the icon in Firefox */
 .dateRange input[type="date"],
 .dateRange input[type="datetime-local"] {
-    position: relative;
-    -moz-appearance: textfield;
+  position: relative;
+  -moz-appearance: textfield;
 }
-
-

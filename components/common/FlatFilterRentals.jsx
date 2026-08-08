@@ -41,7 +41,6 @@ export default function FlatFilterRentals({
         {/* <h1 className="fs-4">Please select an age</h1> */}
         <div className="fw-bold mt-3">The minimum age to rent  most vehicles is 25.</div>
         <div className="center">Drivers under 25 may drive certain vehicles, but may incur a Young Driver Surcharge.</div>
-        <div>For more details of our age policy <a className="text-color-3" href="javascipt:void(0)">click here</a>.</div>
 
         {/* <div className="button-search sc-btn-top"> */}
         <Link href="javascipt:void(0)"

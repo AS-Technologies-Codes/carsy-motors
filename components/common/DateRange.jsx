@@ -69,6 +69,15 @@ const DateRange = ({ setFormData, formData, type }) => {
     setFormData(ele => ({ ...ele, pickUpDate, pickUpTime }))
   };
 
+
+  const now = new Date();
+
+  const minDateTime = new Date(
+    now.getTime() - now.getTimezoneOffset() * 60000
+  )
+    .toISOString()
+    .slice(0, 16);
+
   return (
     <>
       {
@@ -78,6 +87,7 @@ const DateRange = ({ setFormData, formData, type }) => {
             <div className="group-select tf-select">
               <DateRangePicker
                 initialSettings={{
+                  minDate: new Date(),
                   timePicker: true,            // Enables the time picker dropdowns
                   timePicker24Hour: false,     // False uses 12-hour AM/PM format
                   timePickerIncrement: 5,      // Minutes dropdown jumps by 5 mins
@@ -98,7 +108,7 @@ const DateRange = ({ setFormData, formData, type }) => {
                   ) ? `${formData.pickUpDate} ${formData.pickUpTime} - ${formData.ReturnDate} ${formData.ReturnTime}` : "Select Date & Time"}
                   readOnly
                 />
-                
+
               </DateRangePicker>
             </div>
           </div>
@@ -109,6 +119,7 @@ const DateRange = ({ setFormData, formData, type }) => {
               <label>Pick up Date & Time</label>
               <div className="group-select tf-select">
                 <input type='datetime-local'
+                  min={minDateTime}
                   value={dateAndTtime}
                   onChange={handleDate} className='p-0' />
               </div>

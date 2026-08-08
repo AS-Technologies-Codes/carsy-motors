@@ -48,7 +48,7 @@ export default function CarInfo({ carItem, step, setCurrentStep }) {
   };
   const { state, dispatch } = useCarFilter();
   console.log("state.rentalFilters", state.rentalFilters);
-  const { rentalFilters } = state;
+  const { rentalFilters, extras } = state;
 
   console.log({ Filters });
   useEffect(() => {
@@ -135,6 +135,22 @@ export default function CarInfo({ carItem, step, setCurrentStep }) {
 
     // 5. Convert milliseconds to days
     return differenceInMs / (1000 * 60 * 60 * 24);
+  }
+
+  const rentPrice = CarData.rent_type == "short" ?
+    CarData?.per_day_price
+    :
+    CarData?.per_day_price * 7;
+
+  const extrasTotal = extras?.filter(item => item.value).map(item => item.value * item.price).reduce((acc, item) => {
+    acc += item;
+    return acc;
+  }, 0);
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    document.getElementById("book-now-btn").click();
   }
 
   return (
@@ -334,16 +350,15 @@ export default function CarInfo({ carItem, step, setCurrentStep }) {
 
 
       <div className="money text-color-3 font">
-        ${CarData.rent_type == "short" ?
-          <>{CarData?.per_day_price || 0}
-            <span className="fw-3"> / day</span></>
+        ${rentPrice} {CarData.rent_type == "short" ?
+          <span className="fw-3"> / day</span>
           :
-          <>{(CarData?.per_day_price * 7) || 0}
-            <span className="fw-3">/ week</span></>}
+          <span className="fw-3">/ week</span>
+        }
       </div>
 
       <div className="fs-6 fw-5 mb-2 lh-25 text-center text-md-start text-color-2 me-2">
-        Total:
+        Total Rent Price:
         ${(Filters?.pickUpDate && Filters?.ReturnDate ?
           getDifference() * CarData?.per_day_price || 0 :
           CarData.rent_type == "short" ? CarData?.per_day_price : CarData?.per_day_price * 7).toFixed(0)}
@@ -371,35 +386,186 @@ export default function CarInfo({ carItem, step, setCurrentStep }) {
         />
       </fieldset>
 
+      <div className="col-12 rental-type-booking my-3">
+        <fieldset className="phone-wrap style-text">
+          {/* <label className="font-1 fs-14 fw-5">
+            Rental Type*
+          </label> */}
+          <div className="d-flex gap-2">
+            <div
+              className={`d-flex align-items-center p-3 py-2 mx-1 justify-content-center border-color-gray text-color-3 border-half rounded-4 ${CarData.rent_type === "short" ? " bg-light" : ""
+                }`}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width={45}
+                strokeWidth={1}
+                fill="white"
+                stroke="#fd5a21"
+                className="size-3"
+              >
+                <path d="M8 2v4" />
+                <path d="M16 2v4" />
+                <rect width="18" height="18" x="3" y="4" rx="2" />
+                <path d="M3 10h18" />
+                <path d="M8 14h.01" />
+                <path d="M12 14h.01" />
+                <path d="M16 14h.01" />
+                <path d="M8 18h.01" />
+                <path d="M12 18h.01" />
+                <path d="M16 18h.01" />
+              </svg>{" "}
+              <h6 className="text-color-2 fw-bold fs-14 ps-1">
+                Short-term <br /> rentals{" "}
+              </h6>
+            </div>
+            <div
+              className={`d-flex align-items-center p-3 py-2 mx-1 justify-content-center border-color-gray text-color-3 border-half rounded-4 ${CarData.rent_type === "long" ? " bg-light" : ""
+                }`}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width={45}
+                strokeWidth={1}
+                fill="white"
+                stroke="#fd5a21"
+                className="size-3"
+              >
+                <rect width="18" height="18" x="3" y="4" rx="2" />
+                <path d="M16 2v4" />
+                <path d="M3 10h18" />
+                <path d="M8 2v4" />
+                <path d="M17 14h-6" />
+                <path d="M13 18H7" />
+                <path d="M7 14h.01" />
+                <path d="M17 18h.01" />
+              </svg>
+              <h6 className="text-color-2 fw-bold fs-14 ps-1">
+                Long-term <br /> rentals
+              </h6>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+
       <div className="my-4">
         {step != 2 ?
           <>
-            <h6 className="mb-1 fw-bold">Payemet Method: <span className="text-color-3">{rentalFilters.payment_type}</span></h6>
+            <h6 className="mb-1 fw-bold">Payemet Method: <span className="text-color-3">{rentalFilters.payment_type === "pay_at_desk" ? "Pay at Desk" : "Pay Online"}</span></h6>
             <div className="listing-line my-2" />
-            <h6 className="mb-1 fw-bold">Plan Price: <span className="text-color-3">({rentalFilters?.plan || "Basic"}) {rentalFilters?.plan_amount}</span></h6>
+            <h6 className="mb-1 fw-bold">Plan Price: <span className="text-color-3">({rentalFilters?.plan || "Basic"}) ${rentalFilters?.plan_amount}</span></h6>
             <div className="listing-line my-2" />
-            <h6 className="fw-bold">Available Extras: <span className="text-color-3">{rentalFilters?.extra}</span></h6>
-            <div className="listing-line my-2" />
+            {
+              extras?.filter(item => item.value).length ?
+                <>
+                  <h6 className="fw-bold flex align-items-center mb-1">Extras</h6>
+                  <div className="flex gap-2">
+
+                    {extras?.filter(item => item.value).map(item =>
+                      <h6 className="fw-bold flex align-items-center widget-listing p-2">{item.icon}<span className="text-color-3 fs-4">{item.type == "single" ? "✔" : item.value}</span></h6>
+                    )}
+                  </div>
+                  {/* <div className="listing-line my-2" /> */}
+                </>
+                :
+                null
+            }
           </>
           :
           null
         }
       </div>
 
+      {step != 2 ?
+        <div className="widget-listing p-2">
+          <p>
+            Car Rent Price:
+            ${(Filters?.pickUpDate && Filters?.ReturnDate ?
+              getDifference() * CarData?.per_day_price || 0 :
+              CarData.rent_type == "short" ? CarData?.per_day_price : CarData?.per_day_price * 7).toFixed(0)}
 
-      <div className="profile-contact mt-3">
-        <div className="btn-contact flex-two">
-          <a href="#" onClick={step == 2 ? handleWhatsApp : () => setCurrentStep(step + 1)} className="btn-pf bg-green">
-            <span className="fs-16 fw-5 lh-20 font text-color-1">
-              {step == 2 ?
-                "Chat with Dealer"
-                :
-                "Go to review & checkout"
-              }
-            </span>
-          </a>
+          </p>
+          <div className="listing-line my-2" />
+          <p>Plan Price: <span>${rentalFilters?.plan_amount}</span></p>
+          <div className="listing-line my-2" />
+          <p> Total Extras Price: ${extrasTotal}</p>
+          <div className="listing-line my-2" />
+          <p className="fw-bold"> Total Price:
+            ${rentPrice + extrasTotal + rentalFilters?.plan_amount}
+          </p>
         </div>
-      </div>
+        :
+        null}
+
+      {step != 2 ?
+        <div className="money text-color-3 font ms-2 my-4">
+          ${rentPrice + extrasTotal + rentalFilters?.plan_amount}
+          <span className="fw-3"> / Total</span>
+        </div>
+        :
+        null}
+
+      <form onSubmit={handleSubmit}>
+        {step == 4 ?
+          <div className="form-group mt-3">
+            <div>
+              <label className="flex-three align-items-start">
+                <input
+                style={{display: "none"}}
+                  type="checkbox"
+                  name="consentCreditScore"
+                  // checked={formData?.consentCreditScore}
+                  // onChange={handleChange}
+                  required
+                />
+                <span
+                  className="btn-checkbox"
+                // style={{ width: "75px" }}
+                />
+                <span className="text-color-2 font-2">
+                  I have read and accept the{" "}
+                  <span className="text-decoration-underline">
+                    Rental information,
+                  </span>
+                  {" "}the{" "}
+                  <span className="text-decoration-underline">
+                    Terms and Conditions,
+                  </span>
+                  {" "}and the{" "}
+                  <span className="text-decoration-underline">
+                    Privacy Policy
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+          :
+          null}
+
+        <div className="profile-contact mt-3">
+          <div className="btn-contact flex-two">
+            <button
+              name="submit"
+              type="submit"
+              onClick={step == 2 ? handleWhatsApp : step == 3 ? () => setCurrentStep(step + 1) : () => { }}
+              className="sc-button border-0 btn-pf bg-green">
+              <span className="fs-16 fw-5 lh-20 font text-color-1">
+                {step == 2 ?
+                  "Chat with Dealer"
+                  :
+                  step == 3 ?
+                    "Go to review & checkout"
+                    :
+                    "Book Now"
+                }
+              </span>
+            </button>
+          </div>
+        </div>
+      </form>
     </>
   );
 }

@@ -201,6 +201,7 @@ export const initialState = {
   countModel: "Any Model",
   countPrice: "",
   rental_type: "",
+  extras: [],
   rentalFilters:
     typeof window !== "undefined"
       ? JSON.parse(localStorage.getItem("filters") || "{}")
@@ -261,6 +262,8 @@ export function reducer(state, action) {
       return { ...state, condition: action.payload };
     case "RENTAL_TYPE":
       return { ...state, rental_type: action.payload };
+      case "RENTAL_EXTRAS":
+      return { ...state, extras: action.payload };
     case "SET_RENT_FILTER_VALUES": {
       console.log("state.rentalFilters", action.payload);
       const rentalFilters = action.payload;
@@ -298,6 +301,7 @@ export function reducer(state, action) {
         countMake: "Any Make",
         countModel: "Any Model",
         countPrice: "",
+  extras: [],
         rentalFilters: {},
       };
     }

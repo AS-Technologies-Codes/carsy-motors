@@ -98,6 +98,7 @@ const DateRange = ({ setFormData, formData, type }) => {
                   ) ? `${formData.pickUpDate} ${formData.pickUpTime} - ${formData.ReturnDate} ${formData.ReturnTime}` : "Select Date & Time"}
                   readOnly
                 />
+                
               </DateRangePicker>
             </div>
           </div>

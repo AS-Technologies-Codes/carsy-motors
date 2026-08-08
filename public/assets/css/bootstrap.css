@@ -13056,3 +13056,39 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   position: relative;
   -moz-appearance: textfield;
 }
+
+/* Change background color of the active/selected dates */
+.daterangepicker td.active, 
+.daterangepicker td.active:hover {
+  background-color: #ff5722 !important; /* Your custom color */
+  color: #fff !important;
+}
+
+/* Change color of the intermediate dates in the selected range */
+.daterangepicker td.in-range {
+  background-color: #fbe9e7 !important; /* Soft tint of your color */
+  color: #333 !important;
+}
+
+/* Change the color of the Apply button */
+.daterangepicker .applyBtn {
+  background-color: #ff5722 !important;
+  border-color: #ff5722 !important;
+}
+
+/* Change the text hover color on individual days */
+.daterangepicker td.available:hover, 
+.daterangepicker th.available:hover {
+  background-color: #eee !important;
+}
+
+input[type="datetime-local"] {
+  color: #fff;
+  background-color: #222;
+  border: 1px solid #555;
+}
+
+/* Calendar/time picker icon */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}

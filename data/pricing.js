@@ -17,7 +17,7 @@ export const pricingPlans = [
     stars: "⭐⭐",
     description: "Reduce Excess: $1,650.00",
     title2: "$58.00 / day",
-    price: "$696.00",
+    price: 696.00,
     // total: "Total $696.00",
     features: [
       "Collision Damage & Theft Protection",
@@ -33,7 +33,7 @@ export const pricingPlans = [
     description: "Reduce Excess: $0.00",
     crossPrice: "$853.39",
     title2: "$64.00 / day",
-    price: "$768.05",
+    price: 768.05,
     // total: "Total $768.05",
     features: [
       "Collision Damage & Theft Protection",

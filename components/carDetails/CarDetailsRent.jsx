@@ -134,7 +134,7 @@ const CarDetailsRent = ({ carItem }) => {
             key={step.key}
             onClick={() => index == 0 ? showActionToast() : setCurrentStep(index + 1)}
             className={`msf-progress-item ${index === currentStep - 1 ? "is-active" : ""
-              } ${index < (currentStep - 1) ? "is-complete" : ""}`}
+              } ${index < (currentStep - 1) ? "" : "is-complete"}`}
           >
             {step.icon ?
               step.icon :

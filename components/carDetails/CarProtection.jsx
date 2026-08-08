@@ -6,16 +6,72 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
 const CarProtection = () => {
-    const [Plan, setPlan] = useState(0);
-    const [extraValues, setextraValues] = useState({});
-    const { state, dispatch } = useCarFilter();
-    const { rentalFilters } = state;
 
-    const setFilters = (values) => {
-        const payload = { ...rentalFilters, extra: values };
-        console.log('state.rentalFilters', values);
+    const _extras = [
+        {
+            id: "1",
+            icon: <svg xmlns="http://www.w3.org/2000/svg" className='me-1' width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trees-icon lucide-trees"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z" /><path d="M7 16v6" /><path d="M13 19v3" /><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5" /></svg>,
+            title: "Offset Carbon Emissions",
+            desc: "Your contribution will find Greenfleet Carbon Offset reforestation projects around the world",
+            price: "4.00",
+            value: 0,
+            type: "single",
+        },
+        {
+            id: "2",
+            icon: <svg xmlns="http://www.w3.org/2000/svg" className='me-1' width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trees-icon lucide-trees"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z" /><path d="M7 16v6" /><path d="M13 19v3" /><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5" /></svg>,
+            title: "Offset Carbon Emissions",
+            desc: "Your contribution will find Greenfleet Carbon Offset reforestation projects around the world",
+            price: "4.00",
+            value: 0,
+            type: "multiple",
+        },
+        {
+            id: "3",
+            icon: <svg xmlns="http://www.w3.org/2000/svg" className='me-1' width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trees-icon lucide-trees"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z" /><path d="M7 16v6" /><path d="M13 19v3" /><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5" /></svg>,
+            title: "Offset Carbon Emissions",
+            desc: "Your contribution will find Greenfleet Carbon Offset reforestation projects around the world",
+            price: "4.00",
+            value: 0,
+            type: "multiple",
+        },
+        {
+            id: "4",
+            icon: <svg xmlns="http://www.w3.org/2000/svg" className='me-1' width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trees-icon lucide-trees"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z" /><path d="M7 16v6" /><path d="M13 19v3" /><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5" /></svg>,
+            title: "Offset Carbon Emissions",
+            desc: "Your contribution will find Greenfleet Carbon Offset reforestation projects around the world",
+            price: "4.00",
+            value: 0,
+            type: "multiple",
+        },
+        {
+            id: "5",
+            icon: <svg xmlns="http://www.w3.org/2000/svg" className='me-1' width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trees-icon lucide-trees"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z" /><path d="M7 16v6" /><path d="M13 19v3" /><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5" /></svg>,
+            title: "Offset Carbon Emissions",
+            desc: "Your contribution will find Greenfleet Carbon Offset reforestation projects around the world",
+            price: "4.00",
+            value: 0,
+            type: "multiple",
+        },
+        {
+            id: "6",
+            icon: <svg xmlns="http://www.w3.org/2000/svg" className='me-1' width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trees-icon lucide-trees"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z" /><path d="M7 16v6" /><path d="M13 19v3" /><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5" /></svg>,
+            title: "Offset Carbon Emissions",
+            desc: "Your contribution will find Greenfleet Carbon Offset reforestation projects around the world",
+            price: "4.00",
+            value: 0,
+            type: "multiple",
+        },
+    ]
+
+    const [Plan, setPlan] = useState(0);
+    const { state, dispatch } = useCarFilter();
+    const { rentalFilters, extras } = state;
+
+
+    const setExtras = (payload) => {
         dispatch({
-            type: "SET_RENT_FILTER_VALUES",
+            type: "RENTAL_EXTRAS",
             payload,
         });
     };
@@ -27,65 +83,14 @@ const CarProtection = () => {
             payload,
         });
     };
-
-    // const extraValues = {};
-    // useEffect(() => {
-    //     setFilters({ extra: extraValues });
-    // }, [extraValues])
+    useEffect(() => {
+        setExtras(_extras)
+    }, [])
 
 
-    console.log({ extraValues });
+    console.log({ extras });
 
-    const extras = [
-        {
-            id: "1",
-            icon: <svg xmlns="http://www.w3.org/2000/svg" className='me-1' width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trees-icon lucide-trees"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z" /><path d="M7 16v6" /><path d="M13 19v3" /><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5" /></svg>,
-            title: "Offset Carbon Emissions",
-            desc: "Your contribution will find Greenfleet Carbon Offset reforestation projects around the world",
-            price: "4.00",
-            type: "single",
-        },
-        {
-            id: "2",
-            icon: <svg xmlns="http://www.w3.org/2000/svg" className='me-1' width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trees-icon lucide-trees"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z" /><path d="M7 16v6" /><path d="M13 19v3" /><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5" /></svg>,
-            title: "Offset Carbon Emissions",
-            desc: "Your contribution will find Greenfleet Carbon Offset reforestation projects around the world",
-            price: "4.00",
-            type: "multiple",
-        },
-        {
-            id: "3",
-            icon: <svg xmlns="http://www.w3.org/2000/svg" className='me-1' width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trees-icon lucide-trees"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z" /><path d="M7 16v6" /><path d="M13 19v3" /><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5" /></svg>,
-            title: "Offset Carbon Emissions",
-            desc: "Your contribution will find Greenfleet Carbon Offset reforestation projects around the world",
-            price: "4.00",
-            type: "multiple",
-        },
-        {
-            id: "4",
-            icon: <svg xmlns="http://www.w3.org/2000/svg" className='me-1' width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trees-icon lucide-trees"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z" /><path d="M7 16v6" /><path d="M13 19v3" /><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5" /></svg>,
-            title: "Offset Carbon Emissions",
-            desc: "Your contribution will find Greenfleet Carbon Offset reforestation projects around the world",
-            price: "4.00",
-            type: "multiple",
-        },
-        {
-            id: "5",
-            icon: <svg xmlns="http://www.w3.org/2000/svg" className='me-1' width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trees-icon lucide-trees"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z" /><path d="M7 16v6" /><path d="M13 19v3" /><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5" /></svg>,
-            title: "Offset Carbon Emissions",
-            desc: "Your contribution will find Greenfleet Carbon Offset reforestation projects around the world",
-            price: "4.00",
-            type: "multiple",
-        },
-        {
-            id: "6",
-            icon: <svg xmlns="http://www.w3.org/2000/svg" className='me-1' width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trees-icon lucide-trees"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z" /><path d="M7 16v6" /><path d="M13 19v3" /><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5" /></svg>,
-            title: "Offset Carbon Emissions",
-            desc: "Your contribution will find Greenfleet Carbon Offset reforestation projects around the world",
-            price: "4.00",
-            type: "multiple",
-        },
-    ]
+
     return (
         <div className='p-3'>
             <h2 className='mb-4'>
@@ -119,19 +124,11 @@ const CarProtection = () => {
                                                 <s>{plan.crossPrice}</s>
                                             </h4>
                                         </div>
-                                        {/* <div className="title-price flex-three">
-                                        <h2>$</h2>
-                                        <div className="price fw-6 font text-color-2">
-                                            {isYearly
-                                                ? Math.round((plan.price / 100) * 90 * 12)
-                                                : plan.price}
-                                        </div>
-                                    </div> */}
 
                                         <div>
                                             <h3 className="sub-title mb-1">{plan?.title2}</h3>
                                             <h4 className="text-sub lh-16 fs-16">
-                                                {plan.price ? `Total ${plan.price}` : null}
+                                                {plan.price ? `Total $${plan.price}` : null}
                                             </h4>
                                         </div>
                                     </div>
@@ -150,7 +147,7 @@ const CarProtection = () => {
                                     </ul>
                                     <div className="button-pricing"
                                         onClick={() => { setPlans(index); setPlans({ plan: plan.title, plan_amount: plan.price }) }}>
-                                        <a className={`sc-button ${Plan == index ? "btn-2" : "btn-1"} w-100`} href="javascript:void(0)">
+                                        <a className={`sc-button ${rentalFilters?.plan == plan.title ? "btn-2" : "btn-1"} w-100`} href="javascript:void(0)">
                                             <span>{Plan == index ? "Selected" : "Select Plan"}</span>
                                         </a>
                                     </div>
@@ -169,9 +166,8 @@ const CarProtection = () => {
                 {extras.map((item, index) =>
                     <Extra
                         item={item}
-                        extraValues={rentalFilters?.extra || []}
-                        setextraValues={setFilters}
-                        index={index}
+                        extras={extras}
+                        setExtras={setExtras}
                     />)}
             </div>
         </div>
@@ -181,11 +177,10 @@ const CarProtection = () => {
 export default CarProtection
 
 
-const Extra = ({ item, extraValues, setextraValues, index }) => {
-    let [Increment, setIncrement] = useState(0);
+const Extra = ({ item, extras, setExtras }) => {
 
     return (
-        <div className="col-md-6 p-2">
+        <div className="col-md-6 p-2" key={item.id}>
             <div className="widget-listing h-100">
                 <div className="profile-contact d-flex flex-column gap-2">
                     {/* <div>
@@ -201,39 +196,49 @@ const Extra = ({ item, extraValues, setextraValues, index }) => {
                     </p>
 
                     <div className="fs-26 fw-5 text-color-2 font mt-3">
-                        {/* ${car.price?.toLocaleString()} */}
                         ${item.price}
                         <span className="fw-3">{" / "} Total</span>
                     </div>
                     <div className="fs-13 fw-5 mb-2 lh-25 text-color-2 me-2">
-                        Total: ${Increment * item.price}.00
+                        Total: ${item.value * item.price}.00
                     </div>
 
                     {item?.type === "single" ?
                         <div className="btn-contact">
-                            <Link
-                                href={"javascript:void(0)"}
-                                onClick={() => {
-                                    extraValues[index] = 1;
-                                    setextraValues([...extraValues]);
-                                    setIncrement(1)
-                                }}
-                                className="btn-pf bg-green mt-3"
-                            >
-                                <span className="fs-16 fw-5 lh-20 font text-color-1  mt-1">
-                                    Select
-                                </span>
-                            </Link>
+                            {item.value == 1 ?
+                                <Link
+                                    href={"javascript:void(0)"}
+                                    onClick={() => {
+                                        const modifiedExtras = extras.map(ele => ele.id == item.id ? { ...item, value: 0 } : ele)
+                                        setExtras(modifiedExtras)
+                                    }}
+                                    className="btn-pf bg-green mt-3"
+                                >
+                                    <span className="fs-16 fw-5 lh-20 font text-color-1  mt-1">
+                                        Un Select
+                                    </span>
+                                </Link>
+                                :
+                                <Link
+                                    href={"javascript:void(0)"}
+                                    onClick={() => {
+                                        const modifiedExtras = extras.map(ele => ele.id == item.id ? { ...item, value: 1 } : ele)
+                                        setExtras(modifiedExtras)
+                                    }}
+                                    className="btn-pf bg-green mt-3"
+                                >
+                                    <span className="fs-16 fw-5 lh-20 font text-color-1  mt-1">
+                                        Select
+                                    </span>
+                                </Link>}
                         </div>
                         :
                         <div className="btn-contact flex align-items-center">
                             <Link
                                 href={"javascript:void(0)"}
                                 onClick={() => {
-                                    const exp = Increment == 0 ? 0 : Increment - 1;
-                                    extraValues[index] = exp;
-                                    setextraValues([...extraValues]);
-                                    setIncrement(exp)
+                                    const modifiedExtras = extras.map(ele => (ele.id == item.id && item.value != 0) ? { ...item, value: item.value - 1 } : ele)
+                                    setExtras(modifiedExtras)
                                 }}
                                 className="btn-pf bg-green mt-3"
                             >
@@ -241,13 +246,12 @@ const Extra = ({ item, extraValues, setextraValues, index }) => {
                                     -
                                 </span>
                             </Link>
-                            <h3 className='relative center' style={{ top: 10, minWidth: 20 }}>{Increment}</h3>
+                            <h3 className='relative center' style={{ top: 10, minWidth: 20 }}>{item.value}</h3>
                             <Link
                                 href={"javascript:void(0)"}
                                 onClick={() => {
-                                    extraValues[index] = Increment + 1;
-                                    setextraValues([...extraValues]);
-                                    setIncrement(Increment + 1)
+                                    const modifiedExtras = extras.map(ele => ele.id == item.id ? { ...item, value: item.value + 1 } : ele)
+                                    setExtras(modifiedExtras)
                                 }}
                                 className="btn-pf bg-orange mt-3"
                             >

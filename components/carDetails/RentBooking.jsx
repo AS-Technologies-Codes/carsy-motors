@@ -15,8 +15,8 @@ export default function RentBooking() {
   const [showMessage, setShowMessage] = useState(false);
   const [saving, setSaving] = useState(false);
   const router = useRouter();
-  // const { state, dispatch } = useCarFilter();
-  // const { rentalFilters } = state;
+  const { state, dispatch } = useCarFilter();
+  const { extras, rentalFilters } = state;
   const filtersData = getFiltersData();
   console.log(filtersData);
 
@@ -82,14 +82,14 @@ export default function RentBooking() {
       end_date: `${filtersData.ReturnDate}-${filtersData.ReturnTime}`,
       start_date: `${filtersData.pickUpDate}-${filtersData.pickUpTime}`,
       plan: filtersData.plan,
-      plan_amount: filtersData.plan_amount.replace("$", ""),
+      plan_amount: filtersData.plan_amount,
       pickup_location: filtersData.YardLocation,
       return_location: filtersData.YardLocation,
-      // extra: {},
+      extra: extras.filter(extra => extra.value).length ? JSON.stringify(extras.filter(extra => extra.value)?.map(extra => ({ id: extra.id, value: extra.value }))) : "",
       type: filtersData.car_type,
       rental_type: filtersData.rent_type,
       total_amount: formData.amount,
-      payment_type: filtersData.short_term_rate,
+      payment_type: rentalFilters?.payment_type,
       booking_date: new Date().toISOString(),
     }
     console.log({ body });
@@ -98,17 +98,16 @@ export default function RentBooking() {
       await saveBooking(body);
       setSuccess(true);
       handleShowMessage();
-      setFormData({
-        // car_id: Number(id),
-        customer_name: "",
-        customer_email: "",
-        customer_phone: "",
-        dob: new Date().toISOString().slice(0, 10),
-        rental_type: "short",
-        amount: "",
-      });
-      window.localStorage.removeItem("filters");
-      router.push(`/rentals/${body.rental_type}`)
+      // setFormData({
+      //   customer_name: "",
+      //   customer_email: "",
+      //   customer_phone: "",
+      //   dob: new Date().toISOString().slice(0, 10),
+      //   rental_type: "short",
+      //   amount: "",
+      // });
+      // window.localStorage.removeItem("filters");
+      // router.push(`/rentals/${body.rental_type}`)
     } catch (error) {
       console.log({ error });
       setSuccess(false);
@@ -216,99 +215,6 @@ export default function RentBooking() {
                       </fieldset>
                     </div>
 
-
-
-                    <div className="col-12 rental-type-booking">
-                      <fieldset className="phone-wrap style-text">
-                        <label className="font-1 fs-14 fw-5">
-                          Rental Type*
-                        </label>
-                        <div className="d-flex gap-2">
-                          <div
-                            onClick={() =>
-                              setFormData((prev) => ({
-                                ...prev,
-                                rental_type: "short_term",
-                              }))
-                            }
-                            className={`booking-option d-flex align-items-center p-3 py-2 mx-1 justify-content-center border-color-gray text-color-3 border-half rounded-4 ${formData.rental_type === "short_term" ? "active" : ""
-                              }`}
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              width={45}
-                              strokeWidth={1}
-                              fill="white"
-                              stroke="#fd5a21"
-                              className="size-3"
-                            >
-                              <path d="M8 2v4" />
-                              <path d="M16 2v4" />
-                              <rect width="18" height="18" x="3" y="4" rx="2" />
-                              <path d="M3 10h18" />
-                              <path d="M8 14h.01" />
-                              <path d="M12 14h.01" />
-                              <path d="M16 14h.01" />
-                              <path d="M8 18h.01" />
-                              <path d="M12 18h.01" />
-                              <path d="M16 18h.01" />
-                            </svg>{" "}
-                            <h6 className="text-color-2 fw-bold fs-14 ps-1">
-                              Short-term <br /> rentals{" "}
-                            </h6>
-                          </div>
-                          <div
-                            onClick={() =>
-                              setFormData((prev) => ({
-                                ...prev,
-                                rental_type: "long_term",
-                              }))
-                            }
-                            className={`booking-option d-flex align-items-center p-3 py-2 mx-1 justify-content-center border-color-gray text-color-3 border-half rounded-4 ${formData.rental_type === "long_term" ? "active" : ""
-                              }`}
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              width={45}
-                              strokeWidth={1}
-                              fill="white"
-                              stroke="#fd5a21"
-                              className="size-3"
-                            >
-                              <rect width="18" height="18" x="3" y="4" rx="2" />
-                              <path d="M16 2v4" />
-                              <path d="M3 10h18" />
-                              <path d="M8 2v4" />
-                              <path d="M17 14h-6" />
-                              <path d="M13 18H7" />
-                              <path d="M7 14h.01" />
-                              <path d="M17 18h.01" />
-                            </svg>
-                            <h6 className="text-color-2 fw-bold fs-14 ps-1">
-                              Long-term <br /> rentals
-                            </h6>
-                          </div>
-                        </div>
-                      </fieldset>
-                    </div>
-
-                    <div className="col-12">
-                      <fieldset className="phone-wrap style-text">
-                        <label className="font-1 fs-14 fw-5">Amount</label>
-                        <input
-                          type="number"
-                          disabled
-                          className="tb-my-input"
-                          name="amount"
-                          placeholder="Enter Amount"
-                          value={formData.amount}
-                          onChange={handleChange}
-                          required
-                        />
-                      </fieldset>
-                    </div>
                     <div className="listing-line">
                     </div>
                     <div className="col-12">
@@ -331,7 +237,7 @@ export default function RentBooking() {
                       Refundable deposit: An additional A$ 300 security desposit will be blocked on your card at the pickup counter and released within a few days of the vehicle's return.
                     </p>
 
-                    <div className="form-group mt-3">
+                    {/* <div className="form-group mt-3">
                       <div>
                         <label className="flex-three align-items-start">
                           <input
@@ -361,7 +267,7 @@ export default function RentBooking() {
                           </span>
                         </label>
                       </div>
-                    </div>
+                    </div> */}
 
                   </div>
 
@@ -378,9 +284,10 @@ export default function RentBooking() {
                     )}
                   </div>
 
-                  <div className="button-boxs mt-3">
+                  <div className="button-boxs mt-3 invisible">
                     <button
                       className="sc-button"
+                      id="book-now-btn"
                       name="submit"
                       type="submit"
                       disabled={saving}

@@ -23,13 +23,13 @@ export default function CarSells() {
   const searchParams = useSearchParams() || "";
   const [ComingSoon, setComingSoon] = useState(false);
 
-  useEffect(() => {
-    if (window.location.origin.includes("carsymotors")) {
-      setTimeout(() => {
-        setComingSoon(true);
-      }, 2000);
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (window.location.origin.includes("carsymotors")) {
+  //     setTimeout(() => {
+  //       setComingSoon(true);
+  //     }, 2000);
+  //   }
+  // }, [])
 
   const {
     price,

@@ -4,11 +4,9 @@ import Header2 from "@/components/headers/Header2";
 import React from "react";
 import Link from "next/link";
 import { allBlogs } from "@/data/blogs";
-export const metadata = {
-  title:
-    "Blog Details || AutoDeal - Car Dealer, Rental & Listing React Nextjs Template",
-  description: "AutoDeal - Car Dealer, Rental & Listing React Nextjs Template",
-};
+import { Metadata } from "@/utils/metadata";
+export const metadata = Metadata("Blogs details");
+
 export default function page({ params }) {
   const blogItem =
     allBlogs.filter((elm) => elm.id == params.id)[0] || allBlogs[0];

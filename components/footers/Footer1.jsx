@@ -1,11 +1,12 @@
 "use client";
-import React, {useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { footerData } from "@/data/footerLinks";
 import { saveEmail } from "@/utils/APIs";
 import toast from "react-hot-toast";
 export default function Footer1() {
+
   const emailRef = useRef();
   const [success, setSuccess] = useState(true);
   const [showMessage, setShowMessage] = useState(false);
@@ -26,7 +27,7 @@ export default function Footer1() {
       await saveEmail(emailRef.current.value);
       setSuccess(true);
       handleShowMessage();
-      emailRef.current.reset();
+      emailRef.current.value === "";
     } catch (error) {
       toast.error(error);
     } finally {
@@ -34,31 +35,10 @@ export default function Footer1() {
     }
   };
 
-  // const sendMail = (e) => {
-  //   e.preventDefault();
-  //   emailjs
-  //     .sendForm("service_noj8796", "template_fs3xchn", formRef.current, {
-  //       publicKey: "iG4SCmR-YtJagQ4gV",
-  //     })
-  //     .then((res) => {
-  //       if (res.status === 200) {
-  //         setSuccess(true);
-  //         handleShowMessage();
-
-  //         formRef.current.reset();
-  //       } else {
-  //         setSuccess(false);
-  //         handleShowMessage();
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
   return (
     <footer id="footer" className="clearfix home">
       <div className="container">
-      
+
         <div className="footer-main">
           <div className="row">
             {footerData.map((column, index) => (
@@ -90,9 +70,8 @@ export default function Footer1() {
                 </div>
                 <div className="tf-collapse-content">
                   <div
-                    className={`tfSubscribeMsg  footer-sub-element ${
-                      showMessage ? "active" : ""
-                    }`}
+                    className={`tfSubscribeMsg  footer-sub-element ${showMessage ? "active" : ""
+                      }`}
                   >
                     {success ? (
                       <p style={{ color: "rgb(52, 168, 83)" }}>

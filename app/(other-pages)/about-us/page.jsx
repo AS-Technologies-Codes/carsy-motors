@@ -9,12 +9,10 @@ import Banner from "@/components/otherPages/about/Banner";
 
 import React from "react";
 import Link from "next/link";
+import { Metadata } from "@/utils/metadata";
 
-export const metadata = {
-  title:
-    "About Us || AutoDeal - Car Dealer, Rental & Listing React Nextjs Template",
-  description: "AutoDeal - Car Dealer, Rental & Listing React Nextjs Template",
-};
+export const metadata = Metadata("About us");
+
 export default function page() {
   return (
     <>

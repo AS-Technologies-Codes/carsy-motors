@@ -6,11 +6,10 @@ import React, { Suspense } from "react";
 import Link from "next/link";
 import CarSells from "@/components/carsListings/CarSells";
 import { CarFilterProvider } from "@/context/providers/CarFilterContext";
-export const metadata = {
-  title:
-    "Car Listing List || AutoDeal - Car Dealer, Rental & Listing React Nextjs Template",
-  description: "AutoDeal - Car Dealer, Rental & Listing React Nextjs Template",
-};
+import { Metadata } from "@/utils/metadata";
+
+export const metadata = Metadata("Buy Cars");
+
 export default function page() {
   return (
     <CarFilterProvider>

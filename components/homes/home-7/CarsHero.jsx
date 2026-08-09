@@ -24,9 +24,9 @@ export default function CarsHero() {
   const slides4 = [
     {
       imgSrc: "/assets/images/slider/slide7.jpg",
-      title: "Life's Too Short for a Dodgy Deal",
+      title: "Explore Our Vehicle Inventory",
       label: `WELCOME TO CARSY MOTORS`,
-      description: `We help everyday Queenslanders buy smarter, sell faster, and hire without blowing the budget — right here in Brissie.`,
+      description: `Browse a wide range of quality vehicles from trusted brands. Find the perfect car that fits your needs and budget.`,
       reserveLink: "#",
       specifications: [
         {

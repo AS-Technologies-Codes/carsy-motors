@@ -3,11 +3,9 @@ import Footer1 from "@/components/footers/Footer1";
 import Header2 from "@/components/headers/Header2";
 import React from "react";
 import Link from "next/link";
-export const metadata = {
-  title:
-    "Blog || AutoDeal - Car Dealer, Rental & Listing React Nextjs Template",
-  description: "AutoDeal - Car Dealer, Rental & Listing React Nextjs Template",
-};
+import { Metadata } from "@/utils/metadata";
+export const metadata = Metadata("Blogs");
+
 export default function page() {
   return (
     <>

@@ -3,11 +3,9 @@ import Header2 from "@/components/headers/Header1";
 import Contact from "@/components/otherPages/Contact";
 import React from "react";
 import Link from "next/link";
-export const metadata = {
-  title:
-    "Contact || AutoDeal - Car Dealer, Rental & Listing React Nextjs Template",
-  description: "AutoDeal - Car Dealer, Rental & Listing React Nextjs Template",
-};
+import { Metadata } from "@/utils/metadata";
+export const metadata = Metadata("Contact us");
+
 export default function page() {
   return (
     <>

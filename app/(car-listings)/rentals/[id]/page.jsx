@@ -9,11 +9,10 @@ import CarSells from "@/components/carsListings/CarSells";
 import { CarFilterProvider } from "@/context/providers/CarFilterContext";
 import CarRent from "@/components/carsListings/CarRent";
 import FlatFilterRentals from "@/components/common/FlatFilterRentals";
-export const metadata = {
-  title:
-    "Car Listing List || AutoDeal - Car Dealer, Rental & Listing React Nextjs Template",
-  description: "AutoDeal - Car Dealer, Rental & Listing React Nextjs Template",
-};
+import { Metadata } from "@/utils/metadata";
+
+export const metadata = Metadata("Car Rent");
+
 export default function page() {
   return (
     <CarFilterProvider>

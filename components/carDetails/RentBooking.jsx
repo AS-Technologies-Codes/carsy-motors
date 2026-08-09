@@ -89,6 +89,7 @@ export default function RentBooking() {
       type: filtersData.car_type,
       rental_type: filtersData.rent_type,
       total_amount: formData.amount,
+      program: formData?.program,
       payment_type: rentalFilters?.payment_type,
       booking_date: new Date().toISOString(),
     }
@@ -227,6 +228,8 @@ export default function RentBooking() {
                           onChange={handleChange}
                         >
                           <option>Select Option</option>
+                          <option name="yes">Yes</option>
+                          <option name="no">Np</option>
                         </select>
                       </fieldset>
                     </div>

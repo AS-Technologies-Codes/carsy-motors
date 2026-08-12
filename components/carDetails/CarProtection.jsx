@@ -1,7 +1,8 @@
 "use client";
 import { useCarFilter } from '@/context/providers/CarFilterContext';
 // import { setFiltersData } from '@/context/reducer/carFilterReducer';
-import { pricingPlans } from '@/data/pricing'
+// import { pricingPlans } from '@/data/pricing'
+import { getPlansAndExtrasListingApi } from '@/utils/APIs';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
@@ -65,6 +66,8 @@ const CarProtection = () => {
     ]
 
     const [Plan, setPlan] = useState(0);
+    const [PlansAndExtrasLoading, setPlansAndExtrasLoading] = useState(true);
+    const [pricingPlans, setpricingPlans] = useState([]);
     const { state, dispatch } = useCarFilter();
     const { rentalFilters, extras } = state;
 
@@ -83,12 +86,31 @@ const CarProtection = () => {
             payload,
         });
     };
+
+
+    const fetchPlansAndExtras = async () => {
+        try {
+            setPlansAndExtrasLoading(true);
+            const { getPlansResponse, getExtrasResponse } = await getPlansAndExtrasListingApi();
+            setpricingPlans(getPlansResponse);
+            setExtras(getExtrasResponse);
+        } catch (error) {
+            console.log(error);
+            // toast.error(error);
+        } finally {
+            setPlansAndExtrasLoading(false);
+        }
+    };
+
     useEffect(() => {
-        setExtras(_extras)
-    }, [])
+        fetchPlansAndExtras();
+    }, []);
 
-
-    console.log({ extras });
+    if (PlansAndExtrasLoading) {
+        return <div className="center my-5">
+            <span className="loader"></span>
+        </div>
+    }
 
 
     return (
@@ -107,33 +129,33 @@ const CarProtection = () => {
                         {pricingPlans.map((plan, index) => (
                             <div className="col-lg-4 col-md-6 " key={index}>
                                 <div className="widget-pricing">
-                                    {plan.badge && (
+                                    {plan?.badge && (
                                         <div className="badge-table">
-                                            <span>{plan.badge}</span>
+                                            <span>{plan?.badge}</span>
                                         </div>
                                     )}
                                     <div className="flex flex-column justify-content-between mb-2" style={{ minHeight: 180 }}>
                                         <div className="pricing-heading">
-                                            <h2 className="sub-title d-flex align-items-center">{plan.title}
-                                                <div className='fs-6'>{plan.stars}</div>
+                                            <h2 className="sub-title d-flex align-items-center">{plan?.title}
+                                                <div className='fs-6'>{plan?.stars}</div>
                                             </h2>
                                             <p className="text-sub lh-16 fs-12">
-                                                {plan.description}
+                                                {plan?.description}
                                             </p>
                                             <h4 className="text-sub lh-16 fw-bold fs-16 text-color-3">
-                                                <s>{plan.crossPrice}</s>
+                                                <s>{plan?.crossPrice}</s>
                                             </h4>
                                         </div>
 
                                         <div>
                                             <h3 className="sub-title mb-1">{plan?.title2}</h3>
                                             <h4 className="text-sub lh-16 fs-16">
-                                                {plan.price ? `Total $${plan.price}` : null}
+                                                {plan?.price ? `Total $${plan?.price}` : null}
                                             </h4>
                                         </div>
                                     </div>
                                     <ul className="check">
-                                        {plan.features.map((feature, i) => (
+                                        {plan?.features.map((feature, i) => (
                                             <li
                                                 key={i}
                                                 className={`flex-three ${feature.disabled
@@ -146,9 +168,9 @@ const CarProtection = () => {
                                         ))}
                                     </ul>
                                     <div className="button-pricing"
-                                        onClick={() => { setPlans(index); setPlans({ plan: plan.title, plan_amount: plan.price }) }}>
-                                        <a className={`sc-button ${rentalFilters?.plan == plan.title ? "btn-2" : "btn-1"} w-100`} href="javascript:void(0)">
-                                            <span>{Plan == index ? "Selected" : "Select Plan"}</span>
+                                        onClick={() => { setPlans(index); setPlans({ plan: plan?.title, plan_amount: plan?.price }) }}>
+                                        <a className={`sc-button ${rentalFilters?.plan == plan?.title ? "btn-2" : "btn-1"} w-100`} href="javascript:void(0)">
+                                            <span>{rentalFilters?.plan == plan?.title ? "Selected" : "Select Plan"}</span>
                                         </a>
                                     </div>
                                 </div>

@@ -165,6 +165,52 @@ export const getFleetListingApi = async () => {
   });
 };
 
+export const getPlansAndExtrasListingApi = async () => {
+  try {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: accessToken,
+    };
+
+    const [plansResponse, extrasResponse] = await Promise.all([
+      fetch(URL.getPlans, {
+        method: "GET",
+        headers,
+      }),
+      fetch(URL.getExtras, {
+        method: "GET",
+        headers,
+      }),
+    ]);
+
+    const [plansData, extrasData] = await Promise.all([
+      plansResponse.json(),
+      extrasResponse.json(),
+    ]);
+
+    // Check plans response
+    if (!plansData?.status || plansData.status === "error") {
+      throw new Error(plansData?.message || "Failed to fetch plans listing");
+    }
+
+    // Check extras response
+    if (!extrasData?.status || extrasData.status === "error") {
+      throw new Error(extrasData?.message || "Failed to fetch extras listing");
+    }
+
+    return {
+      getPlansResponse: plansData?.data,
+      getExtrasResponse: extrasData?.data,
+    };
+  } catch (error) {
+    console.error("getPlansAndExtrasListingApi:", error);
+
+    throw new Error(
+      error?.message || "Failed to fetch plans and extras listing",
+    );
+  }
+};
+
 export const saveEmail = async (email) => {
   return new Promise(async (resolve, reject) => {
     try {

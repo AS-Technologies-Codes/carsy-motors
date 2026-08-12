@@ -10,6 +10,8 @@ const URL = {
   getCarsDetails: baseUrl + "get_car_details",
   getRecommended: baseUrl + "get_recommended_cars&recommendation_type=",
   getWhyUs: baseUrl + "get_why_us",
+  getExtras: baseUrl + "get_extra_plans",
+  getPlans: baseUrl + "get_plans",
   getNearby: baseUrl + "get_nearby_locations",
   getFleet: baseUrl + "get_cars&car_type=fleet",
   saveNewsLetter: baseUrl + "save_newsletter",

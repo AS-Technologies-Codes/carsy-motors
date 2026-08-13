@@ -31,7 +31,7 @@ export default function Header1({ bg = "style2" }) {
 
 
   useEffect(() => {
-    if (window.location.origin.includes("carsymotors")) {
+    if (window.location.origin.includes("carsymotors") && !window.localStorage.getItem("comingSoon")) {
       setTimeout(() => {
         setComingSoon(true);
       }, 2000);

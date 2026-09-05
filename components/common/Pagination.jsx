@@ -5,7 +5,7 @@ import React, { useState } from "react";
 export default function Pagination({
   itemLength = 200,
   itemPerPage = 10,
-  setPage = (num) => {},
+  setPage = (num) => { },
   currentPage,
 }) {
   const totalPages = Math.ceil(itemLength / itemPerPage); // Adjust as needed
@@ -23,7 +23,7 @@ export default function Pagination({
         <React.Fragment>
           {" "}
           <li onClick={() => handlePageClick(currentPage - 1)}>
-            <a className={`page-numbers style`}>
+            <a href="#section3" className={`page-numbers style`}>
               <i className="far fa-angle-left" />
             </a>
           </li>
@@ -32,9 +32,9 @@ export default function Pagination({
             return (
               <li key={page}>
                 <a
-                  className={`page-numbers ${
-                    currentPage === page ? "current" : ""
-                  }`}
+                href="#section3"
+                  className={`page-numbers ${currentPage === page ? "current" : ""
+                    }`}
                   onClick={() => handlePageClick(page)}
                 >
                   {page}
@@ -44,16 +44,20 @@ export default function Pagination({
           })}
           {currentPage >= 5 && (
             <li>
-              <a className={`page-numbers current`}>{currentPage}</a>
+              <a href="#section3" className={`page-numbers current`}>
+                {currentPage}
+              </a>
             </li>
           )}
           {totalPages >= 5 && currentPage != totalPages && (
             <li>
-              <a className={`page-numbers dot`}>...</a>
+              <a href="#section3" className={`page-numbers dot`}>
+                ...
+              </a>
             </li>
           )}
           <li onClick={() => handlePageClick(currentPage + 1)}>
-            <a className={`page-numbers style`}>
+            <a href="#section3" className={`page-numbers style`}>
               <i className="far fa-angle-right" />
             </a>
           </li>{" "}

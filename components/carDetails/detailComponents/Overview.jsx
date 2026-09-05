@@ -72,14 +72,14 @@ export default function Overview({ car }) {
                   Fuel Type {car?.fuel_capacity ? "/ Capacity" : ""}:
                 </span>
                 <p className="listing-info-value">
-                  {car?.fuelType}{" "}
-                  {car?.fuel_capacity ? "/ " + car?.fuel_capacity : ""}
+                  {car?.fuelType}
+                  {car?.fuel_capacity ? ", " + car?.fuel_capacity : ""}
                 </p>
               </div>
             </div>
           </div>
         ) : null}
-        {car?.vin ? (
+        {/* {car?.vin ? (
           <div className="col-xl-6 col-md-6 item">
             <div className="inner listing-infor-box">
               <div className="icon">
@@ -102,7 +102,7 @@ export default function Overview({ car }) {
               </div>
             </div>
           </div>
-        ) : null}
+        ) : null} */}
         {car?.door ? (
           <div className="col-xl-6 col-md-6 item">
             <div className="inner listing-infor-box">
@@ -341,7 +341,7 @@ export default function Overview({ car }) {
                   Drive Type {car?.economy ? "/ Economy" : ""}:
                 </span>
                 <p className="listing-info-value">
-                  {car?.drive_type} {car?.economy ? "/ " + car?.economy : ""}
+                  {car?.drive_type}{car?.economy ? ", " + car?.economy : ""}
                 </p>
               </div>
             </div>

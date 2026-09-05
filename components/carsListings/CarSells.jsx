@@ -50,7 +50,6 @@ export default function CarSells() {
     sortingOption,
     evsOnly,
     sorted,
-    currentPage,
     itemPerPage,
     filterOptions,
     seat,
@@ -85,8 +84,6 @@ export default function CarSells() {
     },
     setSortingOption: (value) =>
       dispatch({ type: "SET_SORTING_OPTION", payload: value }),
-    setCurrentPage: (value) =>
-      dispatch({ type: "SET_CURRENT_PAGE", payload: value }),
     setItemPerPage: (value) => {
       (dispatch({ type: "SET_CURRENT_PAGE", payload: 1 }),
         dispatch({ type: "SET_ITEM_PER_PAGE", payload: value }));
@@ -117,10 +114,8 @@ export default function CarSells() {
   const fecthGetCars = async () => {
     setCarsLoading(true);
 
-    console.log({ currentPage });
-
     const allParams = {
-      page: currentPage,
+      page: PaginationKeys?.page || 1,
       ...(!price?.includes("Any") ? priceFilter(price) : {}),
       ...(km[0] ? { kmMin: km[0] } : {}),
       ...(km[1] > 100000 ? {} : { kmMax: km[1] }),
@@ -164,7 +159,6 @@ export default function CarSells() {
         : { ...item, favorite: "none" },
     );
     allProps.setData(filteredData);
-    allProps.setCurrentPage(pagination.page);
     allProps.setItemPerPage(pagination.limit);
     setPaginationKeys(pagination);
     setCarsLoading(false);
@@ -190,7 +184,7 @@ export default function CarSells() {
     drive_type,
     featureOptions,
     searchParams,
-    currentPage
+    PaginationKeys?.page || 1,
   ]);
 
   const clearFilter = () => {
@@ -212,7 +206,6 @@ export default function CarSells() {
     } else {
       dispatch({ type: "SET_SORTED", payload: filtered });
     }
-    dispatch({ type: "SET_CURRENT_PAGE", payload: 1 });
   }, [filtered, sortingOption]);
 
   const handleWhatsApp = (carItem) => {
@@ -791,9 +784,9 @@ export default function CarSells() {
                         <div className="themesflat-pagination clearfix mt-40">
                           <ul>
                             <Pagination
-                              currentPage={PaginationKeys.page}
+                              currentPage={PaginationKeys?.page || 1}
                               setPage={(value) =>
-                                allProps.setCurrentPage(value)
+                                setPaginationKeys((prev) => ({ ...prev, page: value }))
                               }
                               itemLength={PaginationKeys.total}
                               itemPerPage={itemPerPage}

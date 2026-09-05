@@ -276,7 +276,7 @@ export default function Hero() {
                                 />
                               </svg>
                             </div>
-                            <div className="font text-color-1">{elm?.price?.toLocaleString()}</div>
+                            <div className="font text-color-1">${elm?.price?.toLocaleString()}</div>
                           </li>
                           <li className="flex-three mb-1">
                             <div className="icon">
@@ -300,7 +300,7 @@ export default function Hero() {
                                 <path d="M6 18v-7" />
                               </svg>
                             </div>
-                            <div className="font text-color-1">{(elm?.price / 10000 * 39).toFixed(1)}</div>
+                            <div className="font text-color-1">${(elm?.price / 10000 * 39).toFixed(1)} / week</div>
                           </li>
                         </ul>
                       }

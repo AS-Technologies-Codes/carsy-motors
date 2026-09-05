@@ -13015,15 +13015,19 @@ transform: scale(.2) !important;
 
 .carousel.carousel-slider .control-arrow {
   top: 50% !important;
-  height: 50px;
+  height: 30px;
   margin: 0px 10px !important;
-  width: 50px;
-  border-radius: 12px;
+  width: 30px;
+  border-radius: 8px;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
+.carousel.carousel-slider .control-arrow:before {
+  height: 8px;
+}
+
 .carousel.carousel-slider .control-arrow:hover {
-  background-color: red !important;
+  background-color: rgba(46, 45, 45, 0.5) !important;
   opacity: 1 !important;
 }
 

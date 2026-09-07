@@ -6,15 +6,15 @@ import Image from "next/image";
 import MobileNav from "./MobileNav";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import ComingSoon1 from "../../public/assets/images/car-list/buy-coming-soon.png"
-import ComingSoon2 from "../../public/assets/images/car-list/coming-soon-mobile.png"
+// import ComingSoon1 from "../../public/assets/images/car-list/buy-coming-soon.png"
+// import ComingSoon2 from "../../public/assets/images/car-list/coming-soon-mobile.png"
 
 export default function Header1({ bg = "style2" }) {
   const router = useRouter();
   const ref = useRef();
   const pathname = usePathname();
   // const searchParams = useSearchParams() || '';
-  const [ComingSoon, setComingSoon] = useState(false);
+  // const [ComingSoon, setComingSoon] = useState(false);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -30,13 +30,13 @@ export default function Header1({ bg = "style2" }) {
   // }, [])
 
 
-  useEffect(() => {
-    if (window.location.origin.includes("carsymotors") && !window.localStorage.getItem("comingSoon")) {
-      setTimeout(() => {
-        setComingSoon(true);
-      }, 2000);
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (window.location.origin.includes("carsymotors") && !window.localStorage.getItem("comingSoon")) {
+  //     setTimeout(() => {
+  //       setComingSoon(true);
+  //     }, 2000);
+  //   }
+  // }, [])
 
   const onSearch = (e) => {
     e.preventDefault();
@@ -56,12 +56,12 @@ export default function Header1({ bg = "style2" }) {
 
   return (
     <>
-      {
+      {/* {
         ComingSoon && <div className="blur position-fixed w-100 top-0 left-0 d-flex justify-content-center align-items-center" style={{ zIndex: 999, height: '100vh' }}>
           <Image src={ComingSoon1} className="w-75 d-none d-md-block border border-5 border-primary" objectFit="cover" />
           <Image src={ComingSoon2} className="w-75 d-md-none border border-5 border-primary" objectFit="cover" />
         </div>
-      }
+      } */}
       <header className={"main-header " + bg}>
         {/* Header Lower */}
         <div className="header-lower">

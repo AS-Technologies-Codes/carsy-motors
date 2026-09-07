@@ -195,7 +195,7 @@ export const initialState = {
   sortingOption: "Sort by (Default)",
   sorted: allCars,
   currentPage: 1,
-  itemPerPage: 20,
+  itemPerPage: 21,
   filterOptions: {},
   countMake: "Any Make",
   countModel: "Any Model",

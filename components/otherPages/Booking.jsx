@@ -11,6 +11,7 @@ export default function Booking() {
   const [success, setSuccess] = useState(true);
   const [showMessage, setShowMessage] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     car_id: id ? Number(id) : "",
@@ -20,8 +21,8 @@ export default function Booking() {
     booking_date: new Date().toISOString().slice(0, 10),
     start_date: new Date().toISOString().slice(0, 10),
     end_date: new Date().toISOString().slice(0, 10),
-    rental_type: "short_term",
-    amount: "",
+    car_type: "used",
+    // amount: "",
     notes: "",
   });
 
@@ -50,9 +51,8 @@ export default function Booking() {
       !formData.customer_phone ||
       !formData.booking_date ||
       !formData.start_date ||
-      !formData.end_date ||
-      !formData.rental_type ||
-      !formData.amount
+      !formData.end_date
+      // !formData.amount
     ) {
       toast.error("Please fill in all required booking fields");
       return;
@@ -65,7 +65,7 @@ export default function Booking() {
 
     setSaving(true);
     try {
-      await saveBooking(formData);
+      const bookingRes = await saveBooking(formData);
       setSuccess(true);
       handleShowMessage();
       setFormData({
@@ -76,18 +76,48 @@ export default function Booking() {
         booking_date: new Date().toISOString().slice(0, 10),
         start_date: new Date().toISOString().slice(0, 10),
         end_date: new Date().toISOString().slice(0, 10),
-        rental_type: "short_term",
-        amount: "",
+        car_type: "used",
+        // amount: "",
         notes: "",
       });
+      handlePayment(bookingRes.id)
     } catch (error) {
       console.error(error);
       setSuccess(false);
       handleShowMessage();
-      toast.error(error?.message || "Booking submission failed");
+      toast.error(error || "Booking submission failed");
     } finally {
       setSaving(false);
     }
+  };
+
+  const handlePayment = (id) => {
+    setLoading(true);
+
+    // Create a form
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://astechnologies.pk/saqibstripe/stripe/index.php';
+    form.target = '_blank'; // Opens in new tab
+
+    // Add hidden fields
+    const fields = {
+      booking_id: id,
+    };
+
+    Object.keys(fields).forEach(key => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = fields[key];
+      form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+
+    setLoading(false);
   };
 
   return (
@@ -97,6 +127,15 @@ export default function Booking() {
           <div className="col-md-8 contact-left">
             <div id="comments" className="comments">
               <h2 className="my-5">Booking Details</h2>
+              <div className="contact-right mb-4">
+                <div className="contact-info p-3 box-sd flex align-items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" className="text-primary" stroke="#fd5a21" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-dollar-sign"><circle cx="12" cy="12" r="10" /><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" /><path d="M12 18V6" /></svg>
+                  <div className="mx-2">
+                    <h4 className="text-primary mb-1">Booking Fee Rquired</h4>
+                    <p>Booking fee of $100 is required for the car booking request.</p>
+                  </div>
+                </div>
+              </div>
               <div className="respond-comment">
                 <form
                   ref={formRef}
@@ -166,6 +205,7 @@ export default function Booking() {
                           type="date"
                           className="tb-my-input"
                           name="booking_date"
+                          disabled
                           value={formData.booking_date}
                           onChange={handleChange}
                           required
@@ -280,7 +320,7 @@ export default function Booking() {
                       </fieldset>
                     </div> */}
 
-                    <div className="col-12">
+                    {/* <div className="col-12">
                       <fieldset className="phone-wrap style-text">
                         <label className="font-1 fs-14 fw-5">Amount*</label>
                         <input
@@ -293,7 +333,7 @@ export default function Booking() {
                           required
                         />
                       </fieldset>
-                    </div>
+                    </div> */}
 
                     <div className="col-12">
                       <fieldset className="phone-wrap style-text">
@@ -313,17 +353,14 @@ export default function Booking() {
                   </div>
 
                   <div
-                    className={`tfSubscribeMsg footer-sub-element ${
-                      showMessage ? "active" : ""
-                    }`}
+                    className={`tfSubscribeMsg footer-sub-element ${showMessage ? "active" : ""
+                      }`}
                   >
                     {success ? (
                       <p style={{ color: "rgb(52, 168, 83)" }}>
                         Booking submitted successfully
                       </p>
-                    ) : (
-                      <p style={{ color: "red" }}>Something went wrong</p>
-                    )}
+                    ) : null}
                   </div>
 
                   <div className="button-boxs mt-3">
@@ -333,7 +370,7 @@ export default function Booking() {
                       type="submit"
                       disabled={saving}
                     >
-                      <span>{saving ? "Submitting..." : "Submit"}</span>
+                      <span>{saving ? "Submitting..." : "Submit Booking & Pay"}</span>
                     </button>
                   </div>
                 </form>
@@ -364,6 +401,6 @@ export default function Booking() {
           </div>
         </div>
       </div>
-    </section>
+    </section >
   );
-}
+};

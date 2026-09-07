@@ -102,15 +102,19 @@ export default function CarInfo({ carItem }) {
   };
 
   const handleWhatsApp = () => {
-    if (typeof window !== "undefined") {
-      const phoneNumber = "+923473456750"; // Replace with your actual phone number
-      const message = `Hi! I'm interested in this car:\n\nModel: ${carItem?.model || "N/A"}\nPrice: $${carItem?.price || "N/A"}\nKM: ${carItem?.km || "N/A"}\nFuel: ${carItem?.fuelType || "N/A"}\n\nPlease provide more details.`;
-      const encodedMessage = encodeURIComponent(message);
-      window.open(
-        `https://wa.me/${phoneNumber}?text=${encodedMessage}`,
-        "_blank",
-      );
-    }
+    // if (typeof window !== "undefined") {
+    //   const phoneNumber = "+923473456750"; // Replace with your actual phone number
+    //   const message = `Hi! I'm interested in this car:\n\nModel: ${carItem?.model || "N/A"}\nPrice: $${carItem?.price || "N/A"}\nKM: ${carItem?.km || "N/A"}\nFuel: ${carItem?.fuelType || "N/A"}\n\nPlease provide more details.`;
+    //   const encodedMessage = encodeURIComponent(message);
+    //   window.open(
+    //     `https://wa.me/${phoneNumber}?text=${encodedMessage}`,
+    //     "_blank",
+    //   );
+    // }
+     window.open(
+      "https://m.me/923473456750",
+      "_blank",
+    )
   };
 
   return (

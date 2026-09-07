@@ -116,6 +116,7 @@ export default function CarSells() {
 
     const allParams = {
       page: PaginationKeys?.page || 1,
+      limit: allProps.itemPerPage,
       ...(!price?.includes("Any") ? priceFilter(price) : {}),
       ...(km[0] ? { kmMin: km[0] } : {}),
       ...(km[1] > 100000 ? {} : { kmMax: km[1] }),
@@ -138,9 +139,16 @@ export default function CarSells() {
     };
 
     const params = new URLSearchParams(allParams);
+    const paramArray = Array.from(params.entries());
+    console.log({ paramArray });
+
+    if (paramArray.length > 2) {
+      params.delete('limit');
+      params.delete('page');
+    }
 
     const getGetCarsRequest = await fetch(
-      `${URL.getCars}&limit=${allProps.itemPerPage}&${params.toString()}`,
+      `${URL.getCars}&${params.toString()}`,
       {
         method: "GET",
         headers: {
@@ -160,7 +168,7 @@ export default function CarSells() {
     );
     allProps.setData(filteredData);
     allProps.setItemPerPage(pagination.limit);
-    setPaginationKeys(pagination);
+    setPaginationKeys({ ...pagination, paramArray });
     setCarsLoading(false);
   };
   useEffect(() => {
@@ -188,6 +196,7 @@ export default function CarSells() {
   ]);
 
   const clearFilter = () => {
+
     dispatch({ type: "CLEAR_FILTER" });
   };
 
@@ -209,15 +218,19 @@ export default function CarSells() {
   }, [filtered, sortingOption]);
 
   const handleWhatsApp = (carItem) => {
-    if (typeof window !== "undefined") {
-      const phoneNumber = "+923473456750"; // Replace with your actual phone number
-      const message = `Hi! I'm interested in this car:\n\nModel: ${carItem?.model || "N/A"}\nPrice: $${carItem?.price || "N/A"}\nKM: ${carItem?.km || "N/A"}\nFuel: ${carItem?.fuelType || "N/A"}\n\nPlease provide more details.`;
-      const encodedMessage = encodeURIComponent(message);
-      window.open(
-        `https://wa.me/${phoneNumber}?text=${encodedMessage}`,
-        "_blank",
-      );
-    }
+    // if (typeof window !== "undefined") {
+    //   const phoneNumber = "+923473456750"; // Replace with your actual phone number
+    //   const message = `Hi! I'm interested in this car:\n\nModel: ${carItem?.model || "N/A"}\nPrice: $${carItem?.price || "N/A"}\nKM: ${carItem?.km || "N/A"}\nFuel: ${carItem?.fuelType || "N/A"}\n\nPlease provide more details.`;
+    //   const encodedMessage = encodeURIComponent(message);
+    //   window.open(
+    //     `https://wa.me/${phoneNumber}?text=${encodedMessage}`,
+    //     "_blank",
+    //   );
+    // }
+    window.open(
+      "https://m.me/923473456750",
+      "_blank",
+    )
   };
 
   const handleFavourite = async (carItem) => {
@@ -781,18 +794,21 @@ export default function CarSells() {
                             </div>
                           ))}
                         </div>
-                        <div className="themesflat-pagination clearfix mt-40">
-                          <ul>
-                            <Pagination
-                              currentPage={PaginationKeys?.page || 1}
-                              setPage={(value) =>
-                                setPaginationKeys((prev) => ({ ...prev, page: value }))
-                              }
-                              itemLength={PaginationKeys.total}
-                              itemPerPage={itemPerPage}
-                            />
-                          </ul>
-                        </div>
+                        {PaginationKeys?.paramArray?.length > 2 ?
+                          null :
+                          <div className="themesflat-pagination clearfix mt-40">
+                            <ul>
+                              <Pagination
+                                currentPage={PaginationKeys?.page || 1}
+                                setPage={(value) =>
+                                  setPaginationKeys((prev) => ({ ...prev, page: value }))
+                                }
+                                itemLength={PaginationKeys.total}
+                                itemPerPage={itemPerPage}
+                              />
+                            </ul>
+                          </div>
+                        }
                       </>
                     )}
                   </div>

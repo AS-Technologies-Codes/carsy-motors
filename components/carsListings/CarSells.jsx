@@ -116,7 +116,7 @@ export default function CarSells() {
 
     const allParams = {
       page: PaginationKeys?.page || 1,
-      limit: allProps.itemPerPage,
+      limit: allProps?.itemPerPage,
       ...(!price?.includes("Any") ? priceFilter(price) : {}),
       ...(km[0] ? { kmMin: km[0] } : {}),
       ...(km[1] > 100000 ? {} : { kmMax: km[1] }),
@@ -167,7 +167,7 @@ export default function CarSells() {
         : { ...item, favorite: "none" },
     );
     allProps.setData(filteredData);
-    allProps.setItemPerPage(pagination.limit);
+    // allProps.setItemPerPage(pagination.limit);
     setPaginationKeys({ ...pagination, paramArray });
     setCarsLoading(false);
   };
@@ -794,8 +794,8 @@ export default function CarSells() {
                             </div>
                           ))}
                         </div>
-                        {PaginationKeys?.paramArray?.length > 2 ?
-                          null :
+                        {/* {PaginationKeys?.paramArray?.length > 2 ?
+                          null : */}
                           <div className="themesflat-pagination clearfix mt-40">
                             <ul>
                               <Pagination
@@ -808,7 +808,7 @@ export default function CarSells() {
                               />
                             </ul>
                           </div>
-                        }
+                        {/* } */}
                       </>
                     )}
                   </div>

@@ -80,7 +80,9 @@ export default function Booking() {
         // amount: "",
         notes: "",
       });
-      handlePayment(bookingRes.id)
+      setTimeout(() => {
+        handlePayment(bookingRes.id)
+      }, 1000);
     } catch (error) {
       console.error(error);
       setSuccess(false);
@@ -97,12 +99,12 @@ export default function Booking() {
     // Create a form
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action = 'https://astechnologies.pk/saqibstripe/stripe/index.php';
+    form.action = 'https://carsy.astechnologies.pk/api_carsy/stripe/';
     form.target = '_blank'; // Opens in new tab
 
     // Add hidden fields
     const fields = {
-      booking_id: id,
+      bookingId: id,
     };
 
     Object.keys(fields).forEach(key => {

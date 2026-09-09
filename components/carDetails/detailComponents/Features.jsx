@@ -7,44 +7,44 @@ export default function Features({ feat }) {
   const features = [
     ...(feat?.comfort_convenience && feat?.comfort_convenience?.length
       ? [
-          {
-            title: "Comfort & Convenience",
-            content: feat?.comfort_convenience,
-          },
-        ]
+        {
+          title: "Comfort & Convenience",
+          content: feat?.comfort_convenience,
+        },
+      ]
       : []),
     ...(feat?.interior && feat?.interior?.length
       ? [
-          {
-            title: "Interior",
-            content: feat?.interior,
-          },
-        ]
+        {
+          title: "Interior",
+          content: feat?.interior,
+        },
+      ]
       : []),
     ...(feat?.exterior && feat?.exterior?.length
       ? [
-          {
-            title: "Exterior",
-            content: feat?.exterior,
-          },
-        ]
+        {
+          title: "Exterior",
+          content: feat?.exterior,
+        },
+      ]
       : []),
     ...(feat?.safety_features && feat?.safety_features?.length
       ? [
-          {
-            title: "Safety",
-            content: feat?.safety_features,
-          },
-        ]
+        {
+          title: "Safety",
+          content: feat?.safety_features,
+        },
+      ]
       : []),
     ...(feat?.entertainment_communication &&
-    feat?.entertainment_communication?.length
+      feat?.entertainment_communication?.length
       ? [
-          {
-            title: "Entertainment & Communication",
-            content: feat?.entertainment_communication,
-          },
-        ]
+        {
+          title: "Entertainment & Communication",
+          content: feat?.entertainment_communication,
+        },
+      ]
       : []),
   ];
 
@@ -52,10 +52,10 @@ export default function Features({ feat }) {
 
   return (
     <>
-      <div className="footer-heading-mobie listing-details-mobie mb-30">
+      <div className="mb-30">
         <h2>Features</h2>
       </div>
-      <div className="features-inner tf-collapse-content">
+      <div className="features-inner">
         <div className="inner">
           {feat?.features?.length ? (
             feat?.features?.map((f) => (

@@ -133,10 +133,7 @@ export default function CarDetails1({ carItem }) {
                         className="listing-description footer-col-block"
                         id="scrollspyHeading1"
                       >
-                        <div className="footer-heading-desktop">
-                          <h2>Car overview</h2>
-                        </div>
-                        <div className="footer-heading-mobie listing-details-mobie">
+                        <div className="mt-2">
                           <h2>Car overview</h2>
                         </div>
                         <Overview car={CarDetailsListing} />
@@ -146,9 +143,6 @@ export default function CarDetails1({ carItem }) {
                         className="listing-features footer-col-block"
                         id="scrollspyHeading2"
                       >
-                        <div className="footer-heading-desktop mb-30">
-                          <h2>Features</h2>
-                        </div>
                         <Features feat={CarDetailsListing} />
                       </div>
                       <div className="listing-line" />

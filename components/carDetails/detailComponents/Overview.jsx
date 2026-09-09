@@ -2,11 +2,11 @@ import React from "react";
 
 export default function Overview({ car }) {
   return (
-    <div className="tfcl-listing-info tf-collapse-content mt-30">
+    <div className="tfcl-listing-info  mt-30">
       <div className="row">
         {car?.cylinder ? (
           <div className="col-xl-6 col-md-6 item">
-            <div className="inner listing-infor-box">
+            <div className="inner listing-infor-box align-items-start">
               <div className="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -21,15 +21,15 @@ export default function Overview({ car }) {
                   />
                 </svg>
               </div>
-              <div className="content-listing-info">
+              <div className="content-listing-info align-items-start">
                 <span className="listing-info-title">Cylinders :</span>
-                <p className="listing-info-value">{car?.cylinder}</p>
+                <p className="listing-info-value m-0">{car?.cylinder}</p>
               </div>
             </div>
           </div>
         ) : null}
         {/* <div className="col-xl-6 col-md-6 item">
-          <div className="inner listing-infor-box">
+          <div className="inner listing-infor-box align-items-start">
             <div className="icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -44,15 +44,15 @@ export default function Overview({ car }) {
                 />
               </svg>
             </div>
-            <div className="content-listing-info">
+            <div className="content-listing-info align-items-start">
               <span className="listing-info-title">Stock Number:</span>
-              <p className="listing-info-value">AB9084329457</p>
+              <p className="listing-info-value m-0">AB9084329457</p>
             </div>
           </div>
         </div> */}
         {car?.fuelType ? (
           <div className="col-xl-6 col-md-6 item">
-            <div className="inner listing-infor-box">
+            <div className="inner listing-infor-box align-items-start">
               <div className="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -67,11 +67,11 @@ export default function Overview({ car }) {
                   />
                 </svg>
               </div>
-              <div className="content-listing-info">
+              <div className="content-listing-info align-items-start">
                 <span className="listing-info-title">
                   Fuel Type {car?.fuel_capacity ? "/ Capacity" : ""}:
                 </span>
-                <p className="listing-info-value">
+                <p className="listing-info-value m-0">
                   {car?.fuelType}
                   {car?.fuel_capacity ? ", " + car?.fuel_capacity : ""}
                 </p>
@@ -81,7 +81,7 @@ export default function Overview({ car }) {
         ) : null}
         {/* {car?.vin ? (
           <div className="col-xl-6 col-md-6 item">
-            <div className="inner listing-infor-box">
+            <div className="inner listing-infor-box align-items-start">
               <div className="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -96,16 +96,16 @@ export default function Overview({ car }) {
                   />
                 </svg>
               </div>
-              <div className="content-listing-info">
+              <div className="content-listing-info align-items-start">
                 <span className="listing-info-title">VIN Number:</span>
-                <p className="listing-info-value">{car?.vin}</p>
+                <p className="listing-info-value m-0">{car?.vin}</p>
               </div>
             </div>
           </div>
         ) : null} */}
         {car?.door ? (
           <div className="col-xl-6 col-md-6 item">
-            <div className="inner listing-infor-box">
+            <div className="inner listing-infor-box align-items-start">
               <div className="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -120,16 +120,16 @@ export default function Overview({ car }) {
                   />
                 </svg>
               </div>
-              <div className="content-listing-info">
+              <div className="content-listing-info align-items-start">
                 <span className="listing-info-title">Doors:</span>
-                <p className="listing-info-value">{car?.door}</p>
+                <p className="listing-info-value m-0">{car?.door}</p>
               </div>
             </div>
           </div>
         ) : null}
         {car?.year ? (
           <div className="col-xl-6 col-md-6 item">
-            <div className="inner listing-infor-box">
+            <div className="inner listing-infor-box align-items-start">
               <div className="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -144,16 +144,16 @@ export default function Overview({ car }) {
                   />
                 </svg>
               </div>
-              <div className="content-listing-info">
+              <div className="content-listing-info align-items-start">
                 <span className="listing-info-title">Year:</span>
-                <p className="listing-info-value">{car?.year}</p>
+                <p className="listing-info-value m-0">{car?.year}</p>
               </div>
             </div>
           </div>
         ) : null}
         {car?.color ? (
           <div className="col-xl-6 col-md-6 item">
-            <div className="inner listing-infor-box">
+            <div className="inner listing-infor-box align-items-start">
               <div className="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -168,16 +168,16 @@ export default function Overview({ car }) {
                   />
                 </svg>
               </div>
-              <div className="content-listing-info">
+              <div className="content-listing-info align-items-start">
                 <span className="listing-info-title">Color (Exterior):</span>
-                <p className="listing-info-value">{car?.color}</p>
+                <p className="listing-info-value m-0">{car?.color}</p>
               </div>
             </div>
           </div>
         ) : null}
         {car?.interior_color ? (
           <div className="col-xl-6 col-md-6 item">
-            <div className="inner listing-infor-box">
+            <div className="inner listing-infor-box align-items-start">
               <div className="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -192,16 +192,16 @@ export default function Overview({ car }) {
                   />
                 </svg>
               </div>
-              <div className="content-listing-info">
+              <div className="content-listing-info align-items-start">
                 <span className="listing-info-title">Color (Interior):</span>
-                <p className="listing-info-value">{car?.interior_color}</p>
+                <p className="listing-info-value m-0">{car?.interior_color}</p>
               </div>
             </div>
           </div>
         ) : null}
         {car?.body ? (
           <div className="col-xl-6 col-md-6 item">
-            <div className="inner listing-infor-box">
+            <div className="inner listing-infor-box align-items-start">
               <div className="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -216,16 +216,16 @@ export default function Overview({ car }) {
                   />
                 </svg>
               </div>
-              <div className="content-listing-info">
+              <div className="content-listing-info align-items-start">
                 <span className="listing-info-title">Body Type</span>
-                <p className="listing-info-value">{car?.body}</p>
+                <p className="listing-info-value m-0">{car?.body}</p>
               </div>
             </div>
           </div>
         ) : null}
         {car?.seats ? (
           <div className="col-xl-6 col-md-6 item">
-            <div className="inner listing-infor-box">
+            <div className="inner listing-infor-box align-items-start">
               <div className="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -240,16 +240,16 @@ export default function Overview({ car }) {
                   />
                 </svg>
               </div>
-              <div className="content-listing-info">
+              <div className="content-listing-info align-items-start">
                 <span className="listing-info-title">Seats:</span>
-                <p className="listing-info-value">{car?.seats}</p>
+                <p className="listing-info-value m-0">{car?.seats}</p>
               </div>
             </div>
           </div>
         ) : null}
         {car?.transmission ? (
           <div className="col-xl-6 col-md-6 item">
-            <div className="inner listing-infor-box">
+            <div className="inner listing-infor-box align-items-start">
               <div className="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -264,16 +264,16 @@ export default function Overview({ car }) {
                   />
                 </svg>
               </div>
-              <div className="content-listing-info">
+              <div className="content-listing-info align-items-start">
                 <span className="listing-info-title">Transmission:</span>
-                <p className="listing-info-value">{car?.transmission}</p>
+                <p className="listing-info-value m-0">{car?.transmission}</p>
               </div>
             </div>
           </div>
         ) : null}
         {car?.engine ? (
           <div className="col-xl-6 col-md-6 item">
-            <div className="inner listing-infor-box">
+            <div className="inner listing-infor-box align-items-start">
               <div className="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -288,16 +288,16 @@ export default function Overview({ car }) {
                   />
                 </svg>
               </div>
-              <div className="content-listing-info">
+              <div className="content-listing-info align-items-start">
                 <span className="listing-info-title">Engine:</span>
-                <p className="listing-info-value">{car?.engine}</p>
+                <p className="listing-info-value m-0">{car?.engine}</p>
               </div>
             </div>
           </div>
         ) : null}
         {car?.km ? (
           <div className="col-xl-6 col-md-6 item">
-            <div className="inner listing-infor-box">
+            <div className="inner listing-infor-box align-items-start">
               <div className="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -312,16 +312,16 @@ export default function Overview({ car }) {
                   />
                 </svg>
               </div>
-              <div className="content-listing-info">
+              <div className="content-listing-info align-items-start">
                 <span className="listing-info-title">KM</span>
-                <p className="listing-info-value">{car?.km?.toLocaleString()}</p>
+                <p className="listing-info-value m-0">{car?.km?.toLocaleString()}</p>
               </div>
             </div>
           </div>
         ) : null}
         {car?.drive_type ? (
           <div className="col-xl-6 col-md-6 item">
-            <div className="inner listing-infor-box">
+            <div className="inner listing-infor-box align-items-start">
               <div className="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -336,11 +336,11 @@ export default function Overview({ car }) {
                   />
                 </svg>
               </div>
-              <div className="content-listing-info">
+              <div className="content-listing-info align-items-start">
                 <span className="listing-info-title">
                   Drive Type {car?.economy ? "/ Economy" : ""}:
                 </span>
-                <p className="listing-info-value">
+                <p className="listing-info-value m-0">
                   {car?.drive_type}{car?.economy ? ", " + car?.economy : ""}
                 </p>
               </div>
@@ -349,7 +349,7 @@ export default function Overview({ car }) {
         ) : null}
         {car?.power ? (
           <div className="col-xl-6 col-md-6 item">
-            <div className="inner listing-infor-box">
+            <div className="inner listing-infor-box align-items-start">
               <div className="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -364,9 +364,9 @@ export default function Overview({ car }) {
                   />
                 </svg>
               </div>
-              <div className="content-listing-info">
+              <div className="content-listing-info align-items-start">
                 <span className="listing-info-title">Power:</span>
-                <p className="listing-info-value">{car?.power}</p>
+                <p className="listing-info-value m-0">{car?.power}</p>
               </div>
             </div>
           </div>

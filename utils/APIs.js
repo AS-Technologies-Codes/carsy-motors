@@ -340,7 +340,8 @@ export const saveBooking = async (bookingData) => {
             "Failed to submit booking information",
         );
       }
-      return resolve(saveBookingResponse?.message);
+
+      return resolve(saveBookingResponse?.data || saveBookingResponse);
     } catch (error) {
       return reject(error);
     }

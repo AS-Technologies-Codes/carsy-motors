@@ -158,7 +158,7 @@ export default function CarSells() {
       },
     );
     const getGetCarsResponse = await getGetCarsRequest.json();
-    const { data, pagination } = getGetCarsResponse;
+    const { data, pagination, filters_count } = getGetCarsResponse;
     const filteredData = data?.map((item) =>
       JSON.parse(window.localStorage.getItem("favouriteCar") || "[]").some(
         (car) => car.id === item.id,
@@ -168,6 +168,7 @@ export default function CarSells() {
     );
     allProps.setData(filteredData);
     // allProps.setItemPerPage(pagination.limit);
+    dispatch({ type: "SET_FILTER_OPTIONS", payload: filters_count });
     setPaginationKeys({ ...pagination, paramArray });
     setCarsLoading(false);
   };
@@ -274,7 +275,6 @@ export default function CarSells() {
     );
     allProps.setData(updatedData);
   };
-
 
   return (
     <>
@@ -794,8 +794,8 @@ export default function CarSells() {
                             </div>
                           ))}
                         </div>
-                        {/* {PaginationKeys?.paramArray?.length > 2 ?
-                          null : */}
+                        {PaginationKeys?.paramArray?.length > 2 ?
+                          null :
                           <div className="themesflat-pagination clearfix mt-40">
                             <ul>
                               <Pagination
@@ -808,7 +808,7 @@ export default function CarSells() {
                               />
                             </ul>
                           </div>
-                        {/* } */}
+                        }
                       </>
                     )}
                   </div>

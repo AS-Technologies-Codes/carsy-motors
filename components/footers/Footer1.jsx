@@ -1,9 +1,8 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { footerData } from "@/data/footerLinks";
-import { saveEmail } from "@/utils/APIs";
+import { getRecommendedListingApi, saveEmail } from "@/utils/APIs";
 import toast from "react-hot-toast";
 export default function Footer1() {
 
@@ -35,13 +34,58 @@ export default function Footer1() {
     }
   };
 
+  const [RecommendedBuyListing, setRecommendedBuyListing] = useState([]);
+  const [RecommendedRentListing, setRecommendedRentListing] = useState([]);
+  const fetchRecommendedCars = async () => {
+    try {
+      const getRecommendedBuyData = await getRecommendedListingApi("used");
+      const getRecommendedRentData = await getRecommendedListingApi("rent");
+      setRecommendedBuyListing([{
+        heading: "Buy Cars",
+        menuItems:
+          getRecommendedBuyData.map(item => ({
+            text: item.make, href: "#",
+          }))
+      }]);
+
+      setRecommendedRentListing([{
+        heading: "Rent Cars",
+        menuItems:
+          getRecommendedRentData.map(item => ({
+            text: item.make, href: "#",
+          }))
+      }]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log('sdsadas', RecommendedBuyListing, RecommendedRentListing);
+
+
+  useEffect(() => {
+    fetchRecommendedCars();
+  }, []);
+
+  const firstColumn = [
+    {
+      heading: "About Cassy Motors",
+      menuItems: [
+        { text: "About us", href: "/about-us" },
+        { text: "Contact US", href: "/contact-us" },
+        { text: "Terms & Conditions", href: "#" },
+        { text: "Privacy Policy", href: "#" },
+      ],
+    }
+  ];
+
   return (
     <footer id="footer" className="clearfix home">
       <div className="container">
 
         <div className="footer-main">
           <div className="row">
-            {footerData.map((column, index) => (
+            {firstColumn.map((column, index) => (
               <div className="col-lg-3 col-sm-6 col-12" key={index}>
                 <div className="widget widget-menu footer-col-block">
                   <div className="footer-heading-desktop">
@@ -56,6 +100,52 @@ export default function Footer1() {
                         <Link href="javascript:void(0)">{item.text}</Link>
                       </li>
                     ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+            {RecommendedBuyListing.map((column, index) => (
+              <div className="col-lg-3 col-sm-6 col-12" key={index}>
+                <div className="widget widget-menu footer-col-block">
+                  <div className="footer-heading-desktop">
+                    <h4>{column?.heading}</h4>
+                  </div>
+                  <div className="footer-heading-mobie ">
+                    <h4>{column?.menuItems?.length ? column?.heading : "Listing Coming Soon"}</h4>
+                  </div>
+                  <ul className="box-menu tf-collapse-content">
+                     {column?.menuItems?.length ? column?.menuItems.map((item, itemIndex) => (
+                      <li key={itemIndex}>
+                        <Link href="javascript:void(0)">{item.text}</Link>
+                      </li>
+                    )) : 
+                      <li>
+                        <Link href="javascript:void(0)">Listing Coming Soon</Link>
+                      </li>
+                    }
+                  </ul>
+                </div>
+              </div>
+            ))}
+            {RecommendedRentListing.map((column, index) => (
+              <div className="col-lg-3 col-sm-6 col-12" key={index}>
+                <div className="widget widget-menu footer-col-block">
+                  <div className="footer-heading-desktop">
+                    <h4>{column?.heading}</h4>
+                  </div>
+                  <div className="footer-heading-mobie ">
+                    <h4>{column?.heading}</h4>
+                  </div>
+                  <ul className="box-menu tf-collapse-content">
+                    {column?.menuItems?.length ? column?.menuItems.map((item, itemIndex) => (
+                      <li key={itemIndex}>
+                        <Link href="javascript:void(0)">{item.text}</Link>
+                      </li>
+                    )) : 
+                      <li>
+                        <Link href="javascript:void(0)">Listing Coming Soon</Link>
+                      </li>
+                    }
                   </ul>
                 </div>
               </div>

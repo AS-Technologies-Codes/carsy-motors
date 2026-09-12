@@ -3,12 +3,9 @@ export const footerData = [
     heading: "About Auto Decar",
     menuItems: [
       { text: "About us", href: "/about-us" },
-      { text: "Careers With Us", href: "/about-us" },
-      { text: "Terms & Conditions", href: "/about-us" },
-      { text: "Privacy Policy", href: "/about-us" },
-      { text: "Corporate Policies", href: "/about-us" },
-      { text: "Investors", href: "/about-us" },
-      { text: "FAQs", href: "/faq" },
+      { text: "Contact US", href: "/contact-us" },
+      { text: "Terms & Conditions", href: "#" },
+      { text: "Privacy Policy", href: "#" },
     ],
   },
   {

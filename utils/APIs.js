@@ -270,7 +270,7 @@ export const postContactUs = async (ContactUsData) => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: accessToken,
+            Authorization: "Bearer dfsdgs43543534543gdsfdsfdsfa22342222@@222",
           },
           body: JSON.stringify(ContactUsData),
         },

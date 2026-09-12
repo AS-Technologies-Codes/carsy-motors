@@ -19,8 +19,6 @@ export default function Booking() {
     customer_email: "",
     customer_phone: "",
     booking_date: new Date().toISOString().slice(0, 10),
-    start_date: new Date().toISOString().slice(0, 10),
-    end_date: new Date().toISOString().slice(0, 10),
     car_type: "used",
     // amount: "",
     notes: "",
@@ -49,19 +47,17 @@ export default function Booking() {
       !formData.customer_name ||
       !formData.customer_email ||
       !formData.customer_phone ||
-      !formData.booking_date ||
-      !formData.start_date ||
-      !formData.end_date
+      !formData.booking_date
       // !formData.amount
     ) {
       toast.error("Please fill in all required booking fields");
       return;
     }
 
-    if (new Date(formData.end_date) <= new Date(formData.start_date)) {
-      toast.error("End date must be after start date");
-      return;
-    }
+    // if (new Date(formData.end_date) <= new Date(formData.start_date)) {
+    //   toast.error("End date must be after start date");
+    //   return;
+    // }
 
     setSaving(true);
     try {
@@ -74,8 +70,8 @@ export default function Booking() {
         customer_email: "",
         customer_phone: "",
         booking_date: new Date().toISOString().slice(0, 10),
-        start_date: new Date().toISOString().slice(0, 10),
-        end_date: new Date().toISOString().slice(0, 10),
+        // start_date: new Date().toISOString().slice(0, 10),
+        // end_date: new Date().toISOString().slice(0, 10),
         car_type: "used",
         // amount: "",
         notes: "",
@@ -215,7 +211,7 @@ export default function Booking() {
                       </fieldset>
                     </div>
 
-                    <div className="col-12 col-md-6">
+                    {/* <div className="col-12 col-md-6">
                       <fieldset className="phone-wrap style-text">
                         <label className="font-1 fs-14 fw-5">Start Date*</label>
                         <input
@@ -242,7 +238,7 @@ export default function Booking() {
                           required
                         />
                       </fieldset>
-                    </div>
+                    </div> */}
 
                     {/* <div className="col-12 rental-type-booking">
                       <fieldset className="phone-wrap style-text">

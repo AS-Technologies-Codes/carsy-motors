@@ -64,7 +64,9 @@ export default function Footer1() {
 
 
   useEffect(() => {
-    fetchRecommendedCars();
+    setTimeout(() => {
+      fetchRecommendedCars();
+    }, 2000);
   }, []);
 
   const firstColumn = [
@@ -84,7 +86,7 @@ export default function Footer1() {
       <div className="container">
 
         <div className="footer-main">
-          <div className="row">
+          <div className="row justify-content-between">
             {firstColumn.map((column, index) => (
               <div className="col-lg-3 col-sm-6 col-12" key={index}>
                 <div className="widget widget-menu footer-col-block">
@@ -114,11 +116,11 @@ export default function Footer1() {
                     <h4>{column?.menuItems?.length ? column?.heading : "Listing Coming Soon"}</h4>
                   </div>
                   <ul className="box-menu tf-collapse-content">
-                     {column?.menuItems?.length ? column?.menuItems.map((item, itemIndex) => (
+                    {column?.menuItems?.length ? column?.menuItems.map((item, itemIndex) => (
                       <li key={itemIndex}>
                         <Link href="javascript:void(0)">{item.text}</Link>
                       </li>
-                    )) : 
+                    )) :
                       <li>
                         <Link href="javascript:void(0)">Listing Coming Soon</Link>
                       </li>
@@ -141,7 +143,7 @@ export default function Footer1() {
                       <li key={itemIndex}>
                         <Link href="javascript:void(0)">{item.text}</Link>
                       </li>
-                    )) : 
+                    )) :
                       <li>
                         <Link href="javascript:void(0)">Listing Coming Soon</Link>
                       </li>
